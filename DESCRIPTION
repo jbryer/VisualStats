@@ -1,0 +1,19 @@
+Package: VisualStats
+Title: Visualizations for Statistical Tests
+Version: 0.1
+Authors@R: 
+    person(given = "Jason",
+           family = "Bryer",
+           role = c("aut", "cre"),
+           email = "jason@bryer.org",
+           comment = c(ORCID = "0000-0002-2454-0402"))
+Description: Functions and Shiny applications for visualizing statistical tests.
+Maintainer: Jason Bryer <jason@bryer.org>
+URL: https://github.com/jbryer/VisualStats
+BugReports: https://github.com/jbryer/VisualStats/issues
+License: GPL (>= 3)
+LazyData: true
+VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Encoding: UTF-8

@@ -1,0 +1,5 @@
+^VisualStats\.Rproj$
+^\.Rproj\.user$
+build.R
+^LICENSE\.md$
+docs/

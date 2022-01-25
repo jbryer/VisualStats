@@ -1,0 +1,37 @@
+---
+title: "VisualStats: R package for visualizing statistical tests"
+output: github_document
+editor_options:
+  chunk_output_type: console
+---
+
+```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE, error=FALSE}
+library(devtools)
+document()
+install(build_vignettes = TRUE, dependencies = FALSE)
+```
+
+This package contains functions and [Shiny](https://shiny.rstudio.com) applications designed to visualize statistical tests. The latest version can be installed from Github using the `remotes` package:
+
+```{r, eval=FALSE}
+remotes::install_github('jbryer/VisualStats')
+```
+
+The vignettes currently available:
+
+```{r}
+library(VisualStats)
+vignette(package = 'VisualStats')[['results']][,c('Item', 'Title'), drop = FALSE]
+```
+
+Shiny apps available. You can run the apps using the `shiny_demo('APP_NAME')` where `APP_NAME` is from the list below.
+
+```{r}
+shiny_demo()
+```
+
+All available functions and datasets:
+
+```{r}
+ls('package:VisualStats')
+```

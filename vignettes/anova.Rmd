@@ -1,0 +1,38 @@
+---
+title: "Graphical Analysis of Variance"
+author: "Jason Bryer, Ph.D."
+date: "`r Sys.Date()`"
+output:
+  minidown::mini_document:
+    code_folding: "hide"
+vignette: >
+  %\VignetteIndexEntry{Graphical Analysis of Variance}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FALSE,
+					  # fig_width = 10, fig_height = 10,
+					  fig.align = 'center')
+set.seed(2112)
+library(tidyverse)
+library(VisualStats)
+data('hand_washing')
+```
+
+
+```{r}
+anova_vis(hand_washing$Bacterial_Counts, hand_washing$Method,
+		  plot_group_variances = FALSE,
+		  plot_group_sd = FALSE,
+		  plot_ms_within = FALSE,
+		  plot_ms_between = FALSE,
+		  plot_unit_line = FALSE,
+		  plot_grand_mean = FALSE,
+		  plot_sd_line = FALSE,
+		  plot_pooled_sd = FALSE
+)
+
+```

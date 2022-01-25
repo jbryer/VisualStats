@@ -11,6 +11,10 @@ check()
 devtools::clean_vignettes()
 devtools::build_vignettes()
 
+# packagedown
+pkgdown::build_site()
+usethis::use_pkgdown_github_pages()
+
 ##### Check exported functions and data
 ls('package:VisualStats')
 data(package = 'VisualStats')

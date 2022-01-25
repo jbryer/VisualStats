@@ -3,3 +3,6 @@
 build.R
 ^LICENSE\.md$
 docs/
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

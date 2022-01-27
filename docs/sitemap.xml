@@ -10,7 +10,16 @@
     <loc>https://jbryer.github.io/VisualStats//reference/anova_vis.html</loc>
   </url>
   <url>
+    <loc>https://jbryer.github.io/VisualStats//reference/gaussian_errors_vis.html</loc>
+  </url>
+  <url>
     <loc>https://jbryer.github.io/VisualStats//reference/hand_washing.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats//reference/loess_vis.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats//reference/renderRmd.html</loc>
   </url>
   <url>
     <loc>https://jbryer.github.io/VisualStats//reference/shiny_demo.html</loc>
@@ -20,5 +29,8 @@
   </url>
   <url>
     <loc>https://jbryer.github.io/VisualStats//articles/anova.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats//articles/loess.html</loc>
   </url>
 </urlset>

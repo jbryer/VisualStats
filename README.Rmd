@@ -5,6 +5,8 @@ editor_options:
   chunk_output_type: console
 ---
 
+Website: https://jbryer.github.io/VisualStats/
+
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE, error=FALSE}
 library(devtools)
 document()

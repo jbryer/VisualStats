@@ -9,6 +9,8 @@
 #' @import tidyverse
 #' @import ggplot2
 #' @import reshape2
+#' @import knitr
+#' @import markdown
 #' @importFrom minidown mini_document
 #' @importFrom psych describe describeBy
 NA

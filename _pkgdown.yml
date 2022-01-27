@@ -1,1 +1,3 @@
 url: https://jbryer.github.io/VisualStats/
+template:
+  bootstrap: 5

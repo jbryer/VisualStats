@@ -1,22 +1,15 @@
-VisualStats: R package for visualizing statistical tests
-================
-
 Website: <https://jbryer.github.io/VisualStats/>
 
 This package contains functions and [Shiny](https://shiny.rstudio.com)
 applications designed to visualize statistical tests. The latest version
 can be installed from Github using the `remotes` package:
 
-``` r
-remotes::install_github('jbryer/VisualStats')
-```
+    remotes::install_github('jbryer/VisualStats')
 
 The vignettes currently available:
 
-``` r
-library(VisualStats)
-vignette(package = 'VisualStats')[['results']][,c('Item', 'Title'), drop = FALSE]
-```
+    library(VisualStats)
+    vignette(package = 'VisualStats')[['results']][,c('Item', 'Title'), drop = FALSE]
 
     ##      Item    Title                                          
     ## [1,] "anova" "Graphical Analysis of Variance (source, html)"
@@ -25,9 +18,7 @@ vignette(package = 'VisualStats')[['results']][,c('Item', 'Title'), drop = FALSE
 Shiny apps available. You can run the apps using the
 `shiny_demo('APP_NAME')` where `APP_NAME` is from the list below.
 
-``` r
-shiny_demo()
-```
+    shiny_demo()
 
     ##       package      app
     ## 1 VisualStats    anova
@@ -36,9 +27,6 @@ shiny_demo()
 
 All available functions and datasets:
 
-``` r
-ls('package:VisualStats')
-```
+    ls('package:VisualStats')
 
-    ## [1] "anova_vis"    "hand_washing" "loess_vis"    "renderRmd"    "shiny_demo"  
-    ## [6] "variance_vis"
+    ## [1] "anova_vis"    "hand_washing" "loess_vis"    "renderRmd"    "shiny_demo"   "variance_vis"

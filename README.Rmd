@@ -1,6 +1,8 @@
 ---
 title: "VisualStats: R package for visualizing statistical tests"
-output: github_document
+output:
+  github_document:
+    html_preview: false
 editor_options:
   chunk_output_type: console
 ---

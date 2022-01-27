@@ -12,7 +12,7 @@ devtools::clean_vignettes()
 devtools::build_vignettes()
 
 # packagedown
-rmarkdown::render('README.Rmd', output_format = 'md_document')
+rmarkdown::render('README.Rmd', output_format = 'github_document')
 pkgdown::build_site()
 # usethis::use_pkgdown_github_pages()
 

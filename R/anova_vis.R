@@ -10,10 +10,11 @@
 #' @param group the independent, or grouping, variable.
 #' @examples
 #' data(hand_washing)
-#' anova_vis(hand_washing$Bacterial.Counts, hand_washing$Method)
+#' anova_vis(hand_washing$Bacterial_Counts, hand_washing$Method)
 #' @export
 anova_vis <- function(Y,
 					  group,
+					  plot_boxplot = FALSE,
 					  plot_group_variances = TRUE,
 					  plot_group_sd = TRUE,
 					  plot_ms_within = TRUE,
@@ -29,13 +30,15 @@ anova_vis <- function(Y,
 					  pooled_sd_col = 'steelblue3', # Pooled Standard Deviation
 					  ms_within_col = '#fdc086',
 					  ms_between_col = '#7fc97f',
+					  box_width = diff(xlim) * .025,
+					  box_color = 'grey50',
 					  ...
 ) {
 	df <- data.frame(Value = Y,
 					 Group = group,
 					 stringsAsFactors = FALSE)
 
-	desc <- psych::describeBy(df$Value, group = df$Group, mat = TRUE, skew = FALSE)
+	desc <- psych::describeBy(df$Value, group = df$Group, mat = TRUE, skew = TRUE)
 	names(desc)[2] <- 'Group'
 	desc$Var <- desc$sd^2
 
@@ -97,6 +100,39 @@ anova_vis <- function(Y,
 	title <- bquote(F[.(df_subscript)] == .(prettyNum(F_stat, digits = 3)) ~ '; p' ~ .(ifelse(p < 0.01, ' < 0.01', paste0(' = ', prettyNum(p, digits = 3)))))
 
 	p <- ggplot()
+
+	if(plot_boxplot) {
+		df_boxplot <- df %>%
+			group_by(Group) %>%
+			summarise(boxplot = list( setNames(boxplot.stats(Value)$stats,
+							c('lower_whisker','lower_hinge','median','upper_hinge','upper_whisker') ) ) ) %>%
+			unnest_wider(boxplot) %>%
+			merge(desc[,c('Group', 'contrast')], by = 'Group')
+		p <- p + geom_rect(data = df_boxplot, aes(xmin = contrast - box_width / 2,
+											 xmax = contrast + box_width / 2,
+											 ymin = lower_hinge,
+											 ymax = upper_hinge),
+					  color = box_color,
+					  alpha = 0.0
+					  ) +
+			geom_segment(data = df_boxplot, aes(x = contrast - box_width / 2,
+												xend = contrast + box_width / 2,
+												y = median,
+												yend = median),
+						 color = box_color) +
+			geom_segment(data = df_boxplot, aes(x = contrast,
+												xend = contrast,
+												y = lower_hinge,
+												yend = lower_whisker),
+						 color = box_color) +
+			geom_segment(data = df_boxplot, aes(x = contrast,
+												xend = contrast,
+												y = upper_hinge,
+												yend = upper_whisker),
+						 color = box_color)
+	}
+
+
 	if(plot_group_variances) {
 		p <- p + geom_rect(data = df_rect_within,
 						   aes(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax, fill = Group, color = Group),
@@ -170,4 +206,23 @@ anova_vis <- function(Y,
 			  legend.position = 'bottom')
 
 	return(p)
+}
+
+if(FALSE) { #TODO: move to testthat
+	library(VisualStats)
+	library(tidyverse)
+	data(hand_washing)
+	anova_vis(Y = hand_washing$Bacterial_Counts,
+			  group = hand_washing$Method,
+			  plot_boxplot = TRUE,
+			  plot_group_variances = FALSE,
+			  plot_group_sd = FALSE,
+			  plot_ms_within = FALSE,
+			  plot_ms_between = FALSE,
+			  plot_unit_line = FALSE,
+			  plot_grand_mean = FALSE,
+			  plot_sd_line = FALSE,
+			  plot_pooled_sd = FALSE
+	)
+
 }

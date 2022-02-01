@@ -11,6 +11,7 @@
 #' @import reshape2
 #' @import knitr
 #' @import markdown
+#' @import dplyr
 #' @importFrom minidown mini_document
 #' @importFrom psych describe describeBy
 NA

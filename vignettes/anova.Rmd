@@ -24,7 +24,13 @@ data('hand_washing')
 
 
 ```{r}
-anova_vis(hand_washing$Bacterial_Counts, hand_washing$Method,
+ggplot(hand_washing, aes(x = Method, y = Bacterial_Counts)) +
+	geom_boxplot()
+```
+
+```{r}
+anova_vis(Y = hand_washing$Bacterial_Counts, 
+		  group = hand_washing$Method,
 		  plot_group_variances = FALSE,
 		  plot_group_sd = FALSE,
 		  plot_ms_within = FALSE,

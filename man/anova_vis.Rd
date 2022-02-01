@@ -7,6 +7,7 @@
 anova_vis(
   Y,
   group,
+  plot_boxplot = FALSE,
   plot_group_variances = TRUE,
   plot_group_sd = TRUE,
   plot_ms_within = TRUE,
@@ -22,6 +23,8 @@ anova_vis(
   pooled_sd_col = "steelblue3",
   ms_within_col = "#fdc086",
   ms_between_col = "#7fc97f",
+  box_width = diff(xlim) * 0.025,
+  box_color = "grey50",
   ...
 )
 }
@@ -40,7 +43,7 @@ included on the plot.
 }
 \examples{
 data(hand_washing)
-anova_vis(hand_washing$Bacterial.Counts, hand_washing$Method)
+anova_vis(hand_washing$Bacterial_Counts, hand_washing$Method)
 }
 \references{
 Pruzek & Helmreich (2010). \href{http://moderngraphics11.pbworks.com/f/ElementalGraphics4ANOVA.RP+JH.pdf}{Elemental Graphics for Analysis of Variance using the R Package granova}

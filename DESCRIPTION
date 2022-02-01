@@ -2,11 +2,17 @@ Package: VisualStats
 Title: Visualizations for Statistical Tests
 Version: 0.1
 Authors@R: 
+    c(
     person(given = "Jason",
            family = "Bryer",
            role = c("aut", "cre"),
            email = "jason@bryer.org",
-           comment = c(ORCID = "0000-0002-2454-0402"))
+           comment = c(ORCID = "0000-0002-2454-0402")),
+    person(given = "Bruce",
+           family = "Dudek",
+           role = c("aut"),
+           email = "bdudek@albany.edu")
+    )
 Description: Functions and Shiny applications for visualizing statistical tests.
 Maintainer: Jason Bryer <jason@bryer.org>
 URL: https://github.com/jbryer/VisualStats
@@ -17,3 +23,4 @@ VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Encoding: UTF-8
+Depends: ggplot2, tidyverse, psych

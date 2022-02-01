@@ -1,32 +1,33 @@
 library(devtools)
 
-# create_package(path = '.')
-# use_gpl3_license()
-
+##### Build and install the package
 document()
-install()
 install(build_vignettes = TRUE, dependencies = FALSE)
 check()
 
 devtools::clean_vignettes()
 devtools::build_vignettes()
 
-# packagedown
+
+##### Render the README and generate the packagedown website
 rmarkdown::render('README.Rmd', output_format = 'github_document')
 pkgdown::build_site()
-# usethis::use_pkgdown_github_pages()
+
 
 ##### Check exported functions and data
 ls('package:VisualStats')
 data(package = 'VisualStats')
+
+data("hand_washing")
+anova_vis(hand_washing$Bacterial_Counts, hand_washing$Method)
+anova_vis(hand_washing$Bacterial_Counts, hand_washing$Method,
+		  plot_boxplot = TRUE)
 
 
 ##### Vignettes
 vignette(package = 'VisualStats')
 vignette('anova', package = 'VisualStats')
 
-
-anova_vis(hand_washing$Bacterial.Counts, hand_washing$Method)
 
 ##### Shiny Apps
 shiny_demo()

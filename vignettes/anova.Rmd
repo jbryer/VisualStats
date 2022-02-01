@@ -23,10 +23,24 @@ data('hand_washing')
 ```
 
 
+Analysis of variance (ANOVA) remains an important statistical method for a variety of situations. ANOVA is typically taught along with other null hypothesis tests (e.g. t-test, chi-squared), however, there are many nuances differences in how the test statistic is calculated that many students do not fully understand. Specifically, why use the ratio of mean square between (or treatment) and mean square within (or error) as the test statistic? Pruzek and Helmreich (2010) introduced a visualization that attempts visualize all the components of ANOVA. This visualization was implemented in the `granova` (2014) R package utilizing the base graphics system. This document introduces a version of the granova visualization usinge `ggplot2` Wickham (2016) that provides a number parameters to isoloate certain features of their visualization. We use this approach in teaching ANOVA, mostly through the use of Shiny (Chang et al, 2021) that allows the user/students to interactively add and remove plot features.
+
+
+
 ```{r}
 ggplot(hand_washing, aes(x = Method, y = Bacterial_Counts)) +
 	geom_boxplot()
 ```
+
+
+
+| Source                  | Sum of Squares                                              | *df*  | MS                                   | F                                   | p                              |
+| ------------------------|:-----------------------------------------------------------:|:-----:|:------------------------------------:|:-----------------------------------:|--------------------------------|
+| Between Group (Treatment) | $\sum^{}_{k} n_{k}(\bar{x}_{k} -\bar{x} )^{2}$              | k - 1 | $\frac{SS_{between}}{df_{between}}$  | $\frac{MS_{between}}{MS_{within}}$  | area to right of $F_{k-1,n-k}$ |
+| Within Group (Error)    | $\sum^{}_{k} \sum^{}_{i} (\bar{x}_{ik} -\bar{x}_{k} )^{2}$  | n - k | $\frac{SS_{within}}{df_{within}}$    |                                     |                                |
+| Total                   | $\sum^{}_{k} \sum^{}_{i} (\bar{x}_{ik} -\bar{x} )^{2}$      | n - 1 |                                      |                                     |                                |
+
+
 
 ```{r}
 anova_vis(Y = hand_washing$Bacterial_Counts, 
@@ -42,3 +56,21 @@ anova_vis(Y = hand_washing$Bacterial_Counts,
 )
 
 ```
+
+
+# References
+
+Chang, W., Cheng, J., Allaire, J.J., Sievert, C, Schloerke, B, Xie, Y, Allen, J.,
+  McPherson, J., Dipert, A., & Borges, B. (2021). shiny: Web Application Framework for
+  R. R package version 1.7.1. https://CRAN.R-project.org/package=shiny
+  
+De Veaux, R.D., Velleman, P.F., & Bock, D.E. (2009). *Intro Stats* (4th ed). Pearson.
+
+Pruzek, R.R., & Helmreich, J.E. (2010). Elemental Graphics for Analysis of Variance using the R Package granova. Retrieved from https://api.semanticscholar.org/CorpusID:54635842
+
+Pruzek, R.M., & Helmreich, J.E. (2014). granova: Graphical Analysis of Variance. R package version 2.1. https://CRAN.R-project.org/package=granova
+
+Wickham, H. (2016). *ggplot2: Elegant Graphics for Data Analysis*. Springer-Verlag.
+
+
+

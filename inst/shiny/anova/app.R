@@ -11,7 +11,7 @@ ui <- navbarPage(
 
 	tabPanel(
 		'Plot',
-		chooseSliderSkin("Shiny", color = "seagreen"),
+		# chooseSliderSkin("Shiny", color = "seagreen"),
 		tags$head(tags$style(
 			HTML(
 				'.irs-from, .irs-to, .irs-min, .irs-max, .irs-single {
@@ -35,6 +35,7 @@ ui <- navbarPage(
 						'Unit Line' = 'unit_line',
 						'Grand Mean' = 'grand_mean',
 						'Grand (overall) Standard Deviation' = 'sd_line',
+						'Boxplot' = 'boxplot',
 						'Within Group Standard Deviations' = 'group_sd',
 						'Within Group Variances' = 'group_variances',
 						'Mean Square Within (Error)' = 'ms_within',
@@ -207,6 +208,7 @@ server <- function(input, output, session) {
 		anova_vis(
 			df$Value,
 			df$Group,
+			plot_boxplot = 'boxplot' %in% input$plot_features,
 			plot_group_variances = 'group_variances' %in% input$plot_features,
 			plot_group_sd = 'group_sd' %in% input$plot_features,
 			plot_ms_within = 'ms_within' %in% input$plot_features,

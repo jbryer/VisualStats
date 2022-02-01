@@ -19,6 +19,7 @@ anova_vis <- function(Y,
 					  plot_group_sd = TRUE,
 					  plot_ms_within = TRUE,
 					  plot_ms_between = TRUE,
+					  plot_between_group_variances = FALSE,
 					  plot_unit_line = TRUE,
 					  plot_grand_mean = TRUE,
 					  plot_sd_line = TRUE,
@@ -132,6 +133,12 @@ anova_vis <- function(Y,
 						 color = box_color)
 	}
 
+	if(plot_between_group_variances) {
+		p <- p + geom_rect(data = desc, aes(xmin = contrast, xmax = 0,
+										ymin = mean, ymax = mean(df$Value),
+										color = Group, fill = Group),
+					   alpha = 0.05, linetype = 4)
+	}
 
 	if(plot_group_variances) {
 		p <- p + geom_rect(data = df_rect_within,
@@ -165,7 +172,7 @@ anova_vis <- function(Y,
 		p <- p +
 			geom_hline(yintercept = mean(df$Value), alpha = 0.5, linetype = 2, size = 1) +
 			geom_vline(xintercept = 0, alpha = 0.5, linetype = 2, size = 1) +
-			geom_point(aes(x = 0, y = grand_mean_val), color = grand_mean_col, size = 4)
+			geom_point(aes(x = 0, y = grand_mean_val), color = grand_mean_col, size = 3)
 	}
 
 	if(plot_sd_line) {

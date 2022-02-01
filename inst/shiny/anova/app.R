@@ -40,6 +40,7 @@ ui <- navbarPage(
 						'Within Group Variances' = 'group_variances',
 						'Mean Square Within (Error)' = 'ms_within',
 						'Pooled Within Group Standard Deviation' = 'pooled_sd',
+						'Pooled Between Group Variances' = 'between_group_variances',
 						'Mean Square Between (Treatment)' = 'ms_between'
 					)
 				),
@@ -216,7 +217,8 @@ server <- function(input, output, session) {
 			plot_unit_line = 'unit_line' %in% input$plot_features,
 			plot_grand_mean = 'grand_mean' %in% input$plot_features,
 			plot_sd_line = 'sd_line' %in% input$plot_features,
-			plot_pooled_sd = 'pooled_sd' %in% input$plot_features
+			plot_pooled_sd = 'pooled_sd' %in% input$plot_features,
+			plot_between_group_variances = 'between_group_variances' %in% input$plot_features
 		)
 	})
 

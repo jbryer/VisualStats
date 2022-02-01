@@ -85,7 +85,7 @@
       <h1 data-toc-skip>Graphical Analysis of Variance</h1>
                         <h4 class="author">Jason Bryer, Ph.D.</h4>
             
-            <h4 class="date">2022-01-27</h4>
+            <h4 class="date">2022-02-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jbryer/VisualStats/blob/master/vignettes/anova.Rmd"><code>vignettes/anova.Rmd</code></a></small>
       <div class="hidden name"><code>anova.Rmd</code></div>
@@ -94,8 +94,39 @@
 
     
     
+<p>Analysis of variance (ANOVA) remains an important statistical method for a variety of situations. ANOVA is typically taught along with other null hypothesis tests (e.g. t-test, chi-squared), however, there are many nuances differences in how the test statistic is calculated that many students do not fully understand. Specifically, why use the ratio of mean square between (or treatment) and mean square within (or error) as the test statistic? Pruzek and Helmreich (2010) introduced a visualization that attempts visualize all the components of ANOVA. This visualization was implemented in the <code>granova</code> (2014) R package utilizing the base graphics system. This document introduces a version of the granova visualization usinge <code>ggplot2</code> Wickham (2016) that provides a number parameters to isoloate certain features of their visualization. We use this approach in teaching ANOVA, mostly through the use of Shiny (Chang et al, 2021) that allows the user/students to interactively add and remove plot features.</p>
+<p>To exemplify this appraoch we will explore the effects of different approaches of hand-washing has on bacteria counts (De Veaux et al, 2009). Specifically, each of four types of hand-washing (alcohol spray, antibacterial soap, regular soap, and water only) were replicated eight times resulting in 32 observations. The boxplot below provides a summary of the data.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/anova_vis.html">anova_vis</a></span><span class="op">(</span><span class="va">hand_washing</span><span class="op">$</span><span class="va">Bacterial_Counts</span>, <span class="va">hand_washing</span><span class="op">$</span><span class="va">Method</span>,
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="va">hand_washing</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Method</span>, y <span class="op">=</span> <span class="va">Bacterial_Counts</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+    <span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">Method</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+    <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">'none'</span><span class="op">)</span></code></pre></div>
+<p><img src="anova_files/figure-html/unnamed-chunk-1-1.png" width="700" style="display: block; margin: auto;"></p>
+<p>When conceptualizing variances graphically, we wish to draw squares. Consider the formula for the smaple variance:</p>
+<p><span class="math display">\[S^2 = \frac{\sum(x_i - \bar{x})^2}{n - 1}\]</span></p>
+<p>If we focus on the numerator for a singe observation, say <span class="math inline">\(i = 1\)</span>, <span class="math inline">\((x_1 - \bar{x})^2\)</span>, the contribution to the variance calculation for the first observation can be conceptualized as a square with edges of length <span class="math inline">\(x_i - \bar{x}\)</span>. Therefore, the sample variance is approximately the average of the area of all those squares (see the figure below). <em>NOTE: It is approximate because the sample variance has <span class="math inline">\(n-1\)</span> in the denominator. The true average, using the population variances, would have <span class="math inline">\(n\)</span> in the denominator.</em></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/variance_vis.html">variance_vis</a></span><span class="op">(</span><span class="va">hand_washing</span><span class="op">$</span><span class="va">Bacterial_Counts</span><span class="op">)</span></code></pre></div>
+<p><img src="anova_files/figure-html/unnamed-chunk-2-1.png" width="700" style="display: block; margin: auto;"></p>
+<p>In order to use squares to represent variance components in the figure, we need to convert the categories to numerical values. To achieve this, we will use contrast coefficients. The contrast coefficients are calculated using the group means, centering them on zero. Consider summary statistics for each group:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">desc</span> <span class="op">&lt;-</span> <span class="fu">describeBy</span><span class="op">(</span><span class="va">hand_washing</span><span class="op">$</span><span class="va">Bacterial_Counts</span>, 
+                   <span class="va">hand_washing</span><span class="op">$</span><span class="va">Method</span>, 
+                   mat <span class="op">=</span> <span class="cn">TRUE</span>, skew <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">desc</span></code></pre></div>
+<pre><code>##     item             group1 vars n  mean       sd min max range        se
+## X11    1      Alcohol Spray    1 8  37.5 26.55991   5  82    77  9.390345
+## X12    2 Antibacterial Soap    1 8  92.5 41.96257  20 164   144 14.836008
+## X13    3               Soap    1 8 106.0 46.95895  51 207   156 16.602496
+## X14    4              Water    1 8 117.0 31.13106  74 170    96 11.006492</code></pre>
+<p>The mean of the means is 88.25. If we subtract this value from each group mean, then the deviance in the <em>x</em>-axis will be proportional to each groups deviance from the grand mean.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">desc</span><span class="op">$</span><span class="va">contrast</span> <span class="op">&lt;-</span> <span class="va">desc</span><span class="op">$</span><span class="va">mean</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">desc</span><span class="op">$</span><span class="va">mean</span><span class="op">)</span></code></pre></div>
+<p>The following figure plots the bacteria counts on the <em>y</em>-axis and the contrast coefficent on the <em>x</em>-axis.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/anova_vis.html">anova_vis</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="va">hand_washing</span><span class="op">$</span><span class="va">Bacterial_Counts</span>, 
+          group <span class="op">=</span> <span class="va">hand_washing</span><span class="op">$</span><span class="va">Method</span>,
+          plot_boxplot <span class="op">=</span> <span class="cn">TRUE</span>,
           plot_group_variances <span class="op">=</span> <span class="cn">FALSE</span>,
           plot_group_sd <span class="op">=</span> <span class="cn">FALSE</span>,
           plot_ms_within <span class="op">=</span> <span class="cn">FALSE</span>,
@@ -103,21 +134,204 @@
           plot_unit_line <span class="op">=</span> <span class="cn">FALSE</span>,
           plot_grand_mean <span class="op">=</span> <span class="cn">FALSE</span>,
           plot_sd_line <span class="op">=</span> <span class="cn">FALSE</span>,
-          plot_pooled_sd <span class="op">=</span> <span class="cn">FALSE</span>
+          plot_pooled_sd <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_between_group_variances <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
-<p><img src="anova_files/figure-html/unnamed-chunk-1-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="anova_files/figure-html/unnamed-chunk-5-1.png" width="700" style="display: block; margin: auto;"></p>
+<p>An important advantage of using contrast coefficients is that a one unit change in the <em>x</em>-axis is the same as a one unit change in the <em>y</em>-axis. We can verify this by adding the unit line (i.e. <span class="math inline">\(y = x\)</span>) to the plot and see that the line intersects each group mean. We also added the grand, overall, mean in both the <em>x</em> and <em>y</em>-axes. By design, the grand mean on the <em>y</em>-axis intercepts at zero, whereas it is the grand mean of 88.25.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/anova_vis.html">anova_vis</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="va">hand_washing</span><span class="op">$</span><span class="va">Bacterial_Counts</span>, 
+          group <span class="op">=</span> <span class="va">hand_washing</span><span class="op">$</span><span class="va">Method</span>,
+          plot_boxplot <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_group_variances <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_group_sd <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_ms_within <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_ms_between <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_unit_line <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_grand_mean <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_sd_line <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_pooled_sd <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_between_group_variances <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span></code></pre></div>
+<p><img src="anova_files/figure-html/unnamed-chunk-6-1.png" width="700" style="display: block; margin: auto;"></p>
+<p>The following table has the formulas for each component of an ANOVA summary table.</p>
+<table class="table">
+<colgroup>
+<col width="12%">
+<col width="30%">
+<col width="3%">
+<col width="19%">
+<col width="18%">
+<col width="16%">
+</colgroup>
+<thead><tr class="header">
+<th>Source</th>
+<th align="center">Sum of Squares</th>
+<th align="center"><em>df</em></th>
+<th align="center">MS</th>
+<th align="center">F</th>
+<th>p</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Between Group (Treatment)</td>
+<td align="center"><span class="math inline">\(\sum^{}_{k} n_{k}(\bar{x}_{k} -\bar{x} )^{2}\)</span></td>
+<td align="center"><span class="math inline">\(k - 1\)</span></td>
+<td align="center"><span class="math inline">\(\frac{SS_{between}}{df_{between}}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{MS_{between}}{MS_{within}}\)</span></td>
+<td>area to right of <span class="math inline">\(F_{k-1,n-k}\)</span>
+</td>
+</tr>
+<tr class="even">
+<td>Within Group (Error)</td>
+<td align="center"><span class="math inline">\(\sum^{}_{k} \sum^{}_{i} (\bar{x}_{ik} -\bar{x}_{k} )^{2}\)</span></td>
+<td align="center"><span class="math inline">\(n - k\)</span></td>
+<td align="center"><span class="math inline">\(\frac{SS_{within}}{df_{within}}\)</span></td>
+<td align="center"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td align="center"><span class="math inline">\(\sum^{}_{k} \sum^{}_{i} (\bar{x}_{ik} -\bar{x} )^{2}\)</span></td>
+<td align="center"><span class="math inline">\(n - 1\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>With <em>k</em> being each group and <em>i</em> the observation within group <em>k</em>, the calculation for the within group component involves calculating the deviance from the group mean. In the figure below, the vertical for each group represents the standard deviation and the box is the variance (recall that the standard deviation is equal the square root of the variance).</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/anova_vis.html">anova_vis</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="va">hand_washing</span><span class="op">$</span><span class="va">Bacterial_Counts</span>, 
+          group <span class="op">=</span> <span class="va">hand_washing</span><span class="op">$</span><span class="va">Method</span>,
+          plot_boxplot <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_group_variances <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_group_sd <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_ms_within <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_ms_between <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_unit_line <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_grand_mean <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_sd_line <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_pooled_sd <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_between_group_variances <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span></code></pre></div>
+<p><img src="anova_files/figure-html/unnamed-chunk-7-1.png" width="700" style="display: block; margin: auto;"></p>
+<p>THe mean square within is approximately the average of each groups variances and is represented below as the orange square in the center. Like the variance estimate above, becasue the denominator is <span class="math inline">\(k - 1\)</span> the mean square within will be slightly larger than if we used <span class="math inline">\(k\)</span> in the denominator. By using <span class="math inline">\(k - 1\)</span> we get an <em>unbiased estimate</em>.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/anova_vis.html">anova_vis</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="va">hand_washing</span><span class="op">$</span><span class="va">Bacterial_Counts</span>, 
+          group <span class="op">=</span> <span class="va">hand_washing</span><span class="op">$</span><span class="va">Method</span>,
+          plot_boxplot <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_group_variances <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_group_sd <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_ms_within <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_ms_between <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_unit_line <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_grand_mean <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_sd_line <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_pooled_sd <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_between_group_variances <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span></code></pre></div>
+<p><img src="anova_files/figure-html/unnamed-chunk-8-1.png" width="700" style="display: block; margin: auto;"></p>
+<p>Since we have equal group sizes, the pooled standard deviation (here represented by the horizontal dashed maroon lines) is approximately to the square of the mean square between (the difference in these is due to the using the degrees of freedom in the denominator instead of <em>n</em>). This will not necessarily be the case when the group sizes are not equal since we are taking a weighted average (note the *n_k$ in the formula for the sum of squares between).</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/anova_vis.html">anova_vis</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="va">hand_washing</span><span class="op">$</span><span class="va">Bacterial_Counts</span>, 
+          group <span class="op">=</span> <span class="va">hand_washing</span><span class="op">$</span><span class="va">Method</span>,
+          plot_boxplot <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_group_variances <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_group_sd <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_ms_within <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_ms_between <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_unit_line <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_grand_mean <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_sd_line <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_pooled_sd <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_between_group_variances <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span></code></pre></div>
+<p><img src="anova_files/figure-html/unnamed-chunk-9-1.png" width="700" style="display: block; margin: auto;"></p>
+<p>There are two ways to approach the between group (treatment): 1. Since we know the total sum of squares and the within group sum of squares, we can subtract the within group sum of squares from the total to get the between group sum of squares, or 2. Perform the calculation as presented in the table above. Looking at the fomrula, we see that the between group sum of squares is centered on each group mean’s deviance from the grand mean: <span class="math inline">\((\bar{x}_k - \bar{x})^2\)</span> (note that ${x}_k is the group mean and {x} is the grand mean). The figure below depicts these deviances.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/anova_vis.html">anova_vis</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="va">hand_washing</span><span class="op">$</span><span class="va">Bacterial_Counts</span>, 
+          group <span class="op">=</span> <span class="va">hand_washing</span><span class="op">$</span><span class="va">Method</span>,
+          plot_boxplot <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_group_variances <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_group_sd <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_ms_within <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_ms_between <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_unit_line <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_grand_mean <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_sd_line <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_pooled_sd <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_between_group_variances <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span></code></pre></div>
+<p><img src="anova_files/figure-html/unnamed-chunk-10-1.png" width="700" style="display: block; margin: auto;"></p>
+<p>Unlike the within group sum of squares, each of these deviances is multiplied by the group size, <span class="math inline">\(n_k\)</span>. Since we have equal group sizes in this example, they will each contribute equally to the total between group sum of squares, though it should be noted that this is not case with unequal group sizes. As a result, the mean square between is not an average of the deviances, but rather the sum of the deviances multiplied by <span class="math inline">\(\frac{n_k}{k - 1}\)</span>. The resulting mean square between, depicted below as the green square, is going to be larger than all the individual components of the sum of squares.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/anova_vis.html">anova_vis</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="va">hand_washing</span><span class="op">$</span><span class="va">Bacterial_Counts</span>, 
+          group <span class="op">=</span> <span class="va">hand_washing</span><span class="op">$</span><span class="va">Method</span>,
+          plot_boxplot <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_group_variances <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_group_sd <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_ms_within <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_ms_between <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_unit_line <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_grand_mean <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_sd_line <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_pooled_sd <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_between_group_variances <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span></code></pre></div>
+<p><img src="anova_files/figure-html/unnamed-chunk-11-1.png" width="700" style="display: block; margin: auto;"></p>
+<p>Now that we have a square representing both the mean square between (in green) and the mean square within (in yellow), the F-statistic is equal to the ratio of the area of these two squares.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/anova_vis.html">anova_vis</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="va">hand_washing</span><span class="op">$</span><span class="va">Bacterial_Counts</span>, 
+          group <span class="op">=</span> <span class="va">hand_washing</span><span class="op">$</span><span class="va">Method</span>,
+          plot_boxplot <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_group_variances <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_group_sd <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_ms_within <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_ms_between <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_unit_line <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_grand_mean <span class="op">=</span> <span class="cn">TRUE</span>,
+          plot_sd_line <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_pooled_sd <span class="op">=</span> <span class="cn">FALSE</span>,
+          plot_between_group_variances <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span></code></pre></div>
+<p><img src="anova_files/figure-html/unnamed-chunk-12-1.png" width="700" style="display: block; margin: auto;"></p>
+<p>The <em>p</em>-value is the area under the F-distribution to the right of the F-statistic (repsrented as a vertical dashed line below).</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_function</span><span class="op">(</span>fun <span class="op">=</span> <span class="va">df</span>, args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>df1 <span class="op">=</span> <span class="fl">3</span>, df2 <span class="op">=</span> <span class="fl">28</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+    <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">7.06</span>, linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> 
+    <span class="fu"><a href="https://rdrr.io/r/graphics/plot.window.html">xlim</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span> <span class="op">+</span> <span class="fu">xlab</span><span class="op">(</span><span class="st">'Statistic'</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ylab</span><span class="op">(</span><span class="st">''</span><span class="op">)</span></code></pre></div>
+<p><img src="anova_files/figure-html/unnamed-chunk-13-1.png" width="700" style="display: block; margin: auto;"></p>
+<div id="references" class="section level1">
+<h1 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h1>
+<p>Chang, W., Cheng, J., Allaire, J.J., Sievert, C, Schloerke, B, Xie, Y, Allen, J., McPherson, J., Dipert, A., &amp; Borges, B. (2021). shiny: Web Application Framework for R. R package version 1.7.1. <a href="https://CRAN.R-project.org/package=shiny" class="uri">https://CRAN.R-project.org/package=shiny</a></p>
+<p>De Veaux, R.D., Velleman, P.F., &amp; Bock, D.E. (2009). <em>Intro Stats</em> (4th ed). Pearson.</p>
+<p>Pruzek, R.R., &amp; Helmreich, J.E. (2010). Elemental Graphics for Analysis of Variance using the R Package granova. Retrieved from <a href="https://api.semanticscholar.org/CorpusID:54635842" class="uri">https://api.semanticscholar.org/CorpusID:54635842</a></p>
+<p>Pruzek, R.M., &amp; Helmreich, J.E. (2014). granova: Graphical Analysis of Variance. R package version 2.1. <a href="https://CRAN.R-project.org/package=granova" class="uri">https://CRAN.R-project.org/package=granova</a></p>
+<p>Wickham, H. (2016). <em>ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag.</p>
+</div>
+<div class="footnotes">
+<hr>
+<ol>
+<li id="fn1"><p>The <code>anova_vis</code> function specifies <code><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">ggplot2::coord_equal</a></code> on all plots.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>See <a href="https://web.ma.utexas.edu/users/mks/M358KInstr/SampleSDPf.pdf" class="uri">https://web.ma.utexas.edu/users/mks/M358KInstr/SampleSDPf.pdf</a> for a detailed explanation.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 
 
 
       <footer><div class="copyright">
-  <p>Developed by Jason Bryer.</p>
+  <p>Developed by Jason Bryer, Bruce Dudek.</p>
 </div>
 
 <div class="pkgdown">

@@ -12,6 +12,7 @@ anova_vis(
   plot_group_sd = TRUE,
   plot_ms_within = TRUE,
   plot_ms_between = TRUE,
+  plot_between_group_variances = FALSE,
   plot_unit_line = TRUE,
   plot_grand_mean = TRUE,
   plot_sd_line = TRUE,

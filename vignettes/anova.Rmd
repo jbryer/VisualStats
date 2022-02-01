@@ -2,9 +2,6 @@
 title: "Graphical Analysis of Variance"
 author: "Jason Bryer, Ph.D."
 date: "`r Sys.Date()`"
-output:
-  minidown::mini_document:
-    code_folding: "hide"
 vignette: >
   %\VignetteIndexEntry{Graphical Analysis of Variance}
   %\VignetteEngine{knitr::rmarkdown}
@@ -25,26 +22,47 @@ data('hand_washing')
 
 Analysis of variance (ANOVA) remains an important statistical method for a variety of situations. ANOVA is typically taught along with other null hypothesis tests (e.g. t-test, chi-squared), however, there are many nuances differences in how the test statistic is calculated that many students do not fully understand. Specifically, why use the ratio of mean square between (or treatment) and mean square within (or error) as the test statistic? Pruzek and Helmreich (2010) introduced a visualization that attempts visualize all the components of ANOVA. This visualization was implemented in the `granova` (2014) R package utilizing the base graphics system. This document introduces a version of the granova visualization usinge `ggplot2` Wickham (2016) that provides a number parameters to isoloate certain features of their visualization. We use this approach in teaching ANOVA, mostly through the use of Shiny (Chang et al, 2021) that allows the user/students to interactively add and remove plot features.
 
+To exemplify this appraoch we will explore the effects of different approaches of hand-washing has on bacteria counts (De Veaux et al, 2009). Specifically, each of four types of hand-washing (alcohol spray, antibacterial soap, regular soap, and water only) were replicated eight times resulting in 32 observations. The boxplot below provides a summary of the data.
 
 
 ```{r}
 ggplot(hand_washing, aes(x = Method, y = Bacterial_Counts)) +
-	geom_boxplot()
+	geom_boxplot() + 
+	geom_point(aes(color = Method)) + 
+	theme(legend.position = 'none')
 ```
 
+When conceptualizing variances graphically, we wish to draw squares. Consider the formula for the smaple variance:
 
+$$S^2 = \frac{\sum(x_i - \bar{x})^2}{n - 1}$$
 
-| Source                  | Sum of Squares                                              | *df*  | MS                                   | F                                   | p                              |
-| ------------------------|:-----------------------------------------------------------:|:-----:|:------------------------------------:|:-----------------------------------:|--------------------------------|
-| Between Group (Treatment) | $\sum^{}_{k} n_{k}(\bar{x}_{k} -\bar{x} )^{2}$              | k - 1 | $\frac{SS_{between}}{df_{between}}$  | $\frac{MS_{between}}{MS_{within}}$  | area to right of $F_{k-1,n-k}$ |
-| Within Group (Error)    | $\sum^{}_{k} \sum^{}_{i} (\bar{x}_{ik} -\bar{x}_{k} )^{2}$  | n - k | $\frac{SS_{within}}{df_{within}}$    |                                     |                                |
-| Total                   | $\sum^{}_{k} \sum^{}_{i} (\bar{x}_{ik} -\bar{x} )^{2}$      | n - 1 |                                      |                                     |                                |
+If we focus on the numerator for a singe observation, say $i = 1$, $(x_1 - \bar{x})^2$, the contribution to the variance calculation for the first observation can be conceptualized as a square with edges of length $x_i - \bar{x}$. Therefore, the sample variance is approximately the average of the area of all those squares (see the figure below). *NOTE: It is approximate because the sample variance has $n-1$ in the denominator. The true average, using the population variances, would have $n$ in the denominator.*
 
+```{r}
+variance_vis(hand_washing$Bacterial_Counts)
+```
 
+In order to use squares to represent variance components in the figure, we need to convert the categories to numerical values. To achieve this, we will use contrast coefficients. The contrast coefficients are calculated using the group means, centering them on zero. Consider summary statistics for each group:
+
+```{r}
+desc <- describeBy(hand_washing$Bacterial_Counts, 
+				   hand_washing$Method, 
+				   mat = TRUE, skew = FALSE)
+desc
+```
+
+The mean of the means is `r mean(desc$mean)`. If we subtract this value from each group mean, then the deviance in the *x*-axis will be proportional to each groups deviance from the grand mean.
+
+```{r}
+desc$contrast <- desc$mean - mean(desc$mean)
+```
+
+The following figure plots the bacteria counts on the *y*-axis and the contrast coefficent on the *x*-axis. 
 
 ```{r}
 anova_vis(Y = hand_washing$Bacterial_Counts, 
 		  group = hand_washing$Method,
+		  plot_boxplot = TRUE,
 		  plot_group_variances = FALSE,
 		  plot_group_sd = FALSE,
 		  plot_ms_within = FALSE,
@@ -52,9 +70,152 @@ anova_vis(Y = hand_washing$Bacterial_Counts,
 		  plot_unit_line = FALSE,
 		  plot_grand_mean = FALSE,
 		  plot_sd_line = FALSE,
-		  plot_pooled_sd = FALSE
+		  plot_pooled_sd = FALSE,
+		  plot_between_group_variances = FALSE
 )
+```
 
+An important advantage of using contrast coefficients is that a one unit change in the *x*-axis is the same as a one unit change in the *y*-axis. We can verify this by adding the unit line (i.e. $y = x$) to the plot and see that the line intersects each group mean. We also added the grand, overall, mean in both the *x* and *y*-axes. By design, the grand mean on the *y*-axis intercepts at zero, whereas it is the grand mean of `r mean(hand_washing$Bacterial_Counts)`.^[The `anova_vis` function specifies `ggplot2::coord_equal` on all plots.]
+
+```{r}
+anova_vis(Y = hand_washing$Bacterial_Counts, 
+		  group = hand_washing$Method,
+		  plot_boxplot = FALSE,
+		  plot_group_variances = FALSE,
+		  plot_group_sd = FALSE,
+		  plot_ms_within = FALSE,
+		  plot_ms_between = FALSE,
+		  plot_unit_line = TRUE,
+		  plot_grand_mean = TRUE,
+		  plot_sd_line = FALSE,
+		  plot_pooled_sd = FALSE,
+		  plot_between_group_variances = FALSE
+)
+```
+
+The following table has the formulas for each component of an ANOVA summary table.
+
+| Source                  | Sum of Squares                                              | *df*  | MS                                   | F                                   | p                              |
+| ------------------------|:-----------------------------------------------------------:|:-----:|:------------------------------------:|:-----------------------------------:|--------------------------------|
+| Between Group (Treatment) | $\sum^{}_{k} n_{k}(\bar{x}_{k} -\bar{x} )^{2}$              | $k - 1$ | $\frac{SS_{between}}{df_{between}}$  | $\frac{MS_{between}}{MS_{within}}$  | area to right of $F_{k-1,n-k}$ |
+| Within Group (Error)    | $\sum^{}_{k} \sum^{}_{i} (\bar{x}_{ik} -\bar{x}_{k} )^{2}$  | $n - k$ | $\frac{SS_{within}}{df_{within}}$    |                                     |                                |
+| Total                   | $\sum^{}_{k} \sum^{}_{i} (\bar{x}_{ik} -\bar{x} )^{2}$      | $n - 1$ |                                      |                                     |                                |
+
+
+With *k* being each group and *i* the observation within group *k*, the calculation for the within group component involves calculating the deviance from the group mean. In the figure below, the vertical for each group represents the standard deviation and the box is the variance (recall that the standard deviation is equal the square root of the variance). 
+
+```{r}
+anova_vis(Y = hand_washing$Bacterial_Counts, 
+		  group = hand_washing$Method,
+		  plot_boxplot = FALSE,
+		  plot_group_variances = TRUE,
+		  plot_group_sd = TRUE,
+		  plot_ms_within = FALSE,
+		  plot_ms_between = FALSE,
+		  plot_unit_line = TRUE,
+		  plot_grand_mean = TRUE,
+		  plot_sd_line = FALSE,
+		  plot_pooled_sd = FALSE,
+		  plot_between_group_variances = FALSE
+)
+```
+
+THe mean square within is approximately the average of each groups variances and is represented below as the orange square in the center. Like the variance estimate above, becasue the denominator is $k - 1$ the mean square within will be slightly larger than if we used $k$ in the denominator. By using $k - 1$ we get an *unbiased estimate*.^[See https://web.ma.utexas.edu/users/mks/M358KInstr/SampleSDPf.pdf for a detailed explanation.]
+
+```{r}
+anova_vis(Y = hand_washing$Bacterial_Counts, 
+		  group = hand_washing$Method,
+		  plot_boxplot = FALSE,
+		  plot_group_variances = TRUE,
+		  plot_group_sd = TRUE,
+		  plot_ms_within = TRUE,
+		  plot_ms_between = FALSE,
+		  plot_unit_line = TRUE,
+		  plot_grand_mean = TRUE,
+		  plot_sd_line = FALSE,
+		  plot_pooled_sd = FALSE,
+		  plot_between_group_variances = FALSE
+)
+```
+
+Since we have equal group sizes, the pooled standard deviation (here represented by the horizontal dashed maroon lines) is approximately to the square of the mean square between (the difference in these is due to the using the degrees of freedom in the denominator instead of *n*). This will not necessarily be the case when the group sizes are not equal since we are taking a weighted average (note the *n_k$ in the formula for the sum of squares between).
+
+```{r}
+anova_vis(Y = hand_washing$Bacterial_Counts, 
+		  group = hand_washing$Method,
+		  plot_boxplot = FALSE,
+		  plot_group_variances = FALSE,
+		  plot_group_sd = TRUE,
+		  plot_ms_within = TRUE,
+		  plot_ms_between = FALSE,
+		  plot_unit_line = TRUE,
+		  plot_grand_mean = TRUE,
+		  plot_sd_line = TRUE,
+		  plot_pooled_sd = FALSE,
+		  plot_between_group_variances = FALSE
+)
+```
+
+There are two ways to approach the between group (treatment): 1. Since we know the total sum of squares and the within group sum of squares, we can subtract the within group sum of squares from the total to get the between group sum of squares, or 2. Perform the calculation as presented in the table above. Looking at the fomrula, we see that the between group sum of squares is centered on each group mean's deviance from the grand mean: $(\bar{x}_k - \bar{x})^2$ (note that $\bar{x}_k is the group mean and \bar{x} is the grand mean). The figure below depicts these deviances. 
+
+```{r}
+anova_vis(Y = hand_washing$Bacterial_Counts, 
+		  group = hand_washing$Method,
+		  plot_boxplot = FALSE,
+		  plot_group_variances = FALSE,
+		  plot_group_sd = TRUE,
+		  plot_ms_within = FALSE,
+		  plot_ms_between = FALSE,
+		  plot_unit_line = TRUE,
+		  plot_grand_mean = TRUE,
+		  plot_sd_line = FALSE,
+		  plot_pooled_sd = FALSE,
+		  plot_between_group_variances = TRUE
+)
+```
+
+Unlike the within group sum of squares, each of these deviances is multiplied by the group size, $n_k$. Since we have equal group sizes in this example, they will each contribute equally to the total between group sum of squares, though it should be noted that this is not case with unequal group sizes. As a result, the mean square between is not an average of the deviances, but rather the sum of the deviances multiplied by $\frac{n_k}{k - 1}$. The resulting mean square between, depicted below as the green square, is going to be larger than all the individual components of the sum of squares.
+
+```{r}
+anova_vis(Y = hand_washing$Bacterial_Counts, 
+		  group = hand_washing$Method,
+		  plot_boxplot = FALSE,
+		  plot_group_variances = FALSE,
+		  plot_group_sd = TRUE,
+		  plot_ms_within = FALSE,
+		  plot_ms_between = TRUE,
+		  plot_unit_line = TRUE,
+		  plot_grand_mean = TRUE,
+		  plot_sd_line = FALSE,
+		  plot_pooled_sd = FALSE,
+		  plot_between_group_variances = FALSE
+)
+```
+
+Now that we have a square representing both the mean square between (in green) and the mean square within (in yellow), the F-statistic is equal to the ratio of the area of these two squares.
+
+```{r}
+anova_vis(Y = hand_washing$Bacterial_Counts, 
+		  group = hand_washing$Method,
+		  plot_boxplot = FALSE,
+		  plot_group_variances = FALSE,
+		  plot_group_sd = TRUE,
+		  plot_ms_within = TRUE,
+		  plot_ms_between = TRUE,
+		  plot_unit_line = TRUE,
+		  plot_grand_mean = TRUE,
+		  plot_sd_line = FALSE,
+		  plot_pooled_sd = FALSE,
+		  plot_between_group_variances = FALSE
+)
+```
+
+The *p*-value is the area under the F-distribution to the right of the F-statistic (repsrented as a vertical dashed line below).
+
+```{r}
+ggplot() + geom_function(fun = df, args = c(df1 = 3, df2 = 28)) + 
+	geom_vline(xintercept = 7.06, linetype = 2) + 
+	xlim(0, 10) + xlab('Statistic') + ylab('')
 ```
 
 

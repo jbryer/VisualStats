@@ -1,7 +1,5 @@
 ---
 title: "Graphical Analysis of Variance"
-author: "Jason Bryer, Ph.D."
-date: "`r Sys.Date()`"
 vignette: >
   %\VignetteIndexEntry{Graphical Analysis of Variance}
   %\VignetteEngine{knitr::rmarkdown}
@@ -19,6 +17,8 @@ library(VisualStats)
 data('hand_washing')
 ```
 
+**Author: Jason Bryer, Ph.D.**  
+**Last updated: `r Sys.Date()`**
 
 Analysis of variance (ANOVA) remains an important statistical method for a variety of situations. ANOVA is typically taught along with other null hypothesis tests (e.g. t-test, chi-squared), however, there are many nuances differences in how the test statistic is calculated that many students do not fully understand. Specifically, why use the ratio of mean square between (or treatment) and mean square within (or error) as the test statistic? Pruzek and Helmreich (2010) introduced a visualization that attempts visualize all the components of ANOVA. This visualization was implemented in the `granova` (2014) R package utilizing the base graphics system. This document introduces a version of the granova visualization usinge `ggplot2` Wickham (2016) that provides a number parameters to isoloate certain features of their visualization. We use this approach in teaching ANOVA, mostly through the use of Shiny (Chang et al, 2021) that allows the user/students to interactively add and remove plot features.
 

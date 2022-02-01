@@ -83,9 +83,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Graphical Analysis of Variance</h1>
-                        <h4 class="author">Jason Bryer, Ph.D.</h4>
             
-            <h4 class="date">2022-02-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jbryer/VisualStats/blob/master/vignettes/anova.Rmd"><code>vignettes/anova.Rmd</code></a></small>
       <div class="hidden name"><code>anova.Rmd</code></div>
@@ -94,6 +92,7 @@
 
     
     
+<p><strong>Author: Jason Bryer, Ph.D.</strong><br><strong>Last updated: 2022-02-01</strong></p>
 <p>Analysis of variance (ANOVA) remains an important statistical method for a variety of situations. ANOVA is typically taught along with other null hypothesis tests (e.g. t-test, chi-squared), however, there are many nuances differences in how the test statistic is calculated that many students do not fully understand. Specifically, why use the ratio of mean square between (or treatment) and mean square within (or error) as the test statistic? Pruzek and Helmreich (2010) introduced a visualization that attempts visualize all the components of ANOVA. This visualization was implemented in the <code>granova</code> (2014) R package utilizing the base graphics system. This document introduces a version of the granova visualization usinge <code>ggplot2</code> Wickham (2016) that provides a number parameters to isoloate certain features of their visualization. We use this approach in teaching ANOVA, mostly through the use of Shiny (Chang et al, 2021) that allows the user/students to interactively add and remove plot features.</p>
 <p>To exemplify this appraoch we will explore the effects of different approaches of hand-washing has on bacteria counts (De Veaux et al, 2009). Specifically, each of four types of hand-washing (alcohol spray, antibacterial soap, regular soap, and water only) were replicated eight times resulting in 32 observations. The boxplot below provides a summary of the data.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">

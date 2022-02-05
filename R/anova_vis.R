@@ -8,6 +8,8 @@
 #' @return a ggplot2 expression.
 #' @param Y the dependent variable.
 #' @param group the independent, or grouping, variable.
+#' @param box_width the width of the box express as a percentage of the width of
+#'        the x-axis.
 #' @examples
 #' data(hand_washing)
 #' anova_vis(hand_washing$Bacterial_Counts, hand_washing$Method)
@@ -33,7 +35,7 @@ anova_vis <- function(Y,
 					  pooled_sd_col = 'steelblue3', # Pooled Standard Deviation
 					  ms_within_col = '#fdc086',
 					  ms_between_col = '#7fc97f',
-					  # box_width = diff(xlim) * .025,
+					  box_width = .04,
 					  box_color = 'grey50',
 					  plot_group_labels = FALSE,
 					  ...
@@ -102,6 +104,19 @@ anova_vis <- function(Y,
 
 	df_subscript <- paste0(df_between, ', ', df_within)
 	title <- bquote(F[.(df_subscript)] == .(prettyNum(F_stat, digits = 3)) ~ '; p' ~ .(ifelse(p < 0.01, ' < 0.01', paste0(' = ', prettyNum(p, digits = 3)))))
+
+	miny <- min(grand_mean_val - sqrt(MS_between) / 2,
+				grand_mean_val - sqrt(MS_within) / 2,
+				df$Value)
+	maxy <- max(grand_mean_val + sqrt(MS_between) / 2,
+				grand_mean_val + sqrt(MS_within) / 2,
+				df$Value)
+
+	ylim <- c(0.95 * miny, 1.05 * maxy)
+	xlim <- c(-1 * diff(range(ylim)) / 2,
+			  diff(range(ylim)) / 2)
+
+	box_width = diff(xlim) * box_width
 
 	p <- ggplot()
 
@@ -193,19 +208,6 @@ anova_vis <- function(Y,
 					   color = pooled_sd_col,
 					   alpha = 0.5)
 	}
-
-	miny <- min(grand_mean_val - sqrt(MS_between) / 2,
-				grand_mean_val - sqrt(MS_within) / 2,
-				df$Value)
-	maxy <- max(grand_mean_val + sqrt(MS_between) / 2,
-				grand_mean_val + sqrt(MS_within) / 2,
-				df$Value)
-
-	ylim <- c(0.95 * miny, 1.05 * maxy)
-	xlim <- c(-1 * diff(range(ylim)) / 2,
-			  diff(range(ylim)) / 2)
-
-	box_width = diff(xlim) * .025 # TODO: Make parameter
 
 	if(plot_datapoints) {
 		p <- p + geom_beeswarm(data = df, aes(x = contrast, y = Value,

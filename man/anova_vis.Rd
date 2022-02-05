@@ -26,6 +26,7 @@ anova_vis(
   pooled_sd_col = "steelblue3",
   ms_within_col = "#fdc086",
   ms_between_col = "#7fc97f",
+  box_width = 0.04,
   box_color = "grey50",
   plot_group_labels = FALSE,
   ...
@@ -35,6 +36,9 @@ anova_vis(
 \item{Y}{the dependent variable.}
 
 \item{group}{the independent, or grouping, variable.}
+
+\item{box_width}{the width of the box express as a percentage of the width of
+the x-axis.}
 }
 \value{
 a ggplot2 expression.

@@ -22,8 +22,8 @@ anova_vis <- function(Y,
 					  plot_between_group_variances = FALSE,
 					  plot_unit_line = TRUE,
 					  plot_grand_mean = TRUE,
-					  plot_sd_line = TRUE,
-					  plot_pooled_sd = TRUE,
+					  plot_sd_line = FALSE,
+					  plot_pooled_sd = FALSE,
 					  xlab = 'Contrast Coefficient',
 					  ylab = 'Dependent Variable',
 					  grand_mean_col = 'blue',
@@ -31,8 +31,9 @@ anova_vis <- function(Y,
 					  pooled_sd_col = 'steelblue3', # Pooled Standard Deviation
 					  ms_within_col = '#fdc086',
 					  ms_between_col = '#7fc97f',
-					  box_width = diff(xlim) * .025,
+					  # box_width = diff(xlim) * .025,
 					  box_color = 'grey50',
+					  plot_group_labels = FALSE,
 					  ...
 ) {
 	df <- data.frame(Value = Y,
@@ -191,18 +192,30 @@ anova_vis <- function(Y,
 					   alpha = 0.5)
 	}
 
-	xlim <- c(-1.1 * max(2 * sqrt(MS_between), diff(range(df$Value)) ) / 2,
-			  1.1 * max(2 * sqrt(MS_between), diff(range(df$Value))) / 2)
-	ylim <- c(1.1 * (grand_mean_val - max(2 * sqrt(MS_between), diff(range(df$Value))) / 2),
-			  1.1 * (grand_mean_val + max(2 * sqrt(MS_between), diff(range(df$Value))) / 2))
+	miny <- min(grand_mean_val - sqrt(MS_between) / 2,
+				grand_mean_val - sqrt(MS_within) / 2,
+				df$Value)
+	maxy <- max(grand_mean_val + sqrt(MS_between) / 2,
+				grand_mean_val + sqrt(MS_within) / 2,
+				df$Value)
+
+	ylim <- c(0.95 * miny, 1.05 * maxy)
+	xlim <- c(-1 * diff(range(ylim)) / 2,
+			  diff(range(ylim)) / 2)
+
+	box_width = diff(xlim) * .025 # TODO: Make parameter
 
 	p <- p +
 		geom_point(data = df, aes(x = contrast, y = Value, group = Group, color = Group),
 				   alpha = 0.75, shape = 1, size = 2) +
-		geom_point(data = desc, aes(x = contrast, y = mean, color = Group), size = 3) +
-		geom_text(data = desc, aes(label = Group, x = contrast, y = min(df$Value)),
-				  angle = 90, hjust = 0, vjust = -0.8) +
-		ggtitle(title) +
+		geom_point(data = desc, aes(x = contrast, y = mean, color = Group), size = 3)
+
+	if(plot_group_labels) {
+		p <- p + geom_text(data = desc, aes(label = Group, x = contrast, y = min(df$Value)),
+				  angle = 90, hjust = 0, vjust = -0.8)
+	}
+
+	p <- p + ggtitle(title) +
 		xlim(xlim) + ylim(ylim) +
 		xlab(xlab) +
 		ylab(ylab) +
@@ -222,14 +235,46 @@ if(FALSE) { #TODO: move to testthat
 	anova_vis(Y = hand_washing$Bacterial_Counts,
 			  group = hand_washing$Method,
 			  plot_boxplot = TRUE,
-			  plot_group_variances = FALSE,
+			  plot_group_variances = TRUE,
 			  plot_group_sd = FALSE,
-			  plot_ms_within = FALSE,
-			  plot_ms_between = FALSE,
+			  plot_ms_within = TRUE,
+			  plot_ms_between = TRUE,
 			  plot_unit_line = FALSE,
-			  plot_grand_mean = FALSE,
+			  plot_grand_mean = TRUE,
 			  plot_sd_line = FALSE,
-			  plot_pooled_sd = FALSE
+			  plot_pooled_sd = FALSE,
+			  plot_group_labels = FALSE
 	)
+
+	data(iris)
+	anova_vis(Y = iris$Sepal.Length,
+			  group = iris$Species,
+			  plot_boxplot = FALSE,
+			  plot_group_variances = TRUE,
+			  plot_group_sd = FALSE,
+			  plot_ms_within = TRUE,
+			  plot_ms_between = TRUE,
+			  plot_unit_line = FALSE,
+			  plot_grand_mean = TRUE,
+			  plot_sd_line = FALSE,
+			  plot_pooled_sd = FALSE,
+			  plot_group_labels = FALSE)
+
+	data(penguins, package = 'palmerpenguins')
+	penguins <- penguins[complete.cases(penguins),]
+	set.seed(2112)
+	penguins <- penguins[sample(nrow(penguins), size = .1 * nrow(penguins)),]
+	anova_vis(Y = penguins$flipper_length_mm,
+			  group = penguins$species,
+			  plot_boxplot = FALSE,
+			  plot_group_variances = TRUE,
+			  plot_group_sd = FALSE,
+			  plot_ms_within = TRUE,
+			  plot_ms_between = TRUE,
+			  plot_unit_line = FALSE,
+			  plot_grand_mean = TRUE,
+			  plot_sd_line = FALSE,
+			  plot_pooled_sd = FALSE,
+			  plot_group_labels = FALSE)
 
 }

@@ -15,8 +15,8 @@ anova_vis(
   plot_between_group_variances = FALSE,
   plot_unit_line = TRUE,
   plot_grand_mean = TRUE,
-  plot_sd_line = TRUE,
-  plot_pooled_sd = TRUE,
+  plot_sd_line = FALSE,
+  plot_pooled_sd = FALSE,
   xlab = "Contrast Coefficient",
   ylab = "Dependent Variable",
   grand_mean_col = "blue",
@@ -24,8 +24,8 @@ anova_vis(
   pooled_sd_col = "steelblue3",
   ms_within_col = "#fdc086",
   ms_between_col = "#7fc97f",
-  box_width = diff(xlim) * 0.025,
   box_color = "grey50",
+  plot_group_labels = FALSE,
   ...
 )
 }

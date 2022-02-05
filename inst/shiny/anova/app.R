@@ -24,7 +24,7 @@ ui <- navbarPage(
 				selectInput(
 					'dataset',
 					'Select a dataset: ',
-					choices = c('handwashing', 'anorexia', 'npk', 'simulate'),
+					choices = c('handwashing', 'anorexia', 'npk', 'iris', 'pengiuns', 'simulate'),
 					selected = 'handwashing'
 				),
 				hr(),
@@ -32,6 +32,7 @@ ui <- navbarPage(
 					'plot_features',
 					'Plot Features:',
 					choices = c(
+						'Label Groups' = 'group_labels',
 						'Unit Line' = 'unit_line',
 						'Grand Mean' = 'grand_mean',
 						'Grand (overall) Standard Deviation' = 'sd_line',
@@ -119,6 +120,14 @@ server <- function(input, output, session) {
 			data(npk, package = 'datasets')
 			df <- data.frame(Group = npk$block,
 							 Value = npk$yield)
+		} else if(input$dataset == 'iris') {
+			data(iris)
+			df <- data.frame(Group = iris$Species,
+							 Value = iris$Sepal.Length)
+		} else if(input$dataset == 'pengiuns') {
+			data(penguins, package = 'palmerpenguins')
+			df <- data.frame(Group = penguins$species,
+							 Value = penguins$bill_length_mm)
 		}
 
 		return(df)
@@ -218,7 +227,8 @@ server <- function(input, output, session) {
 			plot_grand_mean = 'grand_mean' %in% input$plot_features,
 			plot_sd_line = 'sd_line' %in% input$plot_features,
 			plot_pooled_sd = 'pooled_sd' %in% input$plot_features,
-			plot_between_group_variances = 'between_group_variances' %in% input$plot_features
+			plot_between_group_variances = 'between_group_variances' %in% input$plot_features,
+			plot_group_labels = 'group_labels' %in% input$plot_features
 		)
 	})
 

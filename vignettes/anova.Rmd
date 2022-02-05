@@ -19,6 +19,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FAL
 set.seed(2112)
 library(tidyverse)
 library(VisualStats)
+library(beeswarm)
 data('hand_washing')
 ```
 
@@ -33,7 +34,7 @@ To exemplify this appraoch we will explore the effects of different approaches o
 ```{r, fig.cap='Boxplot of Bacterial Counts by Hand Washing Method'}
 ggplot(hand_washing, aes(x = Method, y = Bacterial_Counts)) +
 	geom_boxplot() + 
-	geom_point(aes(color = Method)) + 
+	geom_beeswarm(aes(color = Method)) + 
 	theme(legend.position = 'none')
 ```
 

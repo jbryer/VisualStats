@@ -2,9 +2,6 @@
 title: "Loess Regression"
 author: "Jason Bryer, Ph.D. and Bruce Dudek, Ph.D."
 date: "`r Sys.Date()`"
-output:
-  minidown::mini_document:
-    code_folding: "hide"
 vignette: >
   %\VignetteIndexEntry{Loess Regression}
   %\VignetteEngine{knitr::rmarkdown}

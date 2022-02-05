@@ -7,6 +7,8 @@
 anova_vis(
   Y,
   group,
+  plot_datapoints = TRUE,
+  plot_group_means = TRUE,
   plot_boxplot = FALSE,
   plot_group_variances = TRUE,
   plot_group_sd = TRUE,
@@ -17,7 +19,7 @@ anova_vis(
   plot_grand_mean = TRUE,
   plot_sd_line = FALSE,
   plot_pooled_sd = FALSE,
-  xlab = "Contrast Coefficient",
+  xlab = "Deviation Contrast",
   ylab = "Dependent Variable",
   grand_mean_col = "blue",
   sd_line_col = "maroon",

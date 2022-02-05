@@ -139,6 +139,8 @@ included on the plot.</p>
     <pre class="usage"><span class='fu'>anova_vis</span><span class='op'>(</span>
   <span class='va'>Y</span>,
   <span class='va'>group</span>,
+  plot_datapoints <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  plot_group_means <span class='op'>=</span> <span class='cn'>TRUE</span>,
   plot_boxplot <span class='op'>=</span> <span class='cn'>FALSE</span>,
   plot_group_variances <span class='op'>=</span> <span class='cn'>TRUE</span>,
   plot_group_sd <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -147,17 +149,17 @@ included on the plot.</p>
   plot_between_group_variances <span class='op'>=</span> <span class='cn'>FALSE</span>,
   plot_unit_line <span class='op'>=</span> <span class='cn'>TRUE</span>,
   plot_grand_mean <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  plot_sd_line <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  plot_pooled_sd <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  xlab <span class='op'>=</span> <span class='st'>"Contrast Coefficient"</span>,
+  plot_sd_line <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  plot_pooled_sd <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  xlab <span class='op'>=</span> <span class='st'>"Deviation Contrast"</span>,
   ylab <span class='op'>=</span> <span class='st'>"Dependent Variable"</span>,
   grand_mean_col <span class='op'>=</span> <span class='st'>"blue"</span>,
   sd_line_col <span class='op'>=</span> <span class='st'>"maroon"</span>,
   pooled_sd_col <span class='op'>=</span> <span class='st'>"steelblue3"</span>,
   ms_within_col <span class='op'>=</span> <span class='st'>"#fdc086"</span>,
   ms_between_col <span class='op'>=</span> <span class='st'>"#7fc97f"</span>,
-  box_width <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/diff.html'>diff</a></span><span class='op'>(</span><span class='va'>xlim</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>0.025</span>,
   box_color <span class='op'>=</span> <span class='st'>"grey50"</span>,
+  plot_group_labels <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 

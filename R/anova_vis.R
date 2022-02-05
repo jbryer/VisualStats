@@ -14,6 +14,8 @@
 #' @export
 anova_vis <- function(Y,
 					  group,
+					  plot_datapoints = TRUE,
+					  plot_group_means = TRUE,
 					  plot_boxplot = FALSE,
 					  plot_group_variances = TRUE,
 					  plot_group_sd = TRUE,
@@ -24,7 +26,7 @@ anova_vis <- function(Y,
 					  plot_grand_mean = TRUE,
 					  plot_sd_line = FALSE,
 					  plot_pooled_sd = FALSE,
-					  xlab = 'Contrast Coefficient',
+					  xlab = 'Deviation Contrast',
 					  ylab = 'Dependent Variable',
 					  grand_mean_col = 'blue',
 					  sd_line_col = 'maroon', # Grand (overall) Standard Deviation
@@ -205,10 +207,15 @@ anova_vis <- function(Y,
 
 	box_width = diff(xlim) * .025 # TODO: Make parameter
 
-	p <- p +
-		geom_beeswarm(data = df, aes(x = contrast, y = Value, group = Group, color = Group, fill = Group),
-				   alpha = 0.2, size = 2) +
-		geom_point(data = desc, aes(x = contrast, y = mean, color = Group), size = 3)
+	if(plot_datapoints) {
+		p <- p + geom_beeswarm(data = df, aes(x = contrast, y = Value,
+											  group = Group, color = Group, fill = Group),
+							   alpha = 0.2, size = 2)
+	}
+
+	if(plot_group_means) {
+		p <- p + geom_point(data = desc, aes(x = contrast, y = mean, color = Group), size = 3)
+	}
 
 	if(plot_group_labels) {
 		p <- p + geom_text(data = desc, aes(label = Group, x = contrast, y = min(df$Value)),

@@ -12,6 +12,7 @@
 #' @import knitr
 #' @import markdown
 #' @import dplyr
+#' @importFrom ggbeeswarm geom_beeswarm
 #' @importFrom minidown mini_document
 #' @importFrom psych describe describeBy
 NA

@@ -206,8 +206,8 @@ anova_vis <- function(Y,
 	box_width = diff(xlim) * .025 # TODO: Make parameter
 
 	p <- p +
-		geom_point(data = df, aes(x = contrast, y = Value, group = Group, color = Group),
-				   alpha = 0.75, shape = 1, size = 2) +
+		geom_beeswarm(data = df, aes(x = contrast, y = Value, group = Group, color = Group, fill = Group),
+				   alpha = 0.2, size = 2) +
 		geom_point(data = desc, aes(x = contrast, y = mean, color = Group), size = 3)
 
 	if(plot_group_labels) {
@@ -234,16 +234,17 @@ if(FALSE) { #TODO: move to testthat
 	data(hand_washing)
 	anova_vis(Y = hand_washing$Bacterial_Counts,
 			  group = hand_washing$Method,
-			  plot_boxplot = TRUE,
+			  plot_boxplot = FALSE,
 			  plot_group_variances = TRUE,
 			  plot_group_sd = FALSE,
 			  plot_ms_within = TRUE,
 			  plot_ms_between = TRUE,
-			  plot_unit_line = FALSE,
+			  plot_unit_line = TRUE,
 			  plot_grand_mean = TRUE,
 			  plot_sd_line = FALSE,
 			  plot_pooled_sd = FALSE,
-			  plot_group_labels = FALSE
+			  plot_group_labels = FALSE,
+			  ylab = 'Bacterial Count'
 	)
 
 	data(iris)
@@ -254,11 +255,12 @@ if(FALSE) { #TODO: move to testthat
 			  plot_group_sd = FALSE,
 			  plot_ms_within = TRUE,
 			  plot_ms_between = TRUE,
-			  plot_unit_line = FALSE,
+			  plot_unit_line = TRUE,
 			  plot_grand_mean = TRUE,
 			  plot_sd_line = FALSE,
 			  plot_pooled_sd = FALSE,
-			  plot_group_labels = FALSE)
+			  plot_group_labels = FALSE,
+			  ylab = 'Sepal Length')
 
 	data(penguins, package = 'palmerpenguins')
 	penguins <- penguins[complete.cases(penguins),]
@@ -275,6 +277,7 @@ if(FALSE) { #TODO: move to testthat
 			  plot_grand_mean = TRUE,
 			  plot_sd_line = FALSE,
 			  plot_pooled_sd = FALSE,
-			  plot_group_labels = FALSE)
+			  plot_group_labels = FALSE,
+			  ylab = 'Flipper Length')
 
 }

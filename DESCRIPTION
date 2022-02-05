@@ -23,5 +23,5 @@ VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Encoding: UTF-8
-Depends: ggplot2, tidyverse, psych
+Depends: ggplot2, tidyverse, psych, ggbeeswarm
 Suggests: palmerpenguins

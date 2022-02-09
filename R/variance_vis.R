@@ -19,6 +19,8 @@
 variance_vis <- function(x,
 						 plot_mean = TRUE,
 						 plot_deviances = TRUE,
+						 plot_deviances_x = FALSE,
+						 plot_deviances_y = FALSE,
 						 plot_population_variance = TRUE,
 						 plot_sample_variance = FALSE,
 						 plot_population_sd = FALSE,
@@ -51,6 +53,22 @@ variance_vis <- function(x,
 			plot_deviances <- 1:nrow(df)
 		} else {
 			plot_deviances <- c()
+		}
+	}
+
+	if(is.logical(plot_deviances_x)) {
+		if(plot_deviances_x) {
+			plot_deviances_x <- 1:nrow(df)
+		} else {
+			plot_deviances_x <- c()
+		}
+	}
+
+	if(is.logical(plot_deviances_y)) {
+		if(plot_deviances_y) {
+			plot_deviances_y <- 1:nrow(df)
+		} else {
+			plot_deviances_y <- c()
 		}
 	}
 
@@ -104,6 +122,25 @@ variance_vis <- function(x,
 			color = deviation_col, fill = deviation_col, alpha = 0.05)
 	}
 
+	if(length(plot_deviances_x) > 0) {
+		p <- p + geom_segment(
+			data = df[plot_deviances_x,,drop = FALSE],
+			aes(x = mean_x, y = 0, xend = x, yend = 0),
+			color = deviation_col,
+			arrow = arrow(),
+			size = 1.5
+		)
+	}
+
+	if(length(plot_deviances_y) > 0) {
+		p <- p + geom_segment(
+			data = df[plot_deviances_y,,drop = FALSE],
+			aes(x = x, y = 0, xend = x, yend = y),
+			color = deviation_col,
+			size = 1.5
+		)
+	}
+
 	if(plot_population_sd) {
 		y_pos <- get_y_position(population_variance)
 		p <- p + geom_errorbarh(aes(xmin = mean_x - population_variance / 2,
@@ -129,7 +166,26 @@ if(FALSE) {
 
 	variance_vis(x,
 				 plot_mean = TRUE,
-				 plot_deviances = TRUE,
+				 plot_deviances = FALSE,
+				 plot_deviances_x = which(x == max(x)),
+				 plot_deviances_y = which(x == max(x)),
+				 plot_sample_variance = FALSE,
+				 plot_population_variance = FALSE,
+				 plot_population_sd = FALSE)
+
+	variance_vis(x,
+				 plot_mean = TRUE,
+				 plot_deviances = which(x == max(x)),
+				 plot_deviances_x = which(x == max(x)),
+				 plot_deviances_y = which(x == max(x)),
+				 plot_sample_variance = FALSE,
+				 plot_population_variance = FALSE,
+				 plot_population_sd = FALSE)
+
+
+	variance_vis(x,
+				 plot_mean = TRUE,
+				 plot_deviances = FALSE,
 				 plot_sample_variance = FALSE,
 				 plot_population_variance = TRUE,
 				 plot_population_sd = TRUE)
@@ -152,6 +208,12 @@ if(FALSE) {
 	variance_vis(x,
 				 plot_mean = TRUE,
 				 plot_deviances = which(x == max(x)), # Largest cross product
+				 plot_sample_variance = FALSE,
+				 plot_population_variance = TRUE)
+
+	variance_vis(x,
+				 plot_mean = TRUE,
+				 plot_deviances = c(which(x == max(x)), which(x == min(x))), # Largest cross product
 				 plot_sample_variance = FALSE,
 				 plot_population_variance = TRUE)
 

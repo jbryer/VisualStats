@@ -2,3 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
+vignettes/mle_cache/
+inst/shiny/anova/figure/

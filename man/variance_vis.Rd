@@ -8,6 +8,8 @@ variance_vis(
   x,
   plot_mean = TRUE,
   plot_deviances = TRUE,
+  plot_deviances_x = FALSE,
+  plot_deviances_y = FALSE,
   plot_population_variance = TRUE,
   plot_sample_variance = FALSE,
   plot_population_sd = FALSE,

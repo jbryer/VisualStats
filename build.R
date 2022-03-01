@@ -1,15 +1,29 @@
 library(devtools)
+library(usethis)
+library(testthat)
 
 ##### Build and install the package
 document()
-install(build_vignettes = TRUE, dependencies = FALSE)
+install(build_vignettes = FALSE)
+install(build_vignettes = TRUE)
 check()
 
 devtools::clean_vignettes()
 devtools::build_vignettes()
 
+# This function will cleanup the DESCRIPTION file to be tidy
+usethis::use_tidy_description()
 
-##### Render the README and generate the packagedown website
+# Add dependency
+# usethis::use_package('ggplot2', type = 'Imports')
+# usethis::use_package('vdiffr', type = 'Suggests')
+
+##### Tests
+# Create a test
+usethis::use_test('loess-test')
+
+
+##### Render the README and generate the pkgdown website
 rmarkdown::render('README.Rmd', output_format = 'github_document')
 pkgdown::build_site()
 

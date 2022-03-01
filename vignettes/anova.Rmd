@@ -19,7 +19,8 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FAL
 set.seed(2112)
 library(tidyverse)
 library(VisualStats)
-library(beeswarm)
+library(ggbeeswarm)
+library(psych)
 data('hand_washing')
 ```
 

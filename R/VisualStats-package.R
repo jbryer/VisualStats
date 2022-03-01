@@ -5,18 +5,22 @@
 #' @title Visualizations for Statistical Tests
 #' @author \email{jason@@bryer.org}
 #' @keywords statistics visualizations shiny
-#' @import shiny
-#' @import tidyverse
+#' @import magrittr
 #' @import ggplot2
 #' @import reshape2
 #' @import knitr
 #' @import markdown
 #' @import dplyr
+#' @import gganimate
+#' @import magick
+#' @import cowplot
+#' @import egg
+#' @importFrom shiny runApp shinyApp
 #' @importFrom bookdown html_document2
 #' @importFrom ggbeeswarm geom_beeswarm
-#' @importFrom minidown mini_document
 #' @importFrom psych describe describeBy
-NA
+#' @importFrom DT dataTableOutput renderDataTable
+"_PACKAGE"
 
 #' Bacteria counts after various hand washing techniques.
 #'

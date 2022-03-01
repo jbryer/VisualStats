@@ -1,11 +1,13 @@
 pandoc: 2.11.4
-pkgdown: 1.6.1
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   anova: anova.html
   loess: loess.html
-last_built: 2022-02-05T19:07Z
+  log_likelihood: log_likelihood.html
+  mle: mle.html
+last_built: 2022-03-01T13:47Z
 urls:
-  reference: https://jbryer.github.io/VisualStats//reference
-  article: https://jbryer.github.io/VisualStats//articles
+  reference: https://jbryer.github.io/VisualStats/reference
+  article: https://jbryer.github.io/VisualStats/articles
 

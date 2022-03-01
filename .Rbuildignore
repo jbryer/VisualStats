@@ -7,3 +7,5 @@ docs/
 ^docs$
 ^pkgdown$
 data-raw/
+sticker.R
+VisualStats.png

@@ -1,36 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jbryer.github.io/VisualStats//index.html</loc>
+    <loc>https://jbryer.github.io/VisualStats/404.html</loc>
   </url>
   <url>
-    <loc>https://jbryer.github.io/VisualStats//reference/VisualStats-package.html</loc>
+    <loc>https://jbryer.github.io/VisualStats/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://jbryer.github.io/VisualStats//reference/anova_vis.html</loc>
+    <loc>https://jbryer.github.io/VisualStats/articles/anova.html</loc>
   </url>
   <url>
-    <loc>https://jbryer.github.io/VisualStats//reference/gaussian_errors_vis.html</loc>
+    <loc>https://jbryer.github.io/VisualStats/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://jbryer.github.io/VisualStats//reference/hand_washing.html</loc>
+    <loc>https://jbryer.github.io/VisualStats/articles/loess.html</loc>
   </url>
   <url>
-    <loc>https://jbryer.github.io/VisualStats//reference/loess_vis.html</loc>
+    <loc>https://jbryer.github.io/VisualStats/articles/log_likelihood.html</loc>
   </url>
   <url>
-    <loc>https://jbryer.github.io/VisualStats//reference/renderRmd.html</loc>
+    <loc>https://jbryer.github.io/VisualStats/articles/mle.html</loc>
   </url>
   <url>
-    <loc>https://jbryer.github.io/VisualStats//reference/shiny_demo.html</loc>
+    <loc>https://jbryer.github.io/VisualStats/authors.html</loc>
   </url>
   <url>
-    <loc>https://jbryer.github.io/VisualStats//reference/variance_vis.html</loc>
+    <loc>https://jbryer.github.io/VisualStats/index.html</loc>
   </url>
   <url>
-    <loc>https://jbryer.github.io/VisualStats//articles/anova.html</loc>
+    <loc>https://jbryer.github.io/VisualStats/reference/VisualStats-package.html</loc>
   </url>
   <url>
-    <loc>https://jbryer.github.io/VisualStats//articles/loess.html</loc>
+    <loc>https://jbryer.github.io/VisualStats/reference/anova_vis.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/gaussian_errors_vis.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/get_numeric_vars.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/hand_washing.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/isBinary.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/loess_vis.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/logistic.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/logit.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/loglikelihood_binomial.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/loglikelihood_normal.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/optim_save.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/plot_likelihood.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/plot_linear_assumption_check.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/renderRmd.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/shiny_demo.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/shiny_mle.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/shiny_server.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/shiny_ui.html</loc>
+  </url>
+  <url>
+    <loc>https://jbryer.github.io/VisualStats/reference/variance_vis.html</loc>
   </url>
 </urlset>

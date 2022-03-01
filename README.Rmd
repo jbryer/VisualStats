@@ -7,6 +7,8 @@ editor_options:
   chunk_output_type: console
 ---
 
+<a href='https://github.com/jbryer/VisualStats'><img src='VisualStats.png' align="right" height="200" /></a>
+
 Website: https://jbryer.github.io/VisualStats/
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE, error=FALSE}
@@ -39,3 +41,6 @@ All available functions and datasets:
 ```{r}
 ls('package:VisualStats')
 ```
+
+
+*Acknowledgments:* Thanks to [Bruce Dudek](https://www.albany.edu/psychology/statistics/shinypsych.htm) for comments and suggestions and to [Jorge Cimentada's](https://cimentadaj.github.io) [blog post](https://cimentadaj.github.io/blog/2020-11-26-maximum-likelihood-distilled/maximum-likelihood-distilled/) that inspired me to build this shiny application.

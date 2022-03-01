@@ -58,7 +58,7 @@ p <- ggplot(data.frame(x = x, y = y), aes(x = x, y = y)) +
 p
 
 hexSticker::sticker(p,
-					filename = 'VisualStats.png',
+					filename = 'man/figures/VisualStats.png',
 					p_size = 18,
 					package = 'VisualStats',
 					url = "github.com/jbryer/VisualStats",

@@ -7,7 +7,16 @@ editor_options:
   chunk_output_type: console
 ---
 
-<a href='https://github.com/jbryer/VisualStats'><img src='VisualStats.png' align="right" height="200" /></a>
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-"
+)
+```
+
+<img src="man/figures/VisualStats.png" align="right" width="120" />
+
 
 Website: https://jbryer.github.io/VisualStats/
 

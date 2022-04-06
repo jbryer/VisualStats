@@ -24,7 +24,7 @@ ui <- navbarPage(
 				selectInput(
 					'dataset',
 					'Select a dataset: ',
-					choices = c('handwashing', 'anorexia', 'npk', 'iris', 'pengiuns', 'simulate'),
+					choices = c('handwashing', 'anorexia', 'npk', 'iris', 'penguins', 'simulate'),
 					selected = 'handwashing'
 				),
 				hr(),
@@ -124,10 +124,11 @@ server <- function(input, output, session) {
 			data(iris)
 			df <- data.frame(Group = iris$Species,
 							 Value = iris$Sepal.Length)
-		} else if(input$dataset == 'pengiuns') {
+		} else if(input$dataset == 'penguins') {
 			data(penguins, package = 'palmerpenguins')
 			df <- data.frame(Group = penguins$species,
 							 Value = penguins$bill_length_mm)
+			df <- df[complete.cases(df),]
 		}
 
 		return(df)
@@ -232,10 +233,11 @@ server <- function(input, output, session) {
 		)
 	})
 
-	output$about <- VisualStats::renderRmd(paste0(find.package('VisualStats'), '/doc/anova.Rmd'),
-										   input,
-										   envir = environment())
-
+	output$about <- renderText({
+		ShinyDemo::renderRmd(paste0(find.package('VisualStats'), '/doc/anova.Rmd'),
+							 input,
+							 envir = environment())
+	})
 }
 
 shinyApp(ui = ui, server = server)

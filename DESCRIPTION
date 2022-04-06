@@ -1,6 +1,6 @@
 Package: VisualStats
 Title: Visualizations for Statistical Tests
-Version: 0.1
+Version: 0.1.0
 Authors@R: c(
     person("Jason", "Bryer", , "jason@bryer.org", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-2454-0402")),
@@ -8,11 +8,13 @@ Authors@R: c(
   )
 Maintainer: Jason Bryer <jason@bryer.org>
 Description: Functions and Shiny applications for visualizing statistical
-    tests.
+    tests. This package is intended for teachers and learners of statistics 
+    including topics such as variance, ANOVA, regression, and maximum likelihood estimation.
 License: GPL (>= 3)
-URL: https://github.com/jbryer/VisualStats
+URL: https://jbryer.github.io/VisualStats/
 BugReports: https://github.com/jbryer/VisualStats/issues
 Imports: 
+    car,
     cowplot,
     dplyr,
     DT,
@@ -21,12 +23,15 @@ Imports:
     ggbeeswarm,
     ggplot2,
     knitr,
+    magick,
     magrittr,
     markdown,
     psych,
     reshape2,
     magick,
-    shiny
+    shiny,
+    ShinyDemo,
+    transformr
 Suggests: 
     vdiffr,
     testthat (>= 3.0.0)

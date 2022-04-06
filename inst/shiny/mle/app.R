@@ -1,4 +1,4 @@
 library(shiny)
-library(visualMLE)
-shiny::shinyApp(ui = visualMLE:::shiny_ui,
-				server = visualMLE:::shiny_server)
+library(VisualStats)
+shiny::shinyApp(ui = VisualStats:::shiny_ui,
+				server = VisualStats:::shiny_server)

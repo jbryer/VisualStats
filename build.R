@@ -15,7 +15,7 @@ devtools::build_vignettes()
 usethis::use_tidy_description()
 
 # Add dependency
-# usethis::use_package('ggplot2', type = 'Imports')
+# usethis::use_package('ShinyDemo', type = 'Imports')
 # usethis::use_package('vdiffr', type = 'Suggests')
 
 ##### Tests

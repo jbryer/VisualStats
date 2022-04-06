@@ -36,7 +36,7 @@ shinyServer(function(input, output) {
         return(df)
     })
 
-    output$about <- VisualStats::renderRmd(
+    output$about <- ShinyDemo::renderRmd(
             paste0(find.package('VisualStats'), '/doc/loess.Rmd'),
             input,
             envir=environment())

@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FAL
 
 set.seed(2112)
 
-library(tidyverse)
+library(dplyr)
 library(ggplot2)
 library(reshape2)
 library(gganimate)
@@ -522,7 +522,9 @@ p1 <- ggplot() +
 	labs(title = "Iteration: {round(frame/2)}") +
 	shadow_wake(wake_length = 0.1, alpha = FALSE) +
 	ease_aes("cubic-in")
-p1_gif <- animate(p1, nframes = nFrames, width = 480, height = 480, renderer = magick_renderer())
+p1_gif <- animate(p1, nframes = nFrames, 
+				  width = 480, height = 480, 
+				  renderer = magick_renderer())
 
 df.melt <- df %>% melt(id.var = 'Iteration')
 p2 <- ggplot(df.melt, aes(x = Iteration, y = value, color = variable)) +
@@ -533,7 +535,9 @@ p2 <- ggplot(df.melt, aes(x = Iteration, y = value, color = variable)) +
 	xlab('Iteration') + ylab('Parameter Estimate') +
 	theme(legend.position = 'none') +
 	transition_time(Iteration2)
-p2_gif <- animate(p2, nframes = nFrames, width = 480, height = 480, renderer = magick_renderer())
+p2_gif <- animate(p2, nframes = nFrames, 
+				  width = 480, height = 480, 
+				  renderer = magick_renderer())
 
 new_gif <- magick::image_append(c(p1_gif[1], p2_gif[1]))
 for(i in 2:nFrames){

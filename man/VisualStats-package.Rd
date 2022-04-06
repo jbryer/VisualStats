@@ -11,7 +11,7 @@ Visualizations for Statistical Tests
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/jbryer/VisualStats}
+  \item \url{https://jbryer.github.io/VisualStats/}
   \item Report bugs at \url{https://github.com/jbryer/VisualStats/issues}
 }
 

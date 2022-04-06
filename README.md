@@ -3,7 +3,8 @@ VisualStats: R package for visualizing statistical tests
 
 <img src="man/figures/VisualStats.png" align="right" width="120" />
 
-Website: <https://jbryer.github.io/VisualStats/>
+**Authors: Jason Bryer, Ph.D. and Bruce Dudek, Ph.D.**  
+**Website: <https://jbryer.github.io/VisualStats/>**
 
 This package contains functions and [Shiny](https://shiny.rstudio.com)
 applications designed to visualize statistical tests. The latest version
@@ -29,7 +30,7 @@ Shiny apps available. You can run the apps using the
 `shiny_demo('APP_NAME')` where `APP_NAME` is from the list below.
 
 ``` r
-shiny_demo()
+ShinyDemo::shiny_demo(package = 'VisualStats')
 #>       package      app
 #> 1 VisualStats    anova
 #> 2 VisualStats    loess
@@ -45,8 +46,7 @@ ls('package:VisualStats')
 #>  [4] "isBinary"                     "loess_vis"                    "logistic"                    
 #>  [7] "logit"                        "loglikelihood_binomial"       "loglikelihood_normal"        
 #> [10] "optim_save"                   "plot_likelihood"              "plot_linear_assumption_check"
-#> [13] "renderRmd"                    "shiny_demo"                   "shiny_mle"                   
-#> [16] "variance_vis"
+#> [13] "shiny_mle"                    "variance_vis"
 ```
 
 *Acknowledgments:* Thanks to [Bruce

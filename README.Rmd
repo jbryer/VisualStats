@@ -17,8 +17,8 @@ knitr::opts_chunk$set(
 
 <img src="man/figures/VisualStats.png" align="right" width="120" />
 
-
-Website: https://jbryer.github.io/VisualStats/
+**Authors: Jason Bryer, Ph.D. and Bruce Dudek, Ph.D.**    
+**Website: https://jbryer.github.io/VisualStats/**
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE, error=FALSE}
 library(devtools)
@@ -42,7 +42,7 @@ vignette(package = 'VisualStats')[['results']][,c('Item', 'Title'), drop = FALSE
 Shiny apps available. You can run the apps using the `shiny_demo('APP_NAME')` where `APP_NAME` is from the list below.
 
 ```{r}
-shiny_demo()
+ShinyDemo::shiny_demo(package = 'VisualStats')
 ```
 
 All available functions and datasets:

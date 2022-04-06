@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">VisualStats</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,7 +80,7 @@
 
     
     
-<p><strong>Author: Jason Bryer, Ph.D. and Bruce Dudek, Ph.D.</strong><br><strong>Last updated: 2022-03-01</strong></p>
+<p><strong>Author: Jason Bryer, Ph.D. and Bruce Dudek, Ph.D.</strong><br><strong>Last updated: 2022-03-04</strong></p>
 <p>Analysis of variance (ANOVA) remains an important statistical method for a variety of situations. ANOVA is typically taught along with other null hypothesis tests (e.g. t-test, chi-squared), however, there are many nuances differences in how the test statistic is calculated that many students do not fully understand. Specifically, why use the ratio of mean square between (or treatment) and mean square within (or error) as the test statistic? Pruzek and Helmreich (2010) introduced a visualization that attempts visualize all the components of ANOVA. This visualization was implemented in the <code>granova</code> (2014) R package utilizing the base graphics system. This document introduces a version of the granova visualization usinge <code>ggplot2</code> Wickham (2016) that provides a number parameters to isoloate certain features of their visualization. We use this approach in teaching ANOVA, mostly through the use of Shiny (Chang et al, 2021) that allows the user/students to interactively add and remove plot features.</p>
 <p>To exemplify this appraoch we will explore the effects of different approaches of hand-washing has on bacteria counts (De Veaux et al, 2009). Specifically, each of four types of hand-washing (alcohol spray, antibacterial soap, regular soap, and water only) were replicated eight times resulting in 32 observations. The boxplot below provides a summary of the data.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">

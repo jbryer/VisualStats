@@ -3,11 +3,7 @@ title: "Graphical Analysis of Variance"
 vignette: >
   %\VignetteIndexEntry{Graphical Analysis of Variance}
   %\VignetteEngine{knitr::rmarkdown}
-output: 
-  bookdown::html_document2:
-    toc: false
-    number_sections: false
-    fig_caption: true
+output:  knitr:::html_vignette
 editor_options:
   chunk_output_type: console
 ---

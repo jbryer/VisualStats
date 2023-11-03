@@ -16,7 +16,6 @@
 #' @import cowplot
 #' @import egg
 #' @importFrom shiny runApp shinyApp
-#' @importFrom bookdown html_document2
 #' @importFrom ggbeeswarm geom_beeswarm
 #' @importFrom psych describe describeBy
 #' @importFrom DT dataTableOutput renderDataTable

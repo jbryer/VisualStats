@@ -234,7 +234,7 @@ server <- function(input, output, session) {
 	})
 
 	output$about <- renderText({
-		ShinyDemo::renderRmd(paste0(find.package('VisualStats'), '/doc/anova.Rmd'),
+		renderRmd(paste0(find.package('VisualStats'), '/doc/anova.Rmd'),
 							 input,
 							 envir = environment())
 	})

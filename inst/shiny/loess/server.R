@@ -36,14 +36,14 @@ shinyServer(function(input, output) {
         return(df)
     })
 
-    output$about <- ShinyDemo::renderRmd(
-            paste0(find.package('VisualStats'), '/doc/loess.Rmd'),
-            input,
-            envir=environment())
+    # output$about <- renderRmd(
+    #         paste0(find.package('VisualStats'), '/doc/loess.Rmd'),
+    #         input,
+    #         envir=environment())
 
     output$center_input <- renderUI({
         df <- getData()
-        fluidPage(sliderInput("center",
+        sliderInput("center",
                     "Center:",
                     min = min(df[,1]),
                     max = max(df[,1]),
@@ -51,7 +51,7 @@ shinyServer(function(input, output) {
                     # value = min(df[,1]) + (diff(range(df[,1])) / 4),
                     step = diff(range(df[,1])) / 20,
                     round = TRUE,
-                    animate = animationOptions(interval = 800, loop = TRUE))
+                    animate = animationOptions(interval = 800, loop = TRUE)
         )
     })
 
@@ -72,7 +72,7 @@ shinyServer(function(input, output) {
         df$x <- df[,1,drop=TRUE]
         df$y <- df[,2,drop=TRUE]
 
-        loess_vis(formula = y ~ x,
+        VisualStats::loess_vis(formula = y ~ x,
                   data = df,
                   degree = input$degree,
                   draw_loess = input$draw_loess,

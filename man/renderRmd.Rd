@@ -4,8 +4,21 @@
 \alias{renderRmd}
 \title{Render an RMarkdown file to be included in a Shiny app.}
 \usage{
-renderRmd(path, input, envir = new.env(), quiet = TRUE)
+renderRmd(path, input, quiet = TRUE, envir = new.env(), ...)
+}
+\arguments{
+\item{path}{Rmarkdown file to render.}
+
+\item{input}{the input object from Shiny (optional). If provided it will be
+passed to the Rmarkdown file through the environment.}
+
+\item{quiet}{An option to suppress printing during rendering from knitr,
+pandoc command line and others.}
+
+\item{envir}{the environment in which the Rmarkdown code will be evaluated.}
+
+\item{...}{other parameters passed to \code{\link[knitr:knit2html]{knitr::knit2html()}}}
 }
 \description{
-Render an RMarkdown file to be included in a Shiny app.
+This will render an R markdown file to be included in a Shiny app.
 }

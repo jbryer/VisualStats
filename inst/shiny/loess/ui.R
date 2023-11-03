@@ -53,11 +53,11 @@ shinyUI(navbarPage(
                                            "Also see the ABOUT tab."))
             )
         )
-    ),
-
-    tabPanel(
-        'About',
-        # withMathJax(includeHTML(paste0(find.package('VisualStats'), '/doc/loess.html')))
-        htmlOutput('about')
     )
+
+    # tabPanel(
+    #     'About',
+    #     # withMathJax(includeHTML(paste0(find.package('VisualStats'), '/doc/loess.html')))
+    #     htmlOutput('about')
+    # )
 ))

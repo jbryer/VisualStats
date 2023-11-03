@@ -1,9 +1,14 @@
 library(shiny)
-library(tidyverse)
-library(VisualStats)
+library(ggplot2)
+# if(!require(VisualStats)) {
+# 	if(file.exists('R/variance_vis.R')) {
+# 		source('R/variance_vis.R')
+# 	}
+# }
+source('R/variance_vis.R')
 
 ui <- fluidPage(
-	titlePanel("Visualize Sum of Squared and Variance"),
+	titlePanel("Visualize Sum of Squares and Variance"),
 
 	sidebarLayout(
 		sidebarPanel(

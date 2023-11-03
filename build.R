@@ -3,10 +3,10 @@ library(usethis)
 library(testthat)
 
 ##### Build and install the package
-document()
-install(build_vignettes = FALSE)
-install(build_vignettes = TRUE)
-check()
+devtools::document()
+devtools::document()install(build_vignettes = FALSE)
+devtools::document()install(build_vignettes = TRUE)
+devtools::document()check()
 
 devtools::clean_vignettes()
 devtools::build_vignettes()

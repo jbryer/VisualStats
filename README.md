@@ -69,7 +69,7 @@ package any package dependencies need to be installed using teh
 ```` yml
 ```{shinylive-r}
 #| label: fig-shiny-FEATURE
-#| viewerHeight: 700
+#| viewerHeight: 600
 #| standalone: true
 webr::install("ggplot2")
 library(ggplot2)

@@ -9,3 +9,4 @@ docs/
 data-raw/
 sticker.R
 book/
+build_shiny/

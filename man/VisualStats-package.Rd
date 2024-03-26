@@ -4,9 +4,9 @@
 \name{VisualStats-package}
 \alias{VisualStats}
 \alias{VisualStats-package}
-\title{Visualizations for Statistical Tests}
+\title{Visualizations for Statistical Analysis}
 \description{
-Visualizations for Statistical Tests
+Visualizations for Statistical Analysis
 }
 \seealso{
 Useful links:

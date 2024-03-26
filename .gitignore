@@ -5,3 +5,4 @@
 vignettes/mle_cache/
 inst/shiny/anova/figure/
 book/
+build_shiny/

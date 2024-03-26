@@ -1,6 +1,7 @@
 Package: VisualStats
 Title: Visualizations for Statistical Tests
 Version: 0.1.0
+Date: 2024-03-25
 Authors@R: c(
     person("Jason", "Bryer", , "jason@bryer.org", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-2454-0402")),
@@ -41,5 +42,5 @@ VignetteBuilder:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Config/testthat/edition: 3

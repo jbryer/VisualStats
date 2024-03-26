@@ -1,22 +1,11 @@
 library(shiny)
 library(ggplot2)
-# if(!require(VisualStats)) {
-# 	if(file.exists('R/variance_vis.R')) {
-# 		source('R/variance_vis.R')
-# 	}
-# }
-source('R/variance_vis.R')
 
 ui <- fluidPage(
 	titlePanel("Visualize Sum of Squares and Variance"),
 
 	sidebarLayout(
 		sidebarPanel(
-			# selectInput('dataset',
-			# 			'Select a dataset: ',
-			# 			choices = c('handwashing', 'anorexia', 'npk', 'simulate'),
-			# 			selected = 'handwashing'),
-			# hr(),
 			checkboxGroupInput('plot_features',
 							   'Plot Features:',
 							   choices = c(
@@ -49,7 +38,7 @@ server <- function(input, output, session) {
 	output$plot <- renderPlot({
 		x <- getData()
 
-		variance_vis(
+		VisualStats::variance_vis(
 			x,
 			plot_mean = 'plot_mean' %in% input$plot_features,
 			plot_deviances = 'plot_deviances' %in% input$plot_features,

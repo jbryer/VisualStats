@@ -1,8 +1,8 @@
-#' Visualizations for Statistical Tests
+#' Visualizations for Statistical Analysis
 #'
 #' @name VisualStats-package
 #' @docType package
-#' @title Visualizations for Statistical Tests
+#' @title Visualizations for Statistical Analysis
 #' @author \email{jason@@bryer.org}
 #' @keywords statistics visualizations shiny
 #' @import magrittr

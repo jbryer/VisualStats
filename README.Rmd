@@ -20,11 +20,6 @@ knitr::opts_chunk$set(
 **Authors: Jason Bryer, Ph.D. and Bruce Dudek, Ph.D.**    
 **Website: https://jbryer.github.io/VisualStats/**
 
-```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE, error=FALSE}
-library(devtools)
-document()
-install(build_vignettes = TRUE, dependencies = FALSE)
-```
 
 This package contains functions and [Shiny](https://shiny.rstudio.com) applications designed to visualize statistical tests. The latest version can be installed from Github using the `remotes` package:
 
@@ -32,24 +27,9 @@ This package contains functions and [Shiny](https://shiny.rstudio.com) applicati
 remotes::install_github('jbryer/VisualStats')
 ```
 
-The vignettes currently available:
-
-```{r}
-library(VisualStats)
-vignette(package = 'VisualStats')[['results']][,c('Item', 'Title'), drop = FALSE]
-```
-
 Shiny apps available. You can run the apps using the `shiny_demo('APP_NAME')` where `APP_NAME` is from the list below.
 
-```{r}
+```{r, eval=FALSE}
 ShinyDemo::shiny_demo(package = 'VisualStats')
 ```
 
-All available functions and datasets:
-
-```{r}
-ls('package:VisualStats')
-```
-
-
-*Acknowledgments:* Thanks to [Bruce Dudek](https://www.albany.edu/psychology/statistics/shinypsych.htm) for comments and suggestions and to [Jorge Cimentada's](https://cimentadaj.github.io) [blog post](https://cimentadaj.github.io/blog/2020-11-26-maximum-likelihood-distilled/maximum-likelihood-distilled/) that inspired me to build this shiny application.

@@ -1,6 +1,5 @@
 library(shiny)
 library(tidyverse)
-library(VisualStats)
 
 ui <- navbarPage(
 	id = 'navbarpage',
@@ -77,12 +76,11 @@ ui <- navbarPage(
 
 			mainPanel(plotOutput("plot", height = '600px'))
 		),
-	),
+	)
 
-
-	tabPanel('About',
-			 # withMathJax(includeHTML(paste0(find.package('VisualStats'), '/doc/loess.html')))
-			 htmlOutput('about'))
+	# tabPanel('About',
+	# 		 # withMathJax(includeHTML(paste0(find.package('VisualStats'), '/doc/loess.html')))
+	# 		 htmlOutput('about'))
 )
 
 server <- function(input, output, session) {
@@ -107,7 +105,7 @@ server <- function(input, output, session) {
 							 	}
 							 )))
 		} else if (input$dataset == 'handwashing') {
-			data("hand_washing")
+			data("hand_washing", package = 'VisualStats')
 			df <- data.frame(
 				Group = hand_washing$Method,
 				Value = as.integer(hand_washing$Bacterial_Counts)
@@ -121,7 +119,7 @@ server <- function(input, output, session) {
 			df <- data.frame(Group = npk$block,
 							 Value = npk$yield)
 		} else if(input$dataset == 'iris') {
-			data(iris)
+			data(iris, package = 'datasets')
 			df <- data.frame(Group = iris$Species,
 							 Value = iris$Sepal.Length)
 		} else if(input$dataset == 'penguins') {
@@ -216,7 +214,7 @@ server <- function(input, output, session) {
 			}
 		}
 
-		anova_vis(
+		VisualStats::anova_vis(
 			df$Value,
 			df$Group,
 			plot_boxplot = 'boxplot' %in% input$plot_features,
@@ -233,11 +231,11 @@ server <- function(input, output, session) {
 		)
 	})
 
-	output$about <- renderText({
-		renderRmd(paste0(find.package('VisualStats'), '/doc/anova.Rmd'),
-							 input,
-							 envir = environment())
-	})
+	# output$about <- renderText({
+	# 	renderRmd(paste0(find.package('VisualStats'), '/doc/anova.Rmd'),
+	# 						 input,
+	# 						 envir = environment())
+	# })
 }
 
 shinyApp(ui = ui, server = server)

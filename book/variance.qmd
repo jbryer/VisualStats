@@ -6,7 +6,7 @@
 
 ```{shinylive-r}
 #| label: fig-shiny-variance
-#| viewerHeight: 700
+#| viewerHeight: 600
 #| standalone: true
 webr::install("ggplot2")
 

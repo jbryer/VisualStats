@@ -65,10 +65,3 @@ loess_vis <- function(formula,
 
 	return(p)
 }
-
-if(FALSE) {
-	data("faithful")
-	loess_vis(formula = eruptions ~ waiting,
-			  data = faithful)
-}
-

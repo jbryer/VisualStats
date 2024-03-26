@@ -254,10 +254,16 @@ div.csl-indent {
 <figure class="figure">
 <div class="figure-content">
 <pre class="shinylive-r" data-engine="r"><code>#| label: fig-shiny-loess
-#| viewerHeight: 700
+#| viewerHeight: 600
 #| standalone: true
 webr::install("ggplot2")
+webr::install("shinyWidgets")
+webr::install("shinyBS")
+webr::install("dplyr")
 library(ggplot2)
+library(shinyWidgets)
+library(shinyBS)
+library(dplyr)
 source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/loess_vis.R')
 source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/loess_shiny.R')
 shinyApp(ui = loess_shiny_ui, server = loess_shiny_server)</code></pre>

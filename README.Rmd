@@ -61,7 +61,7 @@ Within the Quarto document where the Shiny application is to be embedded, add th
 ````yml
 ```{shinylive-r}
 #| label: fig-shiny-FEATURE
-#| viewerHeight: 700
+#| viewerHeight: 600
 #| standalone: true
 webr::install("ggplot2")
 library(ggplot2)

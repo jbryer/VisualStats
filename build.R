@@ -22,10 +22,15 @@ devtools::build_vignettes()
 rmarkdown::render('README.Rmd')
 
 ##### Book
-quarto::quarto_render('book/index.qmd', output_format = 'html')
+quarto::quarto_render('book/', output_format = 'html')
 # quarto::quarto_render('book/index.qmd', output_format = 'pdf')
 
+# Preview the book (necessary for the Shiny apps to work)
+httpuv::runStaticServer(dir = 'docs/', port = 2112)
+
+
 ##### Build shinylive versions of the apps
+# NOTE: This doesn't currently work very well. Some app work, but not others.
 library(VisualStats)
 
 shiny_apps <- list.dirs('inst/shiny/')

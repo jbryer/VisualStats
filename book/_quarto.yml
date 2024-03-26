@@ -14,8 +14,8 @@ book:
     - mle.qmd
     - anova.qmd
     - references.qmd
-  appendices:
-    - appendix.qmd
+  # appendices:
+  #   - appendix.qmd
   repo-url: https://github.com/jbryer/VisualStats/
   repo-subdir: book
   repo-actions: edit
@@ -32,8 +32,8 @@ format:
       sidebar-width: 200px
       body-width: 1030px
       margin-width: 70px
-  pdf:
-    documentclass: scrreprt
+  # pdf:
+  #   documentclass: scrreprt
 
 filters:
   - shinylive

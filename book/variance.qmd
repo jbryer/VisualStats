@@ -6,7 +6,6 @@
 #| viewerHeight: 600
 #| standalone: true
 webr::install("ggplot2")
-# webr::install("htmltools")
 
 library(ggplot2)
 

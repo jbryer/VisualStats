@@ -22,6 +22,6 @@ remotes::install_github('jbryer/VisualStats')
 This book was creating using [Quarto](https://quarto.org/docs/books/) and hosted on [Github](https://github.com/jbryer/VisualStats).
 
 ```{r, warning=FALSE, error=FALSE}
-sessioninfo::session_diff()
+devtools::session_info()
 ```
 

@@ -33,7 +33,8 @@ Imports:
     shiny,
     transformr,
     ggforce,
-    shinyWidgets
+    shinyWidgets,
+    shinyBS
 Suggests: 
     vdiffr,
     testthat (>= 3.0.0)

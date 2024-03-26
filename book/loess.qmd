@@ -32,3 +32,25 @@ loess_vis(formula = eruptions ~ waiting,
 		  data = faithful)
 ```
 
+::: {#fig-shiny-loess}
+
+::: {.figure-content}
+
+
+```{shinylive-r}
+#| label: fig-shiny-loess
+#| viewerHeight: 700
+#| standalone: true
+webr::install("ggplot2")
+library(ggplot2)
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/loess_vis.R')
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/loess_shiny.R')
+shinyApp(ui = loess_shiny_ui, server = loess_shiny_server)
+```
+
+:::
+
+Visualization of Loess regression.
+
+:::
+

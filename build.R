@@ -8,10 +8,6 @@ devtools::document()
 devtools::install()
 devtools::check()
 
-devtools::clean_vignettes()
-devtools::build_vignettes()
-
-
 # Add dependency
 # usethis::use_package('shinyWidgets', type = 'Imports')
 # usethis::use_package('vdiffr', type = 'Suggests')

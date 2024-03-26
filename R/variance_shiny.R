@@ -2,11 +2,11 @@
 #'
 #' This will start a shiny app explore variance visually.
 #'
-#' @param ... other parameters passed to [shiny::runApp]
+#' @param ... other parameters passed to [shiny::shinyApp]
 #' @references http://rstudio.com/shiny
 #' @export
 variance_shiny <- function(...) {
-	shiny::runApp(app, ...)
+	shiny::shinyApp(ui = variance_shiny_ui, server = variance_shiny_server, ...)
 }
 
 #' Server function for variance application

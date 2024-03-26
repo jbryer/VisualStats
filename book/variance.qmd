@@ -1,9 +1,8 @@
 # Variance
 
-::: {#fig-shiny-spline}
+::: {#fig-shiny-variance}
 
 ::: {.figure-content}
-
 
 ```{shinylive-r}
 #| label: fig-shiny-variance
@@ -24,3 +23,5 @@ shinyApp(ui = variance_shiny_ui, server = variance_shiny_server)
 Visualization of variance.
 
 :::
+
+This Shiny application can be run locally using the `VisualStats::variance_shiny()` function.

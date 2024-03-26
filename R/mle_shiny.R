@@ -32,7 +32,7 @@ shiny_mle <- function(df, default_x, default_y, ...) {
 #'
 #'
 shiny_ui <-  function() { navbarPage(
-	title = "Maximum Likelihood Estimation",
+	# title = "Maximum Likelihood Estimation",
 	tabPanel('Main',
 			 sidebarLayout(
 			 	sidebarPanel(width = 3,

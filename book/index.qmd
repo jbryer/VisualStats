@@ -1,0 +1,27 @@
+# Introduction
+
+This website is largely inspired by what our advisor, colleague, and friend Bob Pruzek called *elemental graphics.* The first two paragraphs from @ElementalGraphics succinctly introduces the core ideas of *elemental graphics*:
+
+> To be most informative in practice, statistical methods should help users see relationships, hypothesized or discovered, among sets of variates or between groups with respect to one or more variates. Particular methods are usually defined using specific models, or by relational questions. Some procedures pose explicit questions that can be approached both descriptively and through inference...
+> 
+> An elemental graphic facilitates direct visualization of data in a way that illuminates the questions that a particular statistical method seeks to answer. For example, a simple scatterplot may be considered the canonical example of an elemental graphic for the association of two variables, and by incorporating superposition of a regression line, especially if augmented with vertical lines (from the points to the regression line) that show "errors", such a plot can become an elemental graphic for a linear prediction.
+
+Their initial paper focused on a specific graphic for analysis of variance (ANOVA), which we cover with some additions. The chapters of this book attempt to take that same philosophy that there are natural graphics that exemplify important statistical concepts beyond ANOVA. This book is not intended to be a standalone introductory statistics book but instead a collection of articles we have used to support the teaching of statistics.
+
+This is an online book because we have found that by having students interact with the graphics, often by controlling specific parameters and/or adding features one-by-one provides a deeper understanding of the concepts. The introduction of the [Shiny](https://shiny.posit.co) [@shiny] R package has greatly simplified the process of creating interactive visualiztions.
+
+All of the Shiny applications, supporting functions, and datasets are included in the `VisualStats` R package. This can be downloaded using the following command:
+
+```{r, eval=FALSE}
+remotes::install_github('jbryer/VisualStats')
+```
+
+
+## Colophon
+
+This book was creating using [Quarto](https://quarto.org/docs/books/) and hosted on [Github](https://github.com/jbryer/VisualStats).
+
+```{r, warning=FALSE, error=FALSE}
+sessioninfo::session_diff()
+```
+

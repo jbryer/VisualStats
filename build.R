@@ -22,7 +22,8 @@ devtools::build_vignettes()
 rmarkdown::render('README.Rmd')
 
 ##### Book
-quarto::quarto_render('book/index.qmd')
+quarto::quarto_render('book/index.qmd', output_format = 'html')
+# quarto::quarto_render('book/index.qmd', output_format = 'pdf')
 
 ##### Build shinylive versions of the apps
 library(VisualStats)

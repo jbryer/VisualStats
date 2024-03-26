@@ -1,0 +1,17 @@
+# Variance
+
+
+```{shinylive-r}
+#| label: fig-shiny-variance
+#| viewerHeight: 600
+#| standalone: true
+webr::install("ggplot2")
+# webr::install("htmltools")
+
+library(ggplot2)
+
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/variance_vis.R')
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/variance_shiny.R')
+
+shinyApp(ui = variance_shiny_ui, server = variance_shiny_server)
+```

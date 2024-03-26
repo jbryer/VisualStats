@@ -1,0 +1,40 @@
+project:
+  type: book
+  output-dir: "../docs/"
+
+book:
+  title: "Visual Statistics"
+  author: "Jason Bryer and Bruce Dudek"
+  # date: "2024-03-23"
+  chapters:
+    - index.qmd
+    - variance.qmd
+    - distributions.qmd
+    - loess.qmd
+    - mle.qmd
+    - anova.qmd
+    - references.qmd
+  appendices:
+    - appendix.qmd
+  repo-url: https://github.com/jbryer/VisualStats/
+  repo-subdir: book
+  repo-actions: edit
+
+bibliography: references.bib
+
+format:
+  html:
+    toc: false
+    theme: cosmo
+    sidebar:
+      style: floating
+    grid:
+      sidebar-width: 200px
+      body-width: 1030px
+      margin-width: 70px
+  pdf:
+    documentclass: scrreprt
+
+filters:
+  - shinylive
+

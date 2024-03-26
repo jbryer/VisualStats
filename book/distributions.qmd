@@ -1,0 +1,17 @@
+# Distributions
+
+```{r, echo=FALSE}
+library(VisualStats)
+```
+
+```{r}
+plot_distributions(dist = 'norm',
+				   xvals = c(-1, 0, 0.5),
+				   xmin = -4,
+				   xmax = 4)
+
+```
+
+
+{{< include distributions_normal.qmd >}}
+

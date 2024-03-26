@@ -1,0 +1,34 @@
+# Loess Regression
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FALSE,
+					  # fig_width = 10, fig_height = 10,
+					  fig.align = 'center')
+set.seed(2112)
+library(tidyverse)
+library(VisualStats)
+```
+
+LOESS (locally estimated scatterplot smoothing) provides a method for visualizing the relationship between variables when classical linear and non-linear least squares regression may not be the most appropriate.  The non-parametric technique explores the relationship between variables using local regressions using only regions of the explanatory variable (IV).
+
+This shiny app permits visualization of those local regressions along the whole of the X variable space.  The way that the loess curve is calculated is to use the predicted value in the response dimension (DV) for the chosen X value based on the local regression.  These predicted points are visualized with the orange dot on the plot and the curve can be seen to be "drawn" when using animation of the centering slider.
+
+The 'loess' function in R provides the capability for either first or second degree polynomial specification for the loess fit (linear or quadratic) and this shiny app provides that same choice along with the "span" specification which affects the smoothing outcome.  Center and span work by locating the local regressions and determining the X axis range employed.
+
+The loess algorithm uses in R and in this shiny app follow an approach developed by @Cleveland1979 and which was apparently also in use in some fields as the Savitsky-Golay filter [@Savitzky1964].  It weights data points closer to the center of the localized regression more heavily than those more distanced.
+
+This app does not permit choice of smoothing `family`. It uses the default Gaussian kernel (least squares approach) of the `loess` function in R.
+
+The weights for each *x* are calculated using:
+
+$$\left( 1 - \left(\frac{dist}{max(dist)}\right)^3 \right)^3$$
+
+when $\alpha < 1$ (i.e. span).
+
+
+```{r}
+data('faithful')
+loess_vis(formula = eruptions ~ waiting,
+		  data = faithful)
+```
+

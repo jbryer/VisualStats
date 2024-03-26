@@ -571,3 +571,50 @@ ggplot(df2, aes(x = x, y = p)) +
 	geom_point(data = study, aes(x = Hours, y = p), color = 'red', size = 4)
 
 ```
+
+
+::: {#fig-shiny-mle}
+
+::: {.figure-content}
+
+```{shinylive-r}
+#| label: fig-shiny-variance
+#| viewerHeight: 600
+#| standalone: true
+
+webr::install("mnormt")
+webr::install("ggplot2")
+webr::install("dplyr")
+webr::install("psych")
+webr::install("tidyr")
+webr::install("cowplot")
+webr::install("reshape2")
+
+library(ggplot2)
+library(dplyr)
+library(psych)
+library(tidyr)
+library(cowplot)
+library(reshape2)
+
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/isBinary.R')
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/optim_save.R')
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/likelihood_normal.R')
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/likelihood_binomial.R')
+
+
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/variance_vis.R')
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/mle_shiny.R')
+
+shinyApp(ui = variance_shiny_ui, server = variance_shiny_server)
+```
+
+:::
+
+Visualization of maximum likelihood estimation.
+
+:::
+
+This Shiny application can be run locally using the `VisualStats::mle_shiny()` function.
+
+

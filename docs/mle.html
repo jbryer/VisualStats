@@ -75,6 +75,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<meta name="shinylive:serviceworker_dir" content=".">
+<script src="site_libs/quarto-contrib/shinylive-0.2.3/shinylive/load-shinylive-sw.js" type="module"></script>
+<script src="site_libs/quarto-contrib/shinylive-0.2.3/shinylive/run-python-blocks.js" type="module"></script>
+<link href="site_libs/quarto-contrib/shinylive-0.2.3/shinylive/shinylive.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/shinylive-quarto-css/shinylive-quarto.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -670,6 +675,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<div id="fig-shiny-mle" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div class="figure-content">
+<pre class="shinylive-r" data-engine="r"><code>#| label: fig-shiny-variance
+#| viewerHeight: 600
+#| standalone: true
+
+webr::install("mnormt")
+webr::install("ggplot2")
+webr::install("dplyr")
+webr::install("psych")
+webr::install("tidyr")
+webr::install("cowplot")
+webr::install("reshape2")
+
+library(ggplot2)
+library(dplyr)
+library(psych)
+library(tidyr)
+library(cowplot)
+library(reshape2)
+
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/isBinary.R')
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/optim_save.R')
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/likelihood_normal.R')
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/likelihood_binomial.R')
+
+
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/variance_vis.R')
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/mle_shiny.R')
+
+shinyApp(ui = variance_shiny_ui, server = variance_shiny_server)</code></pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;5.1: Visualization of maximum likelihood estimation.</figcaption>
+</figure>
+</div>
+<p>This Shiny application can be run locally using the <code>VisualStats::mle_shiny()</code> function.</p>
 
 
 </section>

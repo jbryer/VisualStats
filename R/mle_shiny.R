@@ -4,7 +4,7 @@
 #'
 #' @references http://rstudio.com/shiny
 #' @export
-shiny_mle <- function(df, default_x, default_y, ...) {
+mle_shiny <- function(df, default_x, default_y, ...) {
 	shiny_env <- new.env()
 
 	if(!missing(df)) {
@@ -28,62 +28,60 @@ shiny_mle <- function(df, default_x, default_y, ...) {
 	shiny::runApp(app, ...)
 }
 
-#' Shiny UI
+#' Shiny UI for maximum likelihood estimation
 #'
+#' @return a Shiny UI object.
+#' @export
+mle_shiny_ui <-  function() {
+	navbarPage(
+		tabPanel('Main',
+				 sidebarLayout(
+				 	sidebarPanel(width = 3,
+				 				 uiOutput('outcome_ui'),
+				 				 uiOutput('predictor_ui'),
+				 				 uiOutput('highlight_ui'),
+				 				 hr(),
+				 				 uiOutput('iteration_ui'),
+				 				 checkboxInput('showOLSRegression',
+				 				 			  'Show Regression',
+				 				 			  value = TRUE)
+				 	),
+
+				 	mainPanel(width = 9,
+				 			  tabsetPanel(
+				 			  	tabPanel('Plots',
+				 			  			 fluidRow(
+				 			  			 	column(6, plotOutput("scatter_plot", click = "scatter_plot_click",)),
+				 			  			 	# column(6, plotOutput('likelihood_plot'))
+				 			  			 	column(6, plotOutput("parameter_plot"))
+				 			  			 )
+				 			  			 # plotOutput("parameter_plot")
+				 			  	),
+				 			  	tabPanel('Summary',
+				 			  			 h4('MLE Results'),
+				 			  			 verbatimTextOutput('mle_summary'),
+				 			  			 h4('lm or glm Results'),
+				 			  			 verbatimTextOutput('summary'),
+				 			  			 h4('Point Info'),
+				 			  			 verbatimTextOutput("click_info")
+				 			  	),
+				 			  	tabPanel('Likelihood Plots',
+				 			  			 plotOutput('likelihood_plots', height = '600px')),
+				 			  	tabPanel('Data',
+				 			  			 DT::dataTableOutput('datatable'))
+				 			  )
+				 	)
+				 )
+		)
+	)
+}
+
+#' Shiny server for maximum likelihood estimation
 #'
-shiny_ui <-  function() { navbarPage(
-	# title = "Maximum Likelihood Estimation",
-	tabPanel('Main',
-			 sidebarLayout(
-			 	sidebarPanel(width = 3,
-			 				 uiOutput('outcome_ui'),
-			 				 uiOutput('predictor_ui'),
-			 				 uiOutput('highlight_ui'),
-			 				 hr(),
-			 				 uiOutput('iteration_ui'),
-			 				 checkboxInput('showOLSRegression',
-			 				 			  'Show Regression',
-			 				 			  value = TRUE)
-			 	),
-
-			 	mainPanel(width = 9,
-			 			  tabsetPanel(
-			 			  	tabPanel('Plots',
-			 			  			 fluidRow(
-			 			  			 	column(6, plotOutput("scatter_plot", click = "scatter_plot_click",)),
-			 			  			 	# column(6, plotOutput('likelihood_plot'))
-			 			  			 	column(6, plotOutput("parameter_plot"))
-			 			  			 )
-			 			  			 # plotOutput("parameter_plot")
-			 			  	),
-			 			  	tabPanel('Summary',
-			 			  			 h4('MLE Results'),
-			 			  			 verbatimTextOutput('mle_summary'),
-			 			  			 h4('lm or glm Results'),
-			 			  			 verbatimTextOutput('summary'),
-			 			  			 h4('Point Info'),
-			 			  			 verbatimTextOutput("click_info")
-			 			  	),
-			 			  	tabPanel('Likelihood Plots',
-			 			  			 plotOutput('likelihood_plots', height = '600px')),
-			 			  	tabPanel('Data',
-			 			  			 DT::dataTableOutput('datatable'))
-			 			  )
-			 	)
-			 )
-	),
-
-	# tabPanel('Description', includeHTML('mle.html')
-	# ),
-
-	tabPanel('About',
-			 includeMarkdown(paste0(find.package('visualMLE'), '/shiny/about.md')))
-)}
-
-#' Shiny server.
-#'
-#'
-shiny_server <- function(input, output, session) {
+#' @return a function with Shiny server logic.
+#' @export
+#' @importFrom reshape2 melt
+mle_shiny_server <- function(input, output, session) {
 	# Can use a different data set if desired
 	if(!exists('thedata')) {
 		message('No data specified, using mtcars...')
@@ -115,10 +113,10 @@ shiny_server <- function(input, output, session) {
 		req(input$outcome)
 		req(input$predictor)
 		mle <- NULL
-		if(!visualMLE::isBinary(thedata[,input$outcome])) {
-			mle <- visualMLE::optim_save(
+		if(!isBinary(thedata[,input$outcome])) {
+			mle <- optim_save(
 				runif(3), # Random initial values
-				visualMLE::loglikelihood_normal, # likelihood function
+				loglikelihood_normal, # likelihood function
 				lower = c(-Inf, -Inf, 1.e-5), # The lower bounds for the values, note sigma (error), cannot be negative
 				upper = c(Inf, Inf, sd(thedata[,input$predictor]) ),
 				method = "L-BFGS-B", # https://en.wikipedia.org/wiki/Nelder–Mead_method
@@ -127,9 +125,9 @@ shiny_server <- function(input, output, session) {
 				outcome = thedata[,input$outcome]
 			)
 		} else { # Logistic Regression
-			mle <- visualMLE::optim_save(
+			mle <- optim_save(
 				c(0, 1), # Initial values
-				visualMLE::loglikelihood_binomial,
+				loglikelihood_binomial,
 				method = "L-BFGS-B",
 				control = list(fnscale = -1),
 				predictor = thedata[,input$predictor],
@@ -179,7 +177,7 @@ shiny_server <- function(input, output, session) {
 		req(input$iteration)
 		p <- NULL
 		optim_run <- getData()
-		if(!visualMLE::isBinary(thedata[,input$outcome])) {
+		if(!isBinary(thedata[,input$outcome])) {
 			intercept <- optim_run$iterations[[input$iteration]][1]
 			slope <- optim_run$iterations[[input$iteration]][2]
 			sigma <- optim_run$iterations[[input$iteration]][3]
@@ -199,11 +197,6 @@ shiny_server <- function(input, output, session) {
 			if(input$highlight != 'None') {
 				row <- thedata[input$highlight,,drop = FALSE]
 
-				# p <- plot_likelihood(x = row[, input$predictor],
-				# 					 y = row[, input$outcome],
-				# 					 intercept = intercept,
-				# 					 slope = slope,
-				# 					 sigma = sigma)
 				p <- p + geom_point(data = row, color = 'red')
 
 				heightFactor <- 1 # Increase the multiplier to make the distribution higher
@@ -214,7 +207,6 @@ shiny_server <- function(input, output, session) {
 				y0 <- row[input$highlight, input$outcome]
 				yhat <- slope * x0 + intercept
 				path <- data.frame(x = y + x0, y = x + yhat)
-				# segment <- data.frame(x = x0, y = yhat - k*sigma, xend = x0, yend = yhat + k*sigma)
 				segment2 <- data.frame(x = x0,
 									   y = y0,
 									   xend = dnorm(yhat - y0, 0, sigma) / dnorm(0, 0, sigma) * heightFactor + x0,
@@ -225,13 +217,11 @@ shiny_server <- function(input, output, session) {
 									   yend = yhat)
 
 				p <- p +
-					# geom_segment(data = segment, aes(x = x, y = y, xend = xend, yend = yend)) +
 					geom_segment(data = segment3, aes(x = x, y = y, xend = xend, yend = yend), alpha = 0.3) +
 					geom_segment(data = segment2, aes(x = x, y = y, xend = xend, yend = yend), color = 'red') +
 					geom_point(data = segment2, aes(x = x, y = y), color = '#e31a1c', size = 2) +
 					geom_point(data = segment2, aes(x = xend, y = y), color = '#e31a1c', size = 2) +
 					geom_vline(xintercept = x0) +
-					# geom_hline(yintercept = y0) + # Verify the distribution is centered on y-hat
 					geom_path(data = path, aes(x,y), color = "blue")
 			}
 		} else {
@@ -269,7 +259,7 @@ shiny_server <- function(input, output, session) {
 	output$parameter_plot <- renderPlot({
 		optim_run <- getData()
 		df <- optim_run$iterations_df
-		if(!visualMLE::isBinary(thedata[,input$outcome])) {
+		if(!isBinary(thedata[,input$outcome])) {
 			names(df) <- c('Intercept', 'Slope', 'Sigma', 'LogLikelihood', 'Iteration')
 		} else {
 			names(df) <- c('Intercept', 'Slope', 'LogLikelihood', 'Iteration')
@@ -290,7 +280,7 @@ shiny_server <- function(input, output, session) {
 		if(input$highlight != 'None') {
 			row <- thedata[input$highlight,]
 			df <- optim_run$iterations_df
-			if(!visualMLE::isBinary(thedata[,input$outcome])) {
+			if(!isBinary(thedata[,input$outcome])) {
 				tmp <- df %>% dplyr::filter(Iteration == input$iteration)
 				a <- tmp[1,1]
 				b <- tmp[1,2]
@@ -317,7 +307,7 @@ shiny_server <- function(input, output, session) {
 	})
 
 	output$summary <- renderPrint({
-		if(!visualMLE::isBinary(thedata[,input$outcome])) {
+		if(!isBinary(thedata[,input$outcome])) {
 			lm.out <- lm(as.formula(paste(input$outcome, ' ~ ', input$predictor)),
 						 data = thedata)
 			summary(lm.out)
@@ -349,7 +339,7 @@ shiny_server <- function(input, output, session) {
 		tmp <- df %>% dplyr::filter(Iteration == input$iteration)
 		plots <- list()
 		nplots <- nrow(thedata)
-		if(!visualMLE::isBinary(thedata[,input$outcome])) {
+		if(!isBinary(thedata[,input$outcome])) {
 			for(i in 1:min(nplots, nrow(thedata))) {
 				a <- tmp[1,1]
 				b <- tmp[1,2]

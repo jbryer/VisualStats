@@ -13,7 +13,7 @@ variance_shiny <- function(...) {
 #' @export
 variance_shiny_ui <- function() {
 	fluidPage(
-		titlePanel("Visualize Sum of Squares and Variance"),
+		# titlePanel("Visualize Sum of Squares and Variance"),
 
 		sidebarLayout(
 			sidebarPanel(

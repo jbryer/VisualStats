@@ -18,7 +18,7 @@
     "href": "variance.html",
     "title": "2  Variance",
     "section": "",
-    "text": "#| label: fig-shiny-variance\n#| viewerHeight: 600\n#| standalone: true\nwebr::install(\"ggplot2\")\n\nlibrary(ggplot2)\n\nsource('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/variance_vis.R')\nsource('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/variance_shiny.R')\n\nshinyApp(ui = variance_shiny_ui, server = variance_shiny_server)"
+    "text": "#| label: fig-shiny-variance\n#| viewerHeight: 700\n#| standalone: true\nwebr::install(\"ggplot2\")\n\nlibrary(ggplot2)\n\nsource('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/variance_vis.R')\nsource('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/variance_shiny.R')\n\nshinyApp(ui = variance_shiny_ui, server = variance_shiny_server)\n\nFigure 2.1: Visualization of variance."
   },
   {
     "objectID": "distributions.html#normal-distribution",

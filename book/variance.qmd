@@ -1,9 +1,13 @@
 # Variance
 
+::: {#fig-shiny-spline}
+
+::: {.figure-content}
+
 
 ```{shinylive-r}
 #| label: fig-shiny-variance
-#| viewerHeight: 600
+#| viewerHeight: 700
 #| standalone: true
 webr::install("ggplot2")
 
@@ -14,3 +18,9 @@ source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/variance_shi
 
 shinyApp(ui = variance_shiny_ui, server = variance_shiny_server)
 ```
+
+:::
+
+Visualization of variance.
+
+:::

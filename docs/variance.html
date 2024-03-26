@@ -175,8 +175,11 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<div id="fig-shiny-spline" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div class="figure-content">
 <pre class="shinylive-r" data-engine="r"><code>#| label: fig-shiny-variance
-#| viewerHeight: 600
+#| viewerHeight: 700
 #| standalone: true
 webr::install("ggplot2")
 
@@ -186,6 +189,10 @@ source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/variance_vis
 source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/variance_shiny.R')
 
 shinyApp(ui = variance_shiny_ui, server = variance_shiny_server)</code></pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;2.1: Visualization of variance.</figcaption>
+</figure>
+</div>
 
 
 

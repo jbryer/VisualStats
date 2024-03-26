@@ -25,6 +25,15 @@ quarto::quarto_render('book/', output_format = 'html')
 httpuv::runStaticServer(dir = 'docs/', port = 2112)
 
 
+##### Shiny Apps
+library(VisualStats)
+# Get list Shiny apps
+ls('package:VisualStats')[grep("*_shiny", ls('package:VisualStats'))]
+
+VisualStats::variance_shiny()
+VisualStats::loess_shiny()
+
+
 ##### Build shinylive versions of the apps
 # NOTE: This doesn't currently work very well. Some app work, but not others.
 library(VisualStats)

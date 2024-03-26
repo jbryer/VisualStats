@@ -3,14 +3,13 @@
 #' @param ... other parameters passed to [shiny::shinyApp]
 #' @export
 loess_shiny <- function(...) {
-	shiny::shinyApp(ui = FEATURE_shiny_ui, server = FEATURE_shiny_server, ...)
+	shiny::shinyApp(ui = loess_shiny_ui, server = loess_shiny_server, ...)
 }
 
 #' Shiny Server
 #' @return a function with Shiny server logic.
 #' @export
 #' @importFrom shinyWidgets chooseSliderSkin
-#' @importFrom shinyBS bsPopover
 loess_shiny_ui <- function() {
 	span_range <- c(0.05, 1)
 	navbarPage(
@@ -22,7 +21,7 @@ loess_shiny_ui <- function() {
 
 		tabPanel(
 			'Plot',
-			shinyWidgets::chooseSliderSkin("Shiny", color="seagreen"),
+			# shinyWidgets::chooseSliderSkin("Shiny", color="seagreen"),
 			sidebarLayout(
 				sidebarPanel(
 					selectInput('dataset',
@@ -42,39 +41,14 @@ loess_shiny_ui <- function() {
 								 step = .05,
 								 value = .3),
 					checkboxInput('draw_loess', label = 'Draw Loess fit (best used with animation on the slider)', value = FALSE),
-					checkboxInput('show_loess', label = 'Show Full Loess fit', value = FALSE),
-					helpText(" "),
-					helpText("Click your mouse on the plot to see an explanation of the graph.  (Remove with another click)"),
+					checkboxInput('show_loess', label = 'Show Full Loess fit', value = FALSE)
 				),
 
 				mainPanel(
-					plotOutput("loess_plot"),
-					shinyBS::bsPopover(id="loess_plot",
-							  title="Description",
-							  placement="left",
-							  trigger="click",
-							  content = paste0("This app is a visual/conceptual demonstration of the elements of a  Loess Plot.",
-							  				 "The orange point plots the predicted value from an X axis value midway along a local regression ",
-							  				 "shown by the local (green) regression fit.  The center of this locally weighted regression and its X axis span ",
-							  				 "can be controlled by the CENTER slider and SPAN numeric entry box.",
-							  				 "<br><br>",
-							  				 "Best use of the app would use the animation control for the CENTER slider ",
-							  				 "and the checkbox for actively drawing the Loess fit.",
-							  				 "<br><br>",
-							  				 "The full loess fit can also be displayed with the second checkbox.",
-							  				 "<br><br>",
-							  				 "The local regression can be specifed as a linear or quadratic fit with the DEGREE dropdown. ",
-							  				 "<br><br>",
-							  				 "Also see the ABOUT tab."))
+					plotOutput("loess_plot")
 				)
 			)
 		)
-
-		# tabPanel(
-		#     'About',
-		#     # withMathJax(includeHTML(paste0(find.package('VisualStats'), '/doc/loess.html')))
-		#     htmlOutput('about')
-		# )
 	)
 }
 

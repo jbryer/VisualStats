@@ -219,3 +219,33 @@ ggplot() + geom_function(fun = df, args = c(df1 = 3, df2 = 28)) +
 	xlim(0, 10) + xlab('Statistic') + ylab('')
 ```
 
+
+
+::: {#fig-shiny-variance}
+
+::: {.figure-content}
+
+```{shinylive-r}
+#| label: fig-shiny-variance
+#| viewerHeight: 600
+#| standalone: true
+webr::install("ggplot2")
+
+library(ggplot2)
+
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/data/hand_washing.R')
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/anova_vis.R')
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/anova_shiny.R')
+
+shinyApp(ui = anova_shiny_ui, server = anova_shiny_server)
+```
+
+:::
+
+Visualization of Analysis of Variance (ANOVA)
+
+:::
+
+This Shiny application can be run locally using the `VisualStats::anova_shiny()` function.
+
+

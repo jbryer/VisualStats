@@ -9,68 +9,64 @@ anova_shiny <- function(...) {
 #' @return a Shiny UI object.
 #' @export
 anova_shiny_ui <- function() {
-	navbarPage(
-		id = 'navbarpage',
-		tabPanel(
-			'Plot',
-			sidebarLayout(
-				sidebarPanel(
-					selectInput(
-						'dataset',
-						'Select a dataset: ',
-						choices = c('handwashing', 'anorexia', 'npk', 'iris', 'penguins', 'simulate'),
-						selected = 'handwashing'
-					),
-					hr(),
-					checkboxGroupInput(
-						'plot_features',
-						'Plot Features:',
-						choices = c(
-							'Label Groups' = 'group_labels',
-							'Unit Line' = 'unit_line',
-							'Grand Mean' = 'grand_mean',
-							'Grand (overall) Standard Deviation' = 'sd_line',
-							'Boxplot' = 'boxplot',
-							'Within Group Standard Deviations' = 'group_sd',
-							'Within Group Variances' = 'group_variances',
-							'Mean Square Within (Error)' = 'ms_within',
-							'Pooled Within Group Standard Deviation' = 'pooled_sd',
-							'Pooled Between Group Variances' = 'between_group_variances',
-							'Mean Square Between (Treatment)' = 'ms_between'
-						)
-					),
-					hr(),
-					conditionalPanel(
-						'input.dataset == "simulate"',
-						sliderInput(
-							'k',
-							'Number of groups:',
-							min = 2,
-							max = 10,
-							value = 3,
-							step = 1
-						),
-						numericInput(
-							'n',
-							'n per group:',
-							min = 2,
-							max = 1000,
-							value = 10,
-							step = 1
-						),
-						conditionalPanel('input.dataset == "simulate"',
-										 uiOutput('mean_ui')),
-						numericInput('sd',
-									 'Standard Deviation:',
-									 value = 3),
-						actionButton('resample', 'Resample')
-					),
-					conditionalPanel('input.dataset != "simulate"',
-									 uiOutput('mean_adjust_ui'))
+	fluidPage(
+		sidebarLayout(
+			sidebarPanel(
+				selectInput(
+					'dataset',
+					'Select a dataset: ',
+					choices = c('handwashing', 'anorexia', 'npk', 'iris', 'penguins', 'simulate'),
+					selected = 'handwashing'
 				),
-
-				mainPanel(plotOutput("plot", height = '600px'))
+				hr(),
+				checkboxGroupInput(
+					'plot_features',
+					'Plot Features:',
+					choices = c(
+						'Label Groups' = 'group_labels',
+						'Unit Line' = 'unit_line',
+						'Grand Mean' = 'grand_mean',
+						'Grand (overall) Standard Deviation' = 'sd_line',
+						'Boxplot' = 'boxplot',
+						'Within Group Standard Deviations' = 'group_sd',
+						'Within Group Variances' = 'group_variances',
+						'Mean Square Within (Error)' = 'ms_within',
+						'Pooled Within Group Standard Deviation' = 'pooled_sd',
+						'Pooled Between Group Variances' = 'between_group_variances',
+						'Mean Square Between (Treatment)' = 'ms_between'
+					)
+				),
+				hr(),
+				conditionalPanel(
+					'input.dataset == "simulate"',
+					sliderInput(
+						'k',
+						'Number of groups:',
+						min = 2,
+						max = 10,
+						value = 3,
+						step = 1
+					),
+					numericInput(
+						'n',
+						'n per group:',
+						min = 2,
+						max = 1000,
+						value = 10,
+						step = 1
+					),
+					conditionalPanel('input.dataset == "simulate"',
+									 uiOutput('mean_ui')),
+					numericInput('sd',
+								 'Standard Deviation:',
+								 value = 3),
+					actionButton('resample', 'Resample')
+				),
+				conditionalPanel('input.dataset != "simulate"',
+								 uiOutput('mean_adjust_ui'))
 			),
+
+			mainPanel(plotOutput("plot", height = '600px'))
 		)
 	)
 }

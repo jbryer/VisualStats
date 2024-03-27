@@ -32,6 +32,7 @@ ls('package:VisualStats')[grep("*_shiny", ls('package:VisualStats'))]
 
 VisualStats::variance_shiny()
 VisualStats::loess_shiny()
+VisualStats::anova_shiny()
 VisualStats::mle_shiny()
 
 ##### Build shinylive versions of the apps

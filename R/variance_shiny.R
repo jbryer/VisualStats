@@ -13,8 +13,6 @@ variance_shiny <- function(...) {
 #' @export
 variance_shiny_ui <- function() {
 	fluidPage(
-		# titlePanel("Visualize Sum of Squares and Variance"),
-
 		sidebarLayout(
 			sidebarPanel(
 				checkboxGroupInput('plot_features',
@@ -36,7 +34,7 @@ variance_shiny_ui <- function() {
 			),
 
 			mainPanel(
-				plotOutput("plot", height = '600px')
+				plotOutput("plot", height = '400px')
 			)
 		)
 	)

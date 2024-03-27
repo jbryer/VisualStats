@@ -12,41 +12,31 @@ loess_shiny <- function(...) {
 #' @importFrom shinyWidgets chooseSliderSkin
 loess_shiny_ui <- function() {
 	span_range <- c(0.05, 1)
-	navbarPage(
-		id = 'navbarpage',
-		# title = "Loess Smoothing",
-		#theme = 'readable',
-		#theme = shinythemes::shinytheme("simplex"),
-		# shinythemes::themeSelector(),
+	fluidPage(
+		sidebarLayout(
+			sidebarPanel(
+				selectInput('dataset',
+							'Dataset:',
+							choices = c('Quadratic plus random noise' = 'quadratic',
+										'Cubic plus random noise' = 'cubic',
+										'Old Faithful' = 'faithful')),
+				uiOutput('center_input'),
+				selectInput('degree',
+							'Degree:',
+							choices = c('Linear' = 1,
+										'Quadratic' = 2)),
+				numericInput('span',
+							 'Span:',
+							 min = span_range[1],
+							 max = span_range[2],
+							 step = .05,
+							 value = .3),
+				checkboxInput('draw_loess', label = 'Draw Loess fit (best used with animation on the slider)', value = FALSE),
+				checkboxInput('show_loess', label = 'Show Full Loess fit', value = FALSE)
+			),
 
-		tabPanel(
-			'Plot',
-			# shinyWidgets::chooseSliderSkin("Shiny", color="seagreen"),
-			sidebarLayout(
-				sidebarPanel(
-					selectInput('dataset',
-								'Dataset:',
-								choices = c('Quadratic plus random noise' = 'quadratic',
-											'Cubic plus random noise' = 'cubic',
-											'Old Faithful' = 'faithful')),
-					uiOutput('center_input'),
-					selectInput('degree',
-								'Degree:',
-								choices = c('Linear' = 1,
-											'Quadratic' = 2)),
-					numericInput('span',
-								 'Span:',
-								 min = span_range[1],
-								 max = span_range[2],
-								 step = .05,
-								 value = .3),
-					checkboxInput('draw_loess', label = 'Draw Loess fit (best used with animation on the slider)', value = FALSE),
-					checkboxInput('show_loess', label = 'Show Full Loess fit', value = FALSE)
-				),
-
-				mainPanel(
-					plotOutput("loess_plot")
-				)
+			mainPanel(
+				plotOutput("loess_plot", height = '500px')
 			)
 		)
 	)

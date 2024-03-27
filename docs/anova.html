@@ -243,21 +243,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>In order to use squares to represent the partitioned variance components in ANOVA, it is convenient to derive the deviation of each group mean from the grand mean. This aligns with using “effect coding” to code for group membership in linear modeling. Some times this kind of coding is labeled “deviation coding”. These deviations form a type of contrast and we can visualize one for each group. Consider the summary statistics for each group.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>desc <span class="ot">&lt;-</span> <span class="fu">describeBy</span>(hand_washing<span class="sc">$</span>Bacterial_Counts, </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                   hand_washing<span class="sc">$</span>Method, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mat =</span> <span class="cn">TRUE</span>, <span class="at">skew =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>desc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>desc <span class="ot">&lt;-</span> <span class="fu">describe_by</span>(hand_washing<span class="sc">$</span>Bacterial_Counts, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                    hand_washing<span class="sc">$</span>Method)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>desc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    item             group1 vars n  mean       sd median min max range
-X11    1      Alcohol Spray    1 8  37.5 26.55991   34.5   5  82    77
-X12    2 Antibacterial Soap    1 8  92.5 41.96257   91.5  20 164   144
-X13    3               Soap    1 8 106.0 46.95895  105.0  51 207   156
-X14    4              Water    1 8 117.0 31.13106  114.5  74 170    96
-           se
-X11  9.390345
-X12 14.836008
-X13 16.602496
-X14 11.006492</code></pre>
+<pre><code># A tibble: 4 × 15
+   item group1      n  mean    sd median trimmed   mad   min   max range    skew
+  &lt;int&gt; &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+1     1 Alcoho…     8  37.5  26.6   34.5    37.5  25.2     5    82    77  0.297 
+2     2 Antiba…     8  92.5  42.0   91.5    92.5  30.4    20   164   144 -0.0161
+3     3 Soap        8 106    47.0  105     106    25.9    51   207   156  0.961 
+4     4 Water       8 117    31.1  114.    117    33.4    74   170    96  0.224 
+# ℹ 3 more variables: kurtosis &lt;dbl&gt;, se &lt;dbl&gt;, IQR &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>The mean of the dependent variable is 88.25. If we subtract this value from each group mean, then the deviance in the <em>x</em>-axis will be proportional to each groups deviance from the grand mean.</p>

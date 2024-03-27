@@ -14,7 +14,6 @@
 #' data(hand_washing)
 #' anova_vis(hand_washing$Bacterial_Counts, hand_washing$Method)
 #' @export
-#' @importFrom psych describeBy
 #' @importFrom tidyr unnest_wider
 #' @import dplyr
 #' @importFrom ggbeeswarm geom_beeswarm
@@ -48,7 +47,7 @@ anova_vis <- function(Y,
 					 Group = group,
 					 stringsAsFactors = FALSE)
 
-	desc <- psych::describeBy(df$Value, group = df$Group, mat = TRUE, skew = TRUE)
+	desc <- describe_by(df$Value, group = df$Group, mat = TRUE, skew = TRUE)
 	names(desc)[2] <- 'Group'
 	desc$Var <- desc$sd^2
 

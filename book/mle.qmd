@@ -582,10 +582,8 @@ ggplot(df2, aes(x = x, y = p)) +
 #| viewerHeight: 600
 #| standalone: true
 
-webr::install("mnormt")
 webr::install("ggplot2")
 webr::install("dplyr")
-webr::install("psych")
 webr::install("tidyr")
 webr::install("cowplot")
 webr::install("reshape2")

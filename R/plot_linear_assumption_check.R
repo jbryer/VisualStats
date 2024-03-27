@@ -87,8 +87,8 @@ plot_linear_assumption_check <- function(glm_out,
 	q <- quantile(predicted_prob, probs = probs, na.rm = na.rm)
 	breaks <- cut(predicted_prob, breaks = q, include.lowest = TRUE)
 	tab <- cbind(
-		psych::describeBy(Y, group = breaks, mat = TRUE, skew = FALSE)[,c('group1', 'mean', 'se')],
-		x_pos = psych::describeBy(predicted_prob, group = breaks, mat = TRUE)[,'median']
+		describe_by(Y, group = breaks, mat = TRUE, skew = FALSE)[,c('group1', 'mean', 'se')],
+		x_pos = describe_by(predicted_prob, group = breaks, mat = TRUE)[,'median']
 	)
 
 	tab$ymin <- apply(tab[,c('mean', 'se')], 1, FUN = function(x) { max(x['mean'] - 1.96 * x['se'], 0) })

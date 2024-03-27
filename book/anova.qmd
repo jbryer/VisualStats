@@ -37,9 +37,8 @@ variance_vis(hand_washing$Bacterial_Counts)
 In order to use squares to represent the partitioned variance components in ANOVA, it is convenient to derive the deviation of each group mean from the grand mean. This aligns with using "effect coding" to code for group membership in linear modeling. Some times this kind of coding is labeled "deviation coding". These deviations form a type of contrast and we can visualize one for each group. Consider the summary statistics for each group.
 
 ```{r}
-desc <- describeBy(hand_washing$Bacterial_Counts, 
-				   hand_washing$Method, 
-				   mat = TRUE, skew = FALSE)
+desc <- describe_by(hand_washing$Bacterial_Counts, 
+					hand_washing$Method)
 desc
 ```
 

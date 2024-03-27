@@ -1,3 +1,10 @@
+#' Run the Shiny server
+#' @param ... other parameters passed to [shiny::shinyApp]
+#' @export
+anova_shiny <- function(...) {
+	shiny::shinyApp(ui = anova_shiny_ui, server = anova_shiny_server, ...)
+}
+
 #' Shiny UI
 #' @return a Shiny UI object.
 #' @export
@@ -6,13 +13,6 @@ anova_shiny_ui <- function() {
 		id = 'navbarpage',
 		tabPanel(
 			'Plot',
-			# tags$head(tags$style(
-			# 	HTML(
-			# 		'.irs-from, .irs-to, .irs-min, .irs-max, .irs-single {
-			# 					  visibility: hidden !important; }'
-			# 	)
-			# )),
-
 			sidebarLayout(
 				sidebarPanel(
 					selectInput(
@@ -227,11 +227,4 @@ anova_shiny_server <- function(input, output, session) {
 			plot_group_labels = 'group_labels' %in% input$plot_features
 		)
 	})
-}
-
-#' Run the Shiny server
-#' @param ... other parameters passed to [shiny::shinyApp]
-#' @export
-anova_shiny <- function(...) {
-	shiny::shinyApp(ui = anova_shiny_ui, server = anova_shiny_server, ...)
 }

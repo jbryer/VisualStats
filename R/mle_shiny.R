@@ -3,6 +3,10 @@
 #' This will start a shiny app explore maximum likelihood estimation visually.
 #'
 #' @references http://rstudio.com/shiny
+#' @param df a data.frame to explore.
+#' @param default_x default variable for the x-axis.
+#' @param default_y default variable for the y-axis.
+#' @param ... other parameters passed to [shiny::shinyApp]
 #' @export
 mle_shiny <- function(df, default_x, default_y, ...) {
 	shiny_env <- new.env()
@@ -17,15 +21,14 @@ mle_shiny <- function(df, default_x, default_y, ...) {
 		assign('default_y', default_y, shiny_env)
 	}
 
-	environment(shiny_ui) <- shiny_env
-	environment(shiny_server) <- shiny_env
+	environment(mle_shiny_ui) <- shiny_env
+	environment(mle_shiny_server) <- shiny_env
 
-	app <- shiny::shinyApp(
-		ui = shiny_ui,
-		server = shiny_server
+	shiny::shinyApp(
+		ui = mle_shiny_ui,
+		server = mle_shiny_server,
+		...
 	)
-
-	shiny::runApp(app, ...)
 }
 
 #' Shiny UI for maximum likelihood estimation
@@ -34,44 +37,52 @@ mle_shiny <- function(df, default_x, default_y, ...) {
 #' @export
 mle_shiny_ui <-  function() {
 	navbarPage(
-		tabPanel('Main',
-				 sidebarLayout(
-				 	sidebarPanel(width = 3,
-				 				 uiOutput('outcome_ui'),
-				 				 uiOutput('predictor_ui'),
-				 				 uiOutput('highlight_ui'),
-				 				 hr(),
-				 				 uiOutput('iteration_ui'),
-				 				 checkboxInput('showOLSRegression',
-				 				 			  'Show Regression',
-				 				 			  value = TRUE)
-				 	),
-
-				 	mainPanel(width = 9,
-				 			  tabsetPanel(
-				 			  	tabPanel('Plots',
-				 			  			 fluidRow(
-				 			  			 	column(6, plotOutput("scatter_plot", click = "scatter_plot_click",)),
-				 			  			 	# column(6, plotOutput('likelihood_plot'))
-				 			  			 	column(6, plotOutput("parameter_plot"))
-				 			  			 )
-				 			  			 # plotOutput("parameter_plot")
-				 			  	),
-				 			  	tabPanel('Summary',
-				 			  			 h4('MLE Results'),
-				 			  			 verbatimTextOutput('mle_summary'),
-				 			  			 h4('lm or glm Results'),
-				 			  			 verbatimTextOutput('summary'),
-				 			  			 h4('Point Info'),
-				 			  			 verbatimTextOutput("click_info")
-				 			  	),
-				 			  	tabPanel('Likelihood Plots',
-				 			  			 plotOutput('likelihood_plots', height = '600px')),
-				 			  	tabPanel('Data',
-				 			  			 DT::dataTableOutput('datatable'))
-				 			  )
-				 	)
-				 )
+		tabPanel(
+			'Main',
+			sidebarLayout(
+				sidebarPanel(
+					width = 3,
+					uiOutput('outcome_ui'),
+					uiOutput('predictor_ui'),
+					uiOutput('highlight_ui'),
+					hr(),
+					uiOutput('iteration_ui'),
+					checkboxInput('showOLSRegression',
+								  'Show Regression',
+								  value = TRUE)
+				),
+				mainPanel(
+					width = 9,
+					tabsetPanel(
+						tabPanel(
+							'Plots',
+							fluidRow(
+								column(6, plotOutput("scatter_plot", click = "scatter_plot_click",)),
+								# column(6, plotOutput('likelihood_plot'))
+								column(6, plotOutput("parameter_plot"))
+							)
+							# plotOutput("parameter_plot")
+				 		),
+						tabPanel(
+							'Summary',
+							h4('MLE Results'),
+							verbatimTextOutput('mle_summary'),
+							h4('lm or glm Results'),
+							verbatimTextOutput('summary'),
+							h4('Point Info'),
+							verbatimTextOutput("click_info")
+						),
+						tabPanel(
+							'Likelihood Plots',
+							plotOutput('likelihood_plots', height = '600px')
+						),
+						tabPanel(
+							'Data',
+							DT::dataTableOutput('datatable')
+						)
+					)
+				)
+			)
 		)
 	)
 }

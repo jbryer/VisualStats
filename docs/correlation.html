@@ -300,8 +300,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #| viewerHeight: 600
 #| standalone: true
 webr::install("ggplot2")
+webr::install("dplyr")
+webr::install("mvtnorm")
 
 library(ggplot2)
+library(dplyr)
+library(mvtnorm)
 
 source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/correlation_vis.R')
 source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/correlation_shiny.R')

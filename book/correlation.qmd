@@ -1,0 +1,104 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Correlation
+
+```{r correlation-setup, include=FALSE}
+library(VisualStats)
+```
+
+
+
+$${ r }_{ xy }=\frac { \frac { \sum _{ i=1 }^{ n }{ \left( { X }_{ i }-\overline { X }  \right) \left( { Y }_{ i }-\overline { Y }  \right)  }  }{ n-1 }  }{ { s }_{ x }{ s }_{ y } }$$
+
+
+```{r}
+#| code-fold: false
+mean_x <- 20
+mean_y <- 40
+sd_x <- 2
+sd_y <- 3
+n <- 30
+rho <- 0.8
+set.seed(2112)
+df <- mvtnorm::rmvnorm(n = n,
+					   mean = c(mean_x, mean_y),
+					   sigma = matrix(c(sd_x^2, rho * (sd_x * sd_y),
+					   				 rho * (sd_x * sd_y), sd_y^2), 2, 2)) |>
+	as.data.frame() |>
+	dplyr::mutate(cross_products = abs(V1 * V2))
+```
+
+```{r}
+#| label: fig-corr-largest-deviation
+#| fig-cap: Scatter plot showing the deviations for x and y.
+#| code-fold: true
+
+correlation_vis(df,
+				plot_x_mean = TRUE,
+				plot_y_mean = TRUE,
+				plot_positive_cross_products = FALSE,
+				plot_negative_cross_products = FALSE,
+				plot_x_deviations = df$cross_products == max(df$cross_products),
+				plot_y_deviations = df$cross_products == max(df$cross_products))
+```
+
+```{r}
+#| label: fig-corr-largest-cross-products
+#| fig-cap: Scatter plot showing the deviations for x and y with the cross product represented as the area of the yellow rectangle.
+#| code-fold: true
+
+correlation_vis(df,
+				plot_x_mean = TRUE,
+				plot_y_mean = TRUE,
+				plot_positive_cross_products = FALSE,
+				plot_negative_cross_products = FALSE,
+				plot_cross_products = df$cross_products == max(df$cross_products),
+				plot_x_deviations = df$cross_products == max(df$cross_products),
+				plot_y_deviations = df$cross_products == max(df$cross_products),
+				cross_product_alpha = 0.5)
+```
+
+
+```{r}
+#| label: fig-corr-all-cross-products
+#| fig-cap: Scatter plot with all cross products. Positive and negative cross products are represented by blue and red rectangles, respectively.
+#| code-fold: true
+
+correlation_vis(df,
+				plot_x_mean = TRUE,
+				plot_y_mean = TRUE,
+				plot_positive_cross_products = TRUE,
+				plot_negative_cross_products = TRUE)
+```
+
+
+
+
+::: {#fig-shiny-correlation}
+
+::: {.figure-content}
+
+```{shinylive-r}
+#| label: fig-shiny-correlation
+#| viewerHeight: 600
+#| standalone: true
+webr::install("ggplot2")
+
+library(ggplot2)
+
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/correlation_vis.R')
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/correlation_shiny.R')
+
+shinyApp(ui = correlation_shiny_ui, server = correlation_shiny_server)
+```
+
+:::
+
+Visualization of cross products and correlation
+
+:::
+
+This Shiny application can be run locally using the `VisualStats::correlation_shiny()` function.

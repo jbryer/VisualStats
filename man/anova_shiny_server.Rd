@@ -2,13 +2,20 @@
 % Please edit documentation in R/anova_shiny.R
 \name{anova_shiny_server}
 \alias{anova_shiny_server}
-\title{Shiny Server}
+\title{ANOVA Shiny Server}
 \usage{
 anova_shiny_server(input, output, session)
+}
+\arguments{
+\item{input}{Shiny input object.}
+
+\item{output}{Shiny output object.}
+
+\item{session}{Shiny session object.}
 }
 \value{
 a function with Shiny server logic.
 }
 \description{
-Shiny Server
+ANOVA Shiny Server
 }

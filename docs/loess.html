@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Visual Statistics - 4&nbsp; Loess Regression</title>
+<title>Visual Statistics - 5&nbsp; Loess Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -134,7 +134,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./loess.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Loess Regression</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./loess.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Loess Regression</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -176,26 +176,32 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Correlation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./loess.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Loess Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Loess Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Analysis of Variance (ANOVA)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Analysis of Variance (ANOVA)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -215,7 +221,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Loess Regression</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Loess Regression</span></h1>
 </div>
 
 
@@ -239,9 +245,12 @@ div.csl-indent {
 <p><span class="math display">\[\left( 1 - \left(\frac{dist}{max(dist)}\right)^3 \right)^3\]</span></p>
 <p>when <span class="math inline">\(\alpha &lt; 1\)</span> (i.e.&nbsp;span).</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">'faithful'</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">loess_vis</span>(<span class="at">formula =</span> eruptions <span class="sc">~</span> waiting,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> faithful)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -268,7 +277,7 @@ source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/loess_vis.R'
 source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/loess_shiny.R')
 shinyApp(ui = loess_shiny_ui, server = loess_shiny_server)</code></pre>
 </div>
-<figcaption class="figure-caption">Figure&nbsp;4.1: Visualization of Loess regression. This app is a visual/conceptual demonstration of the elements of a Loess Plot.The orange point plots the predicted value from an X axis value midway along a local regression shown by the local (green) regression fit. The center of this locally weighted regression and its X axis span can be controlled by the CENTER slider and SPAN numeric entry box. Best use of the app would use the animation control for the CENTER slider and the checkbox for actively drawing the Loess fit. The full loess fit can also be displayed with the second checkbox. The local regression can be specifed as a linear or quadratic fit with the DEGREE dropdown.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;5.1: Visualization of Loess regression. This app is a visual/conceptual demonstration of the elements of a Loess Plot.The orange point plots the predicted value from an X axis value midway along a local regression shown by the local (green) regression fit. The center of this locally weighted regression and its X axis span can be controlled by the CENTER slider and SPAN numeric entry box. Best use of the app would use the animation control for the CENTER slider and the checkbox for actively drawing the Loess fit. The full loess fit can also be displayed with the second checkbox. The local regression can be specifed as a linear or quadratic fit with the DEGREE dropdown.</figcaption>
 </figure>
 </div>
 
@@ -519,12 +528,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./distributions.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Distributions</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Distributions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./mle.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

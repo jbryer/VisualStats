@@ -42,14 +42,28 @@ with the name of the application):
     #' @return a Shiny UI object.
     #' @export
     FEATURE_shiny_ui <- function() {
-      # Shiny UI code here
+      # Shiny UI code here. Basic siderbar panel provided
+      fluidPage(
+            sidebarLayout(
+                sidebarPanel(
+                  # Shiny inputs
+                ),
+                mainPanel(plotOutput("plot", height = '600px'))
+            )
+        )
     }
 
-    #' Shiny Server
+    #' Shiny server
+    #' @param input Shiny input object.
+    #' @param output Shiny output object.
+    #' @param session Shiny session object.
     #' @return a function with Shiny server logic.
     #' @export
     FEATURE_shiny_server <- function(input, output, session) {
       # Shiny server code here
+      output$plot <- renderPlot({
+        # Plotting code
+    })
     }
 
     #' Run the Shiny server
@@ -87,3 +101,14 @@ directory):
 
     library(VisualStats)
     shinyApp(ui = FEATURE_shiny_ui, server = FEATURE_shiny_server)
+
+### Helpful links
+
+- [Quarto book
+  options](https://quarto.org/docs/reference/projects/books.html#sidebar)
+- [Search for R packages available as WebR
+  packages](https://rud.is/w/webr-pkgs/)
+- [Figure options for
+  Quarto](https://quarto.org/docs/authoring/figures.html)
+- [Code blocks
+  options](https://quarto.org/docs/output-formats/html-code.html)

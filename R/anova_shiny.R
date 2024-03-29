@@ -1,11 +1,15 @@
-#' Run the Shiny server
-#' @param ... other parameters passed to [shiny::shinyApp]
+#' Run the Shiny server for visualizing ANOVA
+#'
+#' @param ... other parameters passed to [shiny::shinyApp()]
 #' @export
 anova_shiny <- function(...) {
-	shiny::shinyApp(ui = anova_shiny_ui, server = anova_shiny_server, ...)
+	shiny::shinyApp(ui = anova_shiny_ui,
+					server = anova_shiny_server,
+					...)
 }
 
-#' Shiny UI
+#' ANOVA Shiny UI
+#'
 #' @return a Shiny UI object.
 #' @export
 anova_shiny_ui <- function() {
@@ -71,7 +75,11 @@ anova_shiny_ui <- function() {
 	)
 }
 
-#' Shiny Server
+#' ANOVA Shiny Server
+#'
+#' @param input Shiny input object.
+#' @param output Shiny output object.
+#' @param session Shiny session object.
 #' @return a function with Shiny server logic.
 #' @export
 anova_shiny_server <- function(input, output, session) {

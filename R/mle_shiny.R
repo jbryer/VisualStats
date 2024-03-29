@@ -57,7 +57,7 @@ mle_shiny_ui <-  function() {
 						tabPanel(
 							'Plots',
 							fluidRow(
-								column(6, plotOutput("scatter_plot", click = "scatter_plot_click",)),
+								column(6, plotOutput("scatter_plot", click = "scatter_plot_click")),
 								# column(6, plotOutput('likelihood_plot'))
 								column(6, plotOutput("parameter_plot"))
 							)
@@ -89,6 +89,9 @@ mle_shiny_ui <-  function() {
 
 #' Shiny server for maximum likelihood estimation
 #'
+#' @param input Shiny input object.
+#' @param output Shiny output object.
+#' @param session Shiny session object.
 #' @return a function with Shiny server logic.
 #' @export
 #' @importFrom reshape2 melt

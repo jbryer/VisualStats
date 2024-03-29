@@ -2,13 +2,13 @@
 % Please edit documentation in R/anova_shiny.R
 \name{anova_shiny}
 \alias{anova_shiny}
-\title{Run the Shiny server}
+\title{Run the Shiny server for visualizing ANOVA}
 \usage{
 anova_shiny(...)
 }
 \arguments{
-\item{...}{other parameters passed to \link[shiny:shinyApp]{shiny::shinyApp}}
+\item{...}{other parameters passed to \code{\link[shiny:shinyApp]{shiny::shinyApp()}}}
 }
 \description{
-Run the Shiny server
+Run the Shiny server for visualizing ANOVA
 }

@@ -27,6 +27,7 @@ remotes::install_github('jbryer/VisualStats')
 ```
 
 
+
 ### Framework for creating Shiny applications
 
 One of the primary goals of using the Quarto book website format is that Shiny applications can be embedded providing the reader the ability to interact with many of the statistical visualizations presented. The [WebR](https://docs.r-wasm.org/webr/latest/) project provides the framework for embedding R code within HTML pages. Ideally we would load the `VisualStats` package in WebR and call the functions directly. Unfortunatley, the WebR framework does not support installing R packages from source (and according to their documentation, [may likely never have this feature](https://docs.r-wasm.org/webr/latest/building.html#:~:text=It%20is%20not%20possible%20to,to%20install%20packages%20in%20webR.)). However, it is possible to load R scripts from source. The goal here is to maximize the ways in which Shiny applications can be deployed (using Shiny server, running locally, and embedded in Quarto documents) while minimizing the code duplication.
@@ -38,14 +39,28 @@ When developing a new Shiny application, the app should be located in the [`R/`]
 #' @return a Shiny UI object.
 #' @export
 FEATURE_shiny_ui <- function() {
-  # Shiny UI code here
+  # Shiny UI code here. Basic siderbar panel provided
+  fluidPage(
+		sidebarLayout(
+			sidebarPanel(
+			  # Shiny inputs
+			),
+			mainPanel(plotOutput("plot", height = '600px'))
+		)
+	)
 }
 
-#' Shiny Server
+#' Shiny server
+#' @param input Shiny input object.
+#' @param output Shiny output object.
+#' @param session Shiny session object.
 #' @return a function with Shiny server logic.
 #' @export
 FEATURE_shiny_server <- function(input, output, session) {
   # Shiny server code here
+  output$plot <- renderPlot({
+    # Plotting code
+})
 }
 
 #' Run the Shiny server
@@ -79,3 +94,10 @@ To deploy the application using Shiny server, create a file called `app.R` with 
 library(VisualStats)
 shinyApp(ui = FEATURE_shiny_ui, server = FEATURE_shiny_server)
 ```
+
+### Helpful links
+
+* [Quarto book options](https://quarto.org/docs/reference/projects/books.html#sidebar)
+* [Search for R packages available as WebR packages](https://rud.is/w/webr-pkgs/)
+* [Figure options for Quarto](https://quarto.org/docs/authoring/figures.html)
+* [Code blocks options](https://quarto.org/docs/output-formats/html-code.html)

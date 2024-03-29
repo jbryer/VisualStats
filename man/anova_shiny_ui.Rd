@@ -2,7 +2,7 @@
 % Please edit documentation in R/anova_shiny.R
 \name{anova_shiny_ui}
 \alias{anova_shiny_ui}
-\title{Shiny UI}
+\title{ANOVA Shiny UI}
 \usage{
 anova_shiny_ui()
 }
@@ -10,5 +10,5 @@ anova_shiny_ui()
 a Shiny UI object.
 }
 \description{
-Shiny UI
+ANOVA Shiny UI
 }

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Visual Statistics - 5&nbsp; Maximum Likelihood Estimation</title>
+<title>Visual Statistics - 6&nbsp; Maximum Likelihood Estimation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -126,7 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./mle.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./mle.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -168,26 +168,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Correlation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./loess.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Loess Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Loess Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mle.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Analysis of Variance (ANOVA)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Analysis of Variance (ANOVA)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -207,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></h1>
 </div>
 
 
@@ -236,8 +242,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Our goal is to estimate</p>
 <p><span class="math display">\[Y_{mpg} = \beta_{wt} X + e\]</span> where <span class="math inline">\(\beta_{wt}\)</span> is the slope and <span class="math inline">\(e\)</span> is the intercept.</p>
-<section id="ordinary-least-squares" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="ordinary-least-squares"><span class="header-section-number">5.1</span> Ordinary Least Squares</h2>
+<section id="ordinary-least-squares" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="ordinary-least-squares"><span class="header-section-number">6.1</span> Ordinary Least Squares</h2>
 <p>With ordinary least squares (OLS) regression our goal is to minimize the residual sum of squares (RSS):</p>
 <p><span class="math display">\[RSS=\sum^{n}_{i=1} \left( y_{i}-f(x_{i})\right)^{2}\]</span></p>
 <p>where <span class="math inline">\(y_i\)</span> is the variable to be predicted, <span class="math inline">\(f(x_i)\)</span> is the predicted value of <span class="math inline">\(y_i\)</span>, and <span class="math inline">\(n\)</span> is the sample size. Figure 2 superimposes the residuals on the scatter plot. By squaring the length of each of those lines we accomplish two things: 1) we make all the values to be summed positive (i.e.&nbsp;a line that fits all the data perfectly will have a RSS = 0) and 2) points that fall further from the regression line contribute more (geometrically more) to the RSS then points close to the regression line.</p>
@@ -260,6 +266,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>We can easily calculate the RSS for various correlations (<span class="math inline">\(r\)</span>) ranging between -1 and 1. Figure 3 visualizes the RSS.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>mpg</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>wt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mean.y <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)</span>
@@ -274,6 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">ss =</span> <span class="fu">sum</span>((y <span class="sc">-</span> (m <span class="sc">*</span> x <span class="sc">+</span> b))<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">%&gt;%</span> <span class="co"># Sum of squares residuals</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>()</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(ols) <span class="sc">%&gt;%</span> <span class="fu">formatRound</span>(<span class="at">columns =</span> <span class="fu">names</span>(ols), <span class="at">digits=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 
 <div class="datatables html-widget html-fill-item" id="htmlwidget-852f153ef9f44653221c" style="width:100%;height:auto;"></div>
@@ -292,7 +301,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The correlation with the correlation the resulted in the smallest RSS is -0.875.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ols <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(ss <span class="sc">==</span> <span class="fu">min</span>(ss)) <span class="co"># Select the row with the smallest sum of squares residuals</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>       r         m       b       ss
 1 -0.875 -5.389687 37.4306 278.3826</code></pre>
@@ -300,8 +312,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Calculating the correlation in R gives us -0.8676594 and the slope is -5.3444716 which is close to our estimate here. We could get a more accurate result if we tried smaller steps in the correlation (see the <code>by</code> parameter in the <code>seq</code> function above).</p>
 </section>
-<section id="minimizing-rss-algorithmically" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="minimizing-rss-algorithmically"><span class="header-section-number">5.2</span> Minimizing RSS Algorithmically</h2>
+<section id="minimizing-rss-algorithmically" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="minimizing-rss-algorithmically"><span class="header-section-number">6.2</span> Minimizing RSS Algorithmically</h2>
 <p>This approach works well here because the correlation is bounded between -1 and 1 and we can easily calculate the RSS for a bunch of possible correlations. However, there are more efficient ways of finding the correlation that minimizes the RSS than trying correlations equally distributed across the possible range. For example, consider the following simple algorithm:</p>
 <ol type="1">
 <li>Calculate the RSS for <span class="math inline">\(r = 0\)</span>.</li>
@@ -309,6 +321,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>We can repeat this procedure, essentially halving the distance in each iteration until we find a sufficiently small RSS. This process is, in essence, the idea of numerical optimization procedures. In R, the <code>optim</code> function implements the <a href="https://en.wikipedia.org/wiki/Nelder–Mead_method">Nedler-Mead</a> (Nedler &amp; Mead, 1965) and <a href="https://en.wikipedia.org/wiki/Limited-memory_BFGS">Limited Memory BFGS</a> (Byrd et al, 1995) methods for optimizing a set of parameters. The former is the default but we will use the latter throughout this document since it allows for specifying bounds for certain parameters (e.g.&nbsp;only consider positive values). The details of <em>how</em> the algorithm works is beyond the scope of this article (see this <a href="https://www.benfrederickson.com/numerical-optimization/">interactive tutoral</a> by Ben Frederickson for a good introduction), instead we will focus on <em>what</em> the algorithm does. To begin, we must define a function that calculates a metric for which the optimizer is going to minimize (or maximize). Let’s start with RSS:</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>residual_sum_squares <span class="ot">&lt;-</span> <span class="cf">function</span>(parameters, predictor, outcome) {</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    a <span class="ot">&lt;-</span> parameters[<span class="dv">1</span>] <span class="co"># Intercept</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    b <span class="ot">&lt;-</span> parameters[<span class="dv">2</span>] <span class="co"># beta coefficient</span></span>
@@ -317,16 +331,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    ss <span class="ot">&lt;-</span> <span class="fu">sum</span>(residuals<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(ss)</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>The <code>parameters</code> is a vector of the parameters the algorithm is going to minimize (or maximize). Here, these will be the slope and intercept. The <code>predictor</code> and <code>outcome</code> are parameters passed through from the <code>...</code> parameter on the <code>optim</code> function and are necessary for us to calculate the RSS. We can now get the RSS for any set of parameters.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">residual_sum_squares</span>(<span class="fu">c</span>(<span class="dv">37</span>, <span class="sc">-</span><span class="dv">5</span>), mtcars<span class="sc">$</span>wt, mtcars<span class="sc">$</span>mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 303.5247</code></pre>
 </div>
 </div>
 <p><strong>Small Digression</strong> In order to explore each step of the algorithm, we need to wrap the <code>optim</code> function to capture the parameters and output of the function. The <code>optim_save</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> function will add two elements to the returned list: <code>iterations</code> is the raw list of the parameters and output saved and <code>iterations_df</code> is a <code>data.frame</code> containing the same data.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>optim_save <span class="ot">&lt;-</span> <span class="cf">function</span>(par, fn, ...) {</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    iterations <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    wrap_fun <span class="ot">&lt;-</span> <span class="cf">function</span>(parameters, ...) {</span>
@@ -342,9 +362,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    optim_out<span class="sc">$</span>iterations_df<span class="sc">$</span>Iteration <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(optim_out<span class="sc">$</span>iterations_df)</span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(optim_out)</span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>We can now call the <code>optim_save</code> function with our <code>residual_sum_squares</code> function. We initialize the algorithm with two random values for the intercept and slope, respectively. Note that we are using Broyden, Fletcher, Goldfarb, and Shanno optimization method which allows for the specification of bounds on the parameter estimates which we will use later.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>optim.rss <span class="ot">&lt;-</span> <span class="fu">optim_save</span>(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">par =</span> <span class="fu">runif</span>(<span class="dv">2</span>),</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">fn =</span> residual_sum_squares, </span>
@@ -352,18 +375,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">predictor =</span> mtcars<span class="sc">$</span>wt,</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome =</span> mtcars<span class="sc">$</span>mpg</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>The <code>par</code> parameter provides the final parameter estimates.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>optim.rss<span class="sc">$</span>par</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 37.285116 -5.344469</code></pre>
 </div>
 </div>
 <p>We can see that the parameters are accurate to at least four decimal places to the OLS method used by the <code>lm</code> function.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lm.out <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt, <span class="at">data =</span> mtcars)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>lm.out<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)          wt 
   37.285126   -5.344472 </code></pre>
@@ -371,6 +401,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>It took the <code>optim</code> function 65 iterations to find the optimal set of parameters that minimized the RSS. Figure 4 shows the value of the parameters (i.e.&nbsp;intercept and slope) and the RSS for each iteration.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> optim.rss<span class="sc">$</span>iterations_df</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Intercept'</span>, <span class="st">'Slope'</span>, <span class="st">'ResidualSumSquares'</span>, <span class="st">'Iteration'</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">melt</span>(<span class="at">id.var =</span> <span class="st">'Iteration'</span>) <span class="sc">%&gt;%</span></span>
@@ -378,6 +410,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">geom_path</span>() <span class="sc">+</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> variable, <span class="at">scales =</span> <span class="st">"free_y"</span>, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">'Iteration'</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">''</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'none'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -388,8 +421,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="likelihood" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="likelihood"><span class="header-section-number">5.3</span> Likelihood</h2>
+<section id="likelihood" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="likelihood"><span class="header-section-number">6.3</span> Likelihood</h2>
 <p>Now that we have laid the groundwork for finding parameters algorithmically, we need to introduce another way of evaluating how well parameters <em>fit</em> the data, namely the likelihood. First, let’s revisit what we are doing in OLS. Figure 5 is a scatter plot of our observations, the OLS regression line in blue, and one observation highlighted in red with the residual as a red line. With OLS, we square the residual for every observation, thereby making all values positive, and summing them. There is, however, another way of estimating fit that doesn’t rely on the residuals.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -427,6 +460,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>We can then calculate the likelihood for each observation in our data. Unlike OLS, we now want to <em>maximize</em> the sum of these values. Also, we are going to use the log of the likelihood so we can add them instead of multiplying. We can now define our log likelihood function:</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>loglikelihood <span class="ot">&lt;-</span> <span class="cf">function</span>(parameters, predictor, outcome) {</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    a <span class="ot">&lt;-</span> parameters[<span class="dv">1</span>]     <span class="co"># intercept</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    b <span class="ot">&lt;-</span> parameters[<span class="dv">2</span>]     <span class="co"># slope / beta coefficient</span></span>
@@ -434,25 +469,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    ll.vec <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(outcome, a <span class="sc">+</span> b <span class="sc">*</span> predictor, sigma, <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">sum</span>(ll.vec))</span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Note that we have to estimate a third parameter, sigma, which is the error term and defines the standard deviation for the normal distribution for estimating the likelihood. This is connected to the distribution of the residuals as we will see later. We can now calculate the log-likelihood for any combination of parameters.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">loglikelihood</span>(<span class="fu">c</span>(<span class="dv">37</span>, <span class="sc">-</span><span class="dv">5</span>, <span class="fu">sd</span>(mtcars<span class="sc">$</span>mpg)),</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">predictor =</span> mtcars<span class="sc">$</span>wt,</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">outcome =</span> mtcars<span class="sc">$</span>mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -91.06374</code></pre>
 </div>
 </div>
 </section>
-<section id="maximum-likelihood-estimation" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="maximum-likelihood-estimation"><span class="header-section-number">5.4</span> Maximum Likelihood Estimation</h2>
+<section id="maximum-likelihood-estimation" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="maximum-likelihood-estimation"><span class="header-section-number">6.4</span> Maximum Likelihood Estimation</h2>
 <p>We can now use the <code>optim_save</code> function to find the parameters that <em>maximize</em> the log-likelihood. Note two important parameter changes:</p>
 <ol type="1">
 <li>We are specifying the <code>lower</code> parameter so that the algorithm will not try negative values for sigma since the variance cannot be negative.</li>
 <li>The value for the <code>control</code> parameter indicates that we wish to maximize the values instead of minimizing (which is the default).</li>
 </ol>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>optim.ll <span class="ot">&lt;-</span> <span class="fu">optim_save</span>(</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">runif</span>(<span class="dv">3</span>),                     <span class="co"># Random initial values</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    loglikelihood,                <span class="co"># Log-likelihood function</span></span>
@@ -462,14 +503,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">predictor =</span> mtcars<span class="sc">$</span>wt,</span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome =</span> mtcars<span class="sc">$</span>mpg</span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>We can get our results and compare them to the results of the <code>lm</code> function and find that they match to at least four decimal places.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>optim.ll<span class="sc">$</span>par[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 37.285114 -5.344468</code></pre>
 </div>
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>lm.out<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)          wt 
   37.285126   -5.344472 </code></pre>
@@ -478,12 +526,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Figure 8 shows the estimated regression line for each iteration of the optimization procedure (on the left; OLS regression line in blue; MLE regression line in black) with the estimated parameters and log-likelihood for all iterations on the left.</p>
 <p>Figure 9 superimposes the normal distribution from which the log-likelihood is determined. The distribution is centered on <span class="math inline">\(\hat{y}\)</span>. The height of the distribution (i.e.&nbsp;density) at <span class="math inline">\(y\)</span> is the likelihood. We take the log of this value to get the log-likelihood. These log-likelihoods are calculated for each observation and summed. Maximum likelihood estimation is attempting to find the parameters (i.e.&nbsp;slope and intercept) that maximizes the log-likelihood.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>VisualStats<span class="sc">::</span><span class="fu">plot_likelihood</span>(<span class="at">x =</span> mtcars<span class="sc">$</span>wt, </span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">y =</span> mtcars<span class="sc">$</span>mpg,</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">pt =</span> <span class="dv">2</span>,</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">intercept =</span> optim.ll<span class="sc">$</span>par[<span class="dv">1</span>],</span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">slope =</span> optim.ll<span class="sc">$</span>par[<span class="dv">2</span>],</span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">sigma =</span> optim.ll<span class="sc">$</span>par[<span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -495,6 +546,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Figure 10 depicts the likelihoods for the first 16 observations.</p>
 <div class="cell" data-layout-align="center" data-hash="mle_cache/html/mleanimation3_7ba1785d1d014ec3530f89d45ab9856a">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> optim.ll<span class="sc">$</span>iterations_df</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Intercept'</span>, <span class="st">'Slope'</span>, <span class="st">'Sigma'</span>, <span class="st">'LogLikelihood'</span>, <span class="st">'Iteration'</span>)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Iteration <span class="sc">==</span> <span class="fu">nrow</span>(df))</span>
@@ -520,6 +573,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ylab</span>(<span class="st">''</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="fu">row.names</span>(mtcars)[i])</span>
 <span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(<span class="at">plotlist =</span> plots)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -532,18 +586,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>With MLE we need to estimate what is often referred to as the error term, or as we saw above is the standard deviation of the normal distribution from which we are estimating the likelihood from. In Figure 9 notice that the normal distribution id drawn vertically. This is because the likelihood is estimated from the error, or the residuals. In OLS we often report the root-mean-square deviation (RMSD, or root-mean-square error, RMSE). The RMSD is the standard deviation of the residuals:</p>
 <p><span class="math display">\[RMSD\  =\  \sqrt{\frac{\sum^{N}_{i=1} (x_{i}-\hat{x_{i}} )^{2}}{N} }\]</span> Where <span class="math inline">\(i\)</span> is the observation, <span class="math inline">\(x_i\)</span> is the observed value, <span class="math inline">\(\hat{x_i}\)</span> is the estimated (predicted) value, and <span class="math inline">\(N\)</span> is the sample size. Below, we see that the numerical optimizer matches the RMSD within a rounding error.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>optim.ll<span class="sc">$</span>par[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.949164</code></pre>
 </div>
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">resid</span>(lm.out)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">nrow</span>(mtcars))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.949163</code></pre>
 </div>
 </div>
 </section>
-<section id="generalized-linear-models" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="generalized-linear-models"><span class="header-section-number">5.5</span> Generalized Linear Models</h2>
+<section id="generalized-linear-models" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="generalized-linear-models"><span class="header-section-number">6.5</span> Generalized Linear Models</h2>
 <p>Generalized linear models (GLM) are a generalization of OLS that allows for the response variables (i.e.&nbsp;dependent variables) to have an error distribution that is not distributed normally. All generalized linear models have the following three characteristics:</p>
 <ol type="1">
 <li>A probability distribution describing the outcome variable .</li>
@@ -554,17 +614,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>We can estimate GLMs using MLE as described above. What will change is the log-likelihood function.</p>
 </section>
-<section id="logistic-regression" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">5.6</span> Logistic Regression</h2>
+<section id="logistic-regression" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">6.6</span> Logistic Regression</h2>
 <p>Logistic regression is a GLM used to model a binary categorical variable using numerical and categorical predictors. We assume a binomial distribution produced the outcome variable and we therefore want to model <em>p</em> the probability of success for a given set of predictors. Instead of fitting a line (or a plane for two predictors, etc. for higher dimensions) we wish to fit the data to the logistic function which is defined as:</p>
 <p><span class="math display">\[ \sigma \left( t \right) =\frac { { e }^{ t } }{ { e }^{ t }+1 } =\frac { 1 }{ 1+{ e }^{ -t } }  \]</span></p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>logistic <span class="ot">&lt;-</span> <span class="cf">function</span>(t) { </span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>t))) </span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(<span class="at">fun =</span> logistic, <span class="at">n =</span> <span class="dv">101</span>) <span class="sc">+</span></span>
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">'x'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -582,11 +645,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="math display">\[ F\left( x \right) =\frac { 1 }{ 1+{ e }^{ -\left( { \beta  }_{ 0 }+\beta _{ 1 }x \right)  } } \]</span></p>
 <p>Consider the following data set where we wish to predict whether a student will pass an exam based upon the number of hours they studied.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>study <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Hours=</span><span class="fu">c</span>(<span class="fl">0.50</span>,<span class="fl">0.75</span>,<span class="fl">1.00</span>,<span class="fl">1.25</span>,<span class="fl">1.50</span>,<span class="fl">1.75</span>,<span class="fl">1.75</span>,<span class="fl">2.00</span>,<span class="fl">2.25</span>,<span class="fl">2.50</span>,<span class="fl">2.75</span>,<span class="fl">3.00</span>,</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>            <span class="fl">3.25</span>,<span class="fl">3.50</span>,<span class="fl">4.00</span>,<span class="fl">4.25</span>,<span class="fl">4.50</span>,<span class="fl">4.75</span>,<span class="fl">5.00</span>,<span class="fl">5.50</span>),</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pass=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -600,6 +666,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>First, we need to define logit function and the log-likelihood function that will be used by the <code>optim</code> function. Instead of using the normal distribution as above (using the <code>dnorm</code> function), we are using a binomial distribution and the logit to link the linear combination of predictors.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>logit <span class="ot">&lt;-</span> <span class="cf">function</span>(x, beta0, beta1) {</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>( <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>beta0 <span class="sc">-</span> beta1 <span class="sc">*</span> x)) )</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -610,9 +678,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    ll <span class="ot">&lt;-</span> <span class="fu">sum</span>( outcome <span class="sc">*</span> <span class="fu">log</span>(p) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> outcome) <span class="sc">*</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> p))</span>
 <span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(ll)</span>
 <span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Now we can call the <code>optim</code> function and get the final parameter estimates.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>optim.binomial <span class="ot">&lt;-</span> <span class="fu">optim_save</span>(</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="co"># Initial values</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    loglikelihood.binomial,</span>
@@ -621,21 +692,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">predictor =</span> study<span class="sc">$</span>Hours,</span>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome =</span> study<span class="sc">$</span>Pass</span>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>In R, the <code>glm</code> (short for generalized linear models) function implements logistic regression when the <code>family = binomial(link = 'logit')</code> parameter is set. See <code>?glm</code> for other families of models to estimate models with other underlying distributions. We can see that our estimate matches the results of <code>glm</code> to a rounding error.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>optim.binomial<span class="sc">$</span>par</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -4.077575  1.504624</code></pre>
 </div>
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>lr.out <span class="ot">&lt;-</span> <span class="fu">glm</span>(Pass <span class="sc">~</span> Hours, <span class="at">data =</span> study, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">'logit'</span>))</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>lr.out<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)       Hours 
   -4.077713    1.504645 </code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Redefine the logistic function to include parameter estimates</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>logistic <span class="ot">&lt;-</span> <span class="cf">function</span>(x, beta0, beta1) {</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> (beta0 <span class="sc">+</span> beta1 <span class="sc">*</span> x)) ))</span>
@@ -650,6 +730,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">args =</span> <span class="fu">list</span>(<span class="at">beta0 =</span> beta0, <span class="at">beta1 =</span> beta1) ) <span class="sc">+</span></span>
 <span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_hue</span>(<span class="st">'Predicted Pass &gt; 0.5'</span>) <span class="sc">+</span></span>
 <span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'inside'</span>, <span class="at">legend.position.inside =</span> <span class="fu">c</span>(<span class="fl">0.85</span>, <span class="fl">0.15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -705,7 +786,7 @@ source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/mle_shiny.R'
 
 shinyApp(ui = variance_shiny_ui, server = variance_shiny_server)</code></pre>
 </div>
-<figcaption class="figure-caption">Figure&nbsp;5.1: Visualization of maximum likelihood estimation.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;6.1: Visualization of maximum likelihood estimation.</figcaption>
 </figure>
 </div>
 <p>This Shiny application can be run locally using the <code>VisualStats::mle_shiny()</code> function.</p>
@@ -957,12 +1038,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./loess.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Loess Regression</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Loess Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./anova.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Analysis of Variance (ANOVA)</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Analysis of Variance (ANOVA)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

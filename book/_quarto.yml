@@ -9,6 +9,7 @@ book:
   chapters:
     - index.qmd
     - variance.qmd
+    - correlation.qmd
     - distributions.qmd
     - loess.qmd
     - mle.qmd
@@ -28,6 +29,8 @@ format:
     theme: cosmo
     sidebar:
       style: floating
+    code-fold: show
+    code-summary: "Show the code"
     grid:
       sidebar-width: 200px
       body-width: 1030px

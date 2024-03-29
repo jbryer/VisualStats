@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Visual Statistics - 6&nbsp; Analysis of Variance (ANOVA)</title>
+<title>Visual Statistics - 7&nbsp; Analysis of Variance (ANOVA)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./anova.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Analysis of Variance (ANOVA)</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./anova.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Analysis of Variance (ANOVA)</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -157,26 +157,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Correlation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./loess.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Loess Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Loess Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Analysis of Variance (ANOVA)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Analysis of Variance (ANOVA)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -196,7 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Analysis of Variance (ANOVA)</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Analysis of Variance (ANOVA)</span></h1>
 </div>
 
 
@@ -214,10 +220,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Analysis of variance (ANOVA) remains an important statistical method for a variety of situations. ANOVA is typically taught along with other null hypothesis tests (e.g.&nbsp;t-test, chi-squared), however, there are many nuances differences in how the test statistic is calculated that many students do not fully understand. Specifically, why use the ratio of mean square between (or treatment) and mean square within (or error) as the test statistic? Pruzek and Helmreich (2010) introduced a visualization that attempts visualize all the components of ANOVA. This visualization was implemented in the <code>granova</code> (2014) R package utilizing the base graphics system. This document introduces a version of the granova visualization usinge <code>ggplot2</code> Wickham (2016) that provides a number parameters to isoloate certain features of their visualization. We use this approach in teaching ANOVA, mostly through the use of Shiny (Chang et al, 2021) that allows the user/students to interactively add and remove plot features.</p>
 <p>To exemplify this appraoch we will explore the effects of different approaches of hand-washing has on bacteria counts (De Veaux et al, 2009). Specifically, each of four types of hand-washing (alcohol spray, antibacterial soap, regular soap, and water only) were replicated eight times resulting in 32 observations. The boxplot below provides a summary of the data.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(hand_washing, <span class="fu">aes</span>(<span class="at">x =</span> Method, <span class="at">y =</span> Bacterial_Counts)) <span class="sc">+</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_beeswarm</span>(<span class="fu">aes</span>(<span class="at">color =</span> Method)) <span class="sc">+</span> </span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'none'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -231,7 +240,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="math display">\[s^2 = \frac{\sum(x_i - \bar{x})^2}{n - 1}\]</span></p>
 <p>If we focus on the numerator for a singe observation, say <span class="math inline">\(i = 1\)</span>, <span class="math inline">\((x_1 - \bar{x})^2\)</span>, the contribution to the variance calculation for the first observation can be conceptualized as a square with edges of length <span class="math inline">\(x_i - \bar{x}\)</span>. Therefore, the sample variance (which we can also call mean square total - which ignores group membership) is approximately the average of the area of all those squares (see the figure below). <em>NOTE: It is approximate because the sample variance has <span class="math inline">\(n-1\)</span> in the denominator. The true average, using the population variances, would have <span class="math inline">\(n\)</span> in the denominator.</em> This visualization of squares sets up delineation of the visualization of components of ANOVA.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">variance_vis</span>(hand_washing<span class="sc">$</span>Bacterial_Counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -243,9 +255,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>In order to use squares to represent the partitioned variance components in ANOVA, it is convenient to derive the deviation of each group mean from the grand mean. This aligns with using “effect coding” to code for group membership in linear modeling. Some times this kind of coding is labeled “deviation coding”. These deviations form a type of contrast and we can visualize one for each group. Consider the summary statistics for each group.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>desc <span class="ot">&lt;-</span> <span class="fu">describe_by</span>(hand_washing<span class="sc">$</span>Bacterial_Counts, </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                    hand_washing<span class="sc">$</span>Method)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>desc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 15
    item group1      n  mean    sd median trimmed   mad   min   max range    skew
@@ -259,10 +274,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The mean of the dependent variable is 88.25. If we subtract this value from each group mean, then the deviance in the <em>x</em>-axis will be proportional to each groups deviance from the grand mean.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>desc<span class="sc">$</span>contrast <span class="ot">&lt;-</span> desc<span class="sc">$</span>mean <span class="sc">-</span> <span class="fu">mean</span>(hand_washing<span class="sc">$</span>Bacterial_Counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>The following figure plots the dependent variable (bacterial counts) in the <em>y</em>-axis and each group is located at a position on the <em>x</em>-axis defined by the deviation for that group mean (the deviations must sum to zero).</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_vis</span>(<span class="at">Y =</span> hand_washing<span class="sc">$</span>Bacterial_Counts, </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">group =</span> hand_washing<span class="sc">$</span>Method,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot_boxplot =</span> <span class="cn">TRUE</span>,</span>
@@ -277,6 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot_between_group_variances =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab =</span> <span class="st">'Bacterial Counts'</span></span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -288,6 +309,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>An important advantage of using deviation contrasts is that a one unit change in the <em>x</em>-axis is the same as a one unit change in the <em>y</em>-axis. We can verify this by adding the unit line (i.e.&nbsp;<span class="math inline">\(y = x\)</span>) to the plot and see that the line intersects mean of each group. We also added the grand, overall, mean in both the <em>x</em> and <em>y</em>-axes. The dashed lines represent the grand mean in two ways: 1. raw scale grand mean in the <em>y</em>-axis and 2. the deviation scale in the <em>x</em>-axis.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_vis</span>(<span class="at">Y =</span> hand_washing<span class="sc">$</span>Bacterial_Counts, </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">group =</span> hand_washing<span class="sc">$</span>Method,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot_boxplot =</span> <span class="cn">FALSE</span>,</span>
@@ -302,6 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot_between_group_variances =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab =</span> <span class="st">'Bacterial Counts'</span></span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -360,6 +384,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>With <em>k</em> being each group and <em>i</em> the observation within group <em>k</em>, the calculation for the within group component involves calculating the deviance from the group mean. In the figure below, the vertical line for each group represents one standard deviation and the area of the box is the variance (<span class="math inline">\(s^2\)</span>; recall that the standard deviation is equal the square root of the variance).</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_vis</span>(<span class="at">Y =</span> hand_washing<span class="sc">$</span>Bacterial_Counts, </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">group =</span> hand_washing<span class="sc">$</span>Method,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot_boxplot =</span> <span class="cn">FALSE</span>,</span>
@@ -374,6 +400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot_between_group_variances =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab =</span> <span class="st">'Bacterial Counts'</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -385,6 +412,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The mean square within is approximately the average of each groups variances and is represented below as the orange square in the center. Like the variance estimate above, becasue the denominator is <span class="math inline">\(k - 1\)</span> the mean square within will be slightly larger than if we used <span class="math inline">\(k\)</span> in the denominator. By using <span class="math inline">\(k - 1\)</span> we get an <em>unbiased estimate</em>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_vis</span>(<span class="at">Y =</span> hand_washing<span class="sc">$</span>Bacterial_Counts, </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">group =</span> hand_washing<span class="sc">$</span>Method,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot_boxplot =</span> <span class="cn">FALSE</span>,</span>
@@ -399,6 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot_between_group_variances =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab =</span> <span class="st">'Bacterial Counts'</span></span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -410,6 +440,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Since we have equal group sizes, the pooled standard deviation (here represented by the horizontal dashed blue lines) is approximately to the square root of the mean square between (the difference in these is due to the using the degrees of freedom in the denominator instead of <em>n</em>). This will not necessarily be the case when the group sizes are not equal since we are taking a weighted average (note the *<span class="math inline">\(n_k\)</span> in the formula for the sum of squares between).</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_vis</span>(<span class="at">Y =</span> hand_washing<span class="sc">$</span>Bacterial_Counts, </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">group =</span> hand_washing<span class="sc">$</span>Method,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot_boxplot =</span> <span class="cn">FALSE</span>,</span>
@@ -424,6 +456,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot_between_group_variances =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab =</span> <span class="st">'Bacterial Counts'</span></span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -435,6 +468,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>There are two ways to approach the between group (treatment): 1. Since we know the total sum of squares and the within group sum of squares, we can subtract the within group sum of squares from the total to get the between group sum of squares, or 2. Perform the calculation as presented in the table above. Looking at the fomrula, we see that the between group sum of squares is centered on each group mean’s deviance from the grand mean: <span class="math inline">\((\bar{x}_k - \bar{x})^2\)</span> (note that <span class="math inline">\(\bar{x}_k\)</span> is the group mean and <span class="math inline">\(\bar{x}\)</span> is the grand mean). The figure below depicts these deviances.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_vis</span>(<span class="at">Y =</span> hand_washing<span class="sc">$</span>Bacterial_Counts, </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">group =</span> hand_washing<span class="sc">$</span>Method,</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot_boxplot =</span> <span class="cn">FALSE</span>,</span>
@@ -449,6 +484,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot_between_group_variances =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab =</span> <span class="st">'Bacterial Counts'</span></span>
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -460,6 +496,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Unlike the within group sum of squares, each deviance is multiplied by the group size, <span class="math inline">\(n_k\)</span>. Since we have equal group sizes in this example, they will each contribute equally to the total between group sum of squares, though it should be noted that this is not case with unequal group sizes. As a result, the mean square between is not an average of the deviances, but rather the sum of the deviances multiplied by <span class="math inline">\(\frac{n_k}{k - 1}\)</span> (in this example it is <span class="math inline">\(\frac{8}{3}\)</span>). The resulting mean square between, depicted below as the green square, is going to be larger than all the individual components of the sum of squares.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_vis</span>(<span class="at">Y =</span> hand_washing<span class="sc">$</span>Bacterial_Counts, </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">group =</span> hand_washing<span class="sc">$</span>Method,</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot_boxplot =</span> <span class="cn">FALSE</span>,</span>
@@ -474,6 +512,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot_between_group_variances =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab =</span> <span class="st">'Bacterial Counts'</span></span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -485,6 +524,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Now that we have a square representing both the mean square between (in green) and the mean square within (in yellow), the F-statistic is equal to the ratio of the area of these two squares.</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_vis</span>(<span class="at">Y =</span> hand_washing<span class="sc">$</span>Bacterial_Counts, </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">group =</span> hand_washing<span class="sc">$</span>Method,</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot_boxplot =</span> <span class="cn">FALSE</span>,</span>
@@ -499,6 +540,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot_between_group_variances =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab =</span> <span class="st">'Bacterial Counts'</span></span>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -510,9 +552,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The <em>p</em>-value is the area under the F-distribution to the right of the F-statistic (repsrented as a vertical dashed line below).</p>
 <div class="cell" data-layout-align="center">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_function</span>(<span class="at">fun =</span> df, <span class="at">args =</span> <span class="fu">c</span>(<span class="at">df1 =</span> <span class="dv">3</span>, <span class="at">df2 =</span> <span class="dv">28</span>)) <span class="sc">+</span> </span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">7.06</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">10</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">'Statistic'</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -547,7 +592,7 @@ source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/anova_shiny.
 
 shinyApp(ui = anova_shiny_ui, server = anova_shiny_server)</code></pre>
 </div>
-<figcaption class="figure-caption">Figure&nbsp;6.1: Visualization of Analysis of Variance (ANOVA)</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;7.1: Visualization of Analysis of Variance (ANOVA)</figcaption>
 </figure>
 </div>
 <p>This Shiny application can be run locally using the <code>VisualStats::anova_shiny()</code> function.</p>
@@ -798,7 +843,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./mle.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

@@ -75,34 +75,14 @@ regression_vis(df,
 ```
 
 
-
-
-::: {#fig-shiny-correlation}
-
-::: {.figure-content}
-
-```{shinylive-r}
-#| label: fig-shiny-correlation
-#| viewerHeight: 600
-#| standalone: true
-webr::install("ggplot2")
-webr::install("dplyr")
-webr::install("mvtnorm")
-
-library(ggplot2)
-library(dplyr)
-library(mvtnorm)
-
-source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/regression_vis.R')
-source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/correlation_shiny.R')
-
-shinyApp(ui = correlation_shiny_ui, server = correlation_shiny_server)
+```{=html}
+ <iframe id="example1" src="https://r.bryer.org/shiny/correlation/" style="border: none; width: 100%; height: 780px" frameborder="0"></iframe>
 ```
 
+
+::: {.content-visible when-format="pdf"}
+
 :::
 
-Visualization of cross products and correlation
-
-:::
 
 This Shiny application can be run locally using the `VisualStats::correlation_shiny()` function.

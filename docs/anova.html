@@ -75,11 +75,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<meta name="shinylive:serviceworker_dir" content=".">
-<script src="site_libs/quarto-contrib/shinylive-0.2.3/shinylive/load-shinylive-sw.js" type="module"></script>
-<script src="site_libs/quarto-contrib/shinylive-0.2.3/shinylive/run-python-blocks.js" type="module"></script>
-<link href="site_libs/quarto-contrib/shinylive-0.2.3/shinylive/shinylive.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/shinylive-quarto-css/shinylive-quarto.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -567,34 +562,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="fig-shiny-variance" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<div class="figure-content">
-<pre class="shinylive-r" data-engine="r"><code>#| label: fig-shiny-variance
-#| viewerHeight: 600
-#| standalone: true
-webr::install("mnormt")
-webr::install("ggplot2")
-webr::install("dplyr")
-webr::install("psych")
-webr::install("tidyr")
-webr::install("ggbeeswarm")
-
-library(ggplot2)
-library(dplyr)
-library(psych)
-library(tidyr)
-library(ggbeeswarm)
-
-source('https://raw.githubusercontent.com/jbryer/VisualStats/main/data/hand_washing.R')
-source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/anova_vis.R')
-source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/anova_shiny.R')
-
-shinyApp(ui = anova_shiny_ui, server = anova_shiny_server)</code></pre>
-</div>
-<figcaption class="figure-caption">Figure&nbsp;7.1: Visualization of Analysis of Variance (ANOVA)</figcaption>
-</figure>
-</div>
+ <iframe id="example1" src="https://r.bryer.org/shiny/anova/" style="border: none; width: 100%; height: 780px" frameborder="0"></iframe>
 <p>This Shiny application can be run locally using the <code>VisualStats::anova_shiny()</code> function.</p>
 
 

@@ -1,26 +1,11 @@
 # Variance
 
-::: {#fig-shiny-variance}
-
-::: {.figure-content}
-
-```{shinylive-r}
-#| label: fig-shiny-variance
-#| viewerHeight: 600
-#| standalone: true
-webr::install("ggplot2")
-
-library(ggplot2)
-
-source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/variance_vis.R')
-source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/variance_shiny.R')
-
-shinyApp(ui = variance_shiny_ui, server = variance_shiny_server)
+```{=html}
+ <iframe id="example1" src="https://r.bryer.org/shiny/variance/" style="border: none; width: 100%; height: 780px" frameborder="0"></iframe>
 ```
 
-:::
 
-Visualization of variance.
+::: {.content-visible when-format="pdf"}
 
 :::
 

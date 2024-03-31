@@ -75,11 +75,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<meta name="shinylive:serviceworker_dir" content=".">
-<script src="site_libs/quarto-contrib/shinylive-0.2.3/shinylive/load-shinylive-sw.js" type="module"></script>
-<script src="site_libs/quarto-contrib/shinylive-0.2.3/shinylive/run-python-blocks.js" type="module"></script>
-<link href="site_libs/quarto-contrib/shinylive-0.2.3/shinylive/shinylive.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/shinylive-quarto-css/shinylive-quarto.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -293,28 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="fig-shiny-correlation" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<div class="figure-content">
-<pre class="shinylive-r" data-engine="r"><code>#| label: fig-shiny-correlation
-#| viewerHeight: 600
-#| standalone: true
-webr::install("ggplot2")
-webr::install("dplyr")
-webr::install("mvtnorm")
-
-library(ggplot2)
-library(dplyr)
-library(mvtnorm)
-
-source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/regression_vis.R')
-source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/correlation_shiny.R')
-
-shinyApp(ui = correlation_shiny_ui, server = correlation_shiny_server)</code></pre>
-</div>
-<figcaption class="figure-caption">Figure&nbsp;3.4: Visualization of cross products and correlation</figcaption>
-</figure>
-</div>
+ <iframe id="example1" src="https://r.bryer.org/shiny/correlation/" style="border: none; width: 100%; height: 780px" frameborder="0"></iframe>
 <p>This Shiny application can be run locally using the <code>VisualStats::correlation_shiny()</code> function.</p>
 
 

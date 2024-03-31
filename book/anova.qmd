@@ -219,40 +219,15 @@ ggplot() + geom_function(fun = df, args = c(df1 = 3, df2 = 28)) +
 ```
 
 
-
-::: {#fig-shiny-variance}
-
-::: {.figure-content}
-
-```{shinylive-r}
-#| label: fig-shiny-variance
-#| viewerHeight: 600
-#| standalone: true
-webr::install("mnormt")
-webr::install("ggplot2")
-webr::install("dplyr")
-webr::install("psych")
-webr::install("tidyr")
-webr::install("ggbeeswarm")
-
-library(ggplot2)
-library(dplyr)
-library(psych)
-library(tidyr)
-library(ggbeeswarm)
-
-source('https://raw.githubusercontent.com/jbryer/VisualStats/main/data/hand_washing.R')
-source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/anova_vis.R')
-source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/anova_shiny.R')
-
-shinyApp(ui = anova_shiny_ui, server = anova_shiny_server)
+```{=html}
+ <iframe id="example1" src="https://r.bryer.org/shiny/anova/" style="border: none; width: 100%; height: 780px" frameborder="0"></iframe>
 ```
 
+
+::: {.content-visible when-format="pdf"}
+
 :::
 
-Visualization of Analysis of Variance (ANOVA)
-
-:::
 
 This Shiny application can be run locally using the `VisualStats::anova_shiny()` function.
 

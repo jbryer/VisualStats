@@ -36,7 +36,7 @@ df <- mvtnorm::rmvnorm(n = n,
 #| fig-cap: Scatter plot showing the deviations for x and y.
 #| code-fold: true
 
-correlation_vis(df,
+regression_vis(df,
 				plot_x_mean = TRUE,
 				plot_y_mean = TRUE,
 				plot_positive_cross_products = FALSE,
@@ -50,7 +50,7 @@ correlation_vis(df,
 #| fig-cap: Scatter plot showing the deviations for x and y with the cross product represented as the area of the yellow rectangle.
 #| code-fold: true
 
-correlation_vis(df,
+regression_vis(df,
 				plot_x_mean = TRUE,
 				plot_y_mean = TRUE,
 				plot_positive_cross_products = FALSE,
@@ -67,7 +67,7 @@ correlation_vis(df,
 #| fig-cap: Scatter plot with all cross products. Positive and negative cross products are represented by blue and red rectangles, respectively.
 #| code-fold: true
 
-correlation_vis(df,
+regression_vis(df,
 				plot_x_mean = TRUE,
 				plot_y_mean = TRUE,
 				plot_positive_cross_products = TRUE,
@@ -93,7 +93,7 @@ library(ggplot2)
 library(dplyr)
 library(mvtnorm)
 
-source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/correlation_vis.R')
+source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/regression_vis.R')
 source('https://raw.githubusercontent.com/jbryer/VisualStats/main/R/correlation_shiny.R')
 
 shinyApp(ui = correlation_shiny_ui, server = correlation_shiny_server)

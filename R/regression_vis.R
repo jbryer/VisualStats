@@ -33,7 +33,7 @@
 #' cross_products == max(cross_products) # Find the largest cross product
 #'
 #' # Scatter plot with arrows showing the largest cross product
-#' correlation_vis(df,
+#' regression_vis(df,
 #' 				plot_x_mean = TRUE,
 #' 				plot_y_mean = TRUE,
 #' 				plot_positive_cross_products = FALSE,
@@ -42,7 +42,7 @@
 #' 				plot_y_deviations = cross_products == max(cross_products))
 #'
 #' # Scatter plot with the largest cross product as a rectangl
-#' correlation_vis(df,
+#' regression_vis(df,
 #' 				plot_x_mean = TRUE,
 #' 				plot_y_mean = TRUE,
 #' 				plot_positive_cross_products = FALSE,
@@ -51,38 +51,53 @@
 #' 				cross_product_alpha = 0.5)
 #'
 #' # Scatter plot with all the cross products.
-#' correlation_vis(df,
+#' regression_vis(df,
 #' 				plot_x_mean = TRUE,
 #' 				plot_y_mean = TRUE,
 #' 				plot_positive_cross_products = TRUE,
 #' 				plot_negative_cross_products = TRUE)
 #'
-correlation_vis <- function(
+regression_vis <- function(
 		df,
 		x_var = names(df)[1],
 		y_var = names(df)[2],
 		plot_x_mean = TRUE,
 		plot_y_mean = TRUE,
-		plot_positive_cross_products = FALSE,
-		plot_negative_cross_products = FALSE,
+		# Regression
 		plot_regression = FALSE,
 		regression_line_color = 'grey30',
+		# Deviations
 		plot_x_deviations = NULL,
 		plot_y_deviations = NULL,
-		plot_cross_products = NULL,
-		cross_product_fill = '#F5C710',
-		positive_cross_product_fill = 'lightblue',
-		negative_cross_product_fill = 'darkred',
 		x_deviation_color = 'darkblue',
 		y_deviation_color = 'darkblue',
 		deviation_size = 1.5,
-		cross_product_color = 'grey30',
+		# Cross products
+		plot_positive_cross_products = FALSE,
+		plot_negative_cross_products = FALSE,
+		plot_cross_products = NULL,
+		positive_cross_product_fill = 'lightblue',
+		negative_cross_product_fill = 'darkred',
 		positive_cross_product_color = cross_product_color,
 		negative_cross_product_color = cross_product_color,
-		cross_product_alpha = 0.1
+		cross_product_color = 'grey30',
+		cross_product_fill = '#F5C710',
+		cross_product_alpha = 0.1,
+		# Residuals
+		plot_residuals = NULL,
+		plot_residuals_squared = NULL,
+		residuals_squared_color = 'grey30',
+		residuals_squared_fill = 'green',
+		residuals_squared_alpha = 0.1,
+		residual_color = 'darkred',
+		residual_size = 1.5
 ) {
 	x_mean <- mean(df[,x_var], na.rm = TRUE)
 	y_mean <- mean(df[,y_var], na.rm = TRUE)
+	lm_out <- lm(as.formula(paste0(y_var, ' ~ ', x_var)), data = df)
+	df$residual <- resid(lm_out)
+	df$predicted <- predict(lm_out)
+	df$residual_x <- (df$residual / sd(df[,y_var]) ) * sd(df[,x_var])
 
 	p <- ggplot(df) +
 		geom_point(aes(x = .data[[x_var]], y = .data[[y_var]]), size = 3, shape = 1)
@@ -131,6 +146,25 @@ correlation_vis <- function(
 					  color = cross_product_color,
 					  alpha = cross_product_alpha)
 	}
+	if(!is.null(plot_residuals_squared)) {
+		p <- p +
+			geom_rect(data = df[plot_residuals_squared,],
+					  aes(xmin = .data[[x_var]],
+					  	  ymin = .data[[y_var]],
+					  	  xmax = .data[[x_var]] - .data[['residual_x']],
+					  	  ymax = .data[['predicted']]),
+					  fill = residuals_squared_fill,
+					  color = residuals_squared_color,
+					  alpha = residuals_squared_alpha)
+	}
+	if(!is.null(plot_residuals)) {
+		p <- p +
+			geom_segment(data = df[plot_residuals,],
+						 aes(x = .data[[x_var]], y = .data[[y_var]],
+						 	 xend = .data[[x_var]], yend = .data[['predicted']]),
+						 color = residual_color,
+						 size = residual_size)
+	}
 	if(!is.null(plot_x_deviations)) {
 		p <- p +
 			geom_segment(data = df[plot_x_deviations,],
@@ -158,4 +192,36 @@ correlation_vis <- function(
 			  legend.position = 'bottom')
 
 	return(p)
+}
+
+if(FALSE) {
+	library(ggplot2)
+	df <- mtcars[,c('wt', 'mpg')]
+	cross_products <- abs(df[,1] * df[,2])
+	cross_products == max(cross_products) # Find the largest cross product
+
+	# Scatter plot with arrows showing the largest cross product
+	regression_vis(df,
+					plot_x_mean = TRUE,
+					plot_y_mean = TRUE,
+					plot_positive_cross_products = FALSE,
+					plot_negative_cross_products = FALSE,
+					plot_regression = TRUE,
+					#plot_cross_products = cross_products == max(cross_products),
+					# plot_residuals = cross_products == max(cross_products),
+					plot_residuals_squared = cross_products == max(cross_products)
+	)
+
+	regression_vis(df,
+					plot_x_mean = TRUE,
+					plot_y_mean = TRUE,
+					plot_positive_cross_products = FALSE,
+					plot_negative_cross_products = FALSE,
+					plot_regression = TRUE,
+					#plot_cross_products = cross_products == max(cross_products),
+					# plot_residuals = cross_products == max(cross_products),
+					plot_residuals_squared = TRUE,
+					plot_residuals = TRUE
+	)
+
 }

@@ -68,13 +68,22 @@ correlation_shiny_ui <- function() {
 					inputId = 'plot_features',
 					label = 'Plot Features:',
 					choices = c(
+						'Use standard scores' = 'standard_scores',
 						'Plot mean of x' = 'plot_x_mean',
 						'Plot mean of y' = 'plot_y_mean',
 						'Plot rectangles for positive cross products' = 'plot_positive_cross_products',
 						'Plot rectangles for negative cross products' = 'plot_negative_cross_products',
-						'Show line of best fit (regression line)' = 'plot_regression'
+						'Show line of best fit (regression line)' = 'plot_regression',
+						'Plot all residuals' = 'plot_all_residuals',
+						'Plot all squared residuals' = 'plot_all_residuals_squared'
 					),
 					selected = c('plot_x_mean', 'plot_y_mean')
+				),
+				radioButtons(
+					inputId = 'selection_type',
+					label = 'Point selection:',
+					choices = c('Cross products' = 'cross_product',
+								'Squared residuals' = 'squared_residual')
 				),
 				fluidRow(
 					column(
@@ -124,15 +133,46 @@ correlation_shiny_server <- function(input, output, session) {
 
 	output$plot <- renderPlot({
 		thedata <- get_data()
-		correlation_vis(
+
+		if('standard_scores' %in% input$plot_features) {
+			thedata[,1] <- (thedata[,1] - mean(thedata[,1])) / sd(thedata[,1])
+			thedata[,2] <- (thedata[,2] - mean(thedata[,2])) / sd(thedata[,2])
+		}
+
+		residuals <- NULL
+		if('plot_all_residuals' %in% input$plot_features) {
+			residuals <- rep(TRUE, nrow(thedata))
+		} else if(input$selection_type == 'squared_residual') {
+			residuals <- selected_rows()
+		}
+		residuals_squared <- NULL
+		if('plot_all_residuals_squared' %in% input$plot_features) {
+			residuals_squared <- rep(TRUE, nrow(thedata))
+		} else if(input$selection_type == 'squared_residual') {
+			residuals_squared <- selected_rows()
+		}
+		cross_products <- NULL
+		if(input$selection_type == 'cross_product') {
+			cross_products <- selected_rows()
+		}
+
+		p <- regression_vis(
 			df = thedata,
 			plot_x_mean = 'plot_x_mean' %in% input$plot_features,
 			plot_y_mean = 'plot_y_mean' %in% input$plot_features,
 			plot_positive_cross_products = 'plot_positive_cross_products' %in% input$plot_features,
 			plot_negative_cross_products = 'plot_negative_cross_products' %in% input$plot_features,
 			plot_regression = 'plot_regression' %in% input$plot_features,
-			plot_cross_products = selected_rows()
+			plot_cross_products = cross_products,
+			plot_residuals = residuals,
+			plot_residuals_squared = residuals_squared
 		)
+
+		if('standard_scores' %in% input$plot_features) {
+			p <- p + coord_equal()
+		}
+
+		return(p)
 	})
 
 	selected_rows <- reactiveVal(NULL)
@@ -143,6 +183,10 @@ correlation_shiny_server <- function(input, output, session) {
 
 	observe({
 		thedata <- get_data()
+		if('standard_scores' %in% input$plot_features) {
+			thedata[,1] <- (thedata[,1] - mean(thedata[,1])) / sd(thedata[,1])
+			thedata[,2] <- (thedata[,2] - mean(thedata[,2])) / sd(thedata[,2])
+		}
 		row <- nearPoints(thedata,
 						  input$scatter_plot_click,
 						  maxpoints = 1,

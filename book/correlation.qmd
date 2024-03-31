@@ -1,14 +1,41 @@
 ---
-output: html_document
 editor_options: 
   chunk_output_type: console
 ---
+
 # Correlation
 
 ```{r correlation-setup, include=FALSE}
 library(VisualStats)
+library(cowplot)
+library(ggplot2)
 ```
 
+
+```{r correlations}
+#| code-fold: true
+#| warning: false
+#| fig-height: 1
+#| fig-cap: Scatterplots representing correlations from -1 to 1.
+plots <- list()
+for(rho in c(-1, -0.8, -0.4, 0, 0.4, 0.8, 1)) {
+	df <- mvtnorm::rmvnorm(n = 30,
+						   mean = c(0, 0),
+						   sigma = matrix(c(1^2, rho * (1 * 1),
+						   				 rho * (1 * 1), 1^2), 2, 2)) |>
+		as.data.frame()
+	
+	plots[[length(plots) + 1]] <- ggplot(df, aes(x = V1, y = V2)) + 
+		geom_point(size = 0.5) +
+		theme_minimal() +
+		theme(axis.text = element_blank(), panel.grid = element_blank()) +
+		xlab(rho) + ylab('') +
+		coord_equal() +
+		xlim(c(-3, 3)) + ylim(c(-3, 3))
+}
+plots$nrow <- 1
+do.call(plot_grid, plots)
+```
 
 
 $${ r }_{ xy }=\frac { \frac { \sum _{ i=1 }^{ n }{ \left( { X }_{ i }-\overline { X }  \right) \left( { Y }_{ i }-\overline { Y }  \right)  }  }{ n-1 }  }{ { s }_{ x }{ s }_{ y } }$$

@@ -35,6 +35,7 @@ VisualStats::correlation_shiny()
 VisualStats::loess_shiny()
 VisualStats::anova_shiny()
 VisualStats::mle_shiny()
+VisualStats::calculus_shiny()
 
 ##### Build shinylive versions of the apps
 # NOTE: This doesn't currently work very well. Some app work, but not others.

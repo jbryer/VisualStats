@@ -9,14 +9,15 @@ book:
   chapters:
     - index.qmd
     - variance.qmd
-    - correlation.qmd
     - distributions.qmd
+    - correlation.qmd
+    - ols_regression.qmd
     - loess.qmd
     - mle.qmd
     - anova.qmd
     - references.qmd
-  # appendices:
-  #   - appendix.qmd
+  appendices:
+    - calculus.qmd
   repo-url: https://github.com/jbryer/VisualStats/
   repo-subdir: book
   repo-actions: edit

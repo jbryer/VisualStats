@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Visual Statistics - 6&nbsp; Maximum Likelihood Estimation</title>
+<title>Visual Statistics - 7&nbsp; Maximum Likelihood Estimation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./mle.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./mle.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -163,32 +163,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Correlation</span></span></a>
+  <a href="./distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Distributions</span></span></a>
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Correlation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ols_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">OLS Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./loess.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Loess Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Loess Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mle.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Analysis of Variance (ANOVA)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Analysis of Variance (ANOVA)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -197,6 +203,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">References</span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./calculus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Calculus</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -208,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation</span></h1>
 </div>
 
 
@@ -237,8 +260,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Our goal is to estimate</p>
 <p><span class="math display">\[Y_{mpg} = \beta_{wt} X + e\]</span> where <span class="math inline">\(\beta_{wt}\)</span> is the slope and <span class="math inline">\(e\)</span> is the intercept.</p>
-<section id="ordinary-least-squares" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="ordinary-least-squares"><span class="header-section-number">6.1</span> Ordinary Least Squares</h2>
+<section id="ordinary-least-squares" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="ordinary-least-squares"><span class="header-section-number">7.1</span> Ordinary Least Squares</h2>
 <p>With ordinary least squares (OLS) regression our goal is to minimize the residual sum of squares (RSS):</p>
 <p><span class="math display">\[RSS=\sum^{n}_{i=1} \left( y_{i}-f(x_{i})\right)^{2}\]</span></p>
 <p>where <span class="math inline">\(y_i\)</span> is the variable to be predicted, <span class="math inline">\(f(x_i)\)</span> is the predicted value of <span class="math inline">\(y_i\)</span>, and <span class="math inline">\(n\)</span> is the sample size. Figure 2 superimposes the residuals on the scatter plot. By squaring the length of each of those lines we accomplish two things: 1) we make all the values to be summed positive (i.e.&nbsp;a line that fits all the data perfectly will have a RSS = 0) and 2) points that fall further from the regression line contribute more (geometrically more) to the RSS then points close to the regression line.</p>
@@ -307,8 +330,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Calculating the correlation in R gives us -0.8676594 and the slope is -5.3444716 which is close to our estimate here. We could get a more accurate result if we tried smaller steps in the correlation (see the <code>by</code> parameter in the <code>seq</code> function above).</p>
 </section>
-<section id="minimizing-rss-algorithmically" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="minimizing-rss-algorithmically"><span class="header-section-number">6.2</span> Minimizing RSS Algorithmically</h2>
+<section id="minimizing-rss-algorithmically" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="minimizing-rss-algorithmically"><span class="header-section-number">7.2</span> Minimizing RSS Algorithmically</h2>
 <p>This approach works well here because the correlation is bounded between -1 and 1 and we can easily calculate the RSS for a bunch of possible correlations. However, there are more efficient ways of finding the correlation that minimizes the RSS than trying correlations equally distributed across the possible range. For example, consider the following simple algorithm:</p>
 <ol type="1">
 <li>Calculate the RSS for <span class="math inline">\(r = 0\)</span>.</li>
@@ -416,8 +439,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="likelihood" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="likelihood"><span class="header-section-number">6.3</span> Likelihood</h2>
+<section id="likelihood" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="likelihood"><span class="header-section-number">7.3</span> Likelihood</h2>
 <p>Now that we have laid the groundwork for finding parameters algorithmically, we need to introduce another way of evaluating how well parameters <em>fit</em> the data, namely the likelihood. First, let’s revisit what we are doing in OLS. Figure 5 is a scatter plot of our observations, the OLS regression line in blue, and one observation highlighted in red with the residual as a red line. With OLS, we square the residual for every observation, thereby making all values positive, and summing them. There is, however, another way of estimating fit that doesn’t rely on the residuals.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -479,8 +502,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="maximum-likelihood-estimation" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="maximum-likelihood-estimation"><span class="header-section-number">6.4</span> Maximum Likelihood Estimation</h2>
+<section id="maximum-likelihood-estimation" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="maximum-likelihood-estimation"><span class="header-section-number">7.4</span> Maximum Likelihood Estimation</h2>
 <p>We can now use the <code>optim_save</code> function to find the parameters that <em>maximize</em> the log-likelihood. Note two important parameter changes:</p>
 <ol type="1">
 <li>We are specifying the <code>lower</code> parameter so that the algorithm will not try negative values for sigma since the variance cannot be negative.</li>
@@ -597,8 +620,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="generalized-linear-models" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="generalized-linear-models"><span class="header-section-number">6.5</span> Generalized Linear Models</h2>
+<section id="generalized-linear-models" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="generalized-linear-models"><span class="header-section-number">7.5</span> Generalized Linear Models</h2>
 <p>Generalized linear models (GLM) are a generalization of OLS that allows for the response variables (i.e.&nbsp;dependent variables) to have an error distribution that is not distributed normally. All generalized linear models have the following three characteristics:</p>
 <ol type="1">
 <li>A probability distribution describing the outcome variable .</li>
@@ -609,8 +632,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>We can estimate GLMs using MLE as described above. What will change is the log-likelihood function.</p>
 </section>
-<section id="logistic-regression" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">6.6</span> Logistic Regression</h2>
+<section id="logistic-regression" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">7.6</span> Logistic Regression</h2>
 <p>Logistic regression is a GLM used to model a binary categorical variable using numerical and categorical predictors. We assume a binomial distribution produced the outcome variable and we therefore want to model <em>p</em> the probability of success for a given set of predictors. Instead of fitting a line (or a plane for two predictors, etc. for higher dimensions) we wish to fit the data to the logistic function which is defined as:</p>
 <p><span class="math display">\[ \sigma \left( t \right) =\frac { { e }^{ t } }{ { e }^{ t }+1 } =\frac { 1 }{ 1+{ e }^{ -t } }  \]</span></p>
 <div class="cell" data-layout-align="center">
@@ -1001,12 +1024,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./loess.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Loess Regression</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Loess Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./anova.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Analysis of Variance (ANOVA)</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Analysis of Variance (ANOVA)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

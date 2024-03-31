@@ -1,0 +1,10 @@
+name: BayesBilliards
+account: jbryer
+server: shinyapps.io
+appId: 84024
+bundleId: 377611
+url: https://jbryer.shinyapps.io/BayesBilliards/
+when: 1456152294.57185
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: Bayes An Essay towards solving a Problem in the Doctrine of Chances.pdf

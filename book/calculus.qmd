@@ -1,0 +1,56 @@
+---
+editor_options:
+  chunk_output_type: console
+---
+
+```{r, echo=FALSE}
+library(VisualStats)
+library(ggplot2)
+```
+
+# Calculus
+
+Although we believe calculus is not required prerequisite for statistics, having a basic understanding of the three core concepts from calculus can be helpful when learning statistics. This appendix provides some visualizations and Shiny applications we use to provide a *crash course* in calculus so students have a basic understanding of limits (useful for the Central Limit Theorem), derivatives (use for the ordinary least squares), and integrals (useful for probability distributions, *p*-values, and confidence intervals).
+
+Isaac Newton and Gottfried Wilhelm Leibniz are credited for developing calculus independently of each other in the 17th century. While Newton developed calculus to solve problems in physics, Leibniz developed much of the notation we use today. 
+
+An important result of their work was the  *fundamental theorem of calculus* states that differentiation and integration are inverse operations. 
+
+## Limits
+
+
+## Derivatives
+
+```{r derivative_plot1}
+#| fig-cap: Estimated derivative at x = 1 for the normal distribution with a delta x of 0.5.
+#| code-fold: true
+derivative_plot(fun = normal_fun, x_value = 1, interval = 0.5)
+```
+
+```{r derivative_plot2}
+#| fig-cap: Estimated derivative at x = 1 for the normal distribution with a delta x of 0.1.
+#| code-fold: true
+derivative_plot(fun = normal_fun, x_value = 1, interval = 0.1)
+```
+
+
+
+## Integrals
+
+```{r integral_plot3}
+#| fig-cap: Estimated integral using Reimann sums with 3 rectangles.
+#| code-fold: true
+integral_plot(fun = normal_fun, xmin = 0, xmax = 1, n = 3)
+```
+
+```{r integral_plot10}
+#| fig-cap: Estimated integral using Reimann sums with 10 rectangles.
+#| code-fold: true
+integral_plot(fun = normal_fun, xmin = 0, xmax = 1, n = 10)
+```
+
+```{r integral_plot100}
+#| fig-cap: Estimated integral using Reimann sums with 100 rectangles.
+#| code-fold: true
+integral_plot(fun = normal_fun, xmin = 0, xmax = 1, n = 100)
+```

@@ -21,7 +21,7 @@ correlation_shiny_ui <- function() {
 					column(
 						width = 6,
 						numericInput(
-							inputId = 'x_mean',
+							inputId = 'mean_x',
 							label = 'IV (x) mean',
 							value = 20, min = 100, max = 100, step = 1
 						)
@@ -29,7 +29,7 @@ correlation_shiny_ui <- function() {
 					column(
 						width = 6,
 						numericInput(
-							inputId = 'x_sd',
+							inputId = 'sd_x',
 							label = 'IV (x) Std. Dev.',
 							value = 2, min = 0, max = 100, step = 1
 						)
@@ -39,7 +39,7 @@ correlation_shiny_ui <- function() {
 					column(
 						width = 6,
 						numericInput(
-							inputId = 'y_mean',
+							inputId = 'mean_y',
 							label = 'DV (y) mean',
 							value = 30, min = 100, max = 100, step = 1
 						)
@@ -47,7 +47,7 @@ correlation_shiny_ui <- function() {
 					column(
 						width = 6,
 						numericInput(
-							inputId = 'y_sd',
+							inputId = 'sd_y',
 							label = 'DV (y) Std. Dev.',
 							value = 3, min = 0, max = 100, step = 1
 						)
@@ -133,10 +133,10 @@ correlation_shiny_server <- function(input, output, session) {
 		input$resample
 		selected_rows(NULL)
 		mvtnorm::rmvnorm(
-			n = n,
-			mean = c(mean_x, mean_y),
-			sigma = matrix(c(sd_x^2, rho * (sd_x * sd_y),
-							 rho * (sd_x * sd_y), sd_y^2), 2, 2)) |>
+			n = input$n,
+			mean = c(input$mean_x, input$mean_y),
+			sigma = matrix(c(input$sd_x^2, input$rho * (input$sd_x * input$sd_y),
+							 input$rho * (input$sd_x * input$sd_y), input$sd_y^2), 2, 2)) |>
 			as.data.frame() |>
 			dplyr::rename(x = V1, y = V2) |>
 			dplyr::mutate(x_deviation = x - mean(x),

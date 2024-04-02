@@ -86,7 +86,11 @@ regression_vis(df,
 				plot_positive_cross_products = FALSE,
 				plot_negative_cross_products = FALSE,
 				plot_x_deviations = deviation_to_plot,
-				plot_y_deviations = deviation_to_plot)
+				plot_y_deviations = deviation_to_plot) +
+	annotate('text', x = 22.5, y = 46.2,
+			 label = bquote("x - bar(x)"), parse = TRUE, vjust = 1.5, size = 8) +
+	annotate('text', x = 25.0, y = 44,
+			 label = bquote("y - bar(y)"), parse = TRUE, vjust = 2, size = 8, angle = -90)
 ```
 
 Hence, for each observation (*i*) in our data frame the numerator is summing the area of a rectangle (see @fig-corr-largest-cross-products for the one observation in yellow). When we calculate variances we square the deviation which as a result ensures that all the values being summed are positive. However, for covariance this is not the case. The numbers in @fig-corr-largest-cross-products correspond to the four quadrants of the plot. For points that fall in quadrants 1 and 3, the cross products (i.e. $(x_i - \bar{x})(y_i - \bar{y}$) will be positive. For points that fall in quadrants 2 and 4 however, the cross products will be negative.

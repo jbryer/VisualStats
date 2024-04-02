@@ -29,7 +29,7 @@ for(rho in c(-1, -0.8, -0.4, 0, 0.4, 0.8, 1)) {
 	
 	plots[[length(plots) + 1]] <- ggplot(df, aes(x = V1, y = V2)) + 
 		geom_point(size = 0.5) +
-		theme_vs() +
+		theme_minimal() +
 		theme(axis.text = element_blank(), panel.grid = element_blank()) +
 		xlab(rho) + ylab('') +
 		coord_equal() +

@@ -24,7 +24,7 @@ This website/book does not intend to be another introductory statistics book, th
 
 ## Contributions
 
-This website is very much a work in progress. If you have suggestions and/or edits you can either [open an issue on Github](https://github.com/jbryer/VisualStats/issues) or click "edit this page" at the bottom of each page.
+This website is a work in progress. If you have suggestions and/or edits you can either [open an issue on Github](https://github.com/jbryer/VisualStats/issues) or click "edit this page" at the bottom of each page.
 
 
 ## Colophon

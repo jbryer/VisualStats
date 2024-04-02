@@ -185,11 +185,7 @@ regression_vis <- function(
 	}
 
 
-	p <- p +
-		theme_minimal() +
-		theme(panel.grid.major = element_line(color = 'grey90', linewidth = 0.3),
-			  panel.grid.minor = element_blank(),
-			  legend.position = 'bottom')
+	p <- p + theme_vs()
 
 	return(p)
 }

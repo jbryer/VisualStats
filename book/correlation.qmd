@@ -29,7 +29,7 @@ for(rho in c(-1, -0.8, -0.4, 0, 0.4, 0.8, 1)) {
 	
 	plots[[length(plots) + 1]] <- ggplot(df, aes(x = V1, y = V2)) + 
 		geom_point(size = 0.5) +
-		theme_minimal() +
+		theme_vs() +
 		theme(axis.text = element_blank(), panel.grid = element_blank()) +
 		xlab(rho) + ylab('') +
 		coord_equal() +
@@ -135,7 +135,7 @@ ggplot(df, aes(x = cross_product, fill = cross_product > 0)) +
 	geom_histogram(bins = 15, alpha = 0.75) +
 	scale_fill_manual('Cross product > 0', values = c('lightblue', 'darkred')) +
 	xlab('Cross Product') + 
-	theme_minimal()
+	theme_vs()
 ```
 
 The last part of @eq-covariance is the denominator where we average across all of the observations. If we wish to calculate the covariance for a population we divide my *n*, but for sample covariance we divide by *n - 1*. Substuting @eq-covariance into @eq-correlation we get the following:

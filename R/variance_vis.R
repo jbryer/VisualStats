@@ -155,7 +155,8 @@ variance_vis <- function(x,
 		theme(axis.text.y = element_blank(),
 			  axis.ticks.y = element_blank()) +
 		xlab(xlab) + ylab('') +
-		coord_equal()
+		coord_equal() +
+		theme_vs()
 
 	return(p)
 }

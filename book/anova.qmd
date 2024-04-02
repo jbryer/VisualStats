@@ -21,7 +21,7 @@ To exemplify this appraoch we will explore the effects of different approaches o
 ggplot(hand_washing, aes(x = Method, y = Bacterial_Counts)) +
 	geom_boxplot() + 
 	geom_beeswarm(aes(color = Method)) + 
-	theme(legend.position = 'none')
+	theme_vs() + theme(legend.position = 'none')
 ```
 
 When conceptualizing variances graphically, we wish to draw squares. Consider the formula for the sample variance:
@@ -215,7 +215,8 @@ The *p*-value is the area under the F-distribution to the right of the F-statist
 ```{r, fig.cap = 'F-distribution'}
 ggplot() + geom_function(fun = df, args = c(df1 = 3, df2 = 28)) + 
 	geom_vline(xintercept = 7.06, linetype = 2) + 
-	xlim(0, 10) + xlab('Statistic') + ylab('')
+	xlim(0, 10) + xlab('Statistic') + ylab('') +
+	theme_vs()
 ```
 
 

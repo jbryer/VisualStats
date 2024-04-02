@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FAL
 
 set.seed(2112)
 
+library(VisualStats)
 library(dplyr)
 library(ggplot2)
 library(reshape2)
@@ -29,7 +30,7 @@ We will begin with a typical bivariate regression using the `mtcars` data set wh
 
 
 ```{r mlescatterplot1, echo = FALSE, fig.cap = 'Figure 1. Scatter plot of weight versus miles per gallan.'}
-ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point() + theme_vs() 
 ```
 
 Our goal is to estimate
@@ -54,7 +55,8 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 	geom_point() +
 	geom_abline(intercept = lm.out$coefficients[1],
 				slope = lm.out$coefficients[2], color = 'blue') +
-	geom_segment(aes(xend = wt, yend = predicted), color = '#e31a1c')
+	geom_segment(aes(xend = wt, yend = predicted), color = '#e31a1c') +
+	theme_vs()
 ```
 
 The basic properties we know about regression are:
@@ -77,20 +79,20 @@ ols <- tibble(
 	r = seq(-1, 1, by = 0.025),            # Correlation
 	m = r * (sd.y / sd.x),                 # Slope
 	b = mean.y - m * mean.x                # Intercept
-) %>% rowwise() %>%
-	mutate(ss = sum((y - (m * x + b))^2)) %>% # Sum of squares residuals
+) |> rowwise() |>
+	mutate(ss = sum((y - (m * x + b))^2)) |> # Sum of squares residuals
 	as.data.frame()
-datatable(ols) %>% formatRound(columns = names(ols), digits=3)
+datatable(ols) |> formatRound(columns = names(ols), digits=3)
 ```
 
 ```{r mlesumsquares, echo = FALSE, fig.cap = 'Figure 3. Residual sum of squares.'}
-ggplot(ols, aes(x = r, y = ss)) + geom_path() + geom_point()
+ggplot(ols, aes(x = r, y = ss)) + geom_path() + geom_point() + theme_vs()
 ```
 
-The correlation with the correlation the resulted in the smallest RSS is `r ols %>% dplyr::filter(ss == min(ss)) %>% select(r) %>% unname()`.
+The correlation with the correlation the resulted in the smallest RSS is `r ols |> dplyr::filter(ss == min(ss)) |> select(r) |> unname()`.
 
 ```{r mlesmallss}
-ols %>% dplyr::filter(ss == min(ss)) # Select the row with the smallest sum of squares residuals
+ols |> dplyr::filter(ss == min(ss)) # Select the row with the smallest sum of squares residuals
 ```
 
 Calculating the correlation in R gives us `r cor(x, y)` and the slope is `r cor(x, y) * (sd.y / sd.x)` which is close to our estimate here. We could get a more accurate result if we tried smaller steps in the correlation (see the `by` parameter in the `seq` function above).
@@ -172,11 +174,12 @@ It took the `optim` function `r nrow(optim.rss$iterations_df)` iterations to fin
 ```{r mleoptimiationplot, fig.cap = 'Figure 4. Output of the optimizaiton procedure at each iteration.'}
 df <- optim.rss$iterations_df
 names(df) <- c('Intercept', 'Slope', 'ResidualSumSquares', 'Iteration')
-df %>% melt(id.var = 'Iteration') %>%
+df |> melt(id.var = 'Iteration') |>
 	ggplot(aes(x = Iteration, y = value, color = variable)) +
 	geom_point(size = 1) + geom_path() +
 	facet_wrap(~ variable, scales = "free_y", ncol = 1) +
-	xlab('Iteration') + ylab('') + theme(legend.position = 'none')
+	xlab('Iteration') + ylab('') + 
+	theme_vs() + theme(legend.position = 'none')
 ```
 
 
@@ -196,7 +199,8 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 	geom_segment(data = mtcars[pt,], color = 'red', size = 1,
 				 aes(x = wt, xend = wt, y = mpg, yend = fitted_mpg)) +
 	geom_point(data = mtcars[pt,], color = 'red', size = 4) +
-	geom_smooth(method = 'lm', formula = y ~ x, se = FALSE)
+	geom_smooth(method = 'lm', formula = y ~ x, se = FALSE) +
+	theme_vs()
 ```
 
 We often think of probabilities as the areas under a fixed distribution. For example, the first car in `mtcars` is `r row.names(mtcars)[pt]` with an average miles per gallon of `r mtcars[pt,]$mpg` and weighs `r mtcars[pt,]$wt * 1000`lbs. The probability of a car with a miles per gallon less than `r row.names(mtcars)[pt]` given the data we have in `mtcars` is `r pnorm(mtcars[pt,]$mpg, mean(mtcars$mpg), sd = sd(mtcars$mpg))` and is depicted in Figure 6.
@@ -213,7 +217,8 @@ ggplot() +
 	geom_segment(aes(x = mtcars[pt,]$mpg, xend = mtcars[pt,]$mpg),
 				 y = 0, yend = dnorm(y[pt], mean(mtcars$mpg), sd(mtcars$mpg))) +
 	xlim(mean(mtcars$mpg) - 3 * sd(mtcars$mpg), mean(mtcars$mpg) + 3 * sd(mtcars$mpg)) +
-	xlab('Miles Per Gallon') + ylab('Density')
+	xlab('Miles Per Gallon') + ylab('Density') +
+	theme_vs()
 ```
 
 For probabilities, we are working with a fixed distribution, that is:
@@ -235,7 +240,8 @@ p1 <- ggplot() +
 	geom_point(aes(x = mtcars[pt1,]$mpg, y = dnorm(y[pt1], a + b * x[pt1], sigma)),
 			   color = 'red', size = 4) +
 	xlim(mean(y) - 3 * sd(y), mean(y) + 3 * sd(y)) +
-	xlab('') + ylab('Density')
+	xlab('') + ylab('Density') +
+	theme_vs()
 pt2 <- 5
 p2 <- ggplot() +
 	stat_function(fun = dnorm, n = 101,
@@ -247,7 +253,8 @@ p2 <- ggplot() +
 			   color = 'red', size = 4) +
 	xlim(mean(y) - 3 * sd(y), mean(y) + 3 * sd(y)) +
 	# xlim((a + b * x[pt2]) - 3 * sigma, (a + b * x[pt2]) + 3 * sigma) +
-	xlab('Miles per Gallon') + ylab('Density')
+	xlab('Miles per Gallon') + ylab('Density') +
+	theme_vs()
 plot_grid(p1, p2, ncol = 1)
 ```
 
@@ -308,17 +315,19 @@ p1 <- ggplot(mtcars, aes(x = wt, y = mpg)) +
 	geom_point(data = mtcars, aes(x = wt, y = mpg)) +
 	transition_time(Iteration) +
 	labs(title = "Iteration: {frame_time}") +
-	shadow_wake(wake_length = 0.1, alpha = FALSE)
+	shadow_wake(wake_length = 0.1, alpha = FALSE) +
+	theme_vs()
 p1_gif <- animate(p1, width = 480, height = 480, renderer = magick_renderer())
 
-df.melt <- df %>% melt(id.var = 'Iteration')
+df.melt <- df |> melt(id.var = 'Iteration')
 p2 <- ggplot(df.melt, aes(x = Iteration, y = value, color = variable)) +
 	geom_vline(data = data.frame(Iteration2 = df$Iteration),
 			   aes(xintercept = Iteration2)) +
 	geom_path() +
 	facet_wrap(~ variable, scales = "free_y", ncol = 1) +
 	xlab('Iteration') + ylab('Parameter Estimate') +
-	transition_time(Iteration2)
+	transition_time(Iteration2) +
+	theme_vs()
 p2_gif <- animate(p2, width = 480, height = 480, renderer = magick_renderer())
 
 new_gif <- magick::image_append(c(p1_gif[1], p2_gif[1]))
@@ -345,7 +354,7 @@ Figure 10 depicts the likelihoods for the first 16 observations.
 ```{r mleanimation3, cache = TRUE, fig.cap = 'Figure 10. Likelihoods of the first 16 observations for the final parameter estimates.'}
 df <- optim.ll$iterations_df
 names(df) <- c('Intercept', 'Slope', 'Sigma', 'LogLikelihood', 'Iteration')
-tmp <- df %>% dplyr::filter(Iteration == nrow(df))
+tmp <- df |> dplyr::filter(Iteration == nrow(df))
 plots <- list()
 nplots <- 16 #nrow(mtcars)
 for(i in 1:min(nplots, nrow(mtcars))) {
@@ -406,7 +415,8 @@ logistic <- function(t) {
 }
 ggplot() +
 	stat_function(fun = logistic, n = 101) +
-	xlim(-4, 4) + xlab('x')
+	xlim(-4, 4) + xlab('x') +
+	theme_vs()
 ```
 
 
@@ -486,7 +496,8 @@ ggplot(study, aes(x = Hours, y = Pass)) +
 	stat_function(fun = logistic, n = 101, 
 				  args = list(beta0 = beta0, beta1 = beta1) ) +
 	scale_color_hue('Predicted Pass > 0.5') +
-	theme(legend.position = 'inside', legend.position.inside = c(0.85, 0.15))
+	theme(legend.position = 'inside', legend.position.inside = c(0.85, 0.15)) +
+	theme_vs()
 ```
 
 Let's explore the process of the numeric optimizer. For this model, it took `r nrow(optim.binomial$iterations_df)` iterations to converge to resulting parameters.
@@ -502,7 +513,7 @@ tmp <- apply(
 	df, 1, FUN = function(x) {
 		logistic(xvals, x[1], x[2])
 	}
-) %>% as.data.frame()
+) |> as.data.frame()
 names(tmp) <- 1:ncol(tmp)
 tmp <- melt(tmp)
 names(tmp) <- c('Iteration', 'Pass')
@@ -520,12 +531,13 @@ p1 <- ggplot() +
 	transition_states(Iteration) +
 	labs(title = "Iteration: {round(frame/2)}") +
 	shadow_wake(wake_length = 0.1, alpha = FALSE) +
-	ease_aes("cubic-in")
+	ease_aes("cubic-in") +
+	theme_vs()
 p1_gif <- animate(p1, nframes = nFrames, 
 				  width = 480, height = 480, 
 				  renderer = magick_renderer())
 
-df.melt <- df %>% melt(id.var = 'Iteration')
+df.melt <- df |> melt(id.var = 'Iteration')
 p2 <- ggplot(df.melt, aes(x = Iteration, y = value, color = variable)) +
 	geom_vline(data = data.frame(Iteration2 = df$Iteration),
 			   aes(xintercept = Iteration2, frame = Iteration2)) +
@@ -533,7 +545,8 @@ p2 <- ggplot(df.melt, aes(x = Iteration, y = value, color = variable)) +
 	facet_wrap(~ variable, scales = "free_y", ncol = 1) +
 	xlab('Iteration') + ylab('Parameter Estimate') +
 	theme(legend.position = 'none') +
-	transition_time(Iteration2)
+	transition_time(Iteration2) +
+	theme_vs()
 p2_gif <- animate(p2, nframes = nFrames, 
 				  width = 480, height = 480, 
 				  renderer = magick_renderer())
@@ -561,14 +574,16 @@ ggplot(df2, aes(x = x, y = p)) +
 					 y = study[pt,]$Pass, yend = logit(study[pt,]$Hours, beta0, beta1)),
 				 color = 'red', size = 1) +
 	geom_point(aes(x = study[pt,]$Hours, y = logit(study[pt,]$Hours, beta0, beta1)),
-			   color = 'red', size = 4)
+			   color = 'red', size = 4) +
+	theme_vs()
 
 study$p <- logit(study$Hours, beta0, beta1)
 ggplot(df2, aes(x = x, y = p)) + 
 	geom_path() + 
 	geom_segment(data = study, aes(x = Hours, xend = Hours,
 								   y = Pass, yend = p), color = 'red', size = 1) +
-	geom_point(data = study, aes(x = Hours, y = p), color = 'red', size = 4)
+	geom_point(data = study, aes(x = Hours, y = p), color = 'red', size = 4) +
+	theme_vs()
 
 ```
 

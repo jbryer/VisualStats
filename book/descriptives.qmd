@@ -1,4 +1,10 @@
-# Variance {#sec-variance}
+# Descriptive Statistics
+
+# Mean versus median
+
+
+
+## Variance {#sec-variance}
 
 $$ s^2 = \frac{\sigma(x_i - \bar{x})^2}{n - 1} $$ {#eq-variance}
 

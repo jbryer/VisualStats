@@ -1,12 +1,28 @@
 #' Color palette used for visualizations (qualitative)
-#'
 #' @export
 vs_palette_qual <- c('#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf','#999999')
 
-#' Color palette used for visualizations (sequential)
+#' Color palette used for visualizations (sequential and blue)
+#' @export
 vs_palette_seq_blues <- c('#f0f9e8','#bae4bc','#7bccc4','#43a2ca','#0868ac')
+
+#' Color palette used for visualizations (sequential and purples)
+#' @export
 vs_palette_seq_purples <- c('#feebe2','#fbb4b9','#f768a1','#c51b8a','#7a0177')
+
+#' Color palette used for visualizations (sequential and greens)
+#' @export
 vs_palette_seq_greens <- c('#ffffcc','#c2e699','#78c679','#31a354','#006837')
+
+#' ggplot2 theme for the VisualStats package
+#' @export
+#' @return a ggplot2 theme
+theme_vs <- function() {
+	theme_minimal() +
+	theme(panel.grid.major = element_line(color = 'grey90', size = 0.3),
+		  panel.grid.minor = element_blank(),
+		  legend.position = 'bottom')
+}
 
 #' Visualizations for Statistical Analysis
 #'

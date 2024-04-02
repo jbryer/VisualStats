@@ -1,5 +1,12 @@
+---
+editor_options: 
+  chunk_output_type: console
+---
+
 ## Normal Distribution
 
 ```{r}
-normal_plot()
+#| label: fig-standard-normal-95
+#| fig-cap: Normal distribution with 95% of the area.
+normal_plot(mean = 0, sd = 1, cv = c(-1.96, 1.96))
 ```

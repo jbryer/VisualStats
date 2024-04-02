@@ -86,6 +86,7 @@ distribution_plot <- function(fun,
 	}
 
 	p <- p + ggtitle(title) + xlab('') + ylab('') +
+		theme_vs() +
 		theme(axis.text.y = element_blank(),
 			  axis.ticks.y = element_blank())
 

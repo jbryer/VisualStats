@@ -151,7 +151,10 @@ plot_linear_assumption_check <- function(glm_out,
 		return(p1)
 	}
 
-	egg::ggarrange(p1, p2, nrow = 1, widths = widths)
+	egg::ggarrange(p1 + theme_vs(),
+				   p2 + theme_vs(),
+				   nrow = 1,
+				   widths = widths)
 }
 
 if(FALSE) { # Testing

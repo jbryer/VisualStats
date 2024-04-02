@@ -1,3 +1,8 @@
+---
+editor_options: 
+  chunk_output_type: console
+---
+
 # Distributions {#sec-distributions}
 
 ```{r, echo=FALSE}
@@ -5,6 +10,8 @@ library(VisualStats)
 ```
 
 ```{r}
+#| label: distributions_norm
+#| fig-cap: R functions for the normal distribution.
 plot_distributions(dist = 'norm',
 				   xvals = c(-1, 0, 0.5),
 				   xmin = -4,

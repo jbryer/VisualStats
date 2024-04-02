@@ -51,6 +51,7 @@ loess_vis <- function(formula,
 			   max(df$y) + 0.05 * diff(range(df$y)))) +
 		xlab(xlab) +
 		ylab(ylab) +
+		theme_vs() +
 		theme(text = element_text(size = 16))
 
 	if(draw_loess) {

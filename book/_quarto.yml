@@ -4,11 +4,27 @@ project:
 
 book:
   title: "Visual Statistics"
-  author: "Jason Bryer and Bruce Dudek"
-  # date: "2024-03-23"
+  author:
+    - name: Jason Bryer
+      orcid: 0000-0002-2454-0402
+      corresponding: true
+      email: jason@bryer.org
+      url: https://bryer.org
+      affiliations:
+        - name: City University of New York
+          department: School of Professional Studies
+          url: https://sps.cuny.edu/academics/graduate/master-science-data-science-ms
+    - name: Bruce Dudek
+      corresponding: false
+      email: bruce.dudek@albany.edu
+      url: https://bcdudek.net
+      affiliations:
+        - name: University at Albany
+          department: Psychology
+          url: https://albany.edu
   chapters:
     - index.qmd
-    - variance.qmd
+    - descriptives.qmd
     - distributions.qmd
     - correlation.qmd
     - ols_regression.qmd
@@ -18,9 +34,12 @@ book:
     - references.qmd
   appendices:
     - calculus.qmd
+  site-url: https://visualstats.bryer.org
   repo-url: https://github.com/jbryer/VisualStats/
-  repo-subdir: book
+  repo-subdir: book/
+  repo-branch: main
   repo-actions: edit
+  issue-url: https://github.com/jbryer/VisualStats/issues
 
 bibliography: references.bib
 

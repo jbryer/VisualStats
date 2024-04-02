@@ -1,3 +1,5 @@
+**Last updated on `r format(Sys.Date(), '%B %d, %Y')`**
+
 # Introduction
 
 This website is largely inspired by what our advisor, colleague, and friend Bob Pruzek called *elemental graphics.* The first two paragraphs from @ElementalGraphics succinctly introduces the core ideas of *elemental graphics*:
@@ -10,18 +12,28 @@ Their initial paper focused on a specific graphic for analysis of variance (ANOV
 
 This is an online book because we have found that by having students interact with the graphics, often by controlling specific parameters and/or adding features one-by-one provides a deeper understanding of the concepts. The introduction of the [Shiny](https://shiny.posit.co) [@shiny] R package has greatly simplified the process of creating interactive visualiztions.
 
-All of the Shiny applications, supporting functions, and datasets are included in the `VisualStats` R package. This can be downloaded using the following command:
+All of the Shiny applications, supporting functions, and data sets are included in the `VisualStats` R package. This can be downloaded using the following command:
 
 ```{r, eval=FALSE}
+#| code-fold: false
 remotes::install_github('jbryer/VisualStats')
 ```
+
+This website/book does not intend to be another introductory statistics book, there are plenty of fantastic options available, but instead a collection of Shiny applications and chapters to support those visualizations. Our philosophy is that students can better understand the statistical formulas instrumental to the field itself through geometric representations. Take for example the fact that many statistical formulas square terms. Drawing a square for these formulas becomeas a natural way of exploring the features of what that statistical formula is attempting to solve.
+
+
+## Contributions
+
+This website is very much a work in progress. If you have suggestions and/or edits you can either [open an issue on Github](https://github.com/jbryer/VisualStats/issues) or click "edit this page" at the bottom of each page.
 
 
 ## Colophon
 
-This book was creating using [Quarto](https://quarto.org/docs/books/) and hosted on [Github](https://github.com/jbryer/VisualStats).
+This book was creating using [Quarto](https://quarto.org/docs/books/) [@quarto] and hosted on [Github](https://github.com/jbryer/VisualStats). The interactive components were created using [Shiny](https://shiny.posit.co) [@shiny]. All of the figures were created using the grammar of graphics [@Wilkinson] framework as implemented by the [`ggplot2`](https://shiny.posit.co) package [@ggplot2].
+
 
 ```{r, warning=FALSE, error=FALSE}
+#| code-fold: false
 devtools::session_info()
 ```
 

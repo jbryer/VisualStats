@@ -116,3 +116,10 @@ directory):
   Quarto](https://quarto.org/docs/authoring/figures.html)
 - [Code blocks
   options](https://quarto.org/docs/output-formats/html-code.html)
+
+## Code of Conduct
+
+Please note that the VisualStats project is released with a [Contributor
+Code of
+Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.

@@ -56,7 +56,7 @@ integral_plot <- function(fun = normal_fun,
 		xlim(c(view_xmin, view_xmax)) +
 		stat_function(fun = fun) +
 		ggtitle(paste0('Aera ≈ ', prettyNum(sum(boxes$area), digits = 3))) +
-		theme_minimal()
+		theme_vs()
 	return(p)
 }
 
@@ -97,6 +97,6 @@ derivative_plot <- function(fun = normal_fun,
 		xlim(c(view_xmin, view_xmax)) +
 		xlab('x') + ylab('y') +
 		ggtitle(paste0('Slope ≈ ', round(segment_slope, digits = 3))) +
-		theme_minimal()
+		theme_vs()
 	return(p)
 }

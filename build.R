@@ -19,11 +19,23 @@ rmarkdown::render('README.Rmd')
 
 ##### Book
 quarto::quarto_render('book/', output_format = 'html', as_job = FALSE)
-# quarto::quarto_render('book/index.qmd', output_format = 'pdf')
+# quarto::quarto_render('book/', output_format = 'pdf', as_job = FALSE)
 
 # Preview the book (necessary for the Shiny apps to work)
 httpuv::runStaticServer(dir = 'docs/', port = 2112)
 
+
+tmp <- roxygen2::parse_file('R/anova_vis.R')
+ls(tmp[[1]]$tags[[1]])
+tmp[[1]]$tags[[1]]$tag
+
+length(tmp[[1]])
+tmp[[1]][[1]] |> length()
+
+for(i in seq_len(length(tmp[[1]]$tags))) {
+	tmp[[1]]$tags[[i]]$tag
+	tmp[[1]]$tags[[i]]$val
+}
 
 ##### Shiny Apps
 library(VisualStats)

@@ -6,7 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Jason Bryer and Bruce Dudek">
+<meta name="author" content="Jason Bryer">
+<meta name="author" content="Bruce Dudek">
 
 <title>Visual Statistics</title>
 <style>
@@ -84,7 +85,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./variance.html" rel="next">
+<link href="./descriptives.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -163,8 +164,8 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./variance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Variance</span></span></a>
+  <a href="./descriptives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -241,16 +242,35 @@ div.csl-indent {
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author"><a href="https://bryer.org">Jason Bryer</a> <a href="https://orcid.org/0000-0002-2454-0402" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://sps.cuny.edu/academics/graduate/master-science-data-science-ms">
+            City University of New York
+            </a>
+          </p>
+      </div>
+      <div class="quarto-title-meta-contents">
+    <p class="author"><a href="https://bcdudek.net">Bruce Dudek</a> </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://albany.edu">
+            University at Albany
+            </a>
+          </p>
+      </div>
+    </div>
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Jason Bryer and Bruce Dudek </p>
-          </div>
-  </div>
-    
+      
   
     
   </div>
@@ -258,6 +278,7 @@ div.csl-indent {
 
 </header>
 
+<p><strong>Last updated on April 01, 2024</strong></p>
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <p>This website is largely inspired by what our advisor, colleague, and friend Bob Pruzek called <em>elemental graphics.</em> The first two paragraphs from <span class="citation" data-cites="ElementalGraphics">Helmreich and Pruzek (<a href="references.html#ref-ElementalGraphics" role="doc-biblioref">2010</a>)</span> succinctly introduces the core ideas of <em>elemental graphics</em>:</p>
@@ -267,21 +288,20 @@ div.csl-indent {
 </blockquote>
 <p>Their initial paper focused on a specific graphic for analysis of variance (ANOVA), which we cover with some additions. The chapters of this book attempt to take that same philosophy that there are natural graphics that exemplify important statistical concepts beyond ANOVA. This book is not intended to be a standalone introductory statistics book but instead a collection of articles we have used to support the teaching of statistics.</p>
 <p>This is an online book because we have found that by having students interact with the graphics, often by controlling specific parameters and/or adding features one-by-one provides a deeper understanding of the concepts. The introduction of the <a href="https://shiny.posit.co">Shiny</a> <span class="citation" data-cites="shiny">(<a href="references.html#ref-shiny" role="doc-biblioref">Chang et al. 2023</a>)</span> R package has greatly simplified the process of creating interactive visualiztions.</p>
-<p>All of the Shiny applications, supporting functions, and datasets are included in the <code>VisualStats</code> R package. This can be downloaded using the following command:</p>
+<p>All of the Shiny applications, supporting functions, and data sets are included in the <code>VisualStats</code> R package. This can be downloaded using the following command:</p>
 <div class="cell">
-<details open="">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'jbryer/VisualStats'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
-<section id="colophon" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="colophon"><span class="header-section-number">1.1</span> Colophon</h2>
-<p>This book was creating using <a href="https://quarto.org/docs/books/">Quarto</a> and hosted on <a href="https://github.com/jbryer/VisualStats">Github</a>.</p>
+<p>This website/book does not intend to be another introductory statistics book, there are plenty of fantastic options available, but instead a collection of Shiny applications and chapters to support those visualizations. Our philosophy is that students can better understand the statistical formulas instrumental to the field itself through geometric representations. Take for example the fact that many statistical formulas square terms. Drawing a square for these formulas becomeas a natural way of exploring the features of what that statistical formula is attempting to solve.</p>
+<section id="contributions" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="contributions"><span class="header-section-number">1.1</span> Contributions</h2>
+<p>This website is very much a work in progress. If you have suggestions and/or edits you can either <a href="https://github.com/jbryer/VisualStats/issues">open an issue on Github</a> or click “edit this page” at the bottom of each page.</p>
+</section>
+<section id="colophon" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="colophon"><span class="header-section-number">1.2</span> Colophon</h2>
+<p>This book was creating using <a href="https://quarto.org/docs/books/">Quarto</a> <span class="citation" data-cites="quarto">(<a href="references.html#ref-quarto" role="doc-biblioref">Allaire and Dervieux 2024</a>)</span> and hosted on <a href="https://github.com/jbryer/VisualStats">Github</a>. The interactive components were created using <a href="https://shiny.posit.co">Shiny</a> <span class="citation" data-cites="shiny">(<a href="references.html#ref-shiny" role="doc-biblioref">Chang et al. 2023</a>)</span>. All of the figures were created using the grammar of graphics <span class="citation" data-cites="Wilkinson">(<a href="references.html#ref-Wilkinson" role="doc-biblioref">Wilkinson 2005</a>)</span> framework as implemented by the <a href="https://shiny.posit.co"><code>ggplot2</code></a> package <span class="citation" data-cites="ggplot2">(<a href="references.html#ref-ggplot2" role="doc-biblioref">Wickham 2016</a>)</span>.</p>
 <div class="cell">
-<details open="">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────
  setting  value
@@ -338,6 +358,7 @@ div.csl-indent {
  vctrs         0.6.5   2023-12-01 [1] CRAN (R 4.3.1)
  xfun          0.43    2024-03-25 [1] CRAN (R 4.3.1)
  xtable        1.8-4   2019-04-21 [1] CRAN (R 4.3.0)
+ yaml          2.3.8   2023-12-11 [1] CRAN (R 4.3.1)
 
  [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library
 
@@ -347,11 +368,20 @@ div.csl-indent {
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-quarto" class="csl-entry" role="listitem">
+Allaire, JJ, and Christophe Dervieux. 2024. <em>Quarto: R Interface to ’Quarto’ Markdown Publishing System</em>. <a href="https://CRAN.R-project.org/package=quarto">https://CRAN.R-project.org/package=quarto</a>.
+</div>
 <div id="ref-shiny" class="csl-entry" role="listitem">
 Chang, Winston, Joe Cheng, JJ Allaire, Carson Sievert, Barret Schloerke, Yihui Xie, Jeff Allen, Jonathan McPherson, Alan Dipert, and Barbara Borges. 2023. <em>Shiny: Web Application Framework for r</em>. <a href="https://CRAN.R-project.org/package=shiny">https://CRAN.R-project.org/package=shiny</a>.
 </div>
 <div id="ref-ElementalGraphics" class="csl-entry" role="listitem">
 Helmreich, James, and Robert Pruzek. 2010. <span>“Elemental Graphics for Analysis of Variance Using the r Package <span class="nocase">granova</span>.”</span>
+</div>
+<div id="ref-ggplot2" class="csl-entry" role="listitem">
+Wickham, Hadley. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
+</div>
+<div id="ref-Wilkinson" class="csl-entry" role="listitem">
+Wilkinson, Leland. 2005. <em>The Grammar of Graphics (Statistics and Computing)</em>. Berlin, Heidelberg: Springer-Verlag.
 </div>
 </div>
 </section>
@@ -595,8 +625,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./variance.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Variance</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./descriptives.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

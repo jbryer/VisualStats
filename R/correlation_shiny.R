@@ -194,7 +194,7 @@ correlation_shiny_server <- function(input, output, session) {
 			geom_histogram(bins = 15, alpha = 0.75) +
 			scale_fill_manual('Cross product > 0', values = c('lightblue', 'darkred')) +
 			xlab('Cross Product') +
-			theme_minimal()
+			theme_vs()
 
 	})
 

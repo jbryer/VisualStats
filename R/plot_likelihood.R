@@ -43,6 +43,7 @@ plot_likelihood <- function(x, y, height = 0.4, k = 4, pt = 1,
 		geom_vline(xintercept = x0) +
 		geom_point(data = data.frame(x = x[pt], y = y[pt]), color = '#e31a1c', size = 1.5) +
 		geom_point(data = data.frame(x = segment2$xend, y = y[pt]), color = '#e31a1c', size = 1.5) +
-		geom_path(data = path, aes(x = x, y = y), color = "#33a02c")
+		geom_path(data = path, aes(x = x, y = y), color = "#33a02c") +
+		theme_vs()
 	return(p)
 }

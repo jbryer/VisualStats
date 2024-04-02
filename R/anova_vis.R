@@ -232,10 +232,7 @@ anova_vis <- function(Y,
 		xlab(xlab) +
 		ylab(ylab) +
 		coord_equal() +
-		theme_minimal() +
-		theme(panel.grid.major = element_line(color = 'grey90', size = 0.3),
-			  panel.grid.minor = element_blank(),
-			  legend.position = 'bottom')
+		theme_vs()
 
 	return(p)
 }

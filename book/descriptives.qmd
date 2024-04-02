@@ -30,7 +30,9 @@ $$ s^2 = \frac{\sigma(x_i - \bar{x})^2}{n - 1} $$ {#eq-variance}
 #| warning: false
 #| fig-height: 1.25
 variance_vis(x, plot_deviances_x = 4, plot_deviances = FALSE, plot_population_variance = FALSE) +
-	ylim(c(-1, 5)) + theme(axis.text.y = element_blank())
+	ylim(c(-1, 5)) + theme(axis.text.y = element_blank()) +
+	annotate('text', x = mean(x) + (max(x) - mean(x)) / 2, y = 4,
+			 label = bquote("x - bar(x)"), parse = TRUE, vjust = 1.5, size = 8)
 ```
 
 ```{r}

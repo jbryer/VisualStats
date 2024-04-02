@@ -54,7 +54,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -95,6 +114,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -217,7 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Appendix A — Calculus</h1>
+<h1 class="title"><span id="sec-calculus" class="quarto-section-identifier">Appendix A — Calculus</span></h1>
 </div>
 
 
@@ -232,18 +253,144 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Although we believe calculus is not required prerequisite for statistics, having a basic understanding of the three core concepts from calculus can be helpful when learning statistics. This appendix provides some visualizations and Shiny applications we use to provide a <em>crash course</em> in calculus so students have a basic understanding of limits (useful for the Central Limit Theorem), derivatives (use for the ordinary least squares), and integrals (useful for probability distributions, <em>p</em>-values, and confidence intervals).</p>
-<p>Isaac Newton and Gottfried Wilhelm Leibniz are credited for developing calculus independently of each other in the 17th century. While Newton developed calculus to solve problems in physics, Leibniz developed much of the notation we use today.</p>
-<p>An important result of their work was the <em>fundamental theorem of calculus</em> states that differentiation and integration are inverse operations.</p>
-<section id="limits" class="level2" data-number="A.1">
-<h2 data-number="A.1" class="anchored" data-anchor-id="limits"><span class="header-section-number">A.1</span> Limits</h2>
-</section>
-<section id="derivatives" class="level2" data-number="A.2">
-<h2 data-number="A.2" class="anchored" data-anchor-id="derivatives"><span class="header-section-number">A.2</span> Derivatives</h2>
+<p>Although calculus is not required prerequisite for learning statistics, having a basic understanding of the three core concepts from calculus can be helpful. This appendix provides some visualizations and Shiny applications to provide a <em>crash course</em> in calculus, specifically related to limits (useful for the Central Limit Theorem), derivatives (use for the ordinary least squares), and integrals (useful for probability distributions, <em>p</em>-values, and confidence intervals).</p>
+<p>Isaac Newton and Gottfried Wilhelm Leibniz are credited for developing calculus independently of each other in the 17th century. While Newton developed calculus to solve problems in physics, Leibniz developed much of the notation we use today. Although calculus is now a significant part of mathematics, Newton in particular, developed calculus to solve problems in physics. In particular Newton wanted to understand the relationship between acceleration, velocity, and distance. <a href="#fig-physics">Figure&nbsp;<span>A.1</span></a> depicts acceleration (assuming constant acceleration of 1.0 m/s), velocity, and distance with time on the <em>x</em>-axis. Starting with acceleration, we can see that it is flat. With a constant acceleration of 1.0 m/s, we are stationary at time point zero, but for every second velocity increases by 1.0 m/s such that velocity is 2.0 m/s at time point two, 3.0 m/s at time point three, and etc. Distance is a bit trickier to calculate since velocity is constantly increasing. The distance traveled from time one to two is larger than from time zero to one since velocity has doubled. It turns out that with a linear increase in velocity results in a quadratic increase in distance.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">derivative_plot</span>(<span class="at">fun =</span> normal_fun, <span class="at">x_value =</span> <span class="dv">1</span>, <span class="at">interval =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">time =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.25</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">acceleration =</span> <span class="dv">1</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>velocity <span class="ot">&lt;-</span> df<span class="sc">$</span>time <span class="sc">*</span> df<span class="sc">$</span>acceleration</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>distance <span class="ot">&lt;-</span> df<span class="sc">$</span>time <span class="sc">*</span> df<span class="sc">$</span>velocity <span class="sc">+</span> ((df<span class="sc">$</span>acceleration <span class="sc">*</span> df<span class="sc">$</span>time) <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> time)) <span class="sc">+</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">y =</span> acceleration), <span class="at">color =</span> vs_palette_qual[<span class="dv">1</span>]) <span class="sc">+</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> acceleration), <span class="at">color =</span> vs_palette_qual[<span class="dv">1</span>]) <span class="sc">+</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">label =</span> <span class="st">'Acceleration'</span>, <span class="at">color =</span> vs_palette_qual[<span class="dv">1</span>], </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">x =</span> <span class="dv">5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>acceleration), <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">y =</span> velocity), <span class="at">color =</span> vs_palette_qual[<span class="dv">2</span>]) <span class="sc">+</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> velocity), <span class="at">color =</span> vs_palette_qual[<span class="dv">2</span>]) <span class="sc">+</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">label =</span> <span class="st">'Velocity'</span>, <span class="at">color =</span> vs_palette_qual[<span class="dv">2</span>], </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>              <span class="at">x =</span> <span class="dv">5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>velocity), <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">y =</span> distance), <span class="at">color =</span> vs_palette_qual[<span class="dv">3</span>]) <span class="sc">+</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> distance), <span class="at">color =</span> vs_palette_qual[<span class="dv">3</span>]) <span class="sc">+</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">label =</span> <span class="st">'Distance'</span>, <span class="at">color =</span> vs_palette_qual[<span class="dv">3</span>], </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>              <span class="at">x =</span> <span class="dv">5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>distance), <span class="at">vjust =</span> <span class="dv">0</span>, <span class="at">hjust =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_segment</span>(</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="dv">6</span>, <span class="at">xend =</span> <span class="dv">6</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">yend =</span> <span class="fu">max</span>(df<span class="sc">$</span>distance),</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">"cm"</span>)),</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">linewidth =</span> <span class="dv">2</span>,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> vs_palette_qual[<span class="dv">4</span>]</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">label =</span> <span class="st">'Integrate'</span>,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="dv">6</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>distance) <span class="sc">/</span> <span class="dv">2</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> vs_palette_qual[<span class="dv">4</span>],</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">angle =</span> <span class="dv">90</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_segment</span>(</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="fl">5.5</span>, <span class="at">xend =</span> <span class="fl">5.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>distance), <span class="at">yend =</span> <span class="dv">0</span>,</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">"cm"</span>)),</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">linewidth =</span> <span class="dv">2</span>,</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> vs_palette_qual[<span class="dv">5</span>]</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        <span class="at">label =</span> <span class="st">'Derive'</span>,</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="fl">5.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>distance) <span class="sc">/</span> <span class="dv">2</span>,</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> vs_palette_qual[<span class="dv">5</span>],</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        <span class="at">angle =</span> <span class="dv">90</span>,</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>        <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">'Meters'</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">'Time (seconds)'</span>) <span class="sc">+</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    <span class="co"># xlim(c(0, 6)) +</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">6</span>)) <span class="sc">+</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-physics" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="calculus_files/figure-html/fig-physics-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;A.1: Relationship of acceleration, velocity, and distance.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Calculus provides the tools to define the relationship between these functions. In this particular example letting <em>t</em> stand for time, we have:</p>
+<p><span id="eq-acceleration"><span class="math display">\[f_{acceleration}(t) = 1.0 \tag{A.1}\]</span></span> <span class="math display">\[f_{velocity}(t) = f_{acceleration}(t) * t\]</span> {#eq_velocity} <span id="eq-distance"><span class="math display">\[f_{distance}(t) = f_{velocity}(t) * t + \frac{(f_{acceleration}(t) * t)^2}{2} \tag{A.2}\]</span></span></p>
+<p>To go from <span class="math inline">\(f_{distance}(t)\)</span> to <span class="math inline">\(f_{acceleration}(t)\)</span> you take the derivative, going the other direction you integrate. The <em>fundamental theorem of calculus</em> states that differentiation and integration are inverse operations. This development has had a profound impact on mathematics, calculus, as well as many other fields. In the following sections we will describe in more detail through visualizations the parts of calculus that are most relevant to statistics.</p>
+<section id="limits" class="level2" data-number="A.1">
+<h2 data-number="A.1" class="anchored" data-anchor-id="limits"><span class="header-section-number">A.1</span> Limits</h2>
+<p>Ancient Greek philosopher Zeno of Elea posed a number of paradoxical scenarios. <span class="citation" data-cites="aristotle">Aristotle (<a href="references.html#ref-aristotle" role="doc-biblioref">1929</a>)</span> describe Zeno’s paradox of dichotomy as:</p>
+<blockquote class="blockquote">
+<p>The first asserts the non-existence of motion on the ground that that which is in locomotion must arrive at the half-way stage before it arrives at the goal.</p>
+</blockquote>
+<p>Stated another way, consider standing in front of a wall 1 meter away. You can walk half the distance to get to 0.5 meters away, Then again to arrive at 0.25 meters away. Given this scenario where you can constantly halve your distance to the wall, Zeno’s paradox would state that you would never reach the wall. <a href="#fig-zeno-paradox">Figure&nbsp;<span>A.2</span></a> depicts the first 10 iterations. As we can see very quickly we get very close to zero, though never to zero, such that the lines are indistinguishable from on another. However, we know we do actually reach the wall. In calculus we call this the limit. For Zeno’s paradox of dichotomy, we would say the limit as the number of halving the distance approaches infinity is zero.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">10</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(path)) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    path[i] <span class="ot">&lt;-</span> path[i<span class="dv">-1</span>] <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> path, <span class="at">y =</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">xend =</span> x, <span class="at">yend =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">'Distance'</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">''</span>) <span class="sc">+</span> </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_reverse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-zeno-paradox" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="calculus_files/figure-html/fig-zeno-paradox-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;A.2: Zeno’s paradox of dichotomy.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Consider the <span class="math inline">\(\chi^2\)</span> (chi-squared) distribution with 8 degrees of freedom (<a href="#fig-chisq-distribution-limit">Figure&nbsp;<span>A.3</span></a>). The tail to the right never actually crosses (or touches) the line <em>x</em> = 0. However, from calculus we know that the limit of <span class="math inline">\(\chi^2\)</span> as <em>x</em> approaches infinity is zero.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(<span class="at">fun =</span> dchisq, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">''</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">''</span>) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">50</span>)) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-chisq-distribution-limit" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="calculus_files/figure-html/fig-chisq-distribution-limit-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;A.3: Chi-squared distribution with 8 degrees of freedom.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We write this mathematically as:</p>
+<p><span id="eq-limit"><span class="math display">\[ \lim_{x\to\infty} \chi^2_{df = 8}(x) = 0  \tag{A.3}\]</span></span></p>
+<p>As discussed in the distributions section, a key feature of statistical distributions (e.g.&nbsp;normal, F, t, etc.) is that the area under the curve is one. However the length of the distribution line is infinite (in one direction for one tailed tests, in both directions for two tailed tests), but the area is finite. When this occurs we say that the function converges. With a <span class="math inline">\(\chi^2\)</span> distribution as depicted in <a href="#fig-chisq-distribution-limit">Figure&nbsp;<span>A.3</span></a>, test statistics do not need to be very large before the <em>y</em>-value is smaller than our numeric precision. For example, the <em>y</em>-value for a <span class="math inline">\(\chi^2\)</span> distribution where <em>x</em> = 50 with 8 degrees of freedom <span class="math inline">\(1.8 \times 10^{-8}\)</span>.</p>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dchisq</span>(<span class="dv">50</span>, <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.808326e-08</code></pre>
+</div>
+</div>
+<p>With regard to statistics, understanding the limit is important for the <em>central limit theorem</em> which states that as <em>n</em> (i.e.&nbsp;sample size) increases (approaches infinity), the sampling distribution will approximate the normal distribution. But the limit is also important to understand the concepts of derivatives and integrals, which are presented in the next two sections.</p>
+</section>
+<section id="derivatives" class="level2" data-number="A.2">
+<h2 data-number="A.2" class="anchored" data-anchor-id="derivatives"><span class="header-section-number">A.2</span> Derivatives</h2>
+<p>The derivative of a function describe the instantaneous rate of change at a certain point. Consider the example in <a href="#fig-physics">Figure&nbsp;<span>A.1</span></a>, the derivative for the distance function describes velocity, and the derivative of the velocity function describes acceleration. Visually, the derivative is the slope of the line tangent the desired point.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">derivative_plot</span>(<span class="at">fun =</span> normal_fun, <span class="at">x_value =</span> <span class="dv">1</span>, <span class="at">delta_x =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -257,7 +404,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">derivative_plot</span>(<span class="at">fun =</span> normal_fun, <span class="at">x_value =</span> <span class="dv">1</span>, <span class="at">interval =</span> <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">derivative_plot</span>(<span class="at">fun =</span> normal_fun, <span class="at">x_value =</span> <span class="dv">1</span>, <span class="at">delta_x =</span> <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -268,13 +415,116 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>Values where the <em>first derivative</em> (i.e.&nbsp;slope) is zero provide a way of finding local minumums and maximums.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span>  <span class="fu">expression</span>(x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> x )</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">D</span>(f, <span class="st">"x"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>2 * x - 2 + 1</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">uniroot</span>(<span class="cf">function</span>(x) { <span class="fu">eval</span>(<span class="fu">D</span>(f, <span class="st">"x"</span>))}, <span class="at">lower =</span> <span class="sc">-</span><span class="dv">3</span>, <span class="at">upper =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$root
+[1] 0.5
+
+$f.root
+[1] 8.881784e-16
+
+$iter
+[1] 2
+
+$init.it
+[1] NA
+
+$estim.prec
+[1] 6.103516e-05</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>()) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) { <span class="fu">eval</span>(f) }) <span class="sc">+</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">'blue'</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">'x'</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">'f(x)'</span>) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-parabola" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="calculus_files/figure-html/fig-parabola-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;A.4: Function of x^2 - 2 * x</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span>  <span class="fu">expression</span>(<span class="sc">-</span>x<span class="sc">^</span><span class="dv">3</span> <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>  )</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">D</span>(f, <span class="st">"x"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="sc">-</span>(<span class="dv">3</span> <span class="sc">*</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> (<span class="dv">2</span> <span class="sc">*</span> x)) }</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">uniroot</span>(f1, <span class="at">lower =</span> <span class="sc">-</span><span class="dv">3</span>, <span class="at">upper =</span> <span class="dv">3</span>, <span class="at">tol =</span> <span class="fl">1e-9</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>()) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) { <span class="sc">-</span>x<span class="sc">^</span><span class="dv">3</span> <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> }) <span class="sc">+</span> </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># geom_hline(yintercept = -1, linetype = 2) +</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># geom_point(x = 1, y = -1, size = 3, color = 'blue') +</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.2</span>, <span class="fl">1.2</span>)) <span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">'x'</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">'f(x)'</span>) <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>rss <span class="ot">&lt;-</span> <span class="cf">function</span>(r, <span class="at">x =</span> mtcars<span class="sc">$</span>wt, <span class="at">y =</span> mtcars<span class="sc">$</span>mpg) {</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sapply</span>(r, <span class="at">FUN =</span> <span class="cf">function</span>(r) {</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>            m <span class="ot">&lt;-</span> r <span class="sc">*</span> (<span class="fu">sd</span>(y) <span class="sc">/</span> <span class="fu">sd</span>(x))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>            b <span class="ot">&lt;-</span> <span class="fu">mean</span>(y) <span class="sc">-</span> m <span class="sc">*</span> <span class="fu">mean</span>(x)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>            p <span class="ot">&lt;-</span> m <span class="sc">*</span> x <span class="sc">+</span> b</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>            e <span class="ot">&lt;-</span> y <span class="sc">-</span> p</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>            <span class="fu">sum</span>(e<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>()) <span class="sc">+</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_function</span>(<span class="at">fun =</span> rss, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="calculus_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">optim</span>(<span class="at">par =</span> <span class="dv">0</span>, <span class="at">fn =</span> rss, </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">lower =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">upper =</span> <span class="dv">1</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">method =</span> <span class="st">'L-BFGS-B'</span>)<span class="sc">$</span>par</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.8676594</code></pre>
+</div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(mtcars<span class="sc">$</span>wt, mtcars<span class="sc">$</span>mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.8676594</code></pre>
+</div>
+</div>
 </section>
 <section id="integrals" class="level2" data-number="A.3">
 <h2 data-number="A.3" class="anchored" data-anchor-id="integrals"><span class="header-section-number">A.3</span> Integrals</h2>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integral_plot</span>(<span class="at">fun =</span> normal_fun, <span class="at">xmin =</span> <span class="dv">0</span>, <span class="at">xmax =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integral_plot</span>(<span class="at">fun =</span> normal_fun, <span class="at">xmin =</span> <span class="dv">0</span>, <span class="at">xmax =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -288,7 +538,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integral_plot</span>(<span class="at">fun =</span> normal_fun, <span class="at">xmin =</span> <span class="dv">0</span>, <span class="at">xmax =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integral_plot</span>(<span class="at">fun =</span> normal_fun, <span class="at">xmin =</span> <span class="dv">0</span>, <span class="at">xmax =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -302,7 +552,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integral_plot</span>(<span class="at">fun =</span> normal_fun, <span class="at">xmin =</span> <span class="dv">0</span>, <span class="at">xmax =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integral_plot</span>(<span class="at">fun =</span> normal_fun, <span class="at">xmin =</span> <span class="dv">0</span>, <span class="at">xmax =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -315,6 +565,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-aristotle" class="csl-entry" role="listitem">
+Aristotle. 1929. <em>Physics</em>. Translated by P. H. Wicksteed and F. M. Cornford. New York: G. P. Putnam.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

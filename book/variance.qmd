@@ -1,4 +1,10 @@
-# Variance
+# Variance {#sec-variance}
+
+$$ s^2 = \frac{\sigma(x_i - \bar{x})^2}{n - 1} $$ {#eq-variance}
+
+
+$$ s = \sqrt{s^2} = \sqrt{\frac{\sigma(x_i - \bar{x})^2}{n - 1}} $$ {#eq-standard-deviation}
+
 
 ```{=html}
  <iframe id="example1" src="https://r.bryer.org/shiny/variance/" style="border: none; width: 100%; height: 780px" frameborder="0"></iframe>

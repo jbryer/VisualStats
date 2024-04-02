@@ -73,6 +73,10 @@ with the name of the application):
         shiny::shinyApp(ui = FEATURE_shiny_ui, server = FEATURE_shiny_server, ...)
     }
 
+**Note: Using shinylive to embed Shiny applications currently does not
+work consistently. For now Shiny applications are hosted using Shiny
+server and are embedded using HTML iframes.**
+
 Within the Quarto document where the Shiny application is to be
 embedded, add the following code in a `shinylive-r` code chunk. Note
 that we need to source the R scripts containing the relevant functions.

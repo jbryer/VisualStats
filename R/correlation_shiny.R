@@ -104,7 +104,16 @@ correlation_shiny_ui <- function() {
 			),
 
 			mainPanel(
-				plotOutput("plot", height = '600px', click = "scatter_plot_click")
+				tabsetPanel(
+					tabPanel(
+						'Scatter Plot',
+						plotOutput("plot", height = '600px', click = "scatter_plot_click")
+					),
+					tabPanel(
+						'Histogram',
+						plotOutput('cross_product_histogram', height = '600px')
+					)
+				)
 			)
 		)
 	)
@@ -123,12 +132,16 @@ correlation_shiny_server <- function(input, output, session) {
 	get_data <- reactive({
 		input$resample
 		selected_rows(NULL)
-		mvtnorm::rmvnorm(n = input$n,
-						 mean = c(input$x_mean, input$y_mean),
-						 sigma = matrix(c(input$x_sd^2, input$rho * (input$x_sd * input$y_sd),
-							   			  input$rho * (input$x_sd * input$y_sd), input$y_sd^2), 2, 2)) |>
+		mvtnorm::rmvnorm(
+			n = n,
+			mean = c(mean_x, mean_y),
+			sigma = matrix(c(sd_x^2, rho * (sd_x * sd_y),
+							 rho * (sd_x * sd_y), sd_y^2), 2, 2)) |>
 			as.data.frame() |>
-			dplyr::mutate(cross_products = abs(V1 * V2))
+			dplyr::rename(x = V1, y = V2) |>
+			dplyr::mutate(x_deviation = x - mean(x),
+						  y_deviation = y - mean(y),
+						  cross_product = x_deviation * y_deviation)
 	})
 
 	output$plot <- renderPlot({
@@ -173,6 +186,16 @@ correlation_shiny_server <- function(input, output, session) {
 		}
 
 		return(p)
+	})
+
+	output$cross_product_histogram <- renderPlot({
+		thedata <- get_data()
+		ggplot(thedata, aes(x = cross_product, fill = cross_product > 0)) +
+			geom_histogram(bins = 15, alpha = 0.75) +
+			scale_fill_manual('Cross product > 0', values = c('lightblue', 'darkred')) +
+			xlab('Cross Product') +
+			theme_minimal()
+
 	})
 
 	selected_rows <- reactiveVal(NULL)

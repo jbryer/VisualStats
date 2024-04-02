@@ -55,7 +55,8 @@ integral_plot <- function(fun = normal_fun,
 				  alpha = rect_alpha, color = rect_color, fill = rect_fill) +
 		xlim(c(view_xmin, view_xmax)) +
 		stat_function(fun = fun) +
-		ggtitle(paste0('Aera ≈ ', prettyNum(sum(boxes$area), digits = 3)))
+		ggtitle(paste0('Aera ≈ ', prettyNum(sum(boxes$area), digits = 3))) +
+		theme_minimal()
 	return(p)
 }
 
@@ -95,6 +96,7 @@ derivative_plot <- function(fun = normal_fun,
 		geom_point(aes(x = x_value, y = fun(x_value)), color = 'blue', size = 3) +
 		xlim(c(view_xmin, view_xmax)) +
 		xlab('x') + ylab('y') +
-		ggtitle(paste0('Slope ≈ ', round(segment_slope, digits = 3)))
+		ggtitle(paste0('Slope ≈ ', round(segment_slope, digits = 3))) +
+		theme_minimal()
 	return(p)
 }

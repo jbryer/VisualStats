@@ -1,3 +1,13 @@
+#' Color palette used for visualizations (qualitative)
+#'
+#' @export
+vs_palette_qual <- c('#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf','#999999')
+
+#' Color palette used for visualizations (sequential)
+vs_palette_seq_blues <- c('#f0f9e8','#bae4bc','#7bccc4','#43a2ca','#0868ac')
+vs_palette_seq_purples <- c('#feebe2','#fbb4b9','#f768a1','#c51b8a','#7a0177')
+vs_palette_seq_greens <- c('#ffffcc','#c2e699','#78c679','#31a354','#006837')
+
 #' Visualizations for Statistical Analysis
 #'
 #' @name VisualStats-package

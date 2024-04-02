@@ -3,7 +3,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Correlation
+# Correlation {#sec-correlation}
 
 ```{r correlation-setup, include=FALSE}
 library(VisualStats)
@@ -11,8 +11,10 @@ library(cowplot)
 library(ggplot2)
 ```
 
+Correlation is a measure of the relationship between two variables. The correlation can range from -1 indicating a "perfect" negative relationship to 1 indicating a "perfect" positive relationship. A correlation of 0 indicates no relationship. @fig-correlations depicts scatter plots with various correlations. 
 
-```{r correlations}
+```{r}
+#| label: fig-correlations
 #| code-fold: true
 #| warning: false
 #| fig-height: 1
@@ -37,8 +39,15 @@ plots$nrow <- 1
 do.call(plot_grid, plots)
 ```
 
+For a population, the correlation is defined as the ratio of the covariance to the product of the standard deviations, and is typically denoted using the Greek letter rho ($\rho$), is defined as:
 
-$${ r }_{ xy }=\frac { \frac { \sum _{ i=1 }^{ n }{ \left( { X }_{ i }-\overline { X }  \right) \left( { Y }_{ i }-\overline { Y }  \right)  }  }{ n-1 }  }{ { s }_{ x }{ s }_{ y } }$$
+$$ \rho = \frac{cov(X,Y)}{\sigma_{X} \sigma_{Y}} $$ {#eq-correlation}
+
+The standard deviation ($\sigma$) is equal to the square root of the variance ($\sigma = \sqrt{\frac{\Sigma(x_i - \bar{x})^2}{n - 1}}$) which is covered in detail in @sec-variance. What is new here is the covariance. Like variance, we are interested in deviations from the mean except now in two dimensions. The formula for the covariance is:
+
+$$ cov_{xy} = \frac{\Sigma(x_i - \bar{x})(y_i - \bar{y})}{n - 1} $$ {#eq-covariance}
+
+Let's break down @eq-covariance visually. The following R code generates a data frame with two variables, *x* and *y*, with means of 20 and 40 and standard deviatiosn of 2 and 3, respectively. The population correlation is 0.8 (note that the sample will likely have a slightly different correlation).
 
 
 ```{r}
@@ -50,27 +59,37 @@ sd_y <- 3
 n <- 30
 rho <- 0.8
 set.seed(2112)
-df <- mvtnorm::rmvnorm(n = n,
-					   mean = c(mean_x, mean_y),
-					   sigma = matrix(c(sd_x^2, rho * (sd_x * sd_y),
-					   				 rho * (sd_x * sd_y), sd_y^2), 2, 2)) |>
+df <- mvtnorm::rmvnorm(
+	n = n,
+	mean = c(mean_x, mean_y),
+	sigma = matrix(c(sd_x^2, rho * (sd_x * sd_y),
+					 rho * (sd_x * sd_y), sd_y^2), 2, 2)) |>
 	as.data.frame() |>
-	dplyr::mutate(cross_products = abs(V1 * V2))
+	dplyr::rename(x = V1, y = V2) |>
+	dplyr::mutate(x_deviation = x - mean(x),
+				  y_deviation = y - mean(y),
+				  cross_product = x_deviation * y_deviation)
 ```
+
+
+The numerator of the covariance equation included the product of the deviation from the mean in the *x* direction (i.e. $x_i - \bar{x}$) and the *y* direction (i.e. $y_i - \bar{y}$). @fig-corr-largest-deviation depicts the scatter plot with all `r n` observations, the mean of x and y as dashed lines, and the deviations for one observation represented by blue arrows.
+
 
 ```{r}
 #| label: fig-corr-largest-deviation
 #| fig-cap: Scatter plot showing the deviations for x and y.
 #| code-fold: true
-
+deviation_to_plot <- 23
 regression_vis(df,
 				plot_x_mean = TRUE,
 				plot_y_mean = TRUE,
 				plot_positive_cross_products = FALSE,
 				plot_negative_cross_products = FALSE,
-				plot_x_deviations = df$cross_products == max(df$cross_products),
-				plot_y_deviations = df$cross_products == max(df$cross_products))
+				plot_x_deviations = deviation_to_plot,
+				plot_y_deviations = deviation_to_plot)
 ```
+
+Hence, for each observation (*i*) in our data frame the numerator is summing the area of a rectangle (see @fig-corr-largest-cross-products for the one observation in yellow). When we calculate variances we square the deviation which as a result ensures that all the values being summed are positive. However, for covariance this is not the case. The numbers in @fig-corr-largest-cross-products correspond to the four quadrants of the plot. For points that fall in quadrants 1 and 3, the cross products (i.e. $(x_i - \bar{x})(y_i - \bar{y}$) will be positive. For points that fall in quadrants 2 and 4 however, the cross products will be negative.
 
 ```{r}
 #| label: fig-corr-largest-cross-products
@@ -82,12 +101,17 @@ regression_vis(df,
 				plot_y_mean = TRUE,
 				plot_positive_cross_products = FALSE,
 				plot_negative_cross_products = FALSE,
-				plot_cross_products = df$cross_products == max(df$cross_products),
-				plot_x_deviations = df$cross_products == max(df$cross_products),
-				plot_y_deviations = df$cross_products == max(df$cross_products),
-				cross_product_alpha = 0.5)
+				plot_cross_product = deviation_to_plot,
+				plot_x_deviations = deviation_to_plot,
+				plot_y_deviations = deviation_to_plot,
+				cross_product_alpha = 0.5) +
+	geom_text(label = '1', x = 22.5, y = 44, color = 'blue', size = 16) +
+	geom_text(label = '2', x = 17.5, y = 44, color = 'blue', size = 16) +
+	geom_text(label = '3', x = 17.5, y = 36, color = 'blue', size = 16) +
+	geom_text(label = '4', x = 22.5, y = 36, color = 'blue', size = 16)
 ```
 
+@fig-corr-all-cross-products depicts all the cross products but shades the cross products that are positive in blue and cross products that are negative in red. As a result we can interpret the covariance as the ratio of the area of cross products for points in quadrants 1 and 3 to the area of the cross products for points in quadrants 2 and 4.
 
 ```{r}
 #| label: fig-corr-all-cross-products
@@ -101,10 +125,32 @@ regression_vis(df,
 				plot_negative_cross_products = TRUE)
 ```
 
+We can see this more clearly if we plot a histogram of cross products (see @fig-cross-product-histogram).
+
+```{r}
+#| label: fig-cross-product-histogram
+#| fig-cap: Histogram of cross products.
+#| code-fold: true
+ggplot(df, aes(x = cross_product, fill = cross_product > 0)) +
+	geom_histogram(bins = 15, alpha = 0.75) +
+	scale_fill_manual('Cross product > 0', values = c('lightblue', 'darkred')) +
+	xlab('Cross Product') + 
+	theme_minimal()
+```
+
+The last part of @eq-covariance is the denominator where we average across all of the observations. If we wish to calculate the covariance for a population we divide my *n*, but for sample covariance we divide by *n - 1*. Substuting @eq-covariance into @eq-correlation we get the following:
+
+
+$${ r }_{ xy }=\frac { \frac { \sum _{ i=1 }^{ n }{ \left( { X }_{ i }-\overline { X }  \right) \left( { Y }_{ i }-\overline { Y }  \right)  }  }{ n-1 }  }{ { s }_{ x }{ s }_{ y } }$$ {#eq-correlation-full}
+
+
+The Shiny application allows you to play with all of the features that go into calculating correlation. Clicking on individual points will display the cross product. 
 
 ```{=html}
  <iframe id="example1" src="https://r.bryer.org/shiny/correlation/" style="border: none; width: 100%; height: 780px" frameborder="0"></iframe>
 ```
+
+
 
 
 ::: {.content-visible when-format="pdf"}

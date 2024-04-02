@@ -1,4 +1,4 @@
-# Analysis of Variance (ANOVA)
+# Analysis of Variance (ANOVA) {#sec-anova}
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FALSE,

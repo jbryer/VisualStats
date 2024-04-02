@@ -1,4 +1,4 @@
-# Distributions
+# Distributions {#sec-distributions}
 
 ```{r, echo=FALSE}
 library(VisualStats)

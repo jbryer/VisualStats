@@ -10,3 +10,6 @@ data-raw/
 sticker.R
 book/
 build_shiny/
+shiylive.txt
+README.Rmd
+inst/shiny/BayesBilliards/Bayes An Essay towards solving a Problem in the Doctrine of Chances.pdf

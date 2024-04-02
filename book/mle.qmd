@@ -1,9 +1,9 @@
 ---
-output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Maximum Likelihood Estimation
+
+# Maximum Likelihood Estimation {#sec-mle}
 
 
 ```{r setup, include=FALSE}

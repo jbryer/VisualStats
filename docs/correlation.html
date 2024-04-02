@@ -220,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Correlation</span></h1>
+<h1 class="title"><span id="sec-correlation" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Correlation</span></span></h1>
 </div>
 
 
@@ -235,6 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<p>Correlation is a measure of the relationship between two variables. The correlation can range from -1 indicating a “perfect” negative relationship to 1 indicating a “perfect” positive relationship. A correlation of 0 indicates no relationship. <a href="#fig-correlations">Figure&nbsp;<span>4.1</span></a> depicts scatter plots with various correlations.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -258,15 +259,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(plot_grid, plots)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div id="fig-correlations" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="correlation_files/figure-html/correlations-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Scatterplots representing correlations from -1 to 1.</figcaption>
+<p><img src="correlation_files/figure-html/fig-correlations-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;4.1: Scatterplots representing correlations from -1 to 1.</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><span class="math display">\[{ r }_{ xy }=\frac { \frac { \sum _{ i=1 }^{ n }{ \left( { X }_{ i }-\overline { X }  \right) \left( { Y }_{ i }-\overline { Y }  \right)  }  }{ n-1 }  }{ { s }_{ x }{ s }_{ y } }\]</span></p>
+<p>For a population, the correlation is defined as the ratio of the covariance to the product of the standard deviations, and is typically denoted using the Greek letter rho (<span class="math inline">\(\rho\)</span>), is defined as:</p>
+<p><span id="eq-correlation"><span class="math display">\[ \rho = \frac{cov(X,Y)}{\sigma_{X} \sigma_{Y}}  \tag{4.1}\]</span></span></p>
+<p>The standard deviation (<span class="math inline">\(\sigma\)</span>) is equal to the square root of the variance (<span class="math inline">\(\sigma = \sqrt{\frac{\Sigma(x_i - \bar{x})^2}{n - 1}}\)</span>) which is covered in detail in <a href="variance.html"><span>Chapter&nbsp;2</span></a>. What is new here is the covariance. Like variance, we are interested in deviations from the mean except now in two dimensions. The formula for the covariance is:</p>
+<p><span id="eq-covariance"><span class="math display">\[ cov_{xy} = \frac{\Sigma(x_i - \bar{x})(y_i - \bar{y})}{n - 1}  \tag{4.2}\]</span></span></p>
+<p>Let’s break down <a href="#eq-covariance">Equation&nbsp;<span>4.2</span></a> visually. The following R code generates a data frame with two variables, <em>x</em> and <em>y</em>, with means of 20 and 40 and standard deviatiosn of 2 and 3, respectively. The population correlation is 0.8 (note that the sample will likely have a slightly different correlation).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mean_x <span class="ot">&lt;-</span> <span class="dv">20</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mean_y <span class="ot">&lt;-</span> <span class="dv">40</span></span>
@@ -275,33 +280,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2112</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> mvtnorm<span class="sc">::</span><span class="fu">rmvnorm</span>(<span class="at">n =</span> n,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">mean =</span> <span class="fu">c</span>(mean_x, mean_y),</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sigma =</span> <span class="fu">matrix</span>(<span class="fu">c</span>(sd_x<span class="sc">^</span><span class="dv">2</span>, rho <span class="sc">*</span> (sd_x <span class="sc">*</span> sd_y),</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                                     rho <span class="sc">*</span> (sd_x <span class="sc">*</span> sd_y), sd_y<span class="sc">^</span><span class="dv">2</span>), <span class="dv">2</span>, <span class="dv">2</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cross_products =</span> <span class="fu">abs</span>(V1 <span class="sc">*</span> V2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> mvtnorm<span class="sc">::</span><span class="fu">rmvnorm</span>(</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> n,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">c</span>(mean_x, mean_y),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">sigma =</span> <span class="fu">matrix</span>(<span class="fu">c</span>(sd_x<span class="sc">^</span><span class="dv">2</span>, rho <span class="sc">*</span> (sd_x <span class="sc">*</span> sd_y),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                     rho <span class="sc">*</span> (sd_x <span class="sc">*</span> sd_y), sd_y<span class="sc">^</span><span class="dv">2</span>), <span class="dv">2</span>, <span class="dv">2</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">x =</span> V1, <span class="at">y =</span> V2) <span class="sc">|&gt;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">x_deviation =</span> x <span class="sc">-</span> <span class="fu">mean</span>(x),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y_deviation =</span> y <span class="sc">-</span> <span class="fu">mean</span>(y),</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>                  <span class="at">cross_product =</span> x_deviation <span class="sc">*</span> y_deviation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>The numerator of the covariance equation included the product of the deviation from the mean in the <em>x</em> direction (i.e.&nbsp;<span class="math inline">\(x_i - \bar{x}\)</span>) and the <em>y</em> direction (i.e.&nbsp;<span class="math inline">\(y_i - \bar{y}\)</span>). <a href="#fig-corr-largest-deviation">Figure&nbsp;<span>4.2</span></a> depicts the scatter plot with all 30 observations, the mean of x and y as dashed lines, and the deviations for one observation represented by blue arrows.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">regression_vis</span>(df,</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_x_mean =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_y_mean =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_positive_cross_products =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_negative_cross_products =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_x_deviations =</span> df<span class="sc">$</span>cross_products <span class="sc">==</span> <span class="fu">max</span>(df<span class="sc">$</span>cross_products),</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_y_deviations =</span> df<span class="sc">$</span>cross_products <span class="sc">==</span> <span class="fu">max</span>(df<span class="sc">$</span>cross_products))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>deviation_to_plot <span class="ot">&lt;-</span> <span class="dv">23</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">regression_vis</span>(df,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_x_mean =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_y_mean =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_positive_cross_products =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_negative_cross_products =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_x_deviations =</span> deviation_to_plot,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_y_deviations =</span> deviation_to_plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-corr-largest-deviation" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="correlation_files/figure-html/fig-corr-largest-deviation-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;4.1: Scatter plot showing the deviations for x and y.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;4.2: Scatter plot showing the deviations for x and y.</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p>Hence, for each observation (<em>i</em>) in our data frame the numerator is summing the area of a rectangle (see <a href="#fig-corr-largest-cross-products">Figure&nbsp;<span>4.3</span></a> for the one observation in yellow). When we calculate variances we square the deviation which as a result ensures that all the values being summed are positive. However, for covariance this is not the case. The numbers in <a href="#fig-corr-largest-cross-products">Figure&nbsp;<span>4.3</span></a> correspond to the four quadrants of the plot. For points that fall in quadrants 1 and 3, the cross products (i.e.&nbsp;<span class="math inline">\((x_i - \bar{x})(y_i - \bar{y}\)</span>) will be positive. For points that fall in quadrants 2 and 4 however, the cross products will be negative.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -310,20 +322,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_y_mean =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_positive_cross_products =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_negative_cross_products =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_cross_products =</span> df<span class="sc">$</span>cross_products <span class="sc">==</span> <span class="fu">max</span>(df<span class="sc">$</span>cross_products),</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_x_deviations =</span> df<span class="sc">$</span>cross_products <span class="sc">==</span> <span class="fu">max</span>(df<span class="sc">$</span>cross_products),</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_y_deviations =</span> df<span class="sc">$</span>cross_products <span class="sc">==</span> <span class="fu">max</span>(df<span class="sc">$</span>cross_products),</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">cross_product_alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_cross_product =</span> deviation_to_plot,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_x_deviations =</span> deviation_to_plot,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">plot_y_deviations =</span> deviation_to_plot,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">cross_product_alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">label =</span> <span class="st">'1'</span>, <span class="at">x =</span> <span class="fl">22.5</span>, <span class="at">y =</span> <span class="dv">44</span>, <span class="at">color =</span> <span class="st">'blue'</span>, <span class="at">size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">label =</span> <span class="st">'2'</span>, <span class="at">x =</span> <span class="fl">17.5</span>, <span class="at">y =</span> <span class="dv">44</span>, <span class="at">color =</span> <span class="st">'blue'</span>, <span class="at">size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">label =</span> <span class="st">'3'</span>, <span class="at">x =</span> <span class="fl">17.5</span>, <span class="at">y =</span> <span class="dv">36</span>, <span class="at">color =</span> <span class="st">'blue'</span>, <span class="at">size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">label =</span> <span class="st">'4'</span>, <span class="at">x =</span> <span class="fl">22.5</span>, <span class="at">y =</span> <span class="dv">36</span>, <span class="at">color =</span> <span class="st">'blue'</span>, <span class="at">size =</span> <span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-corr-largest-cross-products" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="correlation_files/figure-html/fig-corr-largest-cross-products-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;4.2: Scatter plot showing the deviations for x and y with the cross product represented as the area of the yellow rectangle.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;4.3: Scatter plot showing the deviations for x and y with the cross product represented as the area of the yellow rectangle.</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p><a href="#fig-corr-all-cross-products">Figure&nbsp;<span>4.4</span></a> depicts all the cross products but shades the cross products that are positive in blue and cross products that are negative in red. As a result we can interpret the covariance as the ratio of the area of cross products for points in quadrants 1 and 3 to the area of the cross products for points in quadrants 2 and 4.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -337,11 +354,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="fig-corr-all-cross-products" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="correlation_files/figure-html/fig-corr-all-cross-products-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;4.3: Scatter plot with all cross products. Positive and negative cross products are represented by blue and red rectangles, respectively.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;4.4: Scatter plot with all cross products. Positive and negative cross products are represented by blue and red rectangles, respectively.</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p>We can see this more clearly if we plot a histogram of cross products (see <a href="#fig-cross-product-histogram">Figure&nbsp;<span>4.5</span></a>).</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> cross_product, <span class="at">fill =</span> cross_product <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">15</span>, <span class="at">alpha =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="st">'Cross product &gt; 0'</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">'lightblue'</span>, <span class="st">'darkred'</span>)) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">'Cross Product'</span>) <span class="sc">+</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-cross-product-histogram" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="correlation_files/figure-html/fig-cross-product-histogram-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;4.5: Histogram of cross products.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The last part of <a href="#eq-covariance">Equation&nbsp;<span>4.2</span></a> is the denominator where we average across all of the observations. If we wish to calculate the covariance for a population we divide my <em>n</em>, but for sample covariance we divide by <em>n - 1</em>. Substuting <a href="#eq-covariance">Equation&nbsp;<span>4.2</span></a> into <a href="#eq-correlation">Equation&nbsp;<span>4.1</span></a> we get the following:</p>
+<p><span id="eq-correlation-full"><span class="math display">\[{ r }_{ xy }=\frac { \frac { \sum _{ i=1 }^{ n }{ \left( { X }_{ i }-\overline { X }  \right) \left( { Y }_{ i }-\overline { Y }  \right)  }  }{ n-1 }  }{ { s }_{ x }{ s }_{ y } } \tag{4.3}\]</span></span></p>
+<p>The Shiny application allows you to play with all of the features that go into calculating correlation. Clicking on individual points will display the cross product.</p>
  <iframe id="example1" src="https://r.bryer.org/shiny/correlation/" style="border: none; width: 100%; height: 780px" frameborder="0"></iframe>
 <p>This Shiny application can be run locally using the <code>VisualStats::correlation_shiny()</code> function.</p>
 

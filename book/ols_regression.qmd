@@ -1,0 +1,59 @@
+---
+editor_options:
+  chunk_output_type: console
+---
+
+```{r regression-setup, include=FALSE}
+library(VisualStats)
+library(ggplot2)
+library(mvtnorm)
+```
+
+# OLS Regression {#sec-regression}
+
+```{r}
+#| code-fold: false
+mean_x <- 20
+mean_y <- 40
+sd_x <- 2
+sd_y <- 3
+n <- 30
+rho <- 0.8
+set.seed(2112)
+df <- mvtnorm::rmvnorm(n = n,
+					   mean = c(mean_x, mean_y),
+					   sigma = matrix(c(sd_x^2, rho * (sd_x * sd_y),
+					   				 rho * (sd_x * sd_y), sd_y^2), 2, 2)) |>
+	as.data.frame() |>
+	dplyr::mutate(cross_products = abs(V1 * V2))
+lm_out <- lm(V1 ~ V2, data = df)
+df$prediction <- predict(lm_out)
+df$residual <- resid(lm_out)
+```
+
+```{r regression1}
+#| fig.cap: Scatter plot with residual.
+#| code-fold: true
+
+regression_vis(df, plot_regression = TRUE, plot_residuals = df$residual == max(df$residual))
+```
+
+
+```{r regression2}
+#| fig.cap: Scatter plot with residual (red line) and squared residual (green squares).
+#| code-fold: true
+
+regression_vis(df, plot_regression = TRUE,
+			   plot_residuals = df$residual == max(df$residual),
+			   plot_residuals_squared = df$residual == max(df$residual))
+```
+
+
+```{r regression3}
+#| fig.cap: Scatter plot with all residuals (red line) and squared residuals (green squares).
+#| code-fold: true
+
+regression_vis(df, plot_regression = TRUE,
+			   plot_residuals = TRUE,
+			   plot_residuals_squared = TRUE)
+```

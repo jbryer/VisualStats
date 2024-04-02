@@ -1,4 +1,15 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Descriptive Statistics
+
+```{r, include=FALSE}
+library(VisualStats)
+library(ggplot2)
+```
+
 
 # Mean versus median
 
@@ -6,7 +17,60 @@
 
 ## Variance {#sec-variance}
 
+```{r}
+x <- c(97.88, 107.91, 88.26, 115.21, 87.38)
+```
+
 $$ s^2 = \frac{\sigma(x_i - \bar{x})^2}{n - 1} $$ {#eq-variance}
+
+```{r}
+#| label: fig-variance1
+#| fig-cap: Deviation for the largest value.
+#| code-fold: true
+#| warning: false
+#| fig-height: 1.25
+variance_vis(x, plot_deviances_x = 4, plot_deviances = FALSE, plot_population_variance = FALSE) +
+	ylim(c(-1, 5)) + theme(axis.text.y = element_blank())
+```
+
+```{r}
+#| label: fig-variance2
+#| fig-cap: Squared deviation for the largest value.
+#| code-fold: true
+#| warning: false
+#| fig-height: 3
+variance_vis(x, plot_deviances_x = 4, 
+			 plot_deviances = 4, 
+			 plot_population_variance = FALSE) +
+	ylim(c(0, 20))
+```
+
+```{r}
+#| label: fig-variance3
+#| fig-cap: Squared deviation for all observations.
+#| code-fold: true
+#| warning: false
+#| fig-height: 3
+variance_vis(x, 
+			 plot_deviances = TRUE, 
+			 plot_population_variance = FALSE) +
+	ylim(c(0, 20))
+```
+
+
+```{r}
+#| label: fig-variance4
+#| fig-cap: Squared deviation for all observations along with population and sample variances.
+#| code-fold: true
+#| warning: false
+#| fig-height: 5
+variance_vis(x, 
+			 plot_deviances = TRUE, 
+			 plot_population_variance = TRUE,
+			 plot_sample_variance = TRUE) + 
+	ylim(c(0,35))
+```
+
 
 
 $$ s = \sqrt{s^2} = \sqrt{\frac{\sigma(x_i - \bar{x})^2}{n - 1}} $$ {#eq-standard-deviation}

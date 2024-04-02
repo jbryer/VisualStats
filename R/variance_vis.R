@@ -141,6 +141,15 @@ variance_vis <- function(x,
 		)
 	}
 
+	if(plot_sample_sd) {
+		y_pos <- get_y_position(population_variance)
+		p <- p + geom_errorbarh(aes(xmin = mean_x - sample_variance / 2,
+									xmax = mean_x + sample_variance / 2,
+									y = mean(y_pos)),
+								color = sample_sd_col,
+								size = sd_size)
+	}
+
 	if(plot_population_sd) {
 		y_pos <- get_y_position(population_variance)
 		p <- p + geom_errorbarh(aes(xmin = mean_x - population_variance / 2,

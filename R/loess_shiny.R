@@ -11,7 +11,7 @@ loess_shiny <- function(...) {
 #' @export
 #' @importFrom shinyWidgets chooseSliderSkin
 loess_shiny_ui <- function() {
-	span_range <- c(0.05, 1)
+	span_range <- c(0.05, 10)
 	fluidPage(
 		sidebarLayout(
 			sidebarPanel(

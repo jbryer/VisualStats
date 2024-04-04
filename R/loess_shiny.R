@@ -30,7 +30,7 @@ loess_shiny_ui <- function() {
 							 min = span_range[1],
 							 max = span_range[2],
 							 step = .05,
-							 value = .3),
+							 value = 0.75),
 				checkboxInput('draw_loess', label = 'Draw Loess fit (best used with animation on the slider)', value = FALSE),
 				checkboxInput('show_loess', label = 'Show Full Loess fit', value = FALSE)
 			),
@@ -55,12 +55,12 @@ loess_shiny_server <- function(input, output, session) {
 		req(input$dataset)
 		df <- NULL
 		if(input$dataset == 'cubic') {
-			df <- tibble(
+			df <- tibble::tibble(
 				x = seq(-1, 1, by = 0.01),
 				y = x^3 + rnorm(length(x), mean = 0, sd = 0.05) - x
 			)
 		} else if(input$dataset == 'quadratic') {
-			df <- tibble(
+			df <- tibble::tibble(
 				x = seq(-1, 1, by = 0.01),
 				y = -x^2 + rnorm(length(x), mean = 0, sd = 0.1) - x
 			)
@@ -113,6 +113,7 @@ loess_shiny_server <- function(input, output, session) {
 				  degree = input$degree,
 				  draw_loess = input$draw_loess,
 				  show_loess = input$show_loess,
-				  center = input$center)
+				  center = input$center,
+				  span = input$span)
 	})
 }

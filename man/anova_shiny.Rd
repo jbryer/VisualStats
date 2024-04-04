@@ -9,6 +9,9 @@ anova_shiny(...)
 \arguments{
 \item{...}{other parameters passed to \code{\link[shiny:shinyApp]{shiny::shinyApp()}}}
 }
+\value{
+results of shinyApp
+}
 \description{
 Run the Shiny server for visualizing ANOVA
 }

@@ -7,7 +7,11 @@
 normal_fun(x, mean = 0, sd = 1)
 }
 \arguments{
-\item{x}{x value}
+\item{x}{x value.}
+
+\item{mean}{the mean.}
+
+\item{sd}{the standard deviation.}
 }
 \value{
 y value for the given x.

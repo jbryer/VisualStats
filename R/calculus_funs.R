@@ -18,7 +18,9 @@ riemann <- function(fun, min, max, n = 2, ...) {
 }
 
 #' Normal distribution function
-#' @param x x value
+#' @param x x value.
+#' @param mean the mean.
+#' @param sd the standard deviation.
 #' @return y value for the given x.
 #' @export
 normal_fun <- function(x, mean = 0, sd = 1) {
@@ -30,6 +32,8 @@ normal_fun <- function(x, mean = 0, sd = 1) {
 #' @param fun function used to calculate Riemann sums.
 #' @param min minimum x-value.
 #' @param max maximum x-value.
+#' @param view_xmin the minimum x-value to view.
+#' @param view_xmax the maximum x-value to view.
 #' @param n number of rectangles used to estimate Riemann sum.
 #' @param view_xmin minimum x-value for the plot view.
 #' @param view_xmax maximum x-value for the plot view.

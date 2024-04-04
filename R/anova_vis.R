@@ -8,8 +8,29 @@
 #' @return a ggplot2 expression.
 #' @param Y the dependent variable.
 #' @param group the independent, or grouping, variable.
-#' @param box_width the width of the box express as a percentage of the width of
-#'        the x-axis.
+#' @param plot_datapoints whether to plot the individual observations.
+#' @param plot_group_means whether to plot the group means.
+#' @param plot_boxplot whether to plot the box plots.
+#' @param plot_group_variances whether to plot the group variances.
+#' @param plot_group_sd whether to plot the group standard deviations.
+#' @param plot_ms_within whether to plot the mean square within.
+#' @param plot_ms_between whether to plot the mean square between.
+#' @param plot_between_group_variances whether to plot the between group variances.
+#' @param plot_unit_line whether to plot the unit line (i.e. y = x).
+#' @param plot_grand_mean whether to plot the grand mean.
+#' @param plot_sd_line whether to plot the standard deviation.
+#' @param plot_pooled_sd whether to plot the pooled standard deviation.
+#' @param xlab label for the x-axis.
+#' @param ylab label for the y-axis.
+#' @param grand_mean_col color for the grand mean.
+#' @param sd_line_col color for the standard deviation line.
+#' @param pooled_sd_col color for the pooled standard deviation.
+#' @param ms_within_col color for the mean square within.
+#' @param ms_between_col color for the mean square between.
+#' @param box_width width of the box express as a percentage of the width of the x-axis.
+#' @param box_color color of the box plots.
+#' @param plot_group_labels whether to plot the group labels on the figure.
+#' @param ... currently unused.
 #' @examples
 #' data(hand_washing)
 #' anova_vis(hand_washing$Bacterial_Counts, hand_washing$Method)

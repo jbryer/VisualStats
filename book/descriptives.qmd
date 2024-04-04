@@ -21,7 +21,7 @@ library(ggplot2)
 x <- c(97.88, 107.91, 88.26, 115.21, 87.38)
 ```
 
-$$ s^2 = \frac{\sigma(x_i - \bar{x})^2}{n - 1} $$ {#eq-variance}
+$$ s^2 = \frac{\Sigma(x_i - \bar{x})^2}{n - 1} $$ {#eq-variance}
 
 ```{r}
 #| label: fig-variance1

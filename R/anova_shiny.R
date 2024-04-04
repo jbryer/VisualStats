@@ -1,6 +1,7 @@
 #' Run the Shiny server for visualizing ANOVA
 #'
 #' @param ... other parameters passed to [shiny::shinyApp()]
+#' @return results of shinyApp
 #' @export
 anova_shiny <- function(...) {
 	shiny::shinyApp(ui = anova_shiny_ui,

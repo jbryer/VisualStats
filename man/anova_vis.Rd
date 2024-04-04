@@ -37,8 +37,51 @@ anova_vis(
 
 \item{group}{the independent, or grouping, variable.}
 
-\item{box_width}{the width of the box express as a percentage of the width of
-the x-axis.}
+\item{plot_datapoints}{whether to plot the individual observations.}
+
+\item{plot_group_means}{whether to plot the group means.}
+
+\item{plot_boxplot}{whether to plot the box plots.}
+
+\item{plot_group_variances}{whether to plot the group variances.}
+
+\item{plot_group_sd}{whether to plot the group standard deviations.}
+
+\item{plot_ms_within}{whether to plot the mean square within.}
+
+\item{plot_ms_between}{whether to plot the mean square between.}
+
+\item{plot_between_group_variances}{whether to plot the between group variances.}
+
+\item{plot_unit_line}{whether to plot the unit line (i.e. y = x).}
+
+\item{plot_grand_mean}{whether to plot the grand mean.}
+
+\item{plot_sd_line}{whether to plot the standard deviation.}
+
+\item{plot_pooled_sd}{whether to plot the pooled standard deviation.}
+
+\item{xlab}{label for the x-axis.}
+
+\item{ylab}{label for the y-axis.}
+
+\item{grand_mean_col}{color for the grand mean.}
+
+\item{sd_line_col}{color for the standard deviation line.}
+
+\item{pooled_sd_col}{color for the pooled standard deviation.}
+
+\item{ms_within_col}{color for the mean square within.}
+
+\item{ms_between_col}{color for the mean square between.}
+
+\item{box_width}{width of the box express as a percentage of the width of the x-axis.}
+
+\item{box_color}{color of the box plots.}
+
+\item{plot_group_labels}{whether to plot the group labels on the figure.}
+
+\item{...}{currently unused.}
 }
 \value{
 a ggplot2 expression.

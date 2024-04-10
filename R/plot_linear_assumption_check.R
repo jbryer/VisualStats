@@ -97,7 +97,7 @@ plot_linear_assumption_check <- function(glm_out,
 	breaks <- cut(predicted_prob, breaks = q, include.lowest = TRUE)
 	tab <- cbind(
 		describe_by(Y, group = breaks, mat = TRUE, skew = FALSE)[,c('group1', 'mean', 'se')],
-		x_pos = describe_by(predicted_prob, group = breaks, mat = TRUE)[,'median']
+		x_pos = describe_by(predicted_prob, group = breaks, mat = TRUE)[,'median',drop=TRUE]
 	)
 
 	tab$ymin <- apply(tab[,c('mean', 'se')], 1, FUN = function(x) { max(x['mean'] - 1.96 * x['se'], 0) })
@@ -108,7 +108,7 @@ plot_linear_assumption_check <- function(glm_out,
 		   aes(x = predicted_prob, y = Y)) +
 		geom_vline(xintercept = q, linetype = 2, alpha = 0.3) +
 		geom_jitter(alpha = 0.4, width = 0, height = 0.05) +
-		geom_segment(data = tab, aes(x = x_pos, xend = x_pos, y = ymin, yend = ymax, color = color), size = 4) +
+		geom_segment(data = tab, aes(x = x_pos, xend = x_pos, y = ymin, yend = ymax, color = color), linewidth = 4) +
 		geom_point(data = tab, aes(x = x_pos, y = mean), color = 'white', size = 2) +
 		geom_abline(slope = 1, intercept = 0, alpha = 0.3) +
 		scale_color_manual(values = c('#e41a1c', '#377eb8'),
@@ -160,6 +160,10 @@ plot_linear_assumption_check <- function(glm_out,
 		return(p1)
 	}
 
+	# cowplot::plot_grid(
+	# 	p1 + theme_vs(),
+	# 	p2 + theme_vs(),
+	# 	nrow = 1)
 	egg::ggarrange(p1 + theme_vs(),
 				   p2 + theme_vs(),
 				   nrow = 1,

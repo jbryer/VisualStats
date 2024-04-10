@@ -24,6 +24,9 @@
 #' @importFrom rlang sym
 #' @importFrom dplyr group_by summarize n ungroup relocate mutate
 #' @export
+#' @examples
+#' data(mtcars)
+#' describe_by(mtcars$mpg, group = mtcars$cyl)
 describe_by <- function(x,
 						group = NULL,
 						type = 3,
@@ -38,7 +41,7 @@ describe_by <- function(x,
 		for(i in seq_len(n_groups)) {
 			df[,paste0('group', i)] <- group[[i]]
 		}
-	} else if(is.vector(group)) {
+	} else if(is.vector(group) | is.factor(group)) {
 		df$group1 <- group
 		n_groups <- 1
 	} else if(!is.null(group)) {

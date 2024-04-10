@@ -23,6 +23,15 @@ get_numeric_vars <- function(glm_out) {
 #'        \code{widths = c(1, 0)}.
 #' @return a ggplot2 expression.
 #' @export
+#' @examples
+#' study <- data.frame(
+#'     Hours=c(0.50,0.75,1.00,1.25,1.50,1.75,1.75,2.00,2.25,2.50,2.75,3.00,
+#' 		       3.25,3.50,4.00,4.25,4.50,4.75,5.00,5.50),
+#'     Pass=c(0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1)
+#' )
+#' lr.out <- glm(Pass ~ Hours, data = study,
+#' 			  family = binomial(link='logit'))
+#' plot_linear_assumption_check(glm_out = lr.out, n_groups = 5)
 plot_linear_assumption_check <- function(glm_out,
 										 n_groups,
 										 vars = get_numeric_vars(glm_out),

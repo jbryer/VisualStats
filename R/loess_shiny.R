@@ -46,7 +46,7 @@ loess_shiny_ui <- function() {
 #' @return a Shiny UI object.
 #' @export
 loess_shiny_server <- function(input, output, session) {
-	span_range <- c(0.05, 1)
+	span_range <- c(0.05, 10)
 	data('faithful', package = 'datasets')
 
 	# Returns the data.frame. The first column will be plotted on the x-axis,

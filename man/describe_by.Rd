@@ -39,3 +39,7 @@ are problematic for deploying Shiny applications using \code{shinylive}. Since t
 package only uses the \code{describeBy} function from the \code{psych} package, we
 re-implemented it in order to remove the dependency on the \code{psych} package.
 }
+\examples{
+data(mtcars)
+describe_by(mtcars$mpg, group = mtcars$cyl)
+}

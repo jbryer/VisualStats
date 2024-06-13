@@ -3,7 +3,7 @@ Version: 0.2.0
 Imports: car, cowplot, dplyr, egg, ggplot2, knitr, latex2exp, magrittr,
         markdown, psych, reshape2, rlang, gganimate, ggbeeswarm, shiny,
         magick, mvtnorm, shinyWidgets, tidyr, tibble, stats
-Suggests: DT, ggforce, vdiffr
+Suggests: DT, shinylive, ggforce, vdiffr
 License: GPL (>= 3)
-MD5sum: 894deea92b6fe49ceb2a09ebfdaee66c
+MD5sum: 7f532dd4147b2f10a61d4d305d23bfe1
 NeedsCompilation: no

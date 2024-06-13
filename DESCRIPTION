@@ -39,6 +39,7 @@ Imports:
     stats
 Suggests: 
     DT,
+    shinylive,
     ggforce,
     vdiffr
 VignetteBuilder: 

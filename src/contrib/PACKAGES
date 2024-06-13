@@ -6,5 +6,5 @@ Imports: car, cowplot, dplyr, DT, egg, gganimate, ggbeeswarm, ggforce,
         tidyr, transformr
 Suggests: testthat (>= 3.0.0), vdiffr
 License: GPL (>= 3)
-MD5sum: d0fa82ce7e499bc0f2545351c4d08072
+MD5sum: 1b28248449ff85bcd69651dfae8f767e
 NeedsCompilation: no

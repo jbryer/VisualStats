@@ -1,0 +1,1 @@
+[{"name":"app.R","content":"library(VisualStats)\nshinyApp(ui = r_squared_shiny_ui, server = r_squared_shiny_server)\n","type":"text"}]

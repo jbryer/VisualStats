@@ -23,7 +23,41 @@ r_squared_vis(
 \item{df}{data.frame with the data to plot.}
 
 \item{formu}{formula for the regression.}
+
+\item{x_lab}{label for the x-axis.}
+
+\item{y_lab}{label for the y-axis.}
+
+\item{plot_total_variance}{plot a square representing the total variance in the dependent variable.}
+
+\item{plot_regression_variance}{plot a square representing the regression variances.}
+
+\item{plot_error_variance}{plot a square representing the error/residual variance.}
+
+\item{plot_unit_line}{plot the unit line (i.e. y = x).}
+
+\item{plot_points}{plot the data points.}
+
+\item{plot_means}{plot horizontal and vertical lines for the means.}
+
+\item{plot_residuals}{plot vertical lines representing the residuals.}
+
+\item{plot_residuals_squared}{plot squars representing the squared residuals.}
+}
+\value{
+a ggplot2 expression.
 }
 \description{
 Regression Sum of Squared Visualization
+}
+\examples{
+df <- VisualStats::simulate(n = 100, r_squared = .5)
+formu <- y ~ x1 + x2
+lm(formu, df) |> summary()
+VisualStats::r_squared_vis(df, formu,
+						   plot_total_variance = TRUE,
+						   plot_error_variance = FALSE,
+						   plot_regression_variance = TRUE,
+						   plot_residuals_squared = FALSE,
+						   plot_residuals = FALSE)
 }

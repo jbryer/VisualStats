@@ -41,7 +41,7 @@ theme_vs <- function() {
 #' @import magick
 #' @import cowplot
 #' @import egg
-#' @importFrom shiny runApp shinyApp
+#' @import shiny
 #' @importFrom ggbeeswarm geom_beeswarm
 #' @importFrom psych describe describeBy
 #' @importFrom DT dataTableOutput renderDataTable

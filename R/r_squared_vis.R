@@ -2,8 +2,29 @@
 #'
 #' @param df data.frame with the data to plot.
 #' @param formu formula for the regression.
+#' @param x_lab label for the x-axis.
+#' @param y_lab label for the y-axis.
+#' @param plot_total_variance plot a square representing the total variance in the dependent variable.
+#' @param plot_regression_variance plot a square representing the regression variances.
+#' @param plot_error_variance plot a square representing the error/residual variance.
+#' @param plot_unit_line plot the unit line (i.e. y = x).
+#' @param plot_points plot the data points.
+#' @param plot_means plot horizontal and vertical lines for the means.
+#' @param plot_residuals plot vertical lines representing the residuals.
+#' @param plot_residuals_squared plot squars representing the squared residuals.
+#' @return a ggplot2 expression.
 #' @export
 #' @importFrom latex2exp TeX
+#' @examples
+#' df <- VisualStats::simulate(n = 100, r_squared = .5)
+#' formu <- y ~ x1 + x2
+#' lm(formu, df) |> summary()
+#' VisualStats::r_squared_vis(df, formu,
+#' 						   plot_total_variance = TRUE,
+#' 						   plot_error_variance = FALSE,
+#' 						   plot_regression_variance = TRUE,
+#' 						   plot_residuals_squared = FALSE,
+#' 						   plot_residuals = FALSE)
 r_squared_vis <- function(df, formu,
 							  x_lab = 'Observed Value',
 							  y_lab = 'Predicted Value',
@@ -112,6 +133,17 @@ r_squared_vis <- function(df, formu,
 
 #' Tile plot
 #'
+#' This is an internal function.
+#'
+#' @param p a ggplot2 expression.
+#' @param xmin x coordinate for the lower left corner.
+#' @param ymin y coordinate for the lower left corner.
+#' @param xmax x coordinate for the upper right corner.
+#' @param ymax y coordinate for the upper right corner.
+#' @param rev if TRUE drawing starts from the upper right.
+#' @param color color of the perimeter of the boxes.
+#' @param fill the color used to for the fill if length(percent) == 1.
+#' @param alpha the transparency for the fill color(s).
 plot_tiles <- function(p, percent, xmin, ymin, xmax, ymax, rev = FALSE,
 					   color = 'black', fill = '#F5C710', alpha = 0.5) {
 	if(any(percent > 1)) {

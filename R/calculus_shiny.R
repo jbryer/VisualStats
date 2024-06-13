@@ -4,8 +4,7 @@ default_fun = c('Normal' = '1 / (sqrt(2 * pi)) * exp(1)^(-1/2 * (x)^2)',
 #' Shiny UI
 #' @return a Shiny UI object.
 #' @export
-calculus_shiny_ui <- function(
-) {
+calculus_shiny_ui <- function() {
 	# Shiny UI code here. Basic siderbar panel provided
 	fluidPage(
 		sidebarLayout(

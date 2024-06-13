@@ -173,7 +173,7 @@ plot_linear_assumption_check <- function(glm_out,
 if(FALSE) { # Testing
 	library(ggplot2)
 
-	data(mtcars)
+	data('mtcars', envir = environment())
 	mtcars_glm_out <- glm(formula = vs ~ wt + disp, data = mtcars, family = binomial(link='logit'))
 	summary(mtcars_glm_out)
 	plot_linear_assumption_check(mtcars_glm_out)
@@ -189,7 +189,7 @@ if(FALSE) { # Testing
 
 	# This example is from OpenIntro, 4th edition beginning on page 371
 	library(openintro)
-	data(resume)
+	data('resume', envir = environment())
 	glm_out1 <- glm(received_callback ~ job_city + college_degree + years_experience +
 				          honors + military + has_email_address + race + gender + job_ad_id,
 				   data = resume,

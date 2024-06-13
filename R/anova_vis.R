@@ -261,7 +261,7 @@ anova_vis <- function(Y,
 if(FALSE) { #TODO: move to testthat
 	library(VisualStats)
 	library(tidyverse)
-	data(hand_washing)
+	data('hand_washing', envir = environment())
 	anova_vis(Y = hand_washing$Bacterial_Counts,
 			  group = hand_washing$Method,
 			  plot_boxplot = FALSE,
@@ -277,7 +277,7 @@ if(FALSE) { #TODO: move to testthat
 			  ylab = 'Bacterial Count'
 	)
 
-	data(iris)
+	data('iris', envir = environment())
 	anova_vis(Y = iris$Sepal.Length,
 			  group = iris$Species,
 			  plot_boxplot = FALSE,
@@ -292,7 +292,7 @@ if(FALSE) { #TODO: move to testthat
 			  plot_group_labels = FALSE,
 			  ylab = 'Sepal Length')
 
-	data(penguins, package = 'palmerpenguins')
+	data('penguins', package = 'palmerpenguins', envir = environment())
 	penguins <- penguins[complete.cases(penguins),]
 	set.seed(2112)
 	penguins <- penguins[sample(nrow(penguins), size = .1 * nrow(penguins)),]

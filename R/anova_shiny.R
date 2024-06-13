@@ -106,26 +106,26 @@ anova_shiny_server <- function(input, output, session) {
 							 )))
 		} else if (input$dataset == 'handwashing') {
 			if(!exists('hand_washing')) {
-				data("hand_washing", package = 'VisualStats')
+				data("hand_washing", package = 'VisualStats', envir = environment())
 			}
 			df <- data.frame(
 				Group = hand_washing$Method,
 				Value = as.integer(hand_washing$Bacterial_Counts)
 			)
 		} else if (input$dataset == 'anorexia') {
-			data(anorexia, package = 'MASS')
+			data('anorexia', package = 'MASS', envir = environment())
 			df <- data.frame(Group = anorexia$Treat,
 							 Value = anorexia$Postwt - anorexia$Prewt)
 		} else if (input$dataset == 'npk') {
-			data(npk, package = 'datasets')
+			data('npk', package = 'datasets', envir = environment())
 			df <- data.frame(Group = npk$block,
 							 Value = npk$yield)
 		} else if(input$dataset == 'iris') {
-			data(iris, package = 'datasets')
+			data('iris', package = 'datasets', envir = environment())
 			df <- data.frame(Group = iris$Species,
 							 Value = iris$Sepal.Length)
 		} else if(input$dataset == 'penguins') {
-			data(penguins, package = 'palmerpenguins')
+			data('penguins', package = 'palmerpenguins', envir = environment())
 			df <- data.frame(Group = penguins$species,
 							 Value = penguins$bill_length_mm)
 			df <- df[complete.cases(df),]

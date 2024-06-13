@@ -93,7 +93,7 @@ r_squared_shiny_server <- function(input, output, session) {
 			req(input$r_squared)
 			df <- VisualStats::simulate(n = input$n, r_squared = input$r_squared)
 		} else if(input$dataset == 'mtcars') {
-			data(mtcars)
+			data('mtcars', envir = environment())
 			df <- mtcars
 		}
 		return(df)

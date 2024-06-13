@@ -47,7 +47,7 @@ loess_shiny_ui <- function() {
 #' @export
 loess_shiny_server <- function(input, output, session) {
 	span_range <- c(0.05, 10)
-	data('faithful', package = 'datasets')
+	data('faithful', package = 'datasets', envir = environment())
 
 	# Returns the data.frame. The first column will be plotted on the x-axis,
 	# second on the y-axis

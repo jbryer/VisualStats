@@ -96,7 +96,7 @@ mle_shiny_server <- function(input, output, session) {
 	# Can use a different data set if desired
 	if(!exists('thedata')) {
 		message('No data specified, using mtcars...')
-		data(mtcars, envir = environment())
+		data('mtcars', envir = environment())
 		thedata <- mtcars
 		default_y <- 'mpg' # Default variable selected for the dependent variable
 		default_x <- 'wt'  # Default variable selected for the independent variable

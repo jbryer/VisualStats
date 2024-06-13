@@ -2,6 +2,7 @@ out_dir <- '_site/shiny/'
 base_dir <- 'inst/shiny/'
 apps <- list.dirs(base_dir, full.names = FALSE, recursive = FALSE)
 
+devtools::install()
 quarto::quarto_render('book/')
 
 for(i in apps) {

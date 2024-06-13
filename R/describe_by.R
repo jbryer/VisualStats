@@ -79,7 +79,7 @@ describe_by <- function(x,
 }
 
 if(FALSE) {
-	data(mtcars)
+	data('mtcars', envir = environment())
 	describe_by(mtcars$mgp)
 
 	psych::describeBy(mtcars$mpg, group = mtcars$cyl, mat = TRUE, IQR = TRUE)
@@ -89,7 +89,7 @@ if(FALSE) {
 	describe_by(mtcars$mpg, group = list(mtcars$cyl, mtcars$am))
 
 	# Examples from the describeBy documentation
-	data(sat.act)
+	data('sat.act', envir = environment())
 	describeBy(sat.act, group = sat.act$gender) #just one grouping variable
 	describeBy(SATV + SATQ ~ gender, data = sat.act)  #specify the data set if using formula
 

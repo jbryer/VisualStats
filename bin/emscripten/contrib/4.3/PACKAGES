@@ -1,9 +1,8 @@
 Package: VisualStats
-Version: 0.1.0
-Imports: car, cowplot, dplyr, DT, egg, gganimate, ggbeeswarm, ggforce,
-        ggplot2, knitr, latex2exp, magick, magick, magrittr, markdown,
-        mvtnorm, psych, reshape2, rlang, shiny, shinyBS, shinyWidgets,
-        tidyr, transformr
-Suggests: testthat (>= 3.0.0), vdiffr
+Version: 0.2.0
+Imports: car, cowplot, dplyr, egg, ggplot2, knitr, latex2exp, magrittr,
+        markdown, psych, reshape2, rlang, gganimate, ggbeeswarm, shiny,
+        magick, mvtnorm, shinyWidgets, tidyr, tibble, stats
+Suggests: ggforce, testthat (>= 3.5.0), vdiffr
 License: GPL (>= 3)
-MD5sum: b4c94fcbab8fc0dca2f109c622a6466f
+MD5sum: 3d31b150166c9b4ff9e3b269218b45ad

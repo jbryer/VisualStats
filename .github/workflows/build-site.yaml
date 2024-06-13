@@ -34,7 +34,7 @@ jobs:
       - name: Install R Dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::pak, any::devtools, any::pkgdown, any::quarto, local::.
+          extra-packages: any::pak, any::devtools, any::tidyverse, any::quarto, local::.
           needs: website
 
       - name: Build site

@@ -1,0 +1,10 @@
+Package: VisualStats
+Version: 0.1.0
+Imports: car, cowplot, dplyr, DT, egg, gganimate, ggbeeswarm, ggforce,
+        ggplot2, knitr, latex2exp, magick, magick, magrittr, markdown,
+        mvtnorm, psych, reshape2, rlang, shiny, shinyBS, shinyWidgets,
+        tidyr, transformr
+Suggests: testthat (>= 3.0.0), vdiffr
+License: GPL (>= 3)
+MD5sum: 358203b69cc49365a5b15ea7e1942413
+NeedsCompilation: no

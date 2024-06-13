@@ -9,8 +9,9 @@ Authors@R: c(
   )
 Maintainer: Jason Bryer <jason@bryer.org>
 Description: Functions and Shiny applications for visualizing statistical
-    tests. This package is intended for teachers and learners of statistics 
-    including topics such as variance, ANOVA, regression, and maximum likelihood estimation.
+    tests. This package is intended for teachers and learners of
+    statistics including topics such as variance, ANOVA, regression, and
+    maximum likelihood estimation.
 License: GPL (>= 3)
 URL: https://jbryer.github.io/VisualStats/
 BugReports: https://github.com/jbryer/VisualStats/issues
@@ -22,29 +23,30 @@ Imports:
     egg,
     gganimate,
     ggbeeswarm,
+    ggforce,
     ggplot2,
     knitr,
+    latex2exp,
+    magick,
     magick,
     magrittr,
     markdown,
+    mvtnorm,
     psych,
     reshape2,
-    magick,
-    shiny,
-    transformr,
-    ggforce,
-    shinyWidgets,
-    shinyBS,
-    mvtnorm,
     rlang,
-    tidyr
+    shiny,
+    shinyBS,
+    shinyWidgets,
+    tidyr,
+    transformr
 Suggests: 
-    vdiffr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    vdiffr
 VignetteBuilder: 
     knitr
+Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
-Config/testthat/edition: 3

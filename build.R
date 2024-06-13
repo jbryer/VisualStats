@@ -9,7 +9,7 @@ devtools::install()
 devtools::check()
 
 # Add dependency
-# usethis::use_package('shinyWidgets', type = 'Imports')
+# usethis::use_package('latex2exp', type = 'Imports')
 # usethis::use_package('vdiffr', type = 'Suggests')
 
 # quarto add quarto-ext/shinylive

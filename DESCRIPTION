@@ -38,6 +38,7 @@ Imports:
     tibble,
     stats
 Suggests: 
+    DT,
     ggforce,
     vdiffr
 VignetteBuilder: 

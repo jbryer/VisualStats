@@ -36,7 +36,6 @@
 #' anova_vis(hand_washing$Bacterial_Counts, hand_washing$Method)
 #' @export
 #' @importFrom tidyr unnest_wider
-#' @import dplyr
 #' @importFrom ggbeeswarm geom_beeswarm
 anova_vis <- function(Y,
 					  group,

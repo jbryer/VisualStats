@@ -14,3 +14,6 @@ shiylive.txt
 README.Rmd
 inst/shiny/BayesBilliards/Bayes An Essay towards solving a Problem in the Doctrine of Chances.pdf
 ^CODE_OF_CONDUCT\.md$
+build_orig.R
+shinylive.txt
+.github/

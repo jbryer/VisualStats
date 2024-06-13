@@ -25,7 +25,7 @@ distribution_plot <- function(fun,
 		title <- paste("P(", cv[1], "< x <", cv[2], ")",
 					   ifelse(area < 0.01,
 					   	      '< 0.01',
-					   	      paste0('≈ ', signif(area, digits = 3))))
+					   	      paste0('%~~% ', signif(area, digits = 3))))
 
 		p <- p + stat_function(fun = fun,
 					  geom = 'area',
@@ -203,7 +203,7 @@ t_plot <- function(df = 10,
 #' 	normal_plot()
 #' 	normal_plot(cv=c(-2,2))
 #' 	normal_plot(cv=c(-3,3))
-#' 	normal_plot(tails=TRUE)
+#' 	normal_plot(cv=1.96, tails='greater')
 normal_plot <- function(mean = 0,
 						sd = 1,
 						cv = c(-1, 1),

@@ -76,7 +76,7 @@ mle_shiny_ui <-  function() {
 					),
 					tabPanel(
 						'Data',
-						DT::dataTableOutput('datatable')
+						shiny::dataTableOutput('datatable')
 					)
 				)
 			)
@@ -169,7 +169,7 @@ mle_shiny_server <- function(input, output, session) {
 					selected = '')
 	})
 
-	output$datatable <- DT::renderDataTable({ return(thedata) })
+	output$datatable <- shiny::renderDataTable({ return(thedata) })
 
 	output$iteration_ui <- renderUI({
 		optim_run <- getData()

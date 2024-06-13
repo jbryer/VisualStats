@@ -1,7 +1,7 @@
 Package: VisualStats
 Title: Visualizations for Statistical Tests
-Version: 0.1.0
-Date: 2024-03-25
+Version: 0.2.0
+Date: 2024-06-13
 Authors@R: c(
     person("Jason", "Bryer", , "jason@bryer.org", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-2454-0402")),
@@ -9,7 +9,7 @@ Authors@R: c(
   )
 Maintainer: Jason Bryer <jason@bryer.org>
 Description: Functions and Shiny applications for visualizing statistical
-    tests. This package is intended for teachers and learners of
+    concepts. This package is intended for teachers and learners of
     statistics including topics such as variance, ANOVA, regression, and
     maximum likelihood estimation.
 License: GPL (>= 3)
@@ -19,29 +19,27 @@ Imports:
     car,
     cowplot,
     dplyr,
-    DT,
     egg,
-    gganimate,
-    ggbeeswarm,
-    ggforce,
     ggplot2,
     knitr,
     latex2exp,
-    magick,
-    magick,
     magrittr,
     markdown,
-    mvtnorm,
     psych,
     reshape2,
     rlang,
+    gganimate,
+    ggbeeswarm,
     shiny,
-    shinyBS,
+    magick,
+    mvtnorm,
     shinyWidgets,
     tidyr,
-    transformr
+    tibble,
+    stats
 Suggests: 
-    testthat (>= 3.0.0),
+    ggforce,
+    testthat (>= 3.5.0),
     vdiffr
 VignetteBuilder: 
     knitr

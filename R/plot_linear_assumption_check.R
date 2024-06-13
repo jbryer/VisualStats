@@ -112,7 +112,7 @@ plot_linear_assumption_check <- function(glm_out,
 		geom_point(data = tab, aes(x = x_pos, y = mean), color = 'white', size = 2) +
 		geom_abline(slope = 1, intercept = 0, alpha = 0.3) +
 		scale_color_manual(values = c('#e41a1c', '#377eb8'),
-						   limits = c('p ≤ 0.05', 'p > 0.05')) +
+						   limits = c('p \u2264 0.05', 'p > 0.05')) +
 		theme(legend.position = legend.position) +
 		xlab(x_lab) + ylab(y_lab) +
 		xlim(x_limits) #+ ylim(c(0, 1))

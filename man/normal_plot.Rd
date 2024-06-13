@@ -35,5 +35,5 @@ is also given.
 	normal_plot()
 	normal_plot(cv=c(-2,2))
 	normal_plot(cv=c(-3,3))
-	normal_plot(tails=TRUE)
+	normal_plot(cv=1.96, tails='greater')
 }

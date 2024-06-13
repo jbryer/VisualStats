@@ -59,7 +59,7 @@ integral_plot <- function(fun = normal_fun,
 				  alpha = rect_alpha, color = rect_color, fill = rect_fill) +
 		xlim(c(view_xmin, view_xmax)) +
 		stat_function(fun = fun) +
-		ggtitle(paste0('Aera ≈ ', prettyNum(sum(boxes$area), digits = 3))) +
+		ggtitle(paste0('Aera %~~% ', prettyNum(sum(boxes$area), digits = 3))) +
 		theme_vs()
 	return(p)
 }

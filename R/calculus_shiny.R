@@ -51,6 +51,7 @@ calculus_shiny_ui <- function() {
 #' @param output Shiny output object.
 #' @param session Shiny session object.
 #' @return a function with Shiny server logic.
+#' @importFrom stats integrate
 #' @export
 calculus_shiny_server <- function(input, output, session) {
 	error_message <- reactiveVal('')
@@ -139,7 +140,7 @@ calculus_shiny_server <- function(input, output, session) {
 		req(input$range)
 		f <- getFunction()
 		if(is.null(f)) { return(); }
-		integrate(f, input$range[1], input$range[2])
+		stats::integrate(f, input$range[1], input$range[2])
 	})
 }
 

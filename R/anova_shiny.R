@@ -101,7 +101,7 @@ anova_shiny_server <- function(input, output, session) {
 							 Value = as.numeric(sapply(
 							 	group_means,
 							 	FUN = function(x) {
-							 		rnorm(input$n, mean = x, sd = input$sd)
+							 		stats::rnorm(input$n, mean = x, sd = input$sd)
 							 	}
 							 )))
 		} else if (input$dataset == 'handwashing') {
@@ -155,7 +155,7 @@ anova_shiny_server <- function(input, output, session) {
 		input$dataset
 		inputs <- list()
 		isolate(df <- getData())
-		grand_sd <- sd(df$Value)
+		grand_sd <- stats::sd(df$Value)
 		for (i in unique(df$Group)) {
 			value <- mean(df[df$Group == i, ]$Value)
 			isolate(if (!is.null(input[[paste0('mean_adjust_', getGroupName(i))]])) {

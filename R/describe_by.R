@@ -62,16 +62,16 @@ describe_by <- function(x,
 			n = dplyr::n(),
 			mean = mean(x, na.rm = na.rm),
 			sd = sd(x, na.rm = na.rm),
-			median = median(x, na.rm = na.rm),
+			median = stats::median(x, na.rm = na.rm),
 			trimmed = mean(x, trim = trim, na.rm = na.rm),
-			mad = mad(x, na.rm = na.rm),
+			mad = stats::mad(x, na.rm = na.rm),
 			min = min(x, na.rm = na.rm),
 			max = max(x, na.rm = na.rm),
 			range = diff(range(x, na.rm = na.rm)),
 			skew = skew(x, na.rm = na.rm, type = type),
 			kurtosis = kurtosi(x, na.rm = na.rm, type = type),
-			se = sd(x, na.rm = na.rm) / dplyr::n(),
-			IQR = IQR(x, na.rm = na.rm)
+			se = stats::sd(x, na.rm = na.rm) / dplyr::n(),
+			IQR = stats::IQR(x, na.rm = na.rm)
 		) |>
 		dplyr::ungroup() |>
 		dplyr::mutate(item = 1:dplyr::n()) |>

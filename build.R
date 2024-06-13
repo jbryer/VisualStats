@@ -1,153 +1,17 @@
-library(devtools)
-library(usethis)
-library(testthat)
+out_dir <- '_site/shiny/'
+base_dir <- 'inst/shiny/'
+apps <- list.dirs(base_dir, full.names = FALSE, recursive = FALSE)
 
-##### Build and install the package
-usethis::use_tidy_description() # Cleanup the DESCRIPTION file to be tidy
-devtools::document()
-devtools::install()
-devtools::check()
+quarto::quarto_render('book/')
 
-# Add dependency
-# usethis::use_package('latex2exp', type = 'Imports')
-# usethis::use_package('vdiffr', type = 'Suggests')
-
-# quarto add quarto-ext/shinylive
-
-##### Readme
-rmarkdown::render('README.Rmd')
-
-##### Book
-quarto::quarto_render('book/', output_format = 'html', as_job = FALSE)
-# quarto::quarto_render('book/', output_format = 'pdf', as_job = FALSE)
-
-# Preview the book (necessary for the Shiny apps to work)
-httpuv::runStaticServer(dir = 'docs/', port = 2112)
-
-
-tmp <- roxygen2::parse_file('R/anova_vis.R')
-ls(tmp[[1]]$tags[[1]])
-tmp[[1]]$tags[[1]]$tag
-
-length(tmp[[1]])
-tmp[[1]][[1]] |> length()
-
-for(i in seq_len(length(tmp[[1]]$tags))) {
-	tmp[[1]]$tags[[i]]$tag
-	tmp[[1]]$tags[[i]]$val
+for(i in apps) {
+	shinylive::export(appdir = paste0(base_dir, i),
+					  destdir = out_dir,
+					  subdir = i)
 }
 
-##### Shiny Apps
-library(VisualStats)
-# Get list Shiny apps
-ls('package:VisualStats')[grep("*_shiny$", ls('package:VisualStats'))]
-
-VisualStats::variance_shiny()
-VisualStats::correlation_shiny()
-VisualStats::loess_shiny()
-VisualStats::anova_shiny()
-VisualStats::mle_shiny()
-VisualStats::calculus_shiny()
-
-##### Build shinylive versions of the apps
-# NOTE: This doesn't currently work very well. Some app work, but not others.
-library(VisualStats)
-
-shiny_apps <- list.dirs('inst/shiny/')
-
-app_files <- c('app', 'global', 'ui', 'sever')
-build_dir <- 'build_shiny/'
-out_dir <- 'docs/'
-app_index <- ''
-
-for(i in shiny_apps) {
-	files <- list.files(i)
-	if(any(app_files %in% tools::file_path_sans_ext(files))) {
-		app_name <- basename(i)
-		message(paste0('Building ', app_name, '...'))
-		app_index <- paste0(app_index, '\n<li><a href="', app_name, '/">',
-							app_name, '</a></li>')
-		# Create the build directory and copy the app over
-		dir.create(build_dir, showWarnings = FALSE, recursive = TRUE)
-		file.copy(from = i, to = build_dir, recursive = TRUE)
-		# Package dependencies
-		desc <- utils::packageDescription('VisualStats')
-		pkgs <- gsub('\\n', '', desc$Imports) |> strsplit(split = ',') |>
-			unlist() |>
-			stringr::str_trim()
-		pkgs <- paste0('library(', pkgs, ')', collapse = '\n')
-		# loop through the shiny app files and replace VisualStats:: with function
-		# call and add function source to the script. Also add dependencies
-		files <- files[tools::file_path_sans_ext(files) %in% app_files]
-		for(app_file in files) {
-			app_source <- scan(file = paste0(build_dir, app_name, '/', app_file),
-							   what = character(),
-							   quiet = TRUE,
-							   sep = '\n') |>
-				paste0(collapse = '\n')
-			# ToDo: Add data
-
-			# Add function calls
-			visualstats_funs <- stringr::str_match(app_source, "VisualStats::*(.*?)\\s*\\(") |>
-				as.data.frame() |>
-				tidyr::drop_na()
-			if(nrow(visualstats_funs) > 0) {
-				visualstats_funs <- unique(visualstats_funs[,2,drop=TRUE])
-			} else {
-				visualstats_funs <- character()
-			}
-			for(fun_name in visualstats_funs) {
-				fun_source <- get(fun_name) |> deparse() |> paste0(collapse = '\n')
-				app_source <- paste0(
-					fun_name, ' <- ', fun_source, '\n\n', app_source
-				)
-			}
-			app_source <- sub('VisualStats::', '', app_source)
-
-			# Add dependencies
-			# app_source <- paste0('\n', pkgs, '\n', app_source)
-
-			cat(app_source, file = paste0(build_dir, app_name, '/', basename(app_file)))
-		}
-
-		# shinylive::export(appdir = paste0(build_dir, app_name),
-		# 				  destdir = paste0(out_dir, '/', app_name))
-		shinylive::export(appdir = paste0(build_dir, app_name),
-						  destdir = out_dir,
-						  subdir = app_name)
-	} # else Not a shiny application
+if(FALSE) { # For local testing
+	httpuv::runStaticServer("_site/", port = 2112, background = TRUE, browse = FALSE)
+	browseURL(paste0('http://localhost:2112/shiny/', apps[1]))
+	httpuv::stopAllServers()
 }
-
-# shinylive::export(appdir = 'inst/shiny/variance/',
-# 				  destdir = 'docs/shiny/variance/')
-# httpuv::runStaticServer("docs/shiny/variance/")
-
-app_index <- paste0(
-	'<html><head><title>Shiny Applications</title></head><body><ul>\n',
-	app_index,
-	'\n</ul></body></html>'
-)
-# cat(app_index, file = paste0(out_dir, '/index.html'))
-
-httpuv::runStaticServer(dir = out_dir, port = 2112)
-
-unlink(build_dir, recursive = TRUE) # Cleanup
-
-##### Tests
-# Create a test
-# usethis::use_test('loess-test')
-
-##### Check exported functions and data
-ls('package:VisualStats')
-data(package = 'VisualStats')
-
-data("hand_washing")
-anova_vis(hand_washing$Bacterial_Counts, hand_washing$Method)
-anova_vis(hand_washing$Bacterial_Counts, hand_washing$Method,
-		  plot_boxplot = TRUE)
-
-##### Shiny Apps
-shiny_demo()
-shiny_demo('variance')
-shiny_demo('anova')
-shiny_demo('loess')

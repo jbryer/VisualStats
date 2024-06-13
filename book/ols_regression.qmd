@@ -57,3 +57,8 @@ regression_vis(df, plot_regression = TRUE,
 			   plot_residuals = TRUE,
 			   plot_residuals_squared = TRUE)
 ```
+
+## $R^2$
+
+
+

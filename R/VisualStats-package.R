@@ -49,7 +49,6 @@ theme_vs <- function() {
 #' @import knitr
 #' @import markdown
 #' @import gganimate
-#' @import magick
 #' @import cowplot
 #' @import egg
 #' @import shiny

@@ -5,4 +5,4 @@ Imports: car, cowplot, dplyr, egg, ggplot2, knitr, latex2exp, magrittr,
         magick, mvtnorm, shinyWidgets, tidyr, tibble, stats
 Suggests: DT, shinylive, ggforce, vdiffr
 License: GPL (>= 3)
-MD5sum: dd9207ec768e9858077379452010c8be
+MD5sum: afaea5fab108ec55786bf8d446d00d33

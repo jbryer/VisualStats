@@ -2,42 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://visualstats.bryer.org/index.html</loc>
-    <lastmod>2024-06-14T01:37:16.071Z</lastmod>
+    <lastmod>2024-04-02T14:22:19.969Z</lastmod>
   </url>
   <url>
     <loc>https://visualstats.bryer.org/descriptives.html</loc>
-    <lastmod>2024-06-14T01:37:16.071Z</lastmod>
+    <lastmod>2024-08-14T16:56:21.686Z</lastmod>
   </url>
   <url>
     <loc>https://visualstats.bryer.org/distributions.html</loc>
-    <lastmod>2024-06-14T01:37:16.071Z</lastmod>
+    <lastmod>2024-04-02T02:59:38.920Z</lastmod>
   </url>
   <url>
     <loc>https://visualstats.bryer.org/correlation.html</loc>
-    <lastmod>2024-06-14T01:37:16.071Z</lastmod>
+    <lastmod>2024-04-02T14:58:34.499Z</lastmod>
+  </url>
+  <url>
+    <loc>https://visualstats.bryer.org/dependent_sample.html</loc>
+    <lastmod>2024-10-03T13:51:47.535Z</lastmod>
   </url>
   <url>
     <loc>https://visualstats.bryer.org/ols_regression.html</loc>
-    <lastmod>2024-06-14T01:37:16.071Z</lastmod>
+    <lastmod>2024-10-03T13:48:01.791Z</lastmod>
+  </url>
+  <url>
+    <loc>https://visualstats.bryer.org/r_squared.html</loc>
+    <lastmod>2024-10-03T13:48:19.808Z</lastmod>
   </url>
   <url>
     <loc>https://visualstats.bryer.org/loess.html</loc>
-    <lastmod>2024-06-14T01:37:16.071Z</lastmod>
+    <lastmod>2024-04-01T17:59:16.681Z</lastmod>
   </url>
   <url>
     <loc>https://visualstats.bryer.org/mle.html</loc>
-    <lastmod>2024-06-14T01:37:16.071Z</lastmod>
+    <lastmod>2024-06-13T22:45:15.084Z</lastmod>
   </url>
   <url>
     <loc>https://visualstats.bryer.org/anova.html</loc>
-    <lastmod>2024-06-14T01:37:16.071Z</lastmod>
+    <lastmod>2024-04-02T02:41:28.964Z</lastmod>
   </url>
   <url>
     <loc>https://visualstats.bryer.org/references.html</loc>
-    <lastmod>2024-06-14T01:37:16.071Z</lastmod>
+    <lastmod>2024-03-25T16:24:21.375Z</lastmod>
   </url>
   <url>
     <loc>https://visualstats.bryer.org/calculus.html</loc>
-    <lastmod>2024-06-14T01:37:16.071Z</lastmod>
+    <lastmod>2024-04-02T03:07:57.099Z</lastmod>
   </url>
 </urlset>

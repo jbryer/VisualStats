@@ -79,7 +79,7 @@ $$ s = \sqrt{s^2} = \sqrt{\frac{\sigma(x_i - \bar{x})^2}{n - 1}} $$ {#eq-standar
 
 
 ```{=html}
- <iframe id="example1" src="https://r.bryer.org/shiny/variance/" style="border: none; width: 100%; height: 780px" frameborder="0"></iframe>
+ <iframe id="example1" src="https://r.bryer.org/shiny/variance/" style="border: none; width: 100%; height: 400px" frameborder="0"></iframe>
 ```
 
 

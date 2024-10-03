@@ -6,14 +6,13 @@
 \usage{
 plot_tiles(
   p,
-  percent,
+  percents,
   xmin,
   ymin,
   xmax,
   ymax,
   rev = FALSE,
-  color = "black",
-  fill = "#F5C710",
+  colors = vs_palette_qual[seq_len(length(percents))],
   alpha = 0.5
 )
 }
@@ -30,11 +29,11 @@ plot_tiles(
 
 \item{rev}{if TRUE drawing starts from the upper right.}
 
-\item{color}{color of the perimeter of the boxes.}
-
-\item{fill}{the color used to for the fill if length(percent) == 1.}
+\item{colors}{color of the perimeter of the boxes.}
 
 \item{alpha}{the transparency for the fill color(s).}
+
+\item{fill}{the color used to for the fill if length(percents) == 1.}
 }
 \description{
 This is an internal function.

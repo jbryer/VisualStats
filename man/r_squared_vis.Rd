@@ -10,13 +10,20 @@ r_squared_vis(
   x_lab = "Observed Value",
   y_lab = "Predicted Value",
   plot_total_variance = TRUE,
-  plot_regression_variance = TRUE,
+  plot_all_variances = TRUE,
   plot_error_variance = FALSE,
+  plot_regression_variance = FALSE,
   plot_unit_line = TRUE,
   plot_points = TRUE,
   plot_means = TRUE,
-  plot_residuals = TRUE,
-  plot_residuals_squared = TRUE
+  plot_residuals = FALSE,
+  plot_residuals_squared = FALSE,
+  variance_alpha = 0.2,
+  total_variance_color = "#999999",
+  error_variance_color = "#ff7f00",
+  regression_variance_color = "#377eb8",
+  point_color = "grey50",
+  point_alpha = 0.5
 )
 }
 \arguments{
@@ -30,9 +37,11 @@ r_squared_vis(
 
 \item{plot_total_variance}{plot a square representing the total variance in the dependent variable.}
 
-\item{plot_regression_variance}{plot a square representing the regression variances.}
+\item{plot_all_variances}{plot a squares representing all the variances (i.e. each predictor and error).}
 
 \item{plot_error_variance}{plot a square representing the error/residual variance.}
+
+\item{plot_regression_variance}{plot a square representing the total regression variance.}
 
 \item{plot_unit_line}{plot the unit line (i.e. y = x).}
 
@@ -42,7 +51,19 @@ r_squared_vis(
 
 \item{plot_residuals}{plot vertical lines representing the residuals.}
 
-\item{plot_residuals_squared}{plot squars representing the squared residuals.}
+\item{plot_residuals_squared}{plot squares representing the squared residuals.}
+
+\item{variance_alpha}{the alpha level (transparency) of the residual squares.}
+
+\item{total_variance_color}{color representing the total variance.}
+
+\item{error_variance_color}{color representing the error variance.}
+
+\item{regression_variance_color}{color representing variance explained (i.e. regression variance).}
+
+\item{point_color}{color of the data points.}
+
+\item{point_alpha}{the alpha level (transparency) of the data points.}
 }
 \value{
 a ggplot2 expression.
@@ -57,7 +78,7 @@ lm(formu, df) |> summary()
 VisualStats::r_squared_vis(df, formu,
 						   plot_total_variance = TRUE,
 						   plot_error_variance = FALSE,
-						   plot_regression_variance = TRUE,
+						   plot_all_variances = TRUE,
 						   plot_residuals_squared = FALSE,
 						   plot_residuals = FALSE)
 }

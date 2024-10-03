@@ -75,7 +75,7 @@ distribution_plot <- function(fun,
 		title <- paste("P(x > ", cv[1], ")",
 					   ifelse(area < 0.01,
 					   	   '< 0.01',
-					   	   paste0('≈ ', signif(area, digits = 3))))
+					   	   paste0('= ', signif(area, digits = 3))))
 		p <- p + stat_function(fun = fun,
 							   geom = 'area',
 							   xlim = c(cv[1], limits[2]),

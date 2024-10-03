@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <img src="man/figures/VisualStats.png" align="right" width="120" />
 
 **Authors: Jason Bryer, Ph.D. and Bruce Dudek, Ph.D.**    
-**Website: https://jbryer.github.io/VisualStats/**
+**Website: https://https://visualstats.bryer.org**
 
 This package contains functions and [Shiny](https://shiny.rstudio.com) applications designed to visualize statistical tests. The repository also contains a [Quarto book](https://jbryer.github.io/VisualStats). The latest version can be installed from Github using the `remotes` package:
 

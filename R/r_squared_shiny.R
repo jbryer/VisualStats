@@ -55,7 +55,8 @@ r_squared_shiny_ui <- function() {
 						'Squared Residuals' = 'plot_residuals_squared',
 						'Total Variance' = 'plot_total_variance',
 						'Error Variance' = 'plot_error_variance',
-						'Regression Variance' = 'plot_regression_variance'
+						'Regression Variance' = 'plot_regression_variance',
+						'All Variances' = 'plot_all_variances'
 					),
 					selected = c('plot_points', 'plot_means', 'plot_unit_line')
 				)
@@ -118,6 +119,7 @@ r_squared_shiny_server <- function(input, output, session) {
 			plot_total_variance = 'plot_total_variance' %in% input$plot_features,
 			plot_regression_variance = 'plot_regression_variance' %in% input$plot_features,
 			plot_error_variance = 'plot_error_variance' %in% input$plot_features,
+			plot_all_variances = 'plot_all_variances' %in% input$plot_features,
 			plot_unit_line = 'plot_unit_line' %in% input$plot_features,
 			plot_points = 'plot_points' %in% input$plot_features,
 			plot_means = 'plot_means' %in% input$plot_features,

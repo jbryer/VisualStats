@@ -321,8 +321,8 @@ Figure&nbsp;3.1: Normal distribution with 95% of the area.
 </div>
 </div>
 </section>
-<section id="sec-qq-plot" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Comparing Distributions: Quantile-Quantile Plots</h1>
+<section id="sec-qq-plot" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-qq-plot"><span class="header-section-number">3.2</span> Comparing Distributions: Quantile-Quantile Plots</h2>
 <p>The quantile-quantile plot (Q-Q plot) is a graphical method for comparing two distributions. This is done by comparing the quantiles<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> between the two distributions. Q-Q plots are often used to determine whether the distribution of a sample approximates the normal distribution, though it should be noted that it can be used for any type of distribution. To illustrate how the Q-Q plot is constructed, let’s begin with three populations with a uniform, skewed, and normal distribution.</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -337,7 +337,7 @@ Figure&nbsp;3.1: Normal distribution with 95% of the area.
 </details>
 </div>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>distributions <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    reshape2<span class="sc">::</span><span class="fu">melt</span>(<span class="at">variable.name =</span> <span class="st">'distribution'</span>) <span class="sc">|&gt;</span> </span>
@@ -397,7 +397,7 @@ Figure&nbsp;3.1: Normal distribution with 95% of the area.
 </div>
 <p>The following scatter plot depicts the foundation of the Q-Q plot. If the two distributions are the same then we would expect all the points to fall on a straight line.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(samp1, samp_norm), <span class="fu">aes</span>(<span class="at">x =</span> samp1, <span class="at">y =</span> samp_norm)) <span class="sc">+</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
@@ -413,7 +413,7 @@ Figure&nbsp;3.1: Normal distribution with 95% of the area.
 </div>
 <p>It is desirable to draw a straight line for reference, however determining the slope and intercept requires some work. If both the sample and comparison distributions are expressed as standard scores (i.e.&nbsp;mean = 0, standard deviation = 1), then we can draw the unit line (i.e.&nbsp;<span class="math inline">\(y = x\)</span>).</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(samp1, samp_norm), <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">scale</span>(samp1), <span class="at">y =</span> <span class="fu">scale</span>(samp_norm))) <span class="sc">+</span> </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
@@ -468,7 +468,7 @@ Figure&nbsp;3.1: Normal distribution with 95% of the area.
 </div>
 <p>An alternative variation to the Q-Q plot line would be to plot a Loess regression line. If the two distributions are the same then the Loess regression line should be a straight line. With very small samples as demonstrated below, however, the Loess estimation is not very good.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(samp1, samp_norm), <span class="fu">aes</span>(<span class="at">x =</span> samp1, <span class="at">y =</span> samp_norm)) <span class="sc">+</span> </span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">slope =</span> slope, <span class="at">intercept =</span> intercept) <span class="sc">+</span></span>

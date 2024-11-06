@@ -4,7 +4,7 @@ VisualStats: R package for visualizing statistical tests
 <img src="man/figures/VisualStats.png" align="right" width="120" />
 
 **Authors: Jason Bryer, Ph.D. and Bruce Dudek, Ph.D.**  
-**Website: <https://jbryer.github.io/VisualStats/>**
+**Website: <https://visualstats.bryer.org/>**
 
 This package contains functions and [Shiny](https://shiny.rstudio.com)
 applications designed to visualize statistical tests. The repository

@@ -5,8 +5,11 @@ editor_options:
 
 # Distributions {#sec-distributions}
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
 library(VisualStats)
+library(ggplot2)
+ggplot2::theme_set(theme_vs())
+set.seed(2112)
 ```
 
 ```{r}
@@ -22,3 +25,4 @@ plot_distributions(dist = 'norm',
 
 {{< include distributions_normal.qmd >}}
 
+{{< include distributions_qq_plot.qmd >}}

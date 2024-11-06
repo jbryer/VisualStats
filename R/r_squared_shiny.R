@@ -67,7 +67,9 @@ r_squared_shiny_ui <- function() {
 					tabPanel('Plot',
 							plotOutput("plot", height = '600px') ),
 					tabPanel('Regression Output',
-							 verbatimTextOutput('regression_out') ),
+							 verbatimTextOutput('regression_out'),
+							 hr(),
+							 verbatimTextOutput('anova_out')),
 					tabPanel('Variance Plot',
 							 plotOutput('variance_plot', height = '600px') )
 				)
@@ -110,6 +112,10 @@ r_squared_shiny_server <- function(input, output, session) {
 
 	output$regression_out <- renderPrint({
 		lm(getFormula(), data = getData()) |> summary()
+	})
+
+	output$anova_out <- renderPrint({
+		lm(getFormula(), data = getData()) |> anova()
 	})
 
 	output$plot <- renderPlot({

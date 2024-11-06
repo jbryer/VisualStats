@@ -1,0 +1,91 @@
+---
+editor_options: 
+  chunk_output_type: console
+---
+
+# Dependent Samples {#sec-dependent-samples}
+
+```{r correlation-setup, include=FALSE}
+library(VisualStats)
+library(cowplot)
+library(ggplot2)
+```
+
+
+```{r}
+data(anorexia.sub, package = 'granova')
+dependent_sample_vis(
+	df = anorexia.sub,
+	test = 'norm', # or 't'
+	conf_level = 0.95,
+	plot_mean = FALSE,
+	plot_unit_line = TRUE,
+	plot_projections = FALSE,
+	plot_differences = FALSE,
+	plot_ci = FALSE,
+	plot_ci_lines = FALSE,
+	plot_samp_dist = FALSE
+)
+```
+
+
+```{r}
+dependent_sample_vis(
+	df = anorexia.sub,
+	test = 'norm', # or 't'
+	conf_level = 0.95,
+	plot_mean = FALSE,
+	plot_unit_line = TRUE,
+	plot_projections = TRUE,
+	plot_differences = TRUE,
+	plot_ci = FALSE,
+	plot_ci_lines = FALSE,
+	plot_samp_dist = FALSE
+)
+```
+
+
+```{r}
+dependent_sample_vis(
+	df = anorexia.sub,
+	test = 'norm', # or 't'
+	conf_level = 0.95,
+	plot_mean = FALSE,
+	plot_unit_line = TRUE,
+	plot_projections = TRUE,
+	plot_differences = TRUE,
+	plot_ci = FALSE,
+	plot_ci_lines = FALSE,
+	plot_samp_dist = TRUE
+)
+```
+
+```{r}
+dependent_sample_vis(
+	df = anorexia.sub,
+	test = 'norm', # or 't'
+	conf_level = 0.95,
+	plot_mean = TRUE,
+	plot_unit_line = TRUE,
+	plot_projections = TRUE,
+	plot_differences = TRUE,
+	plot_ci = TRUE,
+	plot_ci_lines = FALSE,
+	plot_samp_dist = TRUE
+)
+```
+
+
+```{=html}
+ <iframe id="example1" src="https://r.bryer.org/shiny/dependent_sample/" style="border: none; width: 100%; height: 780px" frameborder="0"></iframe>
+```
+
+
+
+
+::: {.content-visible when-format="pdf"}
+
+:::
+
+
+This Shiny application can be run locally using the `VisualStats::dependent_sample_shiny()` function.

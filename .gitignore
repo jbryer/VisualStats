@@ -5,7 +5,6 @@
 vignettes/mle_cache/
 inst/shiny/anova/figure/
 build_shiny/
-book/
 book/*_cache
 book/*_files/
 data-raw/

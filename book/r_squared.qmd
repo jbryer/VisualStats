@@ -1,0 +1,190 @@
+---
+editor_options: 
+  chunk_output_type: console
+---
+
+# R-Squared {#sec-rsquared}
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FALSE,
+					  fig.align = 'center')
+
+set.seed(2112)
+
+library(VisualStats)
+library(dplyr)
+library(ggplot2)
+library(reshape2)
+library(gganimate)
+library(magick)
+library(cowplot)
+library(DT)
+
+data(mtcars)
+```
+
+
+The coefficient of determination, often referred to as $R^2$, is an important measure of model fit in statistics and data science when the dependent variable is quantitative. First introduced by Write [@Write1921], $R^2$ is the proportion of variance in the dependent variable explained by the independent variable(s). 
+
+To begin, we must first define variance. Broadly, variance is a measure of spread around the mean. Most textbooks provide the following equation for variance:
+
+Total sum of squares:
+
+$$ SS_{total} = \Sigma{(x_i - \bar{x})^2} $$
+
+Regression sum of squares:
+
+$$ SS_{regression} = \Sigma{(\hat{y_i} - \bar{y})^2} $$
+
+Error sum of squares:
+
+$$ SS_{error} = \Sigma{(y_i - \hat{y_i})^2} $$
+
+Thinking of variance as a measure of variation is generally approachable for students, and interestingly, Write (1921) used the word *variation* instead of variance in his seminal paper. The key for students is in the numerator, where each observation is subtracted from the mean (i.e. $x_i - \bar{x}$). 
+
+```{r, echo=FALSE, fig.cap='Plot representing variance.'}
+data(mtcars)
+VisualStats::variance_vis(mtcars$mpg) + xlab('Miles per Gallon')
+```
+
+It turns out there are several ways of calculating $R^2$, many provide equivelent solutions. Most introductions rely on algebra and complicated formulas. This paper provides an approach to understanding $R^2$ using visualizations.
+
+
+```{r, echo=FALSE}
+VisualStats::regression_vis(mtcars,
+                            x_var = 'wt',
+                            y_var = 'mpg',
+                            plot_regression = TRUE,
+                            plot_residuals = TRUE,
+                            plot_residuals_squared = TRUE) +
+  xlab('Weight') + ylab('Miles per Gallon')
+```
+
+```{r residuals-plot, echo=FALSE, fig.cap='Scatter plots with residuals (black lines), resisuals squared (grey squares), and mean square error (orange; average area of the residuals squared).'}
+VisualStats::r_squared_vis(mtcars, mpg ~ wt, 
+                           plot_total_variance = FALSE,
+                           plot_error_variance = TRUE,
+                           plot_all_variances = FALSE,
+                           plot_residuals_squared = TRUE,
+                           plot_residuals = TRUE,
+                           x_lab = 'Observed Miles per Gallon',
+                           y_lab = 'Predicted Miles per Gallon') + 
+  ggplot2::ggtitle('')
+```
+
+```{r variance-plots, echo=FALSE, fig.cap='Scatter plots with total variance (grey square) with error variance (left; orange) and regression variance (left; blue)'}
+p1 <- VisualStats::r_squared_vis(mtcars, mpg ~ wt, 
+                           plot_total_variance = TRUE,
+                           plot_error_variance = TRUE,
+                           plot_all_variances = FALSE,
+                           plot_residuals_squared = FALSE,
+                           plot_residuals = FALSE) + 
+  ggplot2::ggtitle('Total (grey) and error (orange) variance')
+p2 <- VisualStats::r_squared_vis(mtcars, mpg ~ wt, 
+                           plot_total_variance = TRUE,
+                           plot_error_variance = FALSE,
+                           plot_regression_variance = TRUE,
+                           plot_all_variances = FALSE,
+                           plot_residuals_squared = FALSE,
+                           plot_residuals = FALSE) + 
+  ggplot2::ggtitle('Total (grey) and explained (blue) variance')
+cowplot::plot_grid(p1, p2, nrow = 1)
+```
+
+
+```{r all-variance-plot, echo=FALSE, fig.cap='Scatter plot with variance components.'}
+VisualStats::r_squared_vis(mtcars, mpg ~ wt)
+```
+
+### Example 2
+
+
+```{r}
+library(VisualStats)
+set.seed(42)
+df <- VisualStats::simulate(n = 100, r_squared = .7)
+formu <- y ~ x1 + x2
+lm(formu, df) |> summary()
+```
+
+
+
+```{r}
+#| fig.cap: Scatter plot of observed values versus predicted values.
+#| code-fold: true
+
+r_squared_vis(df, formu,
+			  plot_total_variance = FALSE,
+			  plot_error_variance = FALSE,
+			  plot_regression_variance = FALSE,
+			  plot_all_variances = FALSE,
+			  plot_residuals_squared = FALSE,
+			  plot_residuals = FALSE)
+```
+
+
+```{r}
+#| fig.cap: Total Variance
+#| code-fold: true
+
+p1 <- r_squared_vis(df, formu,
+			  plot_total_variance = TRUE,
+			  plot_error_variance = FALSE,
+			  plot_regression_variance = FALSE,
+			  plot_all_variances = FALSE,
+			  plot_residuals_squared = FALSE,
+			  plot_residuals = FALSE) + 
+	ggplot2::ylim(c(-20,20)) +
+	ggplot2::xlim(c(-20,20)) + ggplot2::ggtitle('')
+p2 <- variance_vis(df$y, 
+				   sample_variance_col = '#999999', 
+				   plot_sample_variance = TRUE,
+				   plot_population_variance = FALSE,
+				   variance_position = 'middle',
+				   point_size = 1) + 
+	ggplot2::ylim(c(0,20))
+cowplot::plot_grid(p1, p2)
+```
+
+
+```{r}
+#| fig.cap: Resisuals and squared residuals
+#| code-fold: true
+
+r_squared_vis(df, formu,
+			  plot_total_variance = FALSE,
+			  plot_error_variance = FALSE,
+			  plot_regression_variance = FALSE,
+			  plot_all_variances = FALSE,
+			  plot_residuals_squared = TRUE,
+			  plot_residuals = TRUE)
+```
+
+```{r}
+#| fig.cap: Resisuals and squared residuals
+#| code-fold: true
+
+r_squared_vis(df, formu,
+			  plot_total_variance = FALSE,
+			  plot_error_variance = TRUE,
+			  plot_regression_variance = FALSE,
+			  plot_all_variances = FALSE,
+			  plot_residuals_squared = TRUE,
+			  plot_residuals = TRUE)
+```
+
+```{r}
+#| fig.cap: Resisuals and squared residuals
+#| code-fold: true
+
+r_squared_vis(df, formu,
+			  plot_total_variance = TRUE,
+			  plot_error_variance = TRUE,
+			  plot_regression_variance = FALSE,
+			  plot_all_variances = FALSE,
+			  plot_residuals_squared = FALSE,
+			  plot_residuals = FALSE)
+```
+
+

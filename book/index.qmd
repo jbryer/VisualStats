@@ -21,6 +21,9 @@ remotes::install_github('jbryer/VisualStats')
 
 This website/book does not intend to be another introductory statistics book, there are plenty of fantastic options available, but instead a collection of Shiny applications and chapters to support those visualizations. Our philosophy is that students can better understand the statistical formulas instrumental to the field itself through geometric representations. Take for example the fact that many statistical formulas square terms. Drawing a square for these formulas becomeas a natural way of exploring the features of what that statistical formula is attempting to solve.
 
+## How to use this book
+
+This book is not intended to be a standalone introduction to statistics. There are a lot of high quality, open access, resources and textbooks for learning statistics. Many of these visualizations were created to supplement the [OpenIntro](http://www.openintro.info) textbook. Instead, this book and accompanying R package are designed to provide a more visual exploration of important statistical concepts.
 
 ## Contributions
 

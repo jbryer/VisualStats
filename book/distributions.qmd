@@ -12,6 +12,8 @@ ggplot2::theme_set(theme_vs())
 set.seed(2112)
 ```
 
+
+
 ```{r}
 #| label: distributions_norm
 #| fig-cap: R functions for the normal distribution.

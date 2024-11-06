@@ -51,6 +51,7 @@ bibliography: references.bib
 format:
   html:
     toc: false
+    # number-depth: 2
     theme: cosmo
     sidebar:
       style: floating

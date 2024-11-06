@@ -1,0 +1,147 @@
+---
+editor_options: 
+  chunk_output_type: console
+---
+
+## Comparing Distributions: Quantile-Quantile Plots {#sec-qq-plot}
+
+```{r, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+library(VisualStats)
+library(ggplot2)
+ggplot2::theme_set(theme_vs())
+set.seed(2112)
+```
+
+The quantile-quantile plot (Q-Q plot) is a graphical method for comparing two distributions. This is done by comparing the quantiles^[Quantiles are simply cut points from a distribution such that the intervals have equal probabilities.] between the two distributions. Q-Q plots are often used to determine whether the distribution of a sample approximates the normal distribution, though it should be noted that it can be used for any type of distribution. To illustrate how the Q-Q plot is constructed, let's begin with three populations with a uniform, skewed, and normal distribution.
+
+```{r}
+pop_size <- 100000
+samp_size <- 50
+distributions <- data.frame(
+	unif_pop = runif(pop_size),
+	skew_pop = rchisq(pop_size, df = 5),
+	norm_pop = rnorm(pop_size, mean = 2, sd = 1)
+)
+```
+
+```{r, warning=FALSE, message=FALSE}
+#| label: distributions_populations
+#| fig-cap: Population Distributions
+#| code-fold: true
+distributions |>
+	reshape2::melt(variable.name = 'distribution') |> 
+	ggplot(aes(x = value, color = distribution)) + 
+	geom_density() + 
+	facet_wrap(~ distribution, scales = 'free', ncol = 1) +
+	theme_vs()
+```
+
+Let's start with a small sample with *n* = 6.
+
+```{r}
+samp1 <- sample(distributions$skew_pop, size = 6)
+samp1
+```
+
+If we wish to determine if our sample approximates the normal distribution, we randomly select values (using *n* = 6) from the normal distribution using the `rnorm` function.
+
+```{r}
+samp_norm <- rnorm(length(samp1))
+samp_norm
+```
+
+The Q-Q plot plots the theoretical quantiles (using the `rnorm` function in this example) against the sample quantiles. We take the two vectors, sort them, then combine them such that the smallest value from the sample is paired with the smallest value from the theoretical distribution (i.e. `rnorm` here), all the way to the largest values. 
+
+```{r}
+samp1 <- samp1 |> sort()
+samp_norm <- samp_norm |> sort()
+cbind(samp1, samp_norm)
+```
+
+The following scatter plot depicts the foundation of the Q-Q plot. If the two distributions are the same then we would expect all the points to fall on a straight line. 
+
+```{r}
+#| code-fold: true
+ggplot(cbind(samp1, samp_norm), aes(x = samp1, y = samp_norm)) + 
+	geom_point() + 
+	theme_vs()
+```
+
+It is desirable to draw a straight line for reference, however determining the slope and intercept requires some work. If both the sample and comparison distributions are expressed as standard scores (i.e. mean = 0, standard deviation = 1), then we can draw the unit line (i.e. $y = x$).
+
+```{r}
+#| code-fold: true
+ggplot(cbind(samp1, samp_norm), aes(x = scale(samp1), y = scale(samp_norm))) + 
+	geom_abline(slope = 1, intercept = 0) +
+	geom_point() + 
+	theme_vs()
+```
+
+However, if we wish to retain the scaling of the original sample, we need an alternative strategy to determine the slope and intercept of the line. One common approach is to take the paired quantiles at the 25th and 75th percentiles and then calculate the equation of the line that intercepts those two points.
+
+```{r}
+x_points <- quantile(samp1, probs = c(0.25, 0.75))
+x_points
+y_points <- quantile(samp_norm, probs = c(0.25, 0.75))
+y_points
+slope <- diff(y_points) / diff(x_points)
+intercept <- y_points[1] - slope * x_points[1]
+
+ggplot(cbind(samp1, samp_norm), aes(x = samp1, y = samp_norm)) + 
+	geom_abline(slope = slope, intercept = intercept) +
+	geom_point() + 
+	theme_vs()
+```
+
+An alternative variation to the Q-Q plot line would be to plot a Loess regression line. If the two distributions are the same then the Loess regression line should be a straight line. With very small samples as demonstrated below, however, the Loess estimation is not very good.
+
+```{r}
+#| code-fold: true
+ggplot(cbind(samp1, samp_norm), aes(x = samp1, y = samp_norm)) + 
+	geom_abline(slope = slope, intercept = intercept) +
+	geom_smooth(formula = y ~ x, method = 'loess', se = FALSE, span = 1) +
+	geom_point() + 
+	theme_vs()
+```
+
+
+Let's draw random samples of *n* = `r samp_size` from the three populations defined above.
+
+```{r}
+unif_samp <- sample(distributions$unif_pop, size = samp_size)
+skew_pop <- sample(distributions$skew_pop, size = samp_size)
+norm_pop <- sample(distributions$norm_pop, size = samp_size)
+```
+
+The following three figures are Q-Q plots comparing the sample distributions to the normal distribution using the `gg_qq_plot` function in the `VisualStats` package. This is slight variation on the traditional Q-Q plot by also plotting the marginal distributions.
+
+```{r}
+#| label: distributions_qq_plot_unif
+#| fig-cap: Normal Q-Q Plot of Sample from a Uniform Population Distribution
+gg_qq_plot(unif_samp, loess = TRUE)
+```
+
+```{r}
+#| label: distributions_qq_plot_skew
+#| fig-cap: Normal Q-Q Plot of Sample from a Skewed Population Distribution
+gg_qq_plot(skew_pop, loess = TRUE)
+```
+
+```{r}
+#| label: distributions_qq_plot_norm
+#| fig-cap: Normal Q-Q Plot of Sample from Normal Population Distributed
+gg_qq_plot(norm_pop, loess = TRUE)
+```
+
+Although the most common use of Q-Q plots is to determine whether a sample distribution approximates the normal distribution, technically the Q-Q plot allows for the comparison between any two distributions. For example, the skewed distribution example created above was randomly selected from a chi-squared distribution. The `theoretical_dist` parameter of the `gg_qq_plot` function allows you to change the comparison distribution.
+
+
+```{r}
+#| label: distributions_qq_plot_chisq
+#| fig-cap: Chi-Squared Q-Q Plot
+gg_qq_plot(skew_pop, theoretical_dist = 'chisq', df = 5, 
+		   loess = TRUE)
+```
+
+
+

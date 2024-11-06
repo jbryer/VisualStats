@@ -191,7 +191,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dependent_sample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Correlation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Dependent Samples</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -300,7 +300,7 @@ div.csl-indent {
 </header>
 
 
-<p><strong>Last updated on October 03, 2024</strong></p>
+<p><strong>Last updated on November 06, 2024</strong></p>
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <p>This website is largely inspired by what our advisor, colleague, and friend Bob Pruzek called <em>elemental graphics.</em> The first two paragraphs from <span class="citation" data-cites="ElementalGraphics">Pruzek and Helmreich (<a href="references.html#ref-ElementalGraphics" role="doc-biblioref">2010</a>)</span> succinctly introduces the core ideas of <em>elemental graphics</em>:</p>
@@ -328,59 +328,59 @@ div.csl-indent {
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────
  setting  value
  version  R version 4.4.0 (2024-04-24)
- os       macOS 15.0
+ os       macOS 15.1
  system   aarch64, darwin20
  ui       X11
  language (EN)
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2024-10-03
+ date     2024-11-06
  pandoc   3.2 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/aarch64/ (via rmarkdown)
 
 ─ Packages ───────────────────────────────────────────────────────────────────
- package     * version date (UTC) lib source
- cachem        1.1.0   2024-05-16 [1] CRAN (R 4.4.0)
- cli           3.6.3   2024-06-21 [1] CRAN (R 4.4.0)
- devtools      2.4.5   2022-10-11 [1] CRAN (R 4.4.0)
- digest        0.6.37  2024-08-19 [1] CRAN (R 4.4.1)
- ellipsis      0.3.2   2021-04-29 [1] CRAN (R 4.4.0)
- evaluate      1.0.0   2024-09-17 [1] CRAN (R 4.4.1)
- fastmap       1.2.0   2024-05-15 [1] CRAN (R 4.4.0)
- fs            1.6.4   2024-04-25 [1] CRAN (R 4.4.0)
- glue          1.8.0   2024-09-30 [1] CRAN (R 4.4.1)
- htmltools     0.5.8.1 2024-04-04 [1] CRAN (R 4.4.0)
- htmlwidgets   1.6.4   2023-12-06 [1] CRAN (R 4.4.0)
- httpuv        1.6.15  2024-03-26 [1] CRAN (R 4.4.0)
- jsonlite      1.8.9   2024-09-20 [1] CRAN (R 4.4.1)
- knitr         1.48    2024-07-07 [1] CRAN (R 4.4.0)
- later         1.3.2   2023-12-06 [1] CRAN (R 4.4.0)
- lifecycle     1.0.4   2023-11-07 [1] CRAN (R 4.4.0)
- magrittr      2.0.3   2022-03-30 [1] CRAN (R 4.4.0)
- memoise       2.0.1   2021-11-26 [1] CRAN (R 4.4.0)
- mime          0.12    2021-09-28 [1] CRAN (R 4.4.0)
- miniUI        0.1.1.1 2018-05-18 [1] CRAN (R 4.4.0)
- pkgbuild      1.4.4   2024-03-17 [1] CRAN (R 4.4.0)
- pkgload       1.3.4   2024-01-16 [1] CRAN (R 4.4.0)
- profvis       0.3.8   2023-05-02 [1] CRAN (R 4.4.0)
- promises      1.3.0   2024-04-05 [1] CRAN (R 4.4.0)
- purrr         1.0.2   2023-08-10 [1] CRAN (R 4.4.0)
- R6            2.5.1   2021-08-19 [1] CRAN (R 4.4.0)
- Rcpp          1.0.13  2024-07-17 [1] CRAN (R 4.4.0)
- remotes       2.5.0   2024-03-17 [1] CRAN (R 4.4.0)
- rlang         1.1.4   2024-06-04 [1] CRAN (R 4.4.0)
- rmarkdown     2.28    2024-08-17 [1] CRAN (R 4.4.0)
- rstudioapi    0.16.0  2024-03-24 [1] CRAN (R 4.4.0)
- sessioninfo   1.2.2   2021-12-06 [1] CRAN (R 4.4.0)
- shiny         1.9.1   2024-08-01 [1] CRAN (R 4.4.0)
- stringi       1.8.4   2024-05-06 [1] CRAN (R 4.4.0)
- stringr       1.5.1   2023-11-14 [1] CRAN (R 4.4.0)
- urlchecker    1.0.1   2021-11-30 [1] CRAN (R 4.4.0)
- usethis       2.2.3   2024-02-19 [1] CRAN (R 4.4.0)
- vctrs         0.6.5   2023-12-01 [1] CRAN (R 4.4.0)
- xfun          0.47    2024-08-17 [1] CRAN (R 4.4.0)
- xtable        1.8-4   2019-04-21 [1] CRAN (R 4.4.0)
- yaml          2.3.10  2024-07-26 [1] CRAN (R 4.4.0)
+ package     * version  date (UTC) lib source
+ cachem        1.1.0    2024-05-16 [1] CRAN (R 4.4.0)
+ cli           3.6.3    2024-06-21 [1] CRAN (R 4.4.0)
+ devtools      2.4.5    2022-10-11 [1] CRAN (R 4.4.0)
+ digest        0.6.37   2024-08-19 [1] CRAN (R 4.4.1)
+ ellipsis      0.3.2    2021-04-29 [1] CRAN (R 4.4.0)
+ evaluate      1.0.1    2024-10-10 [1] CRAN (R 4.4.1)
+ fastmap       1.2.0    2024-05-15 [1] CRAN (R 4.4.0)
+ fs            1.6.5    2024-10-30 [1] CRAN (R 4.4.1)
+ glue          1.8.0    2024-09-30 [1] CRAN (R 4.4.1)
+ htmltools     0.5.8.1  2024-04-04 [1] CRAN (R 4.4.0)
+ htmlwidgets   1.6.4    2023-12-06 [1] CRAN (R 4.4.0)
+ httpuv        1.6.15   2024-03-26 [1] CRAN (R 4.4.0)
+ jsonlite      1.8.9    2024-09-20 [1] CRAN (R 4.4.1)
+ knitr         1.48     2024-07-07 [1] CRAN (R 4.4.0)
+ later         1.3.2    2023-12-06 [1] CRAN (R 4.4.0)
+ lifecycle     1.0.4    2023-11-07 [1] CRAN (R 4.4.0)
+ magrittr      2.0.3    2022-03-30 [1] CRAN (R 4.4.0)
+ memoise       2.0.1    2021-11-26 [1] CRAN (R 4.4.0)
+ mime          0.12     2021-09-28 [1] CRAN (R 4.4.0)
+ miniUI        0.1.1.1  2018-05-18 [1] CRAN (R 4.4.0)
+ pkgbuild      1.4.4    2024-03-17 [1] CRAN (R 4.4.0)
+ pkgload       1.3.4    2024-01-16 [1] CRAN (R 4.4.0)
+ profvis       0.3.8    2023-05-02 [1] CRAN (R 4.4.0)
+ promises      1.3.0    2024-04-05 [1] CRAN (R 4.4.0)
+ purrr         1.0.2    2023-08-10 [1] CRAN (R 4.4.0)
+ R6            2.5.1    2021-08-19 [1] CRAN (R 4.4.0)
+ Rcpp          1.0.13-1 2024-11-02 [1] CRAN (R 4.4.1)
+ remotes       2.5.0    2024-03-17 [1] CRAN (R 4.4.0)
+ rlang         1.1.4    2024-06-04 [1] CRAN (R 4.4.0)
+ rmarkdown     2.28     2024-08-17 [1] CRAN (R 4.4.0)
+ rstudioapi    0.16.0   2024-03-24 [1] CRAN (R 4.4.0)
+ sessioninfo   1.2.2    2021-12-06 [1] CRAN (R 4.4.0)
+ shiny         1.9.1    2024-08-01 [1] CRAN (R 4.4.0)
+ stringi       1.8.4    2024-05-06 [1] CRAN (R 4.4.0)
+ stringr       1.5.1    2023-11-14 [1] CRAN (R 4.4.0)
+ urlchecker    1.0.1    2021-11-30 [1] CRAN (R 4.4.0)
+ usethis       2.2.3    2024-02-19 [1] CRAN (R 4.4.0)
+ vctrs         0.6.5    2023-12-01 [1] CRAN (R 4.4.0)
+ xfun          0.49     2024-10-31 [1] CRAN (R 4.4.1)
+ xtable        1.8-4    2019-04-21 [1] CRAN (R 4.4.0)
+ yaml          2.3.10   2024-07-26 [1] CRAN (R 4.4.0)
 
  [1] /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library
 

@@ -4,6 +4,7 @@ Imports: car, cowplot, dplyr, egg, ggplot2, knitr, latex2exp, magrittr,
         markdown, psych, reshape2, rlang, gganimate, ggbeeswarm, shiny,
         magick, mvtnorm, shinyWidgets, tidyr, tibble, stats
 Suggests: DT, shinylive, ggforce, vdiffr
+Enhances: granova
 License: GPL (>= 3)
-MD5sum: 4f516affc4e1d806537896367396cbb1
+MD5sum: 0e3f304eaff27c4a8d4e253769f1a8c1
 NeedsCompilation: no

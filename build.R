@@ -2,6 +2,8 @@ out_dir <- '_site/shiny/'
 base_dir <- 'inst/shiny/'
 apps <- list.dirs(base_dir, full.names = FALSE, recursive = FALSE)
 
+usethis::use_tidy_description()
+devtools::document()
 devtools::install(pkg = '.', dependencies = 'Enhances')
 quarto::quarto_render('book/')
 

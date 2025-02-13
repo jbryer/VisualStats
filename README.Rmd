@@ -20,6 +20,12 @@ knitr::opts_chunk$set(
 **Authors: Jason Bryer, Ph.D. and Bruce Dudek, Ph.D.**    
 **Website: https://visualstats.bryer.org/**
 
+`r badger::badge_github_actions(action = 'R-CMD-check')`
+`r badger::badge_github_actions(action = 'build-site')`
+`r badger::badge_github_actions(action = 'deploy-cran-repo')`
+`r badger::badge_devel("jbryer/VisualStats", "blue")`
+`r badger::badge_cran_release("VisualStats")`
+
 This package contains functions and [Shiny](https://shiny.rstudio.com) applications designed to visualize statistical tests. The repository also contains a [Quarto book](https://jbryer.github.io/VisualStats). The latest version can be installed from Github using the `remotes` package:
 
 ```{r, eval=FALSE}

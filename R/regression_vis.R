@@ -24,6 +24,14 @@
 #' @param positive_cross_product_color the color of the square for positive cross products.
 #' @param negative_cross_product_color the color of the square for negative cross products.
 #' @param cross_product_alpha the alpha level (transparency) for the cross product fill.
+#' @param regression_line_color color for the regression line.
+#' @param plot_residuals whether to plot the residuals.
+#' @param plot_residuals_squared whether to plot the squared residuals.
+#' @param residuals_squared_color color for the residuals.
+#' @param residuals_squared_fill fill color for the squared residuals.
+#' @param residuals_squared_alpha alpha (transparency) level for the squared residuals.
+#' @param residual_color color for the residuals.
+#' @param residual_size size of the residuals.
 #' @return a ggplot2 expression.
 #' @import ggplot2
 #' @export

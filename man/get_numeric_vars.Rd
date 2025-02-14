@@ -6,6 +6,9 @@
 \usage{
 get_numeric_vars(glm_out)
 }
+\arguments{
+\item{glm_out}{the results of \code{\link[stats:glm]{stats::glm()}}.}
+}
 \description{
 Utility function that will return numeric columns used in the regression model.
 }

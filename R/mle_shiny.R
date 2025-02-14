@@ -8,6 +8,7 @@
 #' @param default_y default variable for the y-axis.
 #' @param ... other parameters passed to [shiny::shinyApp]
 #' @export
+#' @rdname mle_shiny
 mle_shiny <- function(df, default_x, default_y, ...) {
 	shiny_env <- new.env()
 
@@ -35,6 +36,7 @@ mle_shiny <- function(df, default_x, default_y, ...) {
 #'
 #' @return a Shiny UI object.
 #' @export
+#' @rdname mle_shiny
 mle_shiny_ui <-  function() {
 	fluidPage(
 		sidebarLayout(
@@ -92,6 +94,7 @@ mle_shiny_ui <-  function() {
 #' @return a function with Shiny server logic.
 #' @export
 #' @importFrom reshape2 melt
+#' @rdname mle_shiny
 mle_shiny_server <- function(input, output, session) {
 	# Can use a different data set if desired
 	if(!exists('thedata')) {

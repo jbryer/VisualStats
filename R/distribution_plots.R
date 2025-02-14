@@ -42,7 +42,7 @@ distribution_plot <- function(fun,
 		title <- paste("P(x < ", cv[1], " & x >", cv[2], ")",
 					   ifelse(area < 0.01,
 					   	   '< 0.01',
-					   	   paste0('≈ ', signif(area, digits = 3))))
+					   	   paste0('%~~% ', signif(area, digits = 3))))
 		p <- p + stat_function(fun = fun,
 							   geom = 'area',
 							   xlim = c(limits[1], cv[1]),
@@ -61,7 +61,7 @@ distribution_plot <- function(fun,
 		title <- paste("P(x < ", cv[1], ")",
 					   ifelse(area < 0.01,
 					   	   '< 0.01',
-					   	   paste0('≈ ', signif(area, digits = 3))))
+					   	   paste0(' %~~% ', signif(area, digits = 3))))
 		p <- p + stat_function(fun = fun,
 							   geom = 'area',
 							   xlim = c(limits[1], cv[1]),
@@ -114,16 +114,19 @@ distribution_plot <- function(fun,
 
 #' Plot a beta distribution
 #'
+#' @param shape1 non-negative parameters of the Beta distribution.
+#' @param shape2 non-negative parameters of the Beta distribution.
+#' @inheritParams distribution_plot
 #' @export
 beta_plot <- function(shape1, shape2,
 					  cv = .5,
-					  tail = TRUE,
+					  tails = TRUE,
 					  limits = c(0, 1),
 					  color = 'steelblue') {
 	distribution_plot(fun = dbeta,
 					  shape1 = shape1,
 					  shape2 = shape2,
-					  tails = 'no',
+					  tails = ifelse(tails, 'greater', 'no'),
 					  cv = c(0, cv),
 					  limits = limits,
 					  color = color)
@@ -131,11 +134,10 @@ beta_plot <- function(shape1, shape2,
 
 #' Plot a chi-squared distribution
 #'
-#' @inheritParams distribution_plot
-#'
+#' @param df degrees of freedom.
 #' @seealso [stats::dchisq()]
 #' @export
-#' @md
+#' @inheritParams distribution_plot
 chisquare_plot <- function(df = 2,
 					   cv = 2,
 					   tails = 'greater',
@@ -152,7 +154,8 @@ chisquare_plot <- function(df = 2,
 
 #' Plot a F distribution.
 #'
-#' @param cf critical value (or F-statistic).
+#' @param df1 numerator degrees of freedom.
+#' @param df2 denominator degrees of freedom.
 #' @inheritParams distribution_plot
 #' @seealso [stats::df()]
 #' @export
@@ -174,6 +177,7 @@ F_plot <- function(df1 = 1, df2 = 5,
 
 #' Plot a student t distribution.
 #'
+#' @param df degrees of freedom.
 #' @inheritParams distribution_plot
 #' @export
 t_plot <- function(df = 10,

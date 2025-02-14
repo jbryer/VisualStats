@@ -1,5 +1,6 @@
 #' Utility function that will return numeric columns used in the regression model.
 #'
+#' @param glm_out the results of [stats::glm()].
 #' @export
 get_numeric_vars <- function(glm_out) {
 	numeric_vars <- unlist(lapply(glm_out$data, is.numeric))
@@ -16,11 +17,20 @@ get_numeric_vars <- function(glm_out) {
 #'        \code{\link{glm}}).
 #' @param vars character vector with the name of the independent variables to
 #'        include. If omitted, all numeric variables will be used.
-#' @param the number of groups to use. By default groups will have a minimum of
+#' @param n_groups the number of groups to use. By default groups will have a minimum of
 #'        six observations up to a maximum of 10 groups.
 #' @param widths the relative widths of the two plots. If you only want the first
 #'        plot, use \code{widths = c(0, 1)}; if only the second plot, use
 #'        \code{widths = c(1, 0)}.
+#' @param na.rm whether missing values should be removed.
+#' @param x_lab label for the x-axis.
+#' @param y_lab label for the y-axis.
+#' @param x_limits limits for the x-axis.
+#' @param coord_equal whether the x- and y-axes should be equal.
+#' @param coord_flip whether the x- and y-axes should be flipped.
+#' @param legend.position location of the legend.
+#' @param varplot_nrow parameter passed to [ggplot2::facet_wrap()].
+#' @param varplot_ncol parameter passed to [ggplot2::facet_wrap()].
 #' @return a ggplot2 expression.
 #' @export
 #' @examples
@@ -102,7 +112,7 @@ plot_linear_assumption_check <- function(glm_out,
 
 	tab$ymin <- apply(tab[,c('mean', 'se')], 1, FUN = function(x) { max(x['mean'] - 1.96 * x['se'], 0) })
 	tab$ymax <- apply(tab[,c('mean', 'se')], 1, FUN = function(x) { min(x['mean'] + 1.96 * x['se'], 1) })
-	tab$color <- ifelse(tab$ymin <= tab$x_pos & tab$x_pos <= tab$ymax, 'p > 0.05', 'p ≤ 0.05')
+	tab$color <- ifelse(tab$ymin <= tab$x_pos & tab$x_pos <= tab$ymax, 'p > 0.05', 'p <= 0.05')
 
 	p1 <- ggplot(data.frame(predicted_prob = predicted_prob, Y = Y),
 		   aes(x = predicted_prob, y = Y)) +

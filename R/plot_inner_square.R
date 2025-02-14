@@ -1,5 +1,7 @@
 #' Plots a circle within a circle.
 #'
+#' @param percent percentage of the inner square.
+#' @param inner location of the inner square.
 #' @export
 plot_inner_square <- function(percent = 0.5, inner = c('center', 'bottom')) {
 	width1 <- 1

@@ -57,15 +57,17 @@ components.
 \examples{
 # Plot a single distribution
 x <- rnorm(n = 1000)
-ggplot() +
-.    geom_dist(x) +
-    geom_point(data.frame(x = mean(x), y = 0, pch = 22)
+ggplot2::ggplot() +
+    geom_dist(x) +
+    ggplot2::geom_point(data = data.frame(x = mean(x), y = 0),
+                        ggplot2::aes(x = x, y = y), pch = 22)
 
+# Plot two distributions
 x1 <- rnorm(1000, mean = 0, sd = 4)
 x2 <- rnbinom(1000, 10, .4)
-ggplot() + geom_dist(list(normal = x1, binomial = x2), adjust = 2)
+ggplot2::ggplot() + geom_dist(list(normal = x1, binomial = x2), adjust = 2)
 
 # Plot more than one distribution using a data frame
 data(mtcars)
-ggplot() + geom_dist(mtcars[,c('mpg', 'wt')], quantile = 0.5)
+ggplot2::ggplot() + geom_dist(mtcars[,c('mpg', 'wt')], quantile = 0.5)
 }

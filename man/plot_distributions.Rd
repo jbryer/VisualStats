@@ -13,6 +13,19 @@ plot_distributions(
   palette = c(d = "#1b9e77", r = "#d95f02", p = "#7570b3", q = "#e7298a")
 )
 }
+\arguments{
+\item{dist}{name of the distribution function to plot (e.g. \code{norm}, \code{t}).}
+
+\item{xvals}{inputs to \code{dist} function.}
+
+\item{xmin}{minimum x-axis value to plot.}
+
+\item{xmax}{maximum x-axis value to plot.}
+
+\item{args}{parameters to pass to \code{dist}.}
+
+\item{palette}{colors to use for the four subplots. Must be a named vector with d, r, p, and q.}
+}
 \description{
 Plot the four distributions functions.
 }

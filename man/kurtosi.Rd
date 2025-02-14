@@ -6,6 +6,13 @@
 \usage{
 kurtosi(x, na.rm = TRUE, type = 3)
 }
+\arguments{
+\item{x}{numeric vector.}
+
+\item{na.rm}{whether to remove missing values.}
+
+\item{type}{see \code{\link[psych:skew]{psych::kurtosi()}}.}
+}
 \description{
 Copied from the psych package
 }

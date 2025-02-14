@@ -6,6 +6,11 @@
 \usage{
 plot_inner_circle(percent = 0.5, y_inner = c("center", "bottom"))
 }
+\arguments{
+\item{percent}{percentage of the inner circle.}
+
+\item{y_inner}{location for the inner circle.}
+}
 \description{
 Plots a circle within a circle.
 }

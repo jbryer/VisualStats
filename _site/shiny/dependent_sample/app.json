@@ -1,1 +1,0 @@
-[{"name":"app.R","content":"if(require(webr)) { # This is running in the browser using webr\n\twebr::install(\"VisualStats\", repos = c(\"https://visualstats.bryer.org/\", \"https://repo.r-wasm.org/\"))\n}\nlibrary(VisualStats)\nlibrary(shiny)\nshinyApp(ui = dependent_sample_shiny_ui, server = dependent_sample_shiny_server)\n","type":"text"}]

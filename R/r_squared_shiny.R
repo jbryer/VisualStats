@@ -3,6 +3,7 @@
 #' @param ... other parameters passed to [shiny::shinyApp()]
 #' @return results of shinyApp
 #' @export
+#' @rdname r_squared_shiny
 r_squared_shiny <- function(...) {
 	shiny::shinyApp(ui = r_squared_shiny_ui,
 					server = r_squared_shiny_server,
@@ -13,6 +14,7 @@ r_squared_shiny <- function(...) {
 #'
 #' @return a Shiny UI object.
 #' @export
+#' @rdname r_squared_shiny
 r_squared_shiny_ui <- function() {
 	fluidPage(
 		sidebarLayout(
@@ -85,6 +87,7 @@ r_squared_shiny_ui <- function() {
 #' @param session Shiny session object.
 #' @return a function with Shiny server logic.
 #' @export
+#' @rdname r_squared_shiny
 r_squared_shiny_server <- function(input, output, session) {
 	getData <- reactive({
 		req(input$dataset)

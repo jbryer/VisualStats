@@ -13,6 +13,17 @@ beta_plot(
   color = "steelblue"
 )
 }
+\arguments{
+\item{shape1}{non-negative parameters of the Beta distribution.}
+
+\item{shape2}{non-negative parameters of the Beta distribution.}
+
+\item{cv}{the critical value(s) to shade.}
+
+\item{limits}{the limits of the plot.}
+
+\item{color}{the color to fill in the area.}
+}
 \description{
 Plot a beta distribution
 }

@@ -2,16 +2,36 @@
 % Please edit documentation in R/dependent_sample_shiny.R
 \name{dependent_sample_shiny}
 \alias{dependent_sample_shiny}
+\alias{dependent_sample_shiny_ui}
+\alias{dependent_sample_shiny_server}
 \title{Run the Shiny server for visualizing R-Squared}
 \usage{
 dependent_sample_shiny(...)
+
+dependent_sample_shiny_ui()
+
+dependent_sample_shiny_server(input, output, session)
 }
 \arguments{
 \item{...}{other parameters passed to \code{\link[shiny:shinyApp]{shiny::shinyApp()}}}
+
+\item{input}{Shiny input object.}
+
+\item{output}{Shiny output object.}
+
+\item{session}{Shiny session object.}
 }
 \value{
 results of shinyApp
+
+a Shiny UI object.
+
+a function with Shiny server logic.
 }
 \description{
 Run the Shiny server for visualizing R-Squared
+
+R-Squared Shiny UI
+
+R-Squared Shiny Server
 }

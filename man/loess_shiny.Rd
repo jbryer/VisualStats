@@ -2,13 +2,28 @@
 % Please edit documentation in R/loess_shiny.R
 \name{loess_shiny}
 \alias{loess_shiny}
+\alias{loess_shiny_ui}
+\alias{loess_shiny_server}
 \title{Run the Loess Shiny server}
 \usage{
 loess_shiny(...)
+
+loess_shiny_ui()
+
+loess_shiny_server(input, output, session)
 }
 \arguments{
 \item{...}{other parameters passed to \link[shiny:shinyApp]{shiny::shinyApp}}
 }
+\value{
+a function with Shiny server logic.
+
+a Shiny UI object.
+}
 \description{
 Run the Loess Shiny server
+
+Shiny Server
+
+Shiny UI
 }

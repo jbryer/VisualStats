@@ -6,6 +6,9 @@
 \usage{
 plot_bar(percent = 0.5)
 }
+\arguments{
+\item{percent}{maximum value for the y-axis.}
+}
 \description{
 Plots a bar.
 }

@@ -2,6 +2,7 @@
 #'
 #' @param ... other parameters passed to [shiny::shinyApp()].
 #' @export
+#' @rdname correlation_shiny
 correlation_shiny <- function(...) {
 	shiny::shinyApp(ui = correlation_shiny_ui,
 					server = correlation_shiny_server,
@@ -13,6 +14,7 @@ correlation_shiny <- function(...) {
 #'
 #' @return a Shiny UI object.
 #' @export
+#' @rdname correlation_shiny
 correlation_shiny_ui <- function() {
 	fluidPage(
 		sidebarLayout(
@@ -128,6 +130,7 @@ correlation_shiny_ui <- function() {
 #' @export
 #' @importFrom dplyr mutate
 #' @importFrom mvtnorm rmvnorm
+#' @rdname correlation_shiny
 correlation_shiny_server <- function(input, output, session) {
 	get_data <- reactive({
 		input$resample

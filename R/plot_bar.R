@@ -1,5 +1,6 @@
 #' Plots a bar.
 #'
+#' @param percent maximum value for the y-axis.
 #' @export
 plot_bar <- function(percent = 0.5) {
 	ggplot() +

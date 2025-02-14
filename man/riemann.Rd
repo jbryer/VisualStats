@@ -7,6 +7,8 @@
 riemann(fun, min, max, n = 2, ...)
 }
 \arguments{
+\item{fun}{function used to calculate the intergral using Riemann sums.}
+
 \item{min}{minimum x-value.}
 
 \item{max}{maximum x-value.}
@@ -14,8 +16,6 @@ riemann(fun, min, max, n = 2, ...)
 \item{n}{number of rectangles used to estimate Riemann sum.}
 
 \item{...}{other parameters passed to f.}
-
-\item{f}{function used to calculate the intergral using Riemann sums.}
 }
 \value{
 data.frame with three variables: xmin, height (i.e. f(xmin)), and area.

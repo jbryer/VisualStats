@@ -3,6 +3,7 @@
 #' @param ... other parameters passed to [shiny::shinyApp()]
 #' @return results of shinyApp
 #' @export
+#' @rdname dependent_sample_shiny
 dependent_sample_shiny <- function(...) {
 	shiny::shinyApp(ui = dependent_sample_shiny_ui,
 					server = dependent_sample_shiny_server,
@@ -13,6 +14,7 @@ dependent_sample_shiny <- function(...) {
 #'
 #' @return a Shiny UI object.
 #' @export
+#' @rdname dependent_sample_shiny
 dependent_sample_shiny_ui <- function() {
 	fluidPage(
 		sidebarLayout(
@@ -105,6 +107,7 @@ dependent_sample_shiny_ui <- function() {
 #' @param session Shiny session object.
 #' @return a function with Shiny server logic.
 #' @export
+#' @rdname dependent_sample_shiny
 dependent_sample_shiny_server <- function(input, output, session) {
 	getData <- reactive({
 		req(input$dataset)

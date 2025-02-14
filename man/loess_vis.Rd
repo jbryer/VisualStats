@@ -17,6 +17,27 @@ loess_vis(
   ...
 )
 }
+\arguments{
+\item{formula}{regression formula.}
+
+\item{data}{data frame containing the data.}
+
+\item{center}{where to display the current Loess estimation.}
+
+\item{degree}{whether to estimate local linear (1) or quadratic (2) regressions.}
+
+\item{span}{the parameter which controls the degree of smoothing.}
+
+\item{draw_loess}{whether to draw the Loess regression line up to \code{center}.}
+
+\item{show_loess}{whether to draw the complete Loess regression line.}
+
+\item{xlab}{x-axis label.}
+
+\item{ylab}{y-axis label.}
+
+\item{...}{currently not used.}
+}
 \description{
 Loess Visualization
 }

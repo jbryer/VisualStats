@@ -2,12 +2,15 @@
 #'
 #' @param x the predictor
 #' @param y the outcome
+#' @param intercept the intercept from the model.
+#' @param slope the slope from the model.
 #' @param sigma the root mean square error
 #' @param k the number of standard deviations to plot
 #' @param height the proportion of the x-axis the distribution should occupy.
 #'        That is, a height of 0.4 means the width of the distribution will
 #'        occupy approximately 40 percent of the plot width.
 #' @param pt the point to highlight and draw the likelihood of.
+#' @param ... currently not used.
 #' @export
 plot_likelihood <- function(x, y, height = 0.4, k = 4, pt = 1,
 						   intercept = lm(y ~ x)$coefficients[1],

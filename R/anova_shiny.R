@@ -1,8 +1,9 @@
 #' Run the Shiny server for visualizing ANOVA
 #'
 #' @param ... other parameters passed to [shiny::shinyApp()]
-#' @return results of shinyApp
+#' @return results of [shiny::shinyApp()]
 #' @export
+#' @rdname anova_shiny
 anova_shiny <- function(...) {
 	shiny::shinyApp(ui = anova_shiny_ui,
 					server = anova_shiny_server,
@@ -13,6 +14,7 @@ anova_shiny <- function(...) {
 #'
 #' @return a Shiny UI object.
 #' @export
+#' @rdname anova_shiny
 anova_shiny_ui <- function() {
 	fluidPage(
 		sidebarLayout(
@@ -83,6 +85,7 @@ anova_shiny_ui <- function() {
 #' @param session Shiny session object.
 #' @return a function with Shiny server logic.
 #' @export
+#' @rdname anova_shiny
 anova_shiny_server <- function(input, output, session) {
 	getData <- reactive({
 		req(input$dataset)

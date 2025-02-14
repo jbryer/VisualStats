@@ -2,16 +2,36 @@
 % Please edit documentation in R/anova_shiny.R
 \name{anova_shiny}
 \alias{anova_shiny}
+\alias{anova_shiny_ui}
+\alias{anova_shiny_server}
 \title{Run the Shiny server for visualizing ANOVA}
 \usage{
 anova_shiny(...)
+
+anova_shiny_ui()
+
+anova_shiny_server(input, output, session)
 }
 \arguments{
 \item{...}{other parameters passed to \code{\link[shiny:shinyApp]{shiny::shinyApp()}}}
+
+\item{input}{Shiny input object.}
+
+\item{output}{Shiny output object.}
+
+\item{session}{Shiny session object.}
 }
 \value{
-results of shinyApp
+results of \code{\link[shiny:shinyApp]{shiny::shinyApp()}}
+
+a Shiny UI object.
+
+a function with Shiny server logic.
 }
 \description{
 Run the Shiny server for visualizing ANOVA
+
+ANOVA Shiny UI
+
+ANOVA Shiny Server
 }

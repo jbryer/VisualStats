@@ -9,7 +9,7 @@
 #'        the height.
 #' @param plot_mean whether to plot a line for the mean difference.
 #' @param plot_unit_line whether to plot the line y = x.
-#' @param plot_projects whether to plot lines connecting the raw data points to
+#' @param plot_projections whether to plot lines connecting the raw data points to
 #'        a line perpendicular to the unit line representing the distribution of differences.
 #' @param plot_differences whether to plot points on aline perpendicular to the unit
 #'        line representing the distribution of differences.

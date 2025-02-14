@@ -2,9 +2,15 @@
 % Please edit documentation in R/mle_shiny.R
 \name{mle_shiny}
 \alias{mle_shiny}
+\alias{mle_shiny_ui}
+\alias{mle_shiny_server}
 \title{Visualizing Maximum Likelihood Estimation Shiny Application}
 \usage{
 mle_shiny(df, default_x, default_y, ...)
+
+mle_shiny_ui()
+
+mle_shiny_server(input, output, session)
 }
 \arguments{
 \item{df}{a data.frame to explore.}
@@ -14,6 +20,17 @@ mle_shiny(df, default_x, default_y, ...)
 \item{default_y}{default variable for the y-axis.}
 
 \item{...}{other parameters passed to \link[shiny:shinyApp]{shiny::shinyApp}}
+
+\item{input}{Shiny input object.}
+
+\item{output}{Shiny output object.}
+
+\item{session}{Shiny session object.}
+}
+\value{
+a Shiny UI object.
+
+a function with Shiny server logic.
 }
 \description{
 This will start a shiny app explore maximum likelihood estimation visually.

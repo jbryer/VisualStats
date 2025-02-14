@@ -4,7 +4,7 @@
 \alias{describe_by}
 \title{Basic summary statistics by group}
 \usage{
-describe_by(x, group = NULL, type = 3, trim = 0.1, na.rm = TRUE, ...)
+describe_by(x, group = NULL, type = 3, trim = 0.1, na.rm = TRUE, mat, ...)
 }
 \arguments{
 \item{x}{a numeric vector to summarize.}
@@ -20,9 +20,9 @@ taken as the nearest endpoint.}
 \item{na.rm}{a logical evaluating to TRUE or FALSE indicating whether NA values
 should be stripped before the computation proceeds.}
 
-\item{...}{not currently used. Included to ensure compatibility.}
-
 \item{mat}{not used, provided to provide direct compatability with \link[psych:describe.by]{psych::describeBy}.}
+
+\item{...}{not currently used. Included to ensure compatibility.}
 }
 \value{
 a data.frame with the summary statistic.

@@ -2,8 +2,10 @@ default_fun = c('Normal' = '1 / (sqrt(2 * pi)) * exp(1)^(-1/2 * (x)^2)',
 				'Cubic' = '0.25 * x^3 + 0.25 * x^2 + 0.49 * x + 5')
 
 #' Shiny UI
+#'
 #' @return a Shiny UI object.
 #' @export
+#' @rdname calculus_shiny
 calculus_shiny_ui <- function() {
 	# Shiny UI code here. Basic siderbar panel provided
 	fluidPage(
@@ -53,6 +55,7 @@ calculus_shiny_ui <- function() {
 #' @return a function with Shiny server logic.
 #' @importFrom stats integrate
 #' @export
+#' @rdname calculus_shiny
 calculus_shiny_server <- function(input, output, session) {
 	error_message <- reactiveVal('')
 
@@ -147,6 +150,7 @@ calculus_shiny_server <- function(input, output, session) {
 #' Run the Shiny server
 #' @param ... other parameters passed to [shiny::shinyApp]
 #' @export
+#' @rdname calculus_shiny
 calculus_shiny <- function(...) {
 	shiny::shinyApp(ui = calculus_shiny_ui, server = calculus_shiny_server, ...)
 }

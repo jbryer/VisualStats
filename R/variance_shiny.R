@@ -5,12 +5,14 @@
 #' @param ... other parameters passed to [shiny::shinyApp]
 #' @references http://rstudio.com/shiny
 #' @export
+#' @rdname variance_shiny
 variance_shiny <- function(...) {
 	shiny::shinyApp(ui = variance_shiny_ui, server = variance_shiny_server, ...)
 }
 
 #' Server function for variance application
 #' @export
+#' @rdname variance_shiny
 variance_shiny_ui <- function() {
 	fluidPage(
 		sidebarLayout(
@@ -46,6 +48,7 @@ variance_shiny_ui <- function() {
 #' @param output Shiny output object.
 #' @param session Shiny session object
 #' @export
+#' @rdname variance_shiny
 variance_shiny_server <- function(input, output, session) {
 	getData <- reactive({
 		x <- c(97.88, 107.91, 88.26, 115.21, 87.38)

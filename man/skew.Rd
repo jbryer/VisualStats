@@ -6,6 +6,13 @@
 \usage{
 skew(x, na.rm = TRUE, type = 3)
 }
+\arguments{
+\item{x}{a numeric vector.}
+
+\item{na.rm}{whether missing values shoujld be removed.}
+
+\item{type}{see \code{\link[psych:skew]{psych::skew()}}}
+}
 \description{
 Copied from the psych package.
 }

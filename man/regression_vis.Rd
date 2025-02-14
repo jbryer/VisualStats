@@ -49,6 +49,8 @@ regression_vis(
 
 \item{plot_regression}{whether to plot the linear regression line.}
 
+\item{regression_line_color}{color for the regression line.}
+
 \item{plot_x_deviations}{either a logical or numerical vector for the rows in \code{df}
 to plot the x deviations.}
 
@@ -81,6 +83,20 @@ to plot the cross products.}
 \item{cross_product_fill}{the fill for the cross products plotted by \code{plot_cross_products}.}
 
 \item{cross_product_alpha}{the alpha level (transparency) for the cross product fill.}
+
+\item{plot_residuals}{whether to plot the residuals.}
+
+\item{plot_residuals_squared}{whether to plot the squared residuals.}
+
+\item{residuals_squared_color}{color for the residuals.}
+
+\item{residuals_squared_fill}{fill color for the squared residuals.}
+
+\item{residuals_squared_alpha}{alpha (transparency) level for the squared residuals.}
+
+\item{residual_color}{color for the residuals.}
+
+\item{residual_size}{size of the residuals.}
 }
 \value{
 a ggplot2 expression.

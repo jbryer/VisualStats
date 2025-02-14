@@ -32,6 +32,7 @@ describe_by <- function(x,
 						type = 3,
 						trim = 0.1,
 						na.rm = TRUE,
+						mat,
 						...) {
 	n_groups <- 0
 	df <- data.frame(x = x,
@@ -96,6 +97,9 @@ if(FALSE) {
 }
 
 #' Copied from the psych package.
+#' @param x a numeric vector.
+#' @param na.rm whether missing values shoujld be removed.
+#' @param type see [psych::skew()]
 skew <- function (x, na.rm = TRUE, type = 3) {
 	if (length(dim(x)) == 0) {
 		if (na.rm) {
@@ -141,7 +145,10 @@ skew <- function (x, na.rm = TRUE, type = 3) {
 }
 
 #' Copied from the psych package
-kurtosi <- function (x, na.rm = TRUE, type = 3) {
+#' @param x numeric vector.
+#' @param na.rm whether to remove missing values.
+#' @param type see [psych::kurtosi()].
+kurtosi <- function(x, na.rm = TRUE, type = 3) {
 	if (length(dim(x)) == 0) {
 		if (na.rm) {
 			x <- x[!is.na(x)]

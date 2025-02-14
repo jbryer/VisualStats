@@ -2,6 +2,7 @@
 #'
 #' @param ... other parameters passed to [shiny::shinyApp]
 #' @export
+#' @rdname loess_shiny
 loess_shiny <- function(...) {
 	shiny::shinyApp(ui = loess_shiny_ui, server = loess_shiny_server, ...)
 }
@@ -10,6 +11,7 @@ loess_shiny <- function(...) {
 #' @return a function with Shiny server logic.
 #' @export
 #' @importFrom shinyWidgets chooseSliderSkin
+#' @rdname loess_shiny
 loess_shiny_ui <- function() {
 	span_range <- c(0.05, 10)
 	fluidPage(
@@ -43,8 +45,13 @@ loess_shiny_ui <- function() {
 }
 
 #' Shiny UI
+#'
+#' @param input Shiny input object.
+#' @param output Shiny output object.
+#' @param session Shiny session oboject.
 #' @return a Shiny UI object.
 #' @export
+#' @rdname loess_shiny
 loess_shiny_server <- function(input, output, session) {
 	span_range <- c(0.05, 10)
 	data('faithful', package = 'datasets', envir = environment())

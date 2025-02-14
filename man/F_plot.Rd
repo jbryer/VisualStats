@@ -14,6 +14,10 @@ F_plot(
 )
 }
 \arguments{
+\item{df1}{numerator degrees of freedom.}
+
+\item{df2}{denominator degrees of freedom.}
+
 \item{cv}{the critical value(s) to shade.}
 
 \item{tails}{whether there are one or two sided tails.}
@@ -21,8 +25,6 @@ F_plot(
 \item{limits}{the limits of the plot.}
 
 \item{color}{the color to fill in the area.}
-
-\item{cf}{critical value (or F-statistic).}
 }
 \description{
 Plot a F distribution.

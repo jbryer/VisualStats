@@ -188,13 +188,13 @@ r_squared_vis <- function(df, formu,
 #' This is an internal function.
 #'
 #' @param p a ggplot2 expression.
+#' @param percents percentage of the inner boxes.
 #' @param xmin x coordinate for the lower left corner.
 #' @param ymin y coordinate for the lower left corner.
 #' @param xmax x coordinate for the upper right corner.
 #' @param ymax y coordinate for the upper right corner.
 #' @param rev if TRUE drawing starts from the upper right.
 #' @param colors color of the perimeter of the boxes.
-#' @param fill the color used to for the fill if length(percents) == 1.
 #' @param alpha the transparency for the fill color(s).
 plot_tiles <- function(p, percents, xmin, ymin, xmax, ymax,
 					   rev = FALSE,

@@ -1,5 +1,15 @@
 #' Loess Visualization
 #'
+#' @param formula regression formula.
+#' @param data data frame containing the data.
+#' @param center where to display the current Loess estimation.
+#' @param degree whether to estimate local linear (1) or quadratic (2) regressions.
+#' @param span the parameter which controls the degree of smoothing.
+#' @param draw_loess whether to draw the Loess regression line up to `center`.
+#' @param show_loess whether to draw the complete Loess regression line.
+#' @param ylab y-axis label.
+#' @param xlab x-axis label.
+#' @param ... currently not used.
 #' @export
 #' @examples
 #' data("faithful")

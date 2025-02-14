@@ -38,6 +38,9 @@ the height.}
 
 \item{plot_unit_line}{whether to plot the line y = x.}
 
+\item{plot_projections}{whether to plot lines connecting the raw data points to
+a line perpendicular to the unit line representing the distribution of differences.}
+
 \item{plot_differences}{whether to plot points on aline perpendicular to the unit
 line representing the distribution of differences.}
 
@@ -47,9 +50,6 @@ line representing the distribution of differences.}
 
 \item{plot_samp_dist}{whether to plot the sampling distribution (normal or t depending
 on the \code{test} parameter).}
-
-\item{plot_projects}{whether to plot lines connecting the raw data points to
-a line perpendicular to the unit line representing the distribution of differences.}
 }
 \value{
 a ggplot2 expression.

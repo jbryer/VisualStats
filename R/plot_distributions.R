@@ -1,5 +1,11 @@
 #' Plot the four distributions functions.
 #'
+#' @param dist name of the distribution function to plot (e.g. `norm`, `t`).
+#' @param xvals inputs to `dist` function.
+#' @param xmin minimum x-axis value to plot.
+#' @param xmax maximum x-axis value to plot.
+#' @param args parameters to pass to `dist`.
+#' @param palette colors to use for the four subplots. Must be a named vector with d, r, p, and q.
 #' @export
 plot_distributions <- function(dist, xvals, xmin, xmax,
 							   args = list(),

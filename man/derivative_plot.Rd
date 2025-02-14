@@ -14,6 +14,10 @@ derivative_plot(
 )
 }
 \arguments{
+\item{fun}{function used to calculate the derivative.}
+
+\item{x_value}{x-coordinate where the derivative is desired.}
+
 \item{delta_x}{the difference in x used to estimate the derivative.}
 
 \item{view_xmin}{minimum x-value for the plot view.}
@@ -21,10 +25,6 @@ derivative_plot(
 \item{view_xmax}{maximum x-value for the plot view.}
 
 \item{...}{other parameters passed to f.}
-
-\item{f}{function used to calculate the derivative.}
-
-\item{x}{x-coordinate where the derivative is desired.}
 }
 \description{
 Derivative plot

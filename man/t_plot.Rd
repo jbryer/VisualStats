@@ -13,6 +13,8 @@ t_plot(
 )
 }
 \arguments{
+\item{df}{degrees of freedom.}
+
 \item{cv}{the critical value(s) to shade.}
 
 \item{tails}{whether there are one or two sided tails.}

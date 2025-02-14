@@ -6,6 +6,11 @@
 \usage{
 plot_inner_square(percent = 0.5, inner = c("center", "bottom"))
 }
+\arguments{
+\item{inner}{location of the inner square.}
+
+\item{percet}{percentage of the inner square.}
+}
 \description{
 Plots a circle within a circle.
 }

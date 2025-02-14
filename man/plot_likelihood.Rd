@@ -29,7 +29,13 @@ occupy approximately 40 percent of the plot width.}
 
 \item{pt}{the point to highlight and draw the likelihood of.}
 
+\item{intercept}{the intercept from the model.}
+
+\item{slope}{the slope from the model.}
+
 \item{sigma}{the root mean square error}
+
+\item{...}{currently not used.}
 }
 \description{
 Scatter plot with likelihood superimposed.

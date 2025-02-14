@@ -25,15 +25,33 @@ plot_linear_assumption_check(
 \item{glm_out}{the results of the logistic regression (i.e. the result from
 \code{\link{glm}}).}
 
+\item{n_groups}{the number of groups to use. By default groups will have a minimum of
+six observations up to a maximum of 10 groups.}
+
 \item{vars}{character vector with the name of the independent variables to
 include. If omitted, all numeric variables will be used.}
+
+\item{na.rm}{whether missing values should be removed.}
+
+\item{x_lab}{label for the x-axis.}
+
+\item{y_lab}{label for the y-axis.}
+
+\item{x_limits}{limits for the x-axis.}
+
+\item{coord_equal}{whether the x- and y-axes should be equal.}
+
+\item{coord_flip}{whether the x- and y-axes should be flipped.}
 
 \item{widths}{the relative widths of the two plots. If you only want the first
 plot, use \code{widths = c(0, 1)}; if only the second plot, use
 \code{widths = c(1, 0)}.}
 
-\item{the}{number of groups to use. By default groups will have a minimum of
-six observations up to a maximum of 10 groups.}
+\item{legend.position}{location of the legend.}
+
+\item{varplot_nrow}{parameter passed to \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}.}
+
+\item{varplot_ncol}{parameter passed to \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}}.}
 }
 \value{
 a ggplot2 expression.

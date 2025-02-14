@@ -32,8 +32,6 @@ plot_tiles(
 \item{colors}{color of the perimeter of the boxes.}
 
 \item{alpha}{the transparency for the fill color(s).}
-
-\item{fill}{the color used to for the fill if length(percents) == 1.}
 }
 \description{
 This is an internal function.

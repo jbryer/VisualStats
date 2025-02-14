@@ -1,6 +1,6 @@
 #' Warpper to optim to save iterations.
 #'
-#' This function wraps the \link{stats::optim} function and saves the parameters
+#' This function wraps the [stats::optim()] function and saves the parameters
 #' and likelihood estimation at each step of the algorithm.
 #'
 #' @param par initial parameters to to be optimized over.
@@ -9,7 +9,7 @@
 #' @return the results of optim with two additional elements, iterations with a
 #'         a list of the values at each iteration of the algorithm and
 #'         iterations_df which is a data.frame version of the list.
-#' @seealso stats::optim
+#' @importFrom stats optim
 #' @export
 optim_save <- function(par, fn, ...) {
 	iterations <- list()

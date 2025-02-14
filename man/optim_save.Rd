@@ -19,9 +19,6 @@ a list of the values at each iteration of the algorithm and
 iterations_df which is a data.frame version of the list.
 }
 \description{
-This function wraps the \link{stats::optim} function and saves the parameters
+This function wraps the \code{\link[stats:optim]{stats::optim()}} function and saves the parameters
 and likelihood estimation at each step of the algorithm.
-}
-\seealso{
-stats::optim
 }

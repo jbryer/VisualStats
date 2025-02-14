@@ -2,12 +2,24 @@
 % Please edit documentation in R/variance_shiny.R
 \name{variance_shiny}
 \alias{variance_shiny}
+\alias{variance_shiny_ui}
+\alias{variance_shiny_server}
 \title{Visualizing Variance Shiny Application}
 \usage{
 variance_shiny(...)
+
+variance_shiny_ui()
+
+variance_shiny_server(input, output, session)
 }
 \arguments{
 \item{...}{other parameters passed to \link[shiny:shinyApp]{shiny::shinyApp}}
+
+\item{input}{Shiny input object.}
+
+\item{output}{Shiny output object.}
+
+\item{session}{Shiny session object}
 }
 \description{
 This will start a shiny app explore variance visually.

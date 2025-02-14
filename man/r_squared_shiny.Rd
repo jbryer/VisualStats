@@ -2,16 +2,36 @@
 % Please edit documentation in R/r_squared_shiny.R
 \name{r_squared_shiny}
 \alias{r_squared_shiny}
+\alias{r_squared_shiny_ui}
+\alias{r_squared_shiny_server}
 \title{Run the Shiny server for visualizing R-Squared}
 \usage{
 r_squared_shiny(...)
+
+r_squared_shiny_ui()
+
+r_squared_shiny_server(input, output, session)
 }
 \arguments{
 \item{...}{other parameters passed to \code{\link[shiny:shinyApp]{shiny::shinyApp()}}}
+
+\item{input}{Shiny input object.}
+
+\item{output}{Shiny output object.}
+
+\item{session}{Shiny session object.}
 }
 \value{
 results of shinyApp
+
+a Shiny UI object.
+
+a function with Shiny server logic.
 }
 \description{
 Run the Shiny server for visualizing R-Squared
+
+R-Squared Shiny UI
+
+R-Squared Shiny Server
 }

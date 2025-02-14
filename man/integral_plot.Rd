@@ -19,15 +19,21 @@ integral_plot(
 \arguments{
 \item{fun}{function used to calculate Riemann sums.}
 
+\item{xmin}{minimum x-value.}
+
+\item{xmax}{maximum x-value.}
+
 \item{view_xmin}{minimum x-value for the plot view.}
 
 \item{view_xmax}{maximum x-value for the plot view.}
 
 \item{n}{number of rectangles used to estimate Riemann sum.}
 
-\item{min}{minimum x-value.}
+\item{rect_alpha}{the alpha (transparency) level for rectangles.}
 
-\item{max}{maximum x-value.}
+\item{rect_color}{the color for rectangles.}
+
+\item{rect_fill}{the fill color for rectangles.}
 }
 \description{
 Integral plot using Riemann sums.

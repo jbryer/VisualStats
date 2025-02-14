@@ -2,13 +2,34 @@
 % Please edit documentation in R/correlation_shiny.R
 \name{correlation_shiny}
 \alias{correlation_shiny}
+\alias{correlation_shiny_ui}
+\alias{correlation_shiny_server}
 \title{Shiny application for visualization of correlations and cross products.}
 \usage{
 correlation_shiny(...)
+
+correlation_shiny_ui()
+
+correlation_shiny_server(input, output, session)
 }
 \arguments{
 \item{...}{other parameters passed to \code{\link[shiny:shinyApp]{shiny::shinyApp()}}.}
+
+\item{input}{Shiny input object.}
+
+\item{output}{Shiny output object.}
+
+\item{session}{Shiny session object.}
+}
+\value{
+a Shiny UI object.
+
+a function with Shiny server logic.
 }
 \description{
 Shiny application for visualization of correlations and cross products.
+
+Shiny UI for correlation
+
+Shiny server for maximum likelihood estimation
 }

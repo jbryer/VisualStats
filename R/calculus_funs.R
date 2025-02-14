@@ -1,6 +1,6 @@
 #' Calculate Riemann sums
 #'
-#' @param f function used to calculate the intergral using Riemann sums.
+#' @param fun function used to calculate the intergral using Riemann sums.
 #' @param min minimum x-value.
 #' @param max maximum x-value.
 #' @param n number of rectangles used to estimate Riemann sum.
@@ -30,13 +30,16 @@ normal_fun <- function(x, mean = 0, sd = 1) {
 #' Integral plot using Riemann sums.
 #'
 #' @param fun function used to calculate Riemann sums.
-#' @param min minimum x-value.
-#' @param max maximum x-value.
+#' @param xmin minimum x-value.
+#' @param xmax maximum x-value.
 #' @param view_xmin the minimum x-value to view.
 #' @param view_xmax the maximum x-value to view.
 #' @param n number of rectangles used to estimate Riemann sum.
 #' @param view_xmin minimum x-value for the plot view.
 #' @param view_xmax maximum x-value for the plot view.
+#' @param rect_alpha the alpha (transparency) level for rectangles.
+#' @param rect_color the color for rectangles.
+#' @param rect_fill the fill color for rectangles.
 #' @export
 integral_plot <- function(fun = normal_fun,
 						  xmin = 0,
@@ -67,8 +70,8 @@ integral_plot <- function(fun = normal_fun,
 #' Derivative plot
 #'
 #'
-#' @param f function used to calculate the derivative.
-#' @param x x-coordinate where the derivative is desired.
+#' @param fun function used to calculate the derivative.
+#' @param x_value x-coordinate where the derivative is desired.
 #' @param delta_x the difference in x used to estimate the derivative.
 #' @param view_xmin minimum x-value for the plot view.
 #' @param view_xmax maximum x-value for the plot view.
@@ -100,7 +103,7 @@ derivative_plot <- function(fun = normal_fun,
 		geom_point(aes(x = x_value, y = fun(x_value)), color = 'blue', size = 3) +
 		xlim(c(view_xmin, view_xmax)) +
 		xlab('x') + ylab('y') +
-		ggtitle(paste0('Slope ≈ ', round(segment_slope, digits = 3))) +
+		ggtitle(paste0('Slope %~~% ', round(segment_slope, digits = 3))) +
 		theme_vs()
 	return(p)
 }

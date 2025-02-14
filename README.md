@@ -6,6 +6,17 @@ VisualStats: R package for visualizing statistical tests
 **Authors: Jason Bryer, Ph.D. and Bruce Dudek, Ph.D.**  
 **Website: <https://visualstats.bryer.org/>**
 
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/jbryer/VisualStats/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jbryer/psa/actions/workflows/R-CMD-check.yaml)
+[![Book
+Status](https://github.com/jbryer/VisualStats/actions/workflows/build-site.yaml/badge.svg)](https://github.com/jbryer/psa/actions/workflows/bookdown.yaml)
+[![WebR
+Repo](https://github.com/jbryer/VisualStats/actions/workflows/deploy-cran-repo.yaml/badge.svg)](https://github.com/jbryer/psa/actions/workflows/R-CMD-check.yaml)
+[![](https://img.shields.io/badge/devel%20version-0.2.0-blue.svg)](https://github.com/jbryer/VisualStats)
+[![](https://www.r-pkg.org/badges/version/VisualStats)](https://cran.r-project.org/package=VisualStats)
+<!-- badges: end -->
+
 This package contains functions and [Shiny](https://shiny.rstudio.com)
 applications designed to visualize statistical tests. The repository
 also contains a [Quarto book](https://jbryer.github.io/VisualStats). The

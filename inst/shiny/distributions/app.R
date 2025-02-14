@@ -1,5 +1,4 @@
 library(shiny)
-library(DATA606)
 
 distributions <- list(
     'Normal' = list(fun = normal_plot),

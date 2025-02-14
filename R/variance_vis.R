@@ -7,17 +7,18 @@
 #' @author Bruce Dudek
 #' @return a ggplot2 expression.
 #' @param x a vector of values to display the variance of.
+#' @param plot_mean whether to plot the mean.
 #' @param plot_deviances,plot_deviances_x,plot_deviances_y either a logical (TRUE to include all cross
 #'        products) or an integer vector indicating which cross products from
 #'         \code{x} are to be plotted.
-#' @param plot_population_variances whether to plot the population variance.
+#' @param plot_population_variance whether to plot the population variance.
 #' @param plot_sample_variance whether to plot the sample variance.
 #' @param plot_population_sd whether to plot the population standard deviation.
 #' @param plot_sample_sd whether to plot the sample standard deviation.
 #' @param point_size the size of points.
 #' @param deviation_col color of the deviations.
 #' @param sample_variance_col color of the sample variance.
-#' @param population_variance_color color of the population variance.
+#' @param population_variance_col color of the population variance.
 #' @param sample_sd_col color of the sample standard deviation.
 #' @param population_sd_col color of the population standard deviation.
 #' @param sd_size size of the standard deviation error bars.

@@ -8,7 +8,7 @@ beta_plot(
   shape1,
   shape2,
   cv = 0.5,
-  tail = TRUE,
+  tails = TRUE,
   limits = c(0, 1),
   color = "steelblue"
 )
@@ -19,6 +19,8 @@ beta_plot(
 \item{shape2}{non-negative parameters of the Beta distribution.}
 
 \item{cv}{the critical value(s) to shade.}
+
+\item{tails}{whether there are one or two sided tails.}
 
 \item{limits}{the limits of the plot.}
 

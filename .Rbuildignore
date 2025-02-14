@@ -18,3 +18,5 @@ build_orig.R
 shinylive.txt
 .github/
 ^\.github$
+_site/
+manuscripts/

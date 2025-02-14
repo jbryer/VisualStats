@@ -14,6 +14,12 @@ loess_shiny_server(input, output, session)
 }
 \arguments{
 \item{...}{other parameters passed to \link[shiny:shinyApp]{shiny::shinyApp}}
+
+\item{input}{Shiny input object.}
+
+\item{output}{Shiny output object.}
+
+\item{session}{Shiny session oboject.}
 }
 \value{
 a function with Shiny server logic.

@@ -27,6 +27,7 @@
 #' @return a list of ggplot2 geometries.
 #' @import ggplot2
 #' @importFrom stats density quantile approxfun
+#' @importFrom grDevices palette
 #' @export
 #' @examples
 #' # Plot a single distribution

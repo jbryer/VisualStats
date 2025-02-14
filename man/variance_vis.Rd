@@ -29,12 +29,40 @@ variance_vis(
 \arguments{
 \item{x}{a vector of values to display the variance of.}
 
-\item{plot_deviances}{either a logical (TRUE to include all cross
+\item{plot_mean}{whether to plot the mean.}
+
+\item{plot_deviances, plot_deviances_x, plot_deviances_y}{either a logical (TRUE to include all cross
 products) or an integer vector indicating which cross products from
-\code{x} are to be plotted.#'}
+\code{x} are to be plotted.}
+
+\item{plot_population_variance}{whether to plot the population variance.}
+
+\item{plot_sample_variance}{whether to plot the sample variance.}
+
+\item{plot_population_sd}{whether to plot the population standard deviation.}
+
+\item{plot_sample_sd}{whether to plot the sample standard deviation.}
+
+\item{point_size}{the size of points.}
 
 \item{variance_position}{where to plot the sample and/or population
 variances. Values can be 'top', 'bottom', or 'middle'.}
+
+\item{deviation_col}{color of the deviations.}
+
+\item{sample_variance_col}{color of the sample variance.}
+
+\item{population_variance_col}{color of the population variance.}
+
+\item{sample_sd_col}{color of the sample standard deviation.}
+
+\item{population_sd_col}{color of the population standard deviation.}
+
+\item{sd_size}{size of the standard deviation error bars.}
+
+\item{xlab}{label for the x-axis.}
+
+\item{...}{currently not used.}
 }
 \value{
 a ggplot2 expression.

@@ -19,6 +19,8 @@ plot_tiles(
 \arguments{
 \item{p}{a ggplot2 expression.}
 
+\item{percents}{percentage of the inner boxes.}
+
 \item{xmin}{x coordinate for the lower left corner.}
 
 \item{ymin}{y coordinate for the lower left corner.}

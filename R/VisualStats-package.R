@@ -60,6 +60,7 @@ theme_vs <- function() {
 #' @importFrom grDevices boxplot.stats
 #' @importFrom stats median sd var mad IQR lm resid predict anova as.formula anova rnorm optim
 #'             binomial complete.cases dist dnorm dt fitted glm loess pf quantile runif setNames
+#'             t.test qt qnorm
 "_PACKAGE"
 
 #' Bacteria counts after various hand washing techniques.

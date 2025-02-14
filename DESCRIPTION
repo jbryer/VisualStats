@@ -24,7 +24,6 @@ Imports:
     ggplot2,
     knitr,
     latex2exp,
-    magick,
     magrittr,
     markdown,
     mvtnorm,
@@ -39,6 +38,7 @@ Imports:
 Suggests: 
     DT,
     ggforce,
+    magick,
     shinylive,
     vdiffr
 Enhances: 

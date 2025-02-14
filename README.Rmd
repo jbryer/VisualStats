@@ -21,9 +21,9 @@ knitr::opts_chunk$set(
 **Website: https://visualstats.bryer.org/**
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/jbryer/VisualStats/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jbryer/psa/actions/workflows/R-CMD-check.yaml)
-[![Book Status](https://github.com/jbryer/VisualStats/actions/workflows/build-site.yaml/badge.svg)](https://github.com/jbryer/psa/actions/workflows/bookdown.yaml)
-[![WebR Repo](https://github.com/jbryer/VisualStats/actions/workflows/deploy-cran-repo.yaml/badge.svg)](https://github.com/jbryer/psa/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/jbryer/VisualStats/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jbryer/VisualStats/actions/workflows/R-CMD-check.yaml)
+[![Book Status](https://github.com/jbryer/VisualStats/actions/workflows/build-site.yaml/badge.svg)](https://github.com/jbryer/VisualStats/actions/workflows/bookdown.yaml)
+[![WebR Repo](https://github.com/jbryer/VisualStats/actions/workflows/deploy-cran-repo.yaml/badge.svg)](https://github.com/jbryer/VisualStats/actions/workflows/R-CMD-check.yaml)
 `r badger::badge_devel("jbryer/VisualStats", "blue")`
 `r badger::badge_cran_release("VisualStats")`
 <!-- badges: end -->

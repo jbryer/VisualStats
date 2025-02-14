@@ -8,11 +8,11 @@ VisualStats: R package for visualizing statistical tests
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/jbryer/VisualStats/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jbryer/psa/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/jbryer/VisualStats/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jbryer/VisualStats/actions/workflows/R-CMD-check.yaml)
 [![Book
-Status](https://github.com/jbryer/VisualStats/actions/workflows/build-site.yaml/badge.svg)](https://github.com/jbryer/psa/actions/workflows/bookdown.yaml)
+Status](https://github.com/jbryer/VisualStats/actions/workflows/build-site.yaml/badge.svg)](https://github.com/jbryer/VisualStats/actions/workflows/bookdown.yaml)
 [![WebR
-Repo](https://github.com/jbryer/VisualStats/actions/workflows/deploy-cran-repo.yaml/badge.svg)](https://github.com/jbryer/psa/actions/workflows/R-CMD-check.yaml)
+Repo](https://github.com/jbryer/VisualStats/actions/workflows/deploy-cran-repo.yaml/badge.svg)](https://github.com/jbryer/VisualStats/actions/workflows/R-CMD-check.yaml)
 [![](https://img.shields.io/badge/devel%20version-0.2.0-blue.svg)](https://github.com/jbryer/VisualStats)
 [![](https://www.r-pkg.org/badges/version/VisualStats)](https://cran.r-project.org/package=VisualStats)
 <!-- badges: end -->

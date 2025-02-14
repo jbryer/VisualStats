@@ -2,8 +2,7 @@ Package: VisualStats
 Version: 0.2.0
 Imports: car, cowplot, dplyr, egg, gganimate, ggbeeswarm, ggplot2,
         knitr, latex2exp, magrittr, markdown, mvtnorm, psych, reshape2,
-        rlang, shiny, shinyWidgets, stats, tibble, tidyr
+        rlang, shiny, shinyWidgets, stats, tibble, tidyr, granova
 Suggests: DT, ggforce, magick, shinylive, vdiffr
-Enhances: granova
 License: GPL (>= 3)
-MD5sum: 2d8920168dc4f9300a2ca64dd9773689
+MD5sum: 62c9a476b17e991f7aec1784be75f9b8

@@ -22,6 +22,7 @@ Imports:
     gganimate,
     ggbeeswarm,
     ggplot2,
+    granova,
     knitr,
     latex2exp,
     magrittr,
@@ -34,15 +35,13 @@ Imports:
     shinyWidgets,
     stats,
     tibble,
-    tidyr,
-    granova
+    tidyr
 Suggests: 
     DT,
     ggforce,
     magick,
     shinylive,
     vdiffr
-Enhances: 
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3

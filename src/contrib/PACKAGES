@@ -6,5 +6,5 @@ Imports: car, cowplot, dplyr, egg, gganimate, ggbeeswarm, ggplot2,
 Suggests: DT, ggforce, shinylive, vdiffr
 Enhances: granova
 License: GPL (>= 3)
-MD5sum: 60553622d63ad7f230e8c2e4611c46ba
+MD5sum: 2aa675b54110f26964399ce106f91b18
 NeedsCompilation: no

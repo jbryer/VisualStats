@@ -34,7 +34,8 @@ Imports:
     shinyWidgets,
     stats,
     tibble,
-    tidyr
+    tidyr,
+    granova
 Suggests: 
     DT,
     ggforce,
@@ -42,7 +43,6 @@ Suggests:
     shinylive,
     vdiffr
 Enhances: 
-    granova
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3

@@ -4,19 +4,32 @@
 \alias{se}
 \title{Calculate standard error}
 \usage{
-se(x)
+se(x, proportion = length(unique(x)) == 2, na.rm = TRUE)
 }
 \arguments{
 \item{x}{a numeric vector to calculate the standard error for.}
+
+\item{proportion}{whether to use the standard error for a proportion.}
+
+\item{na.rm}{a logical evaluating to \code{TRUE} or \code{FALSE} indicating whether \code{NA} values should be
+stripped before the computation proceeds.}
 }
 \value{
 the standard error.
 }
 \description{
-Calculates the standard error of the mean using the following formula:
+If \code{x} is a numeric vector with more than two unique values, this returns the standard error of
+the mean using the following formula:
 }
 \details{
 \deqn{se = \frac{s}{\sqrt{n}}}
 
 where \emph{s} is the sample standard deviation and \emph{n} is the sample size.
+
+If \code{proportion = TRUE} (which is the default when there are only two unique values in \code{x}) this
+returns the standard error for a proportion using the following formula:
+
+\deqn{se = \frac{p\(1 - p)}{n}}
+
+where \emph{p} is the proportion of success and \emph{n} is the sample size.
 }

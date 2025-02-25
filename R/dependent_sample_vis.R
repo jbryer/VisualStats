@@ -19,7 +19,7 @@
 #'        on the `test` parameter).
 #' @return a ggplot2 expression.
 #' @export
-#' @importFrom granovagg granovagg.ds
+#' @import granova
 #' @examples
 #' data(blood_lead, package = 'granova')
 #' dependent_sample_vis(

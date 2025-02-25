@@ -53,6 +53,11 @@ anova_vis <- function(Y,
 					  plot_pooled_sd = FALSE,
 					  xlab = 'Deviation Contrast',
 					  ylab = 'Dependent Variable',
+					  # grand_mean_col = vs_palette_qual[2],
+					  # sd_line_col = vs_palette_qual[1], # Grand (overall) Standard Deviation
+					  # pooled_sd_col = vs_palette_qual[3], # Pooled Standard Deviation
+					  # ms_within_col = vs_palette_qual[7],
+					  # ms_between_col = vs_palette_qual[4],
 					  grand_mean_col = 'blue',
 					  sd_line_col = 'maroon', # Grand (overall) Standard Deviation
 					  pooled_sd_col = 'steelblue3', # Pooled Standard Deviation
@@ -195,14 +200,14 @@ anova_vis <- function(Y,
 	if(plot_ms_within) {
 		p <- p + geom_rect(data = df_rect[2,],
 						   aes(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax, group = Mean.Square),
-						   alpha = 0.4, fill = ms_within_col)
+						   alpha = 0.4, fill = ms_within_col, color = ms_within_col, size = 1)
 
 	}
 
 	if(plot_ms_between) {
 		p <- p + geom_rect(data = df_rect[1,],
 						   aes(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax, group = Mean.Square),
-						   alpha = 0.1, fill = ms_between_col)
+						   alpha = 0.3, fill = ms_between_col, color = ms_between_col, size = 1)
 	}
 
 	if(plot_unit_line) {

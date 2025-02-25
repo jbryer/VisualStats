@@ -1,7 +1,7 @@
 Package: VisualStats
 Title: Visualizations for Statistical Tests
 Version: 0.2.0
-Date: 2025-02-12
+Date: 2025-02-25
 Authors@R: c(
     person("Jason", "Bryer", , "jason@bryer.org", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-2454-0402")),
@@ -42,8 +42,6 @@ Suggests:
     magick,
     shinylive,
     vdiffr
-VignetteBuilder: 
-    knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true

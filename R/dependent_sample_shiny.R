@@ -121,7 +121,7 @@ dependent_sample_shiny_server <- function(input, output, session) {
 				y = rnorm(input$n, mean = input$mean_y, sd = input$sd_y)
 			)
 		} else if(input$dataset == 'anorexia') {
-			data('anorexia.sub', package = 'granova', envir = baseenv())
+			data('anorexia.sub', package = 'granova', env = baseenv())
 			df <- anorexia.sub
 		} else if(input$dataset == 'blood_lead') {
 			data('blood_lead', package = 'granova', env = baseenv())

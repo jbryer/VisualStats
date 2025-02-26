@@ -5,5 +5,5 @@ Imports: car, cowplot, dplyr, egg, gganimate, ggbeeswarm, ggplot2,
         reshape2, rlang, shiny, shinyWidgets, stats, tibble, tidyr
 Suggests: DT, ggforce, magick, shinylive, vdiffr
 License: GPL (>= 3)
-MD5sum: a82ce0de8df362f8ed77f09bed03b159
+MD5sum: d72bb0fdcfa616761f09412c53be066a
 NeedsCompilation: no

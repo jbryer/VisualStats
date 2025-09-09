@@ -1,0 +1,152 @@
+---
+editor_options: 
+  chunk_output_type: console
+---
+
+# Multiple Regression {#sec-multiple-regression}
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FALSE,
+					  fig.align = 'center')
+
+set.seed(2112)
+
+options(digits = 2)
+
+library(VisualStats)
+library(dplyr)
+library(ggplot2)
+library(reshape2)
+library(gganimate)
+library(magick)
+library(cowplot)
+library(DT)
+
+ggplot2::theme_set(theme_vs())
+data("depression", package = "VisualStats")
+```
+
+Now that we have defined the relationship between two variables using ordinary least squares regression, we want to extend that framework to include omre variables. Multiple regression is the procedure used to *predict* an outcome (i.e. dependent variable) from two or more independent variables. We are going to use the `depression` data set which includes baseline measures from `r nrow(depression)` individuals who participated in psychological intervention (Boswell, n.d.). We can visually represent these data using a 3d scatter plot where our dependent variable is on the *z*-axis and independent variables are on the *x* and *y*-axes.
+
+```{r}
+multiple_regression_vis(y = depression$depression,
+						x1 = depression$anxiety,
+						x2 = depression$affect,
+						y_lab = 'Depression',
+						x1_lab = 'Anxiety',
+						x2_lab = 'Affect',
+						plot_regression = FALSE,
+						plot_residuals = FALSE)
+```
+
+Algebraically we represent this model as:
+
+$$Y_{depression} = B_0 + B_{anxiety} X_{anxiety} + B_{affect} X_{affect}$$
+
+We now have two slopes (coefficients) to estimate In the [OLS regression](ols_regression.qmd) chapter we defined the slope of the line as the product of the [correlation](correlation.qmd) and the ratio of the [standard deviations](descriptives.qmd#sec-variance). We might be tempted to estimate the two slopes using:
+
+$$ B_{anxiety} = r_{depression,anxiety} \frac{S_{depression}}{S_{anxiety}} $$
+
+$$ B_{affect} = r_{depression,affect} \frac{S_{depression}}{S_{affect}} $$
+
+However, this would be incorrect because `anxiety` and `affect` are correlated. 
+
+```{r}
+GGally::ggpairs(depression[,c('depression', 'anxiety', 'affect')])
+```
+
+Although it is possible to estimate the slopes using a closed form solution, it requires knowledge of matrix algebra which is beyond the scope of this book. Instead, to explore multiple regression visually, we will use [maximum likelihood estimation](mle.qmd). Our goal, like OLS, is to minimize the sum of squared residuals. The following function generalizes the calculation of the sum of squared residuals introduced in the [maximum likelihood estimation](mle.qmd) for an arbitrary number of independent variables.
+
+```{r}
+residual_sum_squares <- function(parameters, predictors, outcome) {
+	if(length(parameters) - 1 != ncol(predictors)) {
+		stop('Number of parameters does not match the number of predictors.')
+	}
+	predicted <- 0
+	for(i in 1:ncol(predictors)) {
+		predicted <- predicted + parameters[i] * predictors[i]
+	}
+	predicted <- predicted + parameters[length(parameters)]
+	residuals <- outcome - predicted
+	ss <- sum(residuals^2)
+	return(ss)
+}
+```
+
+We can then use the `optim_save` function to find the combination of slopes and intercept that minimizes the sum of squared residuals.
+
+```{r}
+optim.rss <- optim_save(
+	par = runif(3),
+	fn = residual_sum_squares,
+	method = "L-BFGS-B",
+	predictors = depression[,c('anxiety', 'affect')],
+	outcome = depression$depression
+)
+```
+
+```{r}
+summary(optim.rss)
+plot(optim.rss, param_labels = c('anxiety', 'affect', 'intercept'), result_label = 'Sum of Squared Residuals')
+```
+
+The regression results can then be written algebrically as:
+
+$$ Y_{depression} = `r optim.rss$par[3]` + `r optim.rss$par[1]` X_{anxiety} + `r optim.rss$par[2]` X_{affect} $$
+
+The figure below adds the plane estimated to the 3d scatter plot. The vertical lines going from each point to the plane represent the residuals. 
+
+```{r}
+multiple_regression_vis(y = depression$depression,
+						x1 = depression$anxiety,
+						x2 = depression$affect,
+						y_lab = 'Depression',
+						x1_lab = 'Anxiety',
+						x2_lab = 'Affect',
+						plot_regression = TRUE,
+						plot_residuals = TRUE)
+```
+
+Multiple regression uses the same `lm` function to estimate the model, we simply add our additional independent variables. 
+
+```{r}
+lm_out <- lm(depression ~ anxiety + affect, data = depression)
+summary(lm_out)
+```
+
+```{r, include = FALSE}
+# TODO: Not sure I want to include this. It is covered in the R-squared chapter
+depression$predicted <- predict(lm_out)
+VisualStats::r_squared_vis(df = depression[1:20,], 
+						   formu = depression ~ anxiety + affect, 
+                           plot_total_variance = FALSE,
+                           plot_error_variance = FALSE,
+                           plot_all_variances = FALSE,
+                           plot_residuals_squared = TRUE,
+                           plot_residuals = TRUE,
+                           x_lab = 'Observed Depression',
+                           y_lab = 'Predicted Depression') + 
+	geom_point(data = depression, aes(x = depression, y = predicted)) +
+  ggplot2::ggtitle('')
+```
+
+
+## Interaction Effects
+
+```{r}
+multiple_regression_vis(y = depression$depression,
+						x1 = depression$anxiety,
+						x2 = depression$affect,
+						y_lab = 'Depression',
+						x1_lab = 'Anxiety',
+						x2_lab = 'Affect',
+						plot_regression = TRUE,
+						plot_residuals = FALSE,
+						interaction = TRUE)
+```
+
+```{r}
+lm_out_2 <- lm(depression ~ anxiety * affect, data = depression)
+summary(lm_out_2)
+```

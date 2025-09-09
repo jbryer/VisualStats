@@ -67,7 +67,7 @@ print.optim <- function(x, ...) {
 #' Summary method for `optim_save`
 #'
 #' @rdname optim-save
-#' @param object result from [optim_save()].
+#' @param object result from `optim_save`.
 #' @param digits number of digits to round the parmaeters to.
 #' @param ... currently unused.
 #' @return `object` invisibly.
@@ -85,7 +85,7 @@ summary.optim <- function(object, digits = 3, ...) {
 #' Plot method for `optim_save`
 #'
 #' @rdname optim-save
-#' @param x result from [option_save()].
+#' @param x result from `option_save`.
 #' @param param_labels character vector to label the parameters (e.g. variable names).
 #' @param result_label character to label the result (i.e. the resutl of function optimized).
 #' @param ... currently unused.

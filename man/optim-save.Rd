@@ -22,9 +22,9 @@ optim_save(par, fn, ...)
 
 \item{...}{currently unused.}
 
-\item{x}{result from \code{\link[=option_save]{option_save()}}.}
+\item{x}{result from \code{option_save}.}
 
-\item{object}{result from \code{\link[=optim_save]{optim_save()}}.}
+\item{object}{result from \code{optim_save}.}
 
 \item{digits}{number of digits to round the parmaeters to.}
 

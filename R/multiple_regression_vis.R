@@ -8,6 +8,9 @@
 #' @param plot_residuals if `TRUE` the residuals will be plotted as line segments.
 #' @param plot_slopes either `x1` or `x2` to plot the simple slopes (i.e. plus and minus one
 #'        standard deviation) or `NULL` to exclude.
+#' @param x1_lab label for x1-axis.
+#' @param x2_lab label for x2-axis.
+#' @param y_lab label for the y-axis.
 #' @return a plot_ly expression.
 #' @export
 #' @importFrom plotly plot_ly add_trace layout
@@ -106,8 +109,8 @@ multiple_regression_vis <- function(
 		if(!plot_slopes %in% c('x1', 'x2')) {
 			stop('plot_slopes parameter must be either x1 or x2')
 		}
-		#' @param dist distance from the mean expressed in standard deviation units
-		#' @param direction which variable is held constant.
+		# @param dist distance from the mean expressed in standard deviation units
+		# @param direction which variable is held constant.
 		add_slope <- function(plot, dist = 1, direction = 'x1') {
 			constant <- ifelse(direction == 'x1', 'x2', 'x1')
 			x1_mean <- mean(df[,direction])

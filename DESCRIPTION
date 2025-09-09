@@ -14,6 +14,8 @@ Description: Functions and Shiny applications for visualizing statistical
 License: GPL (>= 3)
 URL: https://jbryer.github.io/VisualStats/
 BugReports: https://github.com/jbryer/VisualStats/issues
+Depends: 
+    R (>= 3.5)
 Imports: 
     car,
     cowplot,
@@ -28,6 +30,7 @@ Imports:
     magrittr,
     markdown,
     mvtnorm,
+    plotly,
     psych,
     reshape2,
     rlang,

@@ -67,7 +67,7 @@ to plot the y deviations.}
 
 \item{plot_negative_cross_products}{plot all the cross products in the 2nd and 4th quandrants.}
 
-\item{plot_cross_products}{either a logicial or numerical vector for the rows in \code{df}
+\item{plot_cross_products}{either a logical or numerical vector for the rows in \code{df}
 to plot the cross products.}
 
 \item{positive_cross_product_fill}{the fill for the positive cross products.}

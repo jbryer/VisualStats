@@ -28,11 +28,13 @@ book:
     - distributions.qmd
     - correlation.qmd
     - dependent_sample.qmd
-    - ols_regression.qmd
-    - r_squared.qmd
-    - loess.qmd
-    - mle.qmd
     - anova.qmd
+    - ols_regression.qmd
+    - mle.qmd
+    - multiple_regression.qmd
+    - r_squared.qmd
+    - logistic_regression.qmd
+    - loess.qmd
     - references.qmd
   appendices:
     - calculus.qmd

@@ -11,7 +11,7 @@
 #'        to plot the x deviations.
 #' @param plot_y_deviations either a logical or numerical vector for the rows in `df`
 #'        to plot the y deviations.
-#' @param plot_cross_products either a logicial or numerical vector for the rows in `df`
+#' @param plot_cross_products either a logical or numerical vector for the rows in `df`
 #'        to plot the cross products.
 #' @param plot_regression whether to plot the linear regression line.
 #' @param cross_product_fill the fill for the cross products plotted by `plot_cross_products`.

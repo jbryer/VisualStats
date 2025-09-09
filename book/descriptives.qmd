@@ -78,6 +78,64 @@ variance_vis(x,
 $$ s = \sqrt{s^2} = \sqrt{\frac{\sigma(x_i - \bar{x})^2}{n - 1}} $$ {#eq-standard-deviation}
 
 
+### Sample versus population variance
+
+We used the population variance above because the denominator, *N*, is easier to demonstrate since the variance is simply the average of the area of all the squares. However, we will almost always want to estimate the sample variance which changes the denominator to *n - 1* (technically called the degrees of freedom which will be described in more detail in later chapters). In fact, the `var` function in R to calculate variance will always return the sample variance (and `sd` function for standard deviation by extension). In practice reporting the sample variance when working with a population can be considered a slightly conservative estimate. However, as *n* increases, the difference between the sample and population variances are going to converge (see Appendix A for more details about convergence, limits, and core calculus concepts helpful for learning statistics). 
+
+Let's first define two function to caclulate the sample and population variances.
+
+```{r}
+sample_var <- function(x) {
+	mean_x <- mean(x)
+	n <- length(x)
+	sum( (x - mean_x)^2) / (n - 1)
+}
+
+population_var <- function(x) {
+	mean_x <- mean(x)
+	N <- length(x)
+	sum( (x - mean_x)^2) / N
+}
+```
+
+We will now calculate the sample and population variance from a vector randomly generated from the normal distribution with mean of 0 and standard deviation of 1.
+
+```{r}
+max_n <- 500
+x <- rnorm(max_n)
+variances <- data.frame(n = seq(2, max_n, 1),
+						sample_var = numeric(max_n - 1),
+						population_var = numeric(max_n - 1))
+for(i in seq_len(nrow(variances))) {
+	n <- variances[i,]$n
+	variances[i,]$sample_var <- sample_var(x[1:n])
+	variances[i,]$population_var <- population_var(x[1:n])
+}
+variances <- variances |>
+	dplyr::mutate(Difference = abs(population_var - sample_var))
+```
+
+Figure \@ref(fig:fig-variance-convergence) depicts the two variances along with the difference for sample sizes rangine from 2 to 500. The blue line representing the difference is very close to zero when *n* = 200.
+
+```{r}
+#| label: fig-variance-convergence
+#| fig-cap: Sample versus population variances as *n* increases.
+#| code-fold: true
+#| warning: false
+#| fig-height: 5
+variances |> 
+	reshape2::melt(id.vars = 'n', variable.name = 'Estimate', value.name = 'Variance') |>
+	ggplot(aes(x = n, y = Variance, color = Estimate)) +
+		geom_path()
+```
+
+Examining the last five rows (i.e. *n* = 496 to 500) show that the difference in the two variances is less than 0.01.
+
+```{r}
+tail(variances, 5)
+```
+
+
 ```{=html}
  <iframe id="example1" src="https://r.bryer.org/shiny/variance/" style="border: none; width: 100%; height: 400px" frameborder="0"></iframe>
 ```
@@ -88,3 +146,6 @@ $$ s = \sqrt{s^2} = \sqrt{\frac{\sigma(x_i - \bar{x})^2}{n - 1}} $$ {#eq-standar
 :::
 
 This Shiny application can be run locally using the `VisualStats::variance_shiny()` function.
+
+
+

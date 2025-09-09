@@ -84,3 +84,72 @@ theme_vs <- function() {
 #' @keywords datasets
 #' @references De Veaux, R.D., Velleman, P.F., & Bock, D.E. (2009). *Intro Stats* (4th ed). Pearson.
 NA
+
+#' Depression, anxiety and affect
+#'
+#' The data set used in this set of visualizations has been provided by Professor
+#' [James Boswell](https://www.albany.edu/psychology/faculty/james-boswell),
+#' and is from a psychological treatment study. Baseline indices of Depression severity, Anxiety
+#' Severity, and Positive Affect were acquired on a sample of clients prior to treatment. These
+#' simple measurements permit investigation of the relative and interactive importance of Anxiety
+#' and Positivity in their relationship to Depression scores. It is not surprising that Anxiety
+#' Scores and Depression scores are positively related.
+#'
+#' The interesting question is whether Positive Affect moderates this relationship. The analysis
+#' presented in these visualizations is superficial and is only intended for instructional purposes
+#' in seeing interaction and Simple Slopes. Any strong scientific conclusions based on these
+#' depictions would be premature.
+#'
+#' See https://bcdudek.net/shinyapps.html for more information.
+#'
+#' @name depression
+#' @docType data
+#' @format a data frame with 200 observations of 3 variables.
+#' \describe{
+#'     \item{depression}{Depression severity}
+#'     \item{anxiety}{Anxiety severity}
+#'     \item{affect}{Positive affect}
+#' }
+#' @keywords datasets
+NA
+
+
+#' Product strength predicted from processing time, temperature, and pressure
+#'
+#' This data set is designed to explore the interactions effects. The independent variables
+#' (processing time, temperature, and pressure) affect the dependent variable (product strength).
+#' There is an interaction between `Temperature` and `Pressure`.
+#'
+#' @name manufacturing
+#' @docType data
+#' @format a data frame with 29 observations of 4 variables
+#' \describe{
+#'     \item{Strength}{}
+#'     \item{Temperature}{}
+#'     \item{Pressure}{}
+#'     \item{Time}{}
+#' }
+#' @references Frost, J. (2020). *Regression Analysis: An Intuitive Guide for Using and Interpreting
+#' Linear Models* Statistics By Jim Publishing.
+#' https://statisticsbyjim.com/regression/interaction-effects/
+NA
+
+#' Various characteristics of States (and District of Columbia) including poverty
+#'
+#' This dataset was originally used by Gelman and Hill (2007) to demonstrate multiple regression.
+#' In particular multicollinearity predicting `poverty` from `female_house` and `white`.
+#'
+#' @name poverty
+#' @docType data
+#' @format a data frame with 51 observations of 6 variables
+#' \describe{
+#'     \item{state}{The state.}
+#'     \item{metro_res}{Percent of people in the state living in a metropolitan area.}
+#'     \item{white}{Percent of the state population that is white.}
+#'     \item{hs_grad}{Percent of the state population that has a high school diploma.}
+#'     \item{poverty}{Percent of the state population living in poverty.}
+#'     \item{female_house}{Percent of the state where the female is head of household.}
+#' }
+#' @references Gelman, H. & Hill, J. (2007). *Data Analysis using Regression and Multilevel/Hierarchical Models.*
+#' Cambridge University Press.
+NA

@@ -27,5 +27,30 @@ plot_distributions(
 \item{palette}{colors to use for the four subplots. Must be a named vector with d, r, p, and q.}
 }
 \description{
-Plot the four distributions functions.
+When working with distributions in R, each distribution has four functions, namely:
+}
+\details{
+\itemize{
+\item \code{dXXX} - density function.
+\item \code{rXXX} - generate random number from this distribution.
+\item \code{pXXX} - returns the area to the left of the given value.
+\item \code{qXXX} - returns the quantile for the given value.
+}
+
+Where \code{XXX} is the distribution name (e.g. \code{norm}, \code{binom}, \code{t}, etc.).
+}
+\examples{
+# Normal distribution with mean 100 and standard deviation 15
+plot_distributions(dist = 'norm',
+                   xvals = c(80, 90, 105),
+                   xmin = 55,
+                   xmax = 145,
+                   args = list(mean = 100, sd = 15))
+
+# Binomial distribution
+plot_distributions(dist = 'binom',
+				      xvals = c(1, 3),
+				      xmin = 0,
+				      xmax = 10,
+				      args = list(size = 10, prob = 0.35))
 }

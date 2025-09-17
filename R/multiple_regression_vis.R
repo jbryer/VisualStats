@@ -14,6 +14,7 @@
 #' @return a plot_ly expression.
 #' @export
 #' @importFrom plotly plot_ly add_trace layout
+#' @importFrom stats coef
 #' @examples
 #' data(depression, package = 'VisualStats')
 #' multiple_regression_vis(y = depression$depression,

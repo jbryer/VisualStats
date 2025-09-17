@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -90,14 +90,15 @@ div.csl-indent {
 <link href="./descriptives.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-12c353959f04a374e03d6f3b24c62157.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c5022915cd8665b43a00aab6c793318b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -137,7 +138,8 @@ div.csl-indent {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./VisualStats.png" alt="" class="navbar-logo">
+    <img src="./VisualStats.png" alt="" class="navbar-logo light-content">
+    <img src="./VisualStats.png" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Visual Statistics</span>
@@ -164,6 +166,10 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -314,7 +320,7 @@ div.csl-indent {
 </header>
 
 
-<p><strong>Last updated on September 09, 2025</strong></p>
+<p><strong>Last updated on September 17, 2025</strong></p>
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <p>This website is largely inspired by what our advisor, colleague, and friend Bob Pruzek called <em>elemental graphics.</em> The first two paragraphs from <span class="citation" data-cites="ElementalGraphics">Pruzek and Helmreich (<a href="references.html#ref-ElementalGraphics" role="doc-biblioref">2010</a>)</span> succinctly introduces the core ideas of <em>elemental graphics</em>:</p>
@@ -326,7 +332,7 @@ div.csl-indent {
 <p>This is an online book because we have found that by having students interact with the graphics, often by controlling specific parameters and/or adding features one-by-one provides a deeper understanding of the concepts. The introduction of the <a href="https://shiny.posit.co">Shiny</a> <span class="citation" data-cites="shiny">(<a href="references.html#ref-shiny" role="doc-biblioref">Chang et al. 2023</a>)</span> R package has greatly simplified the process of creating interactive visualiztions.</p>
 <p>All of the Shiny applications, supporting functions, and data sets are included in the <code>VisualStats</code> R package. This can be downloaded using the following command:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'jbryer/VisualStats'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'jbryer/VisualStats'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This website/book does not intend to be another introductory statistics book, there are plenty of fantastic options available, but instead a collection of Shiny applications and chapters to support those visualizations. Our philosophy is that students can better understand the statistical formulas instrumental to the field itself through geometric representations. Take for example the fact that many statistical formulas square terms. Drawing a square for these formulas becomeas a natural way of exploring the features of what that statistical formula is attempting to solve.</p>
 <section id="how-to-use-this-book" class="level2" data-number="1.1">
@@ -341,7 +347,7 @@ div.csl-indent {
 <h2 data-number="1.3" class="anchored" data-anchor-id="colophon"><span class="header-section-number">1.3</span> Colophon</h2>
 <p>This book was creating using <a href="https://quarto.org/docs/books/">Quarto</a> <span class="citation" data-cites="quarto">(<a href="references.html#ref-quarto" role="doc-biblioref">Allaire and Dervieux 2024</a>)</span> and hosted on <a href="https://github.com/jbryer/VisualStats">Github</a>. The interactive components were created using <a href="https://shiny.posit.co">Shiny</a> <span class="citation" data-cites="shiny">(<a href="references.html#ref-shiny" role="doc-biblioref">Chang et al. 2023</a>)</span>. All of the figures were created using the grammar of graphics <span class="citation" data-cites="Wilkinson">(<a href="references.html#ref-Wilkinson" role="doc-biblioref">Wilkinson 2005</a>)</span> framework as implemented by the <a href="https://shiny.posit.co"><code>ggplot2</code></a> package <span class="citation" data-cites="ggplot2">(<a href="references.html#ref-ggplot2" role="doc-biblioref">Wickham 2016</a>)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────
  setting  value
@@ -353,9 +359,9 @@ div.csl-indent {
  collate  C.UTF-8
  ctype    C.UTF-8
  tz       UTC
- date     2025-09-09
+ date     2025-09-17
  pandoc   3.1.3 @ /usr/bin/ (via rmarkdown)
- quarto   1.7.34 @ /usr/local/bin/quarto
+ quarto   1.8.24 @ /usr/local/bin/quarto
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  package     * version date (UTC) lib source
@@ -375,7 +381,7 @@ div.csl-indent {
  knitr         1.50    2025-03-16 [1] RSPM
  later         1.4.4   2025-08-27 [1] RSPM
  lifecycle     1.0.4   2023-11-07 [1] RSPM
- magrittr      2.0.3   2022-03-30 [1] RSPM
+ magrittr      2.0.4   2025-09-12 [1] RSPM
  memoise       2.0.1   2021-11-26 [1] RSPM
  mime          0.13    2025-03-17 [1] RSPM
  miniUI        0.1.2   2025-04-17 [1] RSPM
@@ -479,13 +485,14 @@ Wilkinson, Leland. 2005. <em>The Grammar of Graphics (Statistics and Computing)<
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

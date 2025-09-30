@@ -1,16 +1,8 @@
 ---
+output: md_document
 editor_options: 
   chunk_output_type: console
 ---
-
-```{r, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
-library(VisualStats)
-library(ggplot2)
-ggplot2::theme_set(theme_vs())
-set.seed(2112)
-```
-
-# Distributions {#sec-distributions}
 
 When working with distributions in R, each distribution has four functions, namely:
 
@@ -33,7 +25,7 @@ random variable (X) will be less than or equal to a specific value (`x`), writte
 F(x) = P(X ≤ x). The CDF provides a complete view of a random variable's distribution by 
 accumulating probabilities up to that point.
 
-Here is a full list of available distributions (note that the links go to the corresponding Wikipedia article).
+### Available distributions
 
 ```{r, echo=FALSE, results='asis'}
 data("distributions", package = 'VisualStats')
@@ -44,33 +36,13 @@ for(i in 1:nrow(distributions)) {
 }
 ```
 
+```{r, eval=FALSE}
+helptext <- help(dt, package = stats)
+tools:::Rd2txt(utils:::.getHelpFile(as.character(helptext)))
+db <- tools::Rd_db("stats")
+tmp <- lapply(db, tools:::.Rd_get_metadata, "description")
+tmp <- lapply(db, tools:::.Rd_get_metadata, "usage")
+tmp$Normal.Rd
 
-
-```{r}
-#| label: distributions_norm
-#| fig-cap: R functions for the normal distribution.
-plot_distributions(dist = 'norm',
-				   xvals = c(-1, 0, 0.5),
-				   xmin = -4,
-				   xmax = 4)
 ```
 
-```{r}
-#| label: distributions_binom
-#| fig-cap: R functions for the binomial distribution.
-plot_distributions(dist = 'binom',
-				   xvals = c(1, 3),
-				   xmin = 0,
-				   xmax = 10,
-                   args = list(size = 10, prob = 0.35))
-```
-
-The `distributions_shiny()` function will launch a Shiny application that provides an interface to use the `plot_distributions()` function interactively.
-
-![Screenshot of the distributions Shiny application](/images/distributions_shiny_screenshot.png)
-
-
-
-{{< include distributions_normal.qmd >}}
-
-{{< include distributions_qq_plot.qmd >}}

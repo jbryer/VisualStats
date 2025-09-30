@@ -30,6 +30,19 @@
 #' 				      xmin = 0,
 #' 				      xmax = 10,
 #' 				      args = list(size = 10, prob = 0.35))
+#' # Geometric distribution
+#' plot_distributions(dist = 'geom',
+#'                    xvals = c(1, 3),
+#'                    args = list(prob = 0.2),
+#'                    xmin = 0,
+#'                    xmax = 10)
+#'
+#' # Poisson distribution
+#' plot_distributions(dist = 'pois',
+#'                    xvals = c(1, 3),
+#'                    args = list(lambda = 1),
+#'                    xmin = 0,
+#'                    xmax = 10)
 plot_distributions <- function(
 		dist,
 		xvals,
@@ -81,7 +94,7 @@ plot_distributions <- function(
 			scale_x_continuous(breaks = seq(xmin, xmax, by = 1)) +
 			geom_path(data = df_discrete, aes(x = x, y = d),
 					  color = bar_color,
-					  size = 0.5) +
+					  linewidth = 0.5) +
 			geom_bar(data = df_discrete, aes(x = x, y = d),
 					 fill = bar_color,
 					 width = bar_width,
@@ -90,7 +103,7 @@ plot_distributions <- function(
 			scale_x_continuous(breaks = seq(xmin, xmax, by = 1)) +
 			geom_path(data = df_discrete, aes(x = x, y = d),
 					  color = bar_color,
-					  size = 0.5) +
+					  linewidth = 0.5) +
 			geom_bar(data = df_discrete, aes(x = x, y = d),
 					 fill = bar_color,
 					 width = bar_width,
@@ -106,7 +119,7 @@ plot_distributions <- function(
 			# 		   size = 1) +
 			geom_path(data = df_discrete, aes(x = x, y = cumsum),
 					  color = bar_color,
-					  size = 0.5)
+					  linewidth = 0.5)
 		q_plot <- q_plot +
 			scale_x_continuous(breaks = seq(xmin, xmax, by = 1)) +
 			geom_bar(data = df_discrete, aes(x = x, y = cumsum),
@@ -118,7 +131,7 @@ plot_distributions <- function(
 			# 		   size = 1) +
 			geom_path(data = df_discrete, aes(x = x, y = cumsum),
 					  color = bar_color,
-					  size = 0.5)
+					  linewidth = 0.5)
 	} else {
 		d_plot <- d_plot +
 			xlim(xmin, xmax) +
@@ -139,14 +152,14 @@ plot_distributions <- function(
 		geom_segment(aes(x = x, xend = xmin, y = d, yend = d), color = palette['d'],
 					 arrow = arrow(length = unit(0.5, "cm"))) +
 		geom_point(aes(x = x, y = 0), color = palette['d'], size = 2) +
-		xlab('z-score / quantile') + ylab('Probability Density') +
+		xlab('quantile') + ylab('Probability Density') +
 		ggtitle(paste0('d', dist, '(', args_str, ')')) +
 		theme_vs()
 
 	r_plot <- r_plot +
 		geom_segment(aes(x = x, xend = x, y = d, yend = 0), color = palette['r'],
 					 arrow = arrow(length = unit(0.5, "cm"))) +
-		xlab('z-score / quantile') + ylab('Probability Density') +
+		xlab('quantile') + ylab('Probability Density') +
 		ggtitle(paste0('r', dist, '(', args_str, ')')) +
 		theme_vs()
 
@@ -155,7 +168,7 @@ plot_distributions <- function(
 		geom_segment(aes(x = x, xend = xmin, y = p, yend = p), color = palette['p'],
 					 arrow = arrow(length = unit(0.5, "cm"))) +
 		geom_point(aes(x = x, y = 0), color = palette['p'], size = 2) +
-		xlab('z-score / quantile') + ylab('Cumulative Probability') +
+		xlab('quantile') + ylab('Cumulative Probability') +
 		ggtitle(paste0('p', dist, '(', args_str, ')')) +
 		theme_vs()
 
@@ -164,45 +177,9 @@ plot_distributions <- function(
 					 arrow = arrow(length = unit(0.5, "cm"))) +
 		geom_segment(aes(x = x, xend = xmin, y = p, yend = p), color = palette['q']) +
 		geom_point(aes(x = xmin, y = p), color = palette['q'], size = 2) +
-		xlab('z-score / quantile') + ylab('Cumulative Probability') +
+		xlab('quantile') + ylab('Cumulative Probability') +
 		ggtitle(paste0('q', dist, '(', args_str, ')')) +
 		theme_vs()
 
 	plot_grid(d_plot, r_plot, p_plot, q_plot)
-}
-
-if(FALSE) {
-	plot_distributions(dist = 'norm',
-					   xvals = c(-1, 0, 0.5),
-					   xmin = -4, xmax = 4)
-
-	plot_distributions(dist = 'norm',
-					   xvals = c(80, 90, 105),
-					   xmin = 55, xmax = 145,
-					   args = list(mean = 100, sd = 15))
-
-	plot_distributions(dist = 'binom',
-					   xvals = c(1, 3),
-					   xmin = 0, xmax = 10,
-					   args = list(size = 10, prob = 0.35))
-
-	plot_distributions(dist = 'chisq',
-					   xvals = c(1, 2, 5),
-					   xmin = 0, xmax = 10,
-					   args = list(df = 3))
-
-	plot_distributions(dist = 'f',
-					   xvals = c(0.5, 1, 2),
-					   args = list(df1 = 3, 12),
-					   xmin = 0, xmax = 10)
-
-	plot_distributions(dist = 't',
-					   xvals = c(-1, 0, 0.5),
-					   xmin = -4, xmax = 4,
-					   args = list(df = 5))
-
-	plot_distributions(dist = 'binom',
-					   xvals = c(1, 4),
-					   xmin = 0, xmax = 10,
-					   args = list(size = 10, prob = 0.35))
 }

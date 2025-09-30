@@ -7,7 +7,9 @@ utils::globalVariables(c('df', 'hand_washing', 'anorexia', 'npk', 'iris', 'pengu
 					   'x1', 'x2', 'y1', 'y2', 'height', 'predicted', 'residual',
 						'Value', 'item', 'faithful', 'weight', 'mtcars', 'xend', 'yend',
 						'Iteration', 'value', 'variable', 'd', 'x_pos', 'color', 'boxTidwell_digits',
-						'boxTidwell_position_x', 'boxTidwell_position_y'))
+						'boxTidwell_position_x', 'boxTidwell_position_y',
+						'anorexia.sub', 'blood_lead', 'distributions',
+						'group', 'Theoretical', 'Sample', 'fill'))
 
 
 #' Color palette used for visualizations (qualitative)
@@ -63,6 +65,29 @@ theme_vs <- function() {
 #'             t.test qt qnorm
 "_PACKAGE"
 
+#' Distributions
+#'
+#' This data frame provides information for all of the distribution functions in R. It is
+#' primarily used by the [plot_distributions()] function and corresponding Shiny application.
+#' Specifically it provides the default parameters for the Shiny application.
+#'
+#' @name distributions
+#' @docType data
+#' @format a data frame with 18 observations of 7 variables.
+#' \describe{
+#'   \item{label}{Distribution label.}
+#'   \item{function_name}{The name of the distribution function in R, excluding the first letter
+#'                        (i.e. the `d`, `r`, `p`, or `q`)}
+#'   \item{xmin}{The minimal x-value for the plotting range.}
+#'   \item{xmax}{The maximum x-value for the plotting range.}
+#'   \item{xvals}{The `xvals` parameter for the [plot_distributions()] function. This can be
+#'                a comma separated list.}
+#'   \item{arguments}{Any other arguments for the distribution function.}
+#'   \item{Wikepedia}{Link the the Wikipedia article for the given distribution.}
+#' }
+#' @keywords datasets
+NA
+
 #' Bacteria counts after various hand washing techniques.
 #'
 #' From chapter 28 of De Veaux, Velleman, and Bock (2009):
@@ -76,7 +101,7 @@ theme_vs <- function() {
 #'
 #' @name hand_washing
 #' @docType data
-#' @format a data frame with 32 ovservations of 2 variables.
+#' @format a data frame with 32 observations of 2 variables.
 #' \describe{
 #'   \item{Bacterial_Counts}{the bacterial count after washing hands}
 #'   \item{Method}{the method of handwashing used}

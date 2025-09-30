@@ -5,7 +5,7 @@
 \alias{hand_washing}
 \title{Bacteria counts after various hand washing techniques.}
 \format{
-a data frame with 32 ovservations of 2 variables.
+a data frame with 32 observations of 2 variables.
 \describe{
 \item{Bacterial_Counts}{the bacterial count after washing hands}
 \item{Method}{the method of handwashing used}

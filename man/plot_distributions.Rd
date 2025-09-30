@@ -53,4 +53,17 @@ plot_distributions(dist = 'binom',
 				      xmin = 0,
 				      xmax = 10,
 				      args = list(size = 10, prob = 0.35))
+# Geometric distribution
+plot_distributions(dist = 'geom',
+                   xvals = c(1, 3),
+                   args = list(prob = 0.2),
+                   xmin = 0,
+                   xmax = 10)
+
+# Poisson distribution
+plot_distributions(dist = 'pois',
+                   xvals = c(1, 3),
+                   args = list(lambda = 1),
+                   xmin = 0,
+                   xmax = 10)
 }

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,10 +74,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c5022915cd8665b43a00aab6c793318b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-65adce10e78aee9e637c723200af485c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -303,6 +303,36 @@ window.Quarto = {
 </header>
 
 
+<p>When working with distributions in R, each distribution has four functions, namely:</p>
+<ul>
+<li><code>dXXX</code> - density function.</li>
+<li><code>rXXX</code> - generate random number from this distribution.</li>
+<li><code>pXXX</code> - returns the area to the left of the given value.</li>
+<li><code>qXXX</code> - returns the quantile for the given value/area.</li>
+</ul>
+<p>Where <code>XXX</code> is the distribution name (e.g.&nbsp;<code>norm</code>, <code>binom</code>, <code>t</code>, etc.).</p>
+<p>The <code>VisualStats::plot_distributions()</code> function will generate four plots representing the four R distribution functions. For each subplot points correspond to the first parameter of the corresponding function (note the subplot for the random <code>rXXX</code> function does not have points since this simply returns random values from that distribution). The arrows correspond to what that function will return.</p>
+<p>The top two plots (<code>dXXX</code> and <code>rXXX</code>) plot the distribution. The bottom two plots are the cumulative density function for the given distribution. The CDF describes the probability that a random variable (X) will be less than or equal to a specific value (<code>x</code>), written as F(x) = P(X ≤ x). The CDF provides a complete view of a random variable’s distribution by accumulating probabilities up to that point.</p>
+<p>Here is a full list of available distributions (note that the links go to the corresponding Wikipedia article).</p>
+<ul>
+<li><p><a href="https://en.wikipedia.org/wiki/Beta_distribution">Beta</a>: <code>Xbeta</code></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Binomial_distribution">Binomial</a>: <code>Xbinom</code></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Cauchy_distribution">Cauchy</a>: <code>Xcauchy</code></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Chi-squared_distribution">Chi-Squared</a>: <code>Xchisq</code></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Exponential_distribution">Exponential</a>: <code>Xexp</code></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/F-distribution">F</a>: <code>Xf</code></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Gamma_distribution">Gamma</a>: <code>Xgamma</code></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Geometric_distribution">Geometric</a>: <code>Xgeom</code></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Hypergeometric_distribution">Hypergeometric</a>: <code>Xhyper</code></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Logistic_distribution">Logistic</a>: <code>Xlogis</code></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Log-normal_distribution">Log Normal</a>: <code>Xlnorm</code></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Negative_binomial_distribution">Negative Binomial</a>: <code>Xnbinom</code></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Normal_distribution">Normal</a>: <code>Xnorm</code></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson</a>: <code>Xpois</code></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Student%27s_t-distribution">Student t</a>: <code>Xt</code></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Continuous_uniform_distribution">Uniform</a>: <code>Xunif</code></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Weibull_distribution">Weibull</a>: <code>Xweibull</code></p></li>
+</ul>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
@@ -329,12 +359,6 @@ window.Quarto = {
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">xmax =</span> <span class="dv">10</span>,</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">args =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.35</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-ℹ Please use `linewidth` instead.
-ℹ The deprecated feature was likely used in the VisualStats package.
-  Please report the issue at &lt;https://github.com/jbryer/VisualStats/issues&gt;.</code></pre>
-</div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -344,12 +368,19 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<p>The <code>distributions_shiny()</code> function will launch a Shiny application that provides an interface to use the <code>plot_distributions()</code> function interactively.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/distributions_shiny_screenshot.png" class="img-fluid figure-img"></p>
+<figcaption>Screenshot of the distributions Shiny application</figcaption>
+</figure>
+</div>
 <section id="normal-distribution" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="normal-distribution"><span class="header-section-number">3.1</span> Normal Distribution</h2>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">normal_plot</span>(<span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">cv =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.96</span>, <span class="fl">1.96</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">normal_plot</span>(<span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">cv =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.96</span>, <span class="fl">1.96</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-standard-normal-95" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -371,24 +402,24 @@ Figure&nbsp;3.1: Normal distribution with 95% of the area.
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pop_size <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>samp_size <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>distributions <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">unif_pop =</span> <span class="fu">runif</span>(pop_size),</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">skew_pop =</span> <span class="fu">rchisq</span>(pop_size, <span class="at">df =</span> <span class="dv">5</span>),</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">norm_pop =</span> <span class="fu">rnorm</span>(pop_size, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pop_size <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>samp_size <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>distributions <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">unif_pop =</span> <span class="fu">runif</span>(pop_size),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">skew_pop =</span> <span class="fu">rchisq</span>(pop_size, <span class="at">df =</span> <span class="dv">5</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">norm_pop =</span> <span class="fu">rnorm</span>(pop_size, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>distributions <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    reshape2<span class="sc">::</span><span class="fu">melt</span>(<span class="at">variable.name =</span> <span class="st">'distribution'</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">color =</span> distribution)) <span class="sc">+</span> </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>() <span class="sc">+</span> </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> distribution, <span class="at">scales =</span> <span class="st">'free'</span>, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_vs</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>distributions <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    reshape2<span class="sc">::</span><span class="fu">melt</span>(<span class="at">variable.name =</span> <span class="st">'distribution'</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">color =</span> distribution)) <span class="sc">+</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>() <span class="sc">+</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> distribution, <span class="at">scales =</span> <span class="st">'free'</span>, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_vs</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -403,8 +434,8 @@ Figure&nbsp;3.1: Normal distribution with 95% of the area.
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>samp1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(distributions<span class="sc">$</span>skew_pop, <span class="at">size =</span> <span class="dv">6</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>samp1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>samp1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(distributions<span class="sc">$</span>skew_pop, <span class="at">size =</span> <span class="dv">6</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>samp1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 6.605251 2.147276 6.244270 6.036563 6.184984 4.255935</code></pre>
@@ -414,8 +445,8 @@ Figure&nbsp;3.1: Normal distribution with 95% of the area.
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>samp_norm <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(samp1))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>samp_norm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>samp_norm <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(samp1))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>samp_norm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -0.1160746 -0.8244852 -0.4644825  0.2672684  0.6679687 -0.6274922</code></pre>
@@ -425,9 +456,9 @@ Figure&nbsp;3.1: Normal distribution with 95% of the area.
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>samp1 <span class="ot">&lt;-</span> samp1 <span class="sc">|&gt;</span> <span class="fu">sort</span>()</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>samp_norm <span class="ot">&lt;-</span> samp_norm <span class="sc">|&gt;</span> <span class="fu">sort</span>()</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(samp1, samp_norm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>samp1 <span class="ot">&lt;-</span> samp1 <span class="sc">|&gt;</span> <span class="fu">sort</span>()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>samp_norm <span class="ot">&lt;-</span> samp_norm <span class="sc">|&gt;</span> <span class="fu">sort</span>()</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(samp1, samp_norm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>        samp1  samp_norm
@@ -443,26 +474,9 @@ Figure&nbsp;3.1: Normal distribution with 95% of the area.
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(samp1, samp_norm), <span class="fu">aes</span>(<span class="at">x =</span> samp1, <span class="at">y =</span> samp_norm)) <span class="sc">+</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_vs</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="distributions_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>It is desirable to draw a straight line for reference, however determining the slope and intercept requires some work. If both the sample and comparison distributions are expressed as standard scores (i.e.&nbsp;mean = 0, standard deviation = 1), then we can draw the unit line (i.e.&nbsp;<span class="math inline">\(y = x\)</span>).</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(samp1, samp_norm), <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">scale</span>(samp1), <span class="at">y =</span> <span class="fu">scale</span>(samp_norm))) <span class="sc">+</span> </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_vs</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(samp1, samp_norm), <span class="fu">aes</span>(<span class="at">x =</span> samp1, <span class="at">y =</span> samp_norm)) <span class="sc">+</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_vs</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -472,35 +486,14 @@ Figure&nbsp;3.1: Normal distribution with 95% of the area.
 </div>
 </div>
 </div>
-<p>However, if we wish to retain the scaling of the original sample, we need an alternative strategy to determine the slope and intercept of the line. One common approach is to take the paired quantiles at the 25th and 75th percentiles and then calculate the equation of the line that intercepts those two points.</p>
+<p>It is desirable to draw a straight line for reference, however determining the slope and intercept requires some work. If both the sample and comparison distributions are expressed as standard scores (i.e.&nbsp;mean = 0, standard deviation = 1), then we can draw the unit line (i.e.&nbsp;<span class="math inline">\(y = x\)</span>).</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>x_points <span class="ot">&lt;-</span> <span class="fu">quantile</span>(samp1, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>))</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>x_points</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>     25%      75% 
-4.701092 6.229449 </code></pre>
-</div>
-<details open="" class="code-fold">
-<summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>y_points <span class="ot">&lt;-</span> <span class="fu">quantile</span>(samp_norm, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>))</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>y_points</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>       25%        75% 
--0.5867398  0.1714326 </code></pre>
-</div>
-<details open="" class="code-fold">
-<summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>slope <span class="ot">&lt;-</span> <span class="fu">diff</span>(y_points) <span class="sc">/</span> <span class="fu">diff</span>(x_points)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>intercept <span class="ot">&lt;-</span> y_points[<span class="dv">1</span>] <span class="sc">-</span> slope <span class="sc">*</span> x_points[<span class="dv">1</span>]</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(samp1, samp_norm), <span class="fu">aes</span>(<span class="at">x =</span> samp1, <span class="at">y =</span> samp_norm)) <span class="sc">+</span> </span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">slope =</span> slope, <span class="at">intercept =</span> intercept) <span class="sc">+</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_vs</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(samp1, samp_norm), <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">scale</span>(samp1), <span class="at">y =</span> <span class="fu">scale</span>(samp_norm))) <span class="sc">+</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_vs</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -510,15 +503,35 @@ Figure&nbsp;3.1: Normal distribution with 95% of the area.
 </div>
 </div>
 </div>
-<p>An alternative variation to the Q-Q plot line would be to plot a Loess regression line. If the two distributions are the same then the Loess regression line should be a straight line. With very small samples as demonstrated below, however, the Loess estimation is not very good.</p>
+<p>However, if we wish to retain the scaling of the original sample, we need an alternative strategy to determine the slope and intercept of the line. One common approach is to take the paired quantiles at the 25th and 75th percentiles and then calculate the equation of the line that intercepts those two points.</p>
 <div class="cell">
-<details class="code-fold">
+<details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(samp1, samp_norm), <span class="fu">aes</span>(<span class="at">x =</span> samp1, <span class="at">y =</span> samp_norm)) <span class="sc">+</span> </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">slope =</span> slope, <span class="at">intercept =</span> intercept) <span class="sc">+</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">method =</span> <span class="st">'loess'</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">span =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_vs</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>x_points <span class="ot">&lt;-</span> <span class="fu">quantile</span>(samp1, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>x_points</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     25%      75% 
+4.701092 6.229449 </code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>y_points <span class="ot">&lt;-</span> <span class="fu">quantile</span>(samp_norm, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>y_points</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       25%        75% 
+-0.5867398  0.1714326 </code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>slope <span class="ot">&lt;-</span> <span class="fu">diff</span>(y_points) <span class="sc">/</span> <span class="fu">diff</span>(x_points)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>intercept <span class="ot">&lt;-</span> y_points[<span class="dv">1</span>] <span class="sc">-</span> slope <span class="sc">*</span> x_points[<span class="dv">1</span>]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(samp1, samp_norm), <span class="fu">aes</span>(<span class="at">x =</span> samp1, <span class="at">y =</span> samp_norm)) <span class="sc">+</span> </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">slope =</span> slope, <span class="at">intercept =</span> intercept) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_vs</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -528,20 +541,38 @@ Figure&nbsp;3.1: Normal distribution with 95% of the area.
 </div>
 </div>
 </div>
+<p>An alternative variation to the Q-Q plot line would be to plot a Loess regression line. If the two distributions are the same then the Loess regression line should be a straight line. With very small samples as demonstrated below, however, the Loess estimation is not very good.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">cbind</span>(samp1, samp_norm), <span class="fu">aes</span>(<span class="at">x =</span> samp1, <span class="at">y =</span> samp_norm)) <span class="sc">+</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">slope =</span> slope, <span class="at">intercept =</span> intercept) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">method =</span> <span class="st">'loess'</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">span =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_vs</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="distributions_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>Let’s draw random samples of <em>n</em> = 50 from the three populations defined above.</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>unif_samp <span class="ot">&lt;-</span> <span class="fu">sample</span>(distributions<span class="sc">$</span>unif_pop, <span class="at">size =</span> samp_size)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>skew_pop <span class="ot">&lt;-</span> <span class="fu">sample</span>(distributions<span class="sc">$</span>skew_pop, <span class="at">size =</span> samp_size)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>norm_pop <span class="ot">&lt;-</span> <span class="fu">sample</span>(distributions<span class="sc">$</span>norm_pop, <span class="at">size =</span> samp_size)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>unif_samp <span class="ot">&lt;-</span> <span class="fu">sample</span>(distributions<span class="sc">$</span>unif_pop, <span class="at">size =</span> samp_size)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>skew_pop <span class="ot">&lt;-</span> <span class="fu">sample</span>(distributions<span class="sc">$</span>skew_pop, <span class="at">size =</span> samp_size)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>norm_pop <span class="ot">&lt;-</span> <span class="fu">sample</span>(distributions<span class="sc">$</span>norm_pop, <span class="at">size =</span> samp_size)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>The following three figures are Q-Q plots comparing the sample distributions to the normal distribution using the <code>gg_qq_plot</code> function in the <code>VisualStats</code> package. This is slight variation on the traditional Q-Q plot by also plotting the marginal distributions.</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_qq_plot</span>(unif_samp, <span class="at">loess =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_qq_plot</span>(unif_samp, <span class="at">loess =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -555,7 +586,7 @@ Figure&nbsp;3.1: Normal distribution with 95% of the area.
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_qq_plot</span>(skew_pop, <span class="at">loess =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_qq_plot</span>(skew_pop, <span class="at">loess =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -569,7 +600,7 @@ Figure&nbsp;3.1: Normal distribution with 95% of the area.
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_qq_plot</span>(norm_pop, <span class="at">loess =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_qq_plot</span>(norm_pop, <span class="at">loess =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -584,8 +615,8 @@ Figure&nbsp;3.1: Normal distribution with 95% of the area.
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_qq_plot</span>(skew_pop, <span class="at">theoretical_dist =</span> <span class="st">'chisq'</span>, <span class="at">df =</span> <span class="dv">5</span>, </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">loess =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_qq_plot</span>(skew_pop, <span class="at">theoretical_dist =</span> <span class="st">'chisq'</span>, <span class="at">df =</span> <span class="dv">5</span>, </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">loess =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">

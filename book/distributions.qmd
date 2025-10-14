@@ -8,6 +8,8 @@ library(VisualStats)
 library(ggplot2)
 ggplot2::theme_set(theme_vs())
 set.seed(2112)
+data("distributions", package = 'VisualStats')
+
 ```
 
 # Distributions {#sec-distributions}
@@ -35,10 +37,35 @@ accumulating probabilities up to that point.
 
 Here is a full list of available distributions (note that the links go to the corresponding Wikipedia article).
 
-```{r, echo=FALSE, results='asis'}
-data("distributions", package = 'VisualStats')
+```{r, echo=FALSE, results='hide'}
 for(i in 1:nrow(distributions)) {
-	cat(paste0('* [', distributions[i,]$label, '](', distributions[i,]$Wikipedia, '): ', 
+	fun <- get(paste0('d', distributions[i,]$function_name))
+	params <- distributions[i,]$arguments |> strsplit(',')
+	params <- params[[1]]
+	args <- list(
+		dist = distributions[i,]$function_name,
+		limits = c(distributions[i,]$xmin, distributions[i,]$xmax),
+		cv = c(distributions[i,]$xmin, distributions[i,]$xmax)
+	)
+	for(j in params) {
+		param <- strsplit(j, '=')[[1]]
+		param_name <- gsub(' ', '', param[1])  
+		param_value <- gsub(' ', '', param[2]) |> as.numeric()
+		# if(is.numeric(formals(fun)[param_name][[1]])) {
+		# 	param_value <- as.numeric(param_value)
+		# }
+		args[[param_name]] <- param_value
+	}
+	args$cv <- NULL
+	do.call(distribution_plot, args) + ggtitle(NULL) + theme_void()
+	ggsave(paste0('images/dist_thumb_', distributions[i,]$function_name, '.png'), 
+		   width = 300, height = 300, units = 'px')
+}
+```
+
+```{r, echo=FALSE, results='asis'}
+for(i in 1:nrow(distributions)) {
+	cat(paste0('<img src="images/dist_thumb_', distributions[i,]$function_name, '.png" width="50" /> [', distributions[i,]$label, '](', distributions[i,]$Wikipedia, '): ', 
 			   '`X', distributions[i,]$function_name, '`',
 			   '\n\n'))
 }

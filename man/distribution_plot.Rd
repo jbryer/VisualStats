@@ -2,19 +2,68 @@
 % Please edit documentation in R/distribution_plots.R
 \name{distribution_plot}
 \alias{distribution_plot}
-\title{Plots a distribution}
+\alias{binomial_plot}
+\alias{beta_plot}
+\alias{chisquare_plot}
+\alias{t_plot}
+\alias{normal_plot}
+\title{Distribution plot}
 \usage{
 distribution_plot(
-  fun,
+  dist,
   cv,
   tails = c("no", "two.sided", "less", "greater"),
   limits,
   color = "steelblue",
   ...
 )
+
+binomial_plot(
+  size = 10,
+  prob = 0.35,
+  log = FALSE,
+  cv = qbinom(0.95, size = size, prob = prob),
+  tail = TRUE,
+  limits = c(0, 10),
+  color = "steelblue"
+)
+
+beta_plot(
+  shape1,
+  shape2,
+  cv = 0.5,
+  tails = TRUE,
+  limits = c(0, 1),
+  color = "steelblue"
+)
+
+chisquare_plot(
+  df = 2,
+  cv = 2,
+  tails = "greater",
+  limits = c(0, 10),
+  color = "steelblue"
+)
+
+t_plot(
+  df = 10,
+  cv = c(-1, 1),
+  tails = "no",
+  limits = c(mean - 3 * sd, mean + 3 * sd),
+  color = "steelblue"
+)
+
+normal_plot(
+  mean = 0,
+  sd = 1,
+  cv = c(-1.96, 1.96),
+  tails = "no",
+  limits = c(mean - 3 * sd, mean + 3 * sd),
+  color = "steelblue"
+)
 }
 \arguments{
-\item{fun}{the density function (e.g. dnorm)}
+\item{dist}{name of the distribution function to plot (e.g. \code{norm}, \code{t}).}
 
 \item{cv}{the critical value(s) to shade.}
 
@@ -24,8 +73,41 @@ distribution_plot(
 
 \item{color}{the color to fill in the area.}
 
-\item{...}{other parameters passed to \code{fun}.}
+\item{...}{other parameters passed to the distribution function.}
+
+\item{size}{number of trials (zero or more).}
+
+\item{prob}{probability of success on each trial.}
+
+\item{log}{logical; if TRUE, probabilities p are given as log(p).}
+
+\item{tail}{whether to plot the tails.}
+
+\item{shape1}{non-negative parameters of the Beta distribution.}
+
+\item{shape2}{non-negative parameters of the Beta distribution.}
+
+\item{df}{degrees of freedom.}
+
+\item{mean}{mean of the distribution.}
+
+\item{sd}{standard deviation of the distribution.}
 }
 \description{
-Plots a distribution
+Plots a normal distribution with the area within the given cv shaded.
+The probability (i.e. area) under the normal curve for the given cv
+is also given.
+}
+\examples{
+distribution_plot('norm', cv = c(-1.96, 1.96), limits = c(-4, 4))
+distribution_plot('binom', cv = c(3), limits = c(0, 10), tails = 'greater', size = 10, prob = 0.35)
+	normal_plot()
+	normal_plot(cv=c(-2,2))
+	normal_plot(cv=c(-3,3))
+	normal_plot(cv=1.96, tails='greater')
+}
+\seealso{
+\code{\link[=plot_distributions]{plot_distributions()}}
+
+\code{\link[stats:Chisquare]{stats::dchisq()}}
 }

@@ -18,7 +18,8 @@ distributions_shiny <- function(...) {
 #' @export
 #' @rdname distributions_shiny
 distributions_shiny_ui <- function() {
-	data("distributions", package = 'VisualStats')
+	# data("distributions", package = 'VisualStats')
+	distributions <- VisualStats::distributions
 	dist_choices <- distributions$function_name
 	names(dist_choices) <- paste0(distributions$label, ' (', distributions$function_name, ')')
 
@@ -59,7 +60,8 @@ distributions_shiny_ui <- function() {
 #' @export
 #' @rdname distributions_shiny
 distributions_shiny_server <- function(input, output, session) {
-	data("distributions", package = 'VisualStats')
+	# data("distributions", package = 'VisualStats')
+	distributions <- VisualStats::distributions
 	output$fun_params_ui <- renderUI({
 		params <- formals(distributions[[input$distribution]]$fun)
 		params_default <- formals(distribution_plot)

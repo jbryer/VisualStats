@@ -151,7 +151,8 @@ multiple_regression_vis <- function(
 }
 
 if(FALSE) { # For debugging
-	data(depression, package = 'VisualStats')
+	# data(depression, package = 'VisualStats')
+	depression <- VisualStats::depression
 	multiple_regression_vis(
 		y = depression$depression,
 		x1 = depression$anxiety,

@@ -33,7 +33,7 @@ vs_palette_seq_greens <- c('#ffffcc','#c2e699','#78c679','#31a354','#006837')
 #' @return a ggplot2 theme
 theme_vs <- function() {
 	theme_minimal() +
-	theme(panel.grid.major = element_line(color = 'grey90', size = 0.3),
+	theme(panel.grid.major = element_line(color = 'grey90', linewidth = 0.3),
 		  panel.grid.minor = element_blank(),
 		  legend.position = 'bottom')
 }

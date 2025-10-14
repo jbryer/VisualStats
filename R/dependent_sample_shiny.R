@@ -111,7 +111,7 @@ dependent_sample_shiny_ui <- function() {
 dependent_sample_shiny_server <- function(input, output, session) {
 	getData <- reactive({
 		req(input$dataset)
-		input$resample
+		input$resamplew
 
 		df <- NULL
 		if(input$dataset == 'simulate') {
@@ -121,10 +121,12 @@ dependent_sample_shiny_server <- function(input, output, session) {
 				y = rnorm(input$n, mean = input$mean_y, sd = input$sd_y)
 			)
 		} else if(input$dataset == 'anorexia') {
-			data('anorexia.sub', package = 'granova', env = baseenv())
+			# data('anorexia.sub', package = 'granova', env = baseenv())
+			anorexia.sub <- granova::anorexia.sub
 			df <- anorexia.sub
 		} else if(input$dataset == 'blood_lead') {
-			data('blood_lead', package = 'granova', env = baseenv())
+			# data('blood_lead', package = 'granova', env = baseenv())
+			blood_lead <- granova::blood_lead
 			df <- blood_lead
 		}
 		return(df)

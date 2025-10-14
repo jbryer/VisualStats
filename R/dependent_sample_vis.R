@@ -20,6 +20,7 @@
 #' @return a ggplot2 expression.
 #' @export
 #' @import granova
+#' @import granovaGG
 #' @examples
 #' data(blood_lead, package = 'granova')
 #' dependent_sample_vis(
@@ -50,7 +51,8 @@ dependent_sample_vis <- function(
 		plot_samp_dist = TRUE
 ) {
 	if(FALSE) {
-		data(anorexia.sub, package = 'granovaGG')
+		# data(anorexia.sub, package = 'granovaGG')
+		anorexia.sub <- granovaGG::anorexia.sub
 		df <- anorexia.sub
 		x <- names(df)[1]
 		y <- names(df)[2]
@@ -179,7 +181,8 @@ if(FALSE) {
 				 ylab = "Weight before therapy (lbs.)"
 	)
 
-	data(anorexia.sub, package = 'granova')
+	# data(anorexia.sub, package = 'granova')
+	anorexia.sub <- granova::anorexia.sub
 	dependent_sample_vis(
 		df = anorexia.sub,
 		test = 't', # or 't'
@@ -193,7 +196,8 @@ if(FALSE) {
 		plot_samp_dist = TRUE
 	)
 
-	data(blood_lead, package = 'granova')
+	# data(blood_lead, package = 'granova')
+	blood_lead <- granova::blood_lead
 	dependent_sample_vis(
 		df = blood_lead,
 		test = 'norm', # or 't'

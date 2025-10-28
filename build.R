@@ -6,6 +6,11 @@ usethis::use_tidy_description()
 devtools::document()
 devtools::install(pkg = '.', dependencies = 'Enhances')
 devtools::check()
+
+if(!require(icons)) {
+	remotes::install_github("ropenscilabs/icon")
+}
+icons::download_fontawesome()
 quarto::quarto_render('book/')
 
 for(i in apps) {

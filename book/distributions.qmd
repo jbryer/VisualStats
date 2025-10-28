@@ -64,10 +64,16 @@ for(i in 1:nrow(distributions)) {
 ```
 
 ```{r, echo=FALSE, results='asis'}
+stats_base_url <- 'https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/'
+
 for(i in 1:nrow(distributions)) {
-	cat(paste0('<img src="images/dist_thumb_', distributions[i,]$function_name, '.png" width="50" /> [', distributions[i,]$label, '](', distributions[i,]$Wikipedia, '): ', 
-			   '`X', distributions[i,]$function_name, '`',
-			   '\n\n'))
+	help_file <- help(paste0('d', distributions[i,]$function_name)) |> as.character() |> basename()
+	cat(paste0('<img src="images/dist_thumb_', distributions[i,]$function_name, '.png" width="50" /> ',
+	distributions[i,]$label, ' ',
+	'[`X', distributions[i,]$function_name, '()`](', stats_base_url, '/', help_file, ')',
+	'([', icons::fontawesome('r-project'), '](', stats_base_url, '/', help_file, '), ', 
+	'[', icons::fontawesome('wikipedia-w'), '](', distributions[i,]$Wikipedia, ')) ', 
+	'\n\n'))
 }
 ```
 

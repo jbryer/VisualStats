@@ -219,7 +219,6 @@ binomial_plot <- function(size = 10,
 #'
 #' @param shape1 non-negative parameters of the Beta distribution.
 #' @param shape2 non-negative parameters of the Beta distribution.
-#' @inheritParams distribution_plot
 #' @export
 #' @rdname distribution_plot
 beta_plot <- function(shape1, shape2,
@@ -241,7 +240,6 @@ beta_plot <- function(shape1, shape2,
 #' @param df degrees of freedom.
 #' @seealso [stats::dchisq()]
 #' @export
-#' @inheritParams distribution_plot
 #' @rdname distribution_plot
 chisquare_plot <- function(df = 2,
 					   cv = 2,
@@ -261,7 +259,6 @@ chisquare_plot <- function(df = 2,
 #'
 #' @param df1 numerator degrees of freedom.
 #' @param df2 denominator degrees of freedom.
-#' @inheritParams distribution_plot
 #' @seealso [stats::df()]
 #' @export
 #' @md
@@ -283,7 +280,6 @@ F_plot <- function(df1 = 1, df2 = 5,
 #' Plot a student t distribution.
 #'
 #' @param df degrees of freedom.
-#' @inheritParams distribution_plot
 #' @export
 #' @rdname distribution_plot
 t_plot <- function(df = 10,
@@ -307,7 +303,6 @@ t_plot <- function(df = 10,
 #'
 #' @param mean mean of the distribution.
 #' @param sd standard deviation of the distribution.
-#' @inheritParams distribution_plot
 #' @export
 #' @examples
 #' 	normal_plot()

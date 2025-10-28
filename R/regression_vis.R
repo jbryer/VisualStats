@@ -171,7 +171,7 @@ regression_vis <- function(
 						 aes(x = .data[[x_var]], y = .data[[y_var]],
 						 	 xend = .data[[x_var]], yend = .data[['predicted']]),
 						 color = residual_color,
-						 size = residual_size)
+						 linewidth = residual_size)
 	}
 	if(!is.null(plot_x_deviations)) {
 		p <- p +
@@ -180,7 +180,7 @@ regression_vis <- function(
 						 	 xend = x_mean, yend = .data[[y_var]]),
 						 arrow = arrow(length = unit(0.5, "cm")),
 						 color = x_deviation_color,
-						 size = deviation_size)
+						 linewidth = deviation_size)
 	}
 	if(!is.null(plot_y_deviations)) {
 		p <- p +
@@ -189,7 +189,7 @@ regression_vis <- function(
 						  	 xend = .data[[x_var]], yend = y_mean),
 						 arrow = arrow(length = unit(0.5, "cm")),
 						 color = y_deviation_color,
-						 size = deviation_size)
+						 linewidth = deviation_size)
 	}
 
 

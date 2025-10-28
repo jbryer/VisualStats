@@ -112,8 +112,12 @@ correlation_shiny_ui <- function() {
 						plotOutput("plot", height = '600px', click = "scatter_plot_click")
 					),
 					tabPanel(
-						'Histogram',
+						'Cross Products',
 						plotOutput('cross_product_histogram', height = '600px')
+					),
+					tabPanel(
+						'Residuals',
+						plotOutput('residual_histogram', height = '600px')
 					)
 				)
 			)
@@ -188,6 +192,20 @@ correlation_shiny_server <- function(input, output, session) {
 			p <- p + coord_equal()
 		}
 
+		row <- selected_rows()
+		if(!is.null(row)) {
+			if(input$selection_type == 'cross_product') {
+				center_x <- thedata[row,]$x - (thedata[row,]$x_deviation / 2)
+				center_y <- thedata[row,]$y - (thedata[row,]$y_deviation / 2)
+				p <- p +
+					geom_text(x = center_x,
+							  y = center_y,
+							  label = round(thedata[row,]$cross_product, digits = 4))
+			} else if(input$selection_type == 'squared_residual') {
+				# print(thedata[row,])
+			}
+		}
+
 		return(p)
 	})
 
@@ -198,7 +216,17 @@ correlation_shiny_server <- function(input, output, session) {
 			scale_fill_manual('Cross product > 0', values = c('lightblue', 'darkred')) +
 			xlab('Cross Product') +
 			theme_vs()
+	})
 
+	output$residual_histogram <- renderPlot({
+		thedata <- get_data()
+		lm_out <- lm(y ~ x, data = thedata)
+		thedata$residuals <- resid(lm_out)
+		ggplot(thedata, aes(x = residuals, y = after_stat(density))) +
+			geom_histogram(bins = 10, alpha = 0.75) +
+			geom_density(linewidth = 2) +
+			xlab('Residuals') +
+			theme_vs()
 	})
 
 	selected_rows <- reactiveVal(NULL)

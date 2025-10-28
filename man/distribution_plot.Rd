@@ -5,6 +5,7 @@
 \alias{binomial_plot}
 \alias{beta_plot}
 \alias{chisquare_plot}
+\alias{F_plot}
 \alias{t_plot}
 \alias{normal_plot}
 \title{Distribution plot}
@@ -39,6 +40,15 @@ beta_plot(
 
 chisquare_plot(
   df = 2,
+  cv = 2,
+  tails = "greater",
+  limits = c(0, 10),
+  color = "steelblue"
+)
+
+F_plot(
+  df1 = 1,
+  df2 = 5,
   cv = 2,
   tails = "greater",
   limits = c(0, 10),
@@ -89,6 +99,10 @@ normal_plot(
 
 \item{df}{degrees of freedom.}
 
+\item{df1}{numerator degrees of freedom.}
+
+\item{df2}{denominator degrees of freedom.}
+
 \item{mean}{mean of the distribution.}
 
 \item{sd}{standard deviation of the distribution.}
@@ -110,4 +124,6 @@ distribution_plot('binom', cv = c(3), limits = c(0, 10), tails = 'greater', size
 \code{\link[=plot_distributions]{plot_distributions()}}
 
 \code{\link[stats:Chisquare]{stats::dchisq()}}
+
+\code{\link[stats:Fdist]{stats::df()}}
 }

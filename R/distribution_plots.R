@@ -261,7 +261,7 @@ chisquare_plot <- function(df = 2,
 #' @param df2 denominator degrees of freedom.
 #' @seealso [stats::df()]
 #' @export
-#' @md
+#' @rdname distribution_plot
 F_plot <- function(df1 = 1, df2 = 5,
 				   cv = 2,
 				   tails = 'greater',

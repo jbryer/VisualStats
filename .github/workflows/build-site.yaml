@@ -38,6 +38,9 @@ jobs:
           extra-packages: any::pak, any::devtools, any::tidyverse, any::quarto, any::GGally, local::.
           needs: website
 
+      - name: Install icons
+        run: Rscript -e 'remotes::install_github("ropenscilabs/icon"); icons::download_fontawesome();'
+      
       - name: Build site
         run: Rscript -e 'source("build.R")'
 

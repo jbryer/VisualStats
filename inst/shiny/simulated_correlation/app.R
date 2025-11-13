@@ -1,11 +1,13 @@
 library(shiny)
 library(ggplot2)
 
+print_num <- function(x) {
+    prettyNum(x, big.mark = ',', format = 'f', scientific = FALSE)
+}
 
 ui <- fluidPage(
     titlePanel("Simulated sampling distribution of Pearson correlation"),
 
-    # Sidebar with a slider input for number of bins
     sidebarLayout(
         sidebarPanel(
             h4('Population parameters'),
@@ -16,16 +18,22 @@ ui <- fluidPage(
                 min = 100,
                 max = 200000
             ),
-            numericInput(
-                inputId = 'mean',
-                label = 'Mean',
-                value = 0
-            ),
-            numericInput(
-                inputId = 'sd',
-                label = 'Standard Deviation',
-                value = 1,
-                min = 0.0000001
+            fluidRow(
+                column(6,
+                    numericInput(
+                        inputId = 'mean',
+                        label = 'Mean',
+                        value = 0
+                    )
+                ),
+                column(6,
+                    numericInput(
+                        inputId = 'sd',
+                        label = 'Std Dev',
+                        value = 1,
+                        min = 0.0000001
+                    )
+                )
             ),
             sliderInput(
                 inputId = 'rho',
@@ -99,11 +107,11 @@ ui <- fluidPage(
             tabsetPanel(
                 tabPanel(
                     'Sampling Distribution',
-                    plotOutput("distribution_plot", height = '600px')
+                    plotOutput("distribution_plot", height = '800px')
                 ),
                 tabPanel(
                     'Population',
-                    plotOutput('population_plot', height = '600px')
+                    plotOutput('population_plot', height = '800px')
                 )
             )
         )
@@ -135,12 +143,11 @@ server <- function(input, output) {
             r <- stats::cor.test(
                 samp$x1, samp$x2,
                 conf.level = 0.95, # May want to make this a parameter.
-                # Would also be good to capture normal as well as t
-                method = 'pearson'
+                method = 'pearson' # Parameter?
             )
             sample_r[i,]$r <- r$estimate
             sample_r[i,]$p_t <- r$p.value
-            sample_r[i,]$p_norm <- unname(pnorm(-1 * abs(r$statistic)) * 2)
+            sample_r[i,]$p_norm <- unname(stats::pnorm(-1 * abs(r$statistic)) * 2)
         }
         return(sample_r)
     })
@@ -155,14 +162,14 @@ server <- function(input, output) {
             ggtitle('Scatter plot for population correlation (ρ)',
                     subtitle = paste0(
                         'ρ = ', round(cor(pop$x1, pop$x2), digits = 3), '\n',
-                        'Population N = ', prettyNum(input$pop_n, big.mark = ',', format = 'f', scientific = FALSE)
+                        'Population N = ', print_num(input$pop_n)
                     ))
     })
 
     output$distribution_plot <- renderPlot({
         pop <- get_population()
         sample_r <- get_simulated_samp_dist()
-        suppressWarnings({
+        suppressWarnings({ # If p_threshold == 0 this will print a warning.
             p_dist <- ifelse(input$test_distribution == 't', 'p_t', 'p_norm')
             low_cut <- max(sample_r[sample_r[,p_dist] < input$p_threshold & sample_r$r < 0,]$r)
             max_cut <- min(sample_r[sample_r[,p_dist] < input$p_threshold & sample_r$r > 0,]$r)
@@ -177,9 +184,9 @@ server <- function(input, output) {
                 paste0('Simulated sampling distribution of Pearson correlation (r)'),
                 subtitle = paste0(
                     'ρ = ', round(cor(pop$x1, pop$x2), digits = 3), '\n',
-                    'Population N = ', prettyNum(input$pop_n, big.mark = ',', format = 'f', scientific = FALSE), '\n',
-                    'Sample n = ', input$samp_n, '\n',
-                    'n samples = ', prettyNum(input$n_samples, big.mark = ',', format = 'f', scientific = FALSE), '\n',
+                    'Population N = ', print_num(input$pop_n), '\n',
+                    'Sample n = ', print_num(input$samp_n), '\n',
+                    'n samples = ', print_num(input$n_samples), '\n',
                     ifelse(input$p_threshold > 0,
                         paste0(
                            'Shaded area represents samples where p < ', input$p_threshold, '\n',

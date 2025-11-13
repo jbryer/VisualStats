@@ -199,7 +199,7 @@ server <- function(input, output) {
 
         if(input$p_threshold > 0) {
             p <- p +
-                stat_density(aes(fill = after_stat(x) |> cut(!!c(low_cut, max_cut)))) +
+                stat_density(aes(fill = cut(after_stat(x), c(low_cut, max_cut)))) +
                 scale_fill_manual(values = c('white'), na.value = "steelblue")
         }
 

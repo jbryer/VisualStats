@@ -171,8 +171,11 @@ server <- function(input, output) {
         sample_r <- get_simulated_samp_dist()
         suppressWarnings({ # If p_threshold == 0 this will print a warning.
             p_dist <- ifelse(input$test_distribution == 't', 'p_t', 'p_norm')
-            low_cut <- max(sample_r[sample_r[,p_dist] < input$p_threshold & sample_r$r < 0,]$r)
-            max_cut <- min(sample_r[sample_r[,p_dist] < input$p_threshold & sample_r$r > 0,]$r)
+            # TODO: need to check on subsetting on r
+            low_cut <- max(sample_r[sample_r[,p_dist] < (input$p_threshold / 2) & sample_r$r < 0,]$r)
+            max_cut <- min(sample_r[sample_r[,p_dist] < (input$p_threshold / 2) & sample_r$r > 0,]$r)
+            sample_r$sig <- cut(sample_r$r, c(low_cut, max_cut))
+            sample_r$sig <- ifelse(is.na(sample_r$sig), FALSE, TRUE)
         })
 
         p <- ggplot(sample_r, aes(x = r)) +
@@ -198,9 +201,19 @@ server <- function(input, output) {
             )
 
         if(input$p_threshold > 0) {
+            dens <- density(sample_r$r)
+            dens_df <- data.frame(x = dens$x, y = dens$y)
+            dens_df_low <- dens_df[dens_df$x < low_cut,]
+            dens_df_high <- dens_df[dens_df$x > max_cut,]
+
             p <- p +
-                stat_density(aes(fill = cut(after_stat(x), c(low_cut, max_cut)))) +
-                scale_fill_manual(values = c('white'), na.value = "steelblue")
+                geom_area(data = dens_df_low, aes(x = x, y = y), fill = 'steelblue') +
+                geom_area(data = dens_df_high, aes(x = x, y = y), fill = 'steelblue')
+            # p <- p +
+            #     geom_density(aes(fill = cut(after_stat(x),
+            #                                 breaks = c(-Inf, low_cut, max_cut, Inf),
+            #                                 labels = c('left_tail', 'middle', 'right_tail')))) +
+            #     scale_fill_manual(values = c('steelblue', 'white', 'steelblue'))
         }
 
         if(input$show_mean_se) {
@@ -208,7 +221,7 @@ server <- function(input, output) {
             if(input$test_distribution == 'normal') {
                 r_se <- abs(qnorm((1 - input$confidence_interval)/2)) * sd(sample_r$r)
             } else if(input$test_distribution == 't') {
-                r_se <- abs(qt((1 - input$confidence_interval)/2, df = input$samp_n - 1)) * sd(sample_r$r)
+                r_se <- abs(qt((1 - input$confidence_interval)/2, df = input$samp_n - 2)) * sd(sample_r$r)
             } else {
                 stop('Unknown test distribution')
             }

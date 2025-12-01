@@ -1,9 +1,11 @@
 Package: VisualStats
-Version: 0.2.0
-Imports: car, cowplot, dplyr, egg, gganimate, ggbeeswarm, ggplot2,
-        granova, knitr, latex2exp, magrittr, markdown, mvtnorm, psych,
-        reshape2, rlang, shiny, shinyWidgets, stats, tibble, tidyr
+Version: 0.5.0
+Depends: R (>= 3.5)
+Imports: car, cowplot, dplyr, egg, gganimate, ggbeeswarm, ggdist,
+        ggplot2, granova, granovaGG, knitr, latex2exp, magrittr,
+        markdown, mvtnorm, plotly, psych, reshape2, rlang, shiny,
+        shinyWidgets, stats, tibble, tidyr
 Suggests: DT, ggforce, magick, shinylive, vdiffr
 License: GPL (>= 3)
-MD5sum: d72bb0fdcfa616761f09412c53be066a
+MD5sum: 7577900675565512a456f2bf3f4dbc0f
 NeedsCompilation: no

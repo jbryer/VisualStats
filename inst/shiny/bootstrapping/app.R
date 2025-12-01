@@ -1,5 +1,6 @@
 library(shiny)
 library(VisualStats)
+library(ggplot2)
 
 colors <- c(mean = '#66c2a5', median = '#8da0cb', sample = 'grey50')
 

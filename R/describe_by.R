@@ -71,7 +71,7 @@ describe_by <- function(x,
 			range = diff(range(x, na.rm = na.rm)),
 			skew = skew(x, na.rm = na.rm, type = type),
 			kurtosis = kurtosi(x, na.rm = na.rm, type = type),
-			se = stats::sd(x, na.rm = na.rm) / dplyr::n(),
+			se = stats::sd(x, na.rm = na.rm) / sqrt(dplyr::n()),
 			IQR = stats::IQR(x, na.rm = na.rm)
 		) |>
 		dplyr::ungroup() |>

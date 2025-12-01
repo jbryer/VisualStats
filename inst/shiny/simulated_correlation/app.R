@@ -2,7 +2,7 @@ library(shiny)
 library(ggplot2)
 
 print_num <- function(x) {
-    prettyNum(x, big.mark = ',', format = 'f', scientific = FALSE)
+    prettyNum(x, big.mark = ',', format = 'f', scientific = FALSE, digits = 2)
 }
 
 ui <- fluidPage(
@@ -65,10 +65,20 @@ ui <- fluidPage(
                 min = 10,
                 max = 10000
             ),
-            checkboxInput(
-                inputId = 'show_mean_se',
-                label = 'Show mean and standard error from the simulated sampling distribution',
-                value = FALSE
+            conditionalPanel(
+            	condition = 'input.rho == 0',
+            	checkboxInput(
+            		inputId = 'show_mean_se',
+            		# label = 'Show mean and prediction interval from the simulated sampling distribution',
+            		tags$span(style="color: darkgreen;","Show mean and prediction interval from the simulated sampling distribution"),
+            		value = FALSE
+            	),
+            	checkboxInput(
+            		inputId = 'show_prediction_interval',
+            		# label = 'Show theoretical prediction interval',
+            		label = tags$span(style="color: orange;","Show theoretical prediction interval"),
+            		value = FALSE
+            	)
             ),
             conditionalPanel(
                 condition = 'input.show_mean_se',
@@ -107,11 +117,11 @@ ui <- fluidPage(
             tabsetPanel(
                 tabPanel(
                     'Sampling Distribution',
-                    plotOutput("distribution_plot", height = '800px')
+                    plotOutput("distribution_plot", height = '700px')
                 ),
                 tabPanel(
                     'Population',
-                    plotOutput('population_plot', height = '800px')
+                    plotOutput('population_plot', height = '700px')
                 )
             )
         )
@@ -190,6 +200,8 @@ server <- function(input, output) {
                     'Population N = ', print_num(input$pop_n), '\n',
                     'Sample n = ', print_num(input$samp_n), '\n',
                     'n samples = ', print_num(input$n_samples), '\n',
+                    'Simulated sampling distribution sd = ', print_num(sd(sample_r$r)), '\n',
+                    'Theoretical standard error = ', print_num(sqrt((1 - input$rho^2) / (input$samp_n - 2))), '\n',
                     ifelse(input$p_threshold > 0,
                         paste0(
                            'Shaded area represents samples where p < ', input$p_threshold, '\n',
@@ -203,12 +215,14 @@ server <- function(input, output) {
         if(input$p_threshold > 0) {
             dens <- density(sample_r$r)
             dens_df <- data.frame(x = dens$x, y = dens$y)
+            dens_df <- dens_df[dens_df$x >= -1 & dens_df$x <= 1,]
             dens_df_low <- dens_df[dens_df$x < low_cut,]
             dens_df_high <- dens_df[dens_df$x > max_cut,]
 
             p <- p +
                 geom_area(data = dens_df_low, aes(x = x, y = y), fill = 'steelblue') +
                 geom_area(data = dens_df_high, aes(x = x, y = y), fill = 'steelblue')
+			# This does not work on Windows computers.
             # p <- p +
             #     geom_density(aes(fill = cut(after_stat(x),
             #                                 breaks = c(-Inf, low_cut, max_cut, Inf),
@@ -216,15 +230,27 @@ server <- function(input, output) {
             #     scale_fill_manual(values = c('steelblue', 'white', 'steelblue'))
         }
 
-        if(input$show_mean_se) {
-            r_se <- 0
-            if(input$test_distribution == 'normal') {
-                r_se <- abs(qnorm((1 - input$confidence_interval)/2)) * sd(sample_r$r)
-            } else if(input$test_distribution == 't') {
-                r_se <- abs(qt((1 - input$confidence_interval)/2, df = input$samp_n - 2)) * sd(sample_r$r)
-            } else {
-                stop('Unknown test distribution')
-            }
+        cv <- NA
+        if(!is.null(input$confidence_interval)) {
+        	if(input$test_distribution == 'normal') {
+        		cv <- qnorm((1 - input$confidence_interval)/2)
+        	} else if(input$test_distribution == 't') {
+        		cv <- qt((1 - input$confidence_interval)/2, df = input$samp_n - 2)
+        	} else {
+        		stop('Unknown test distribution')
+        	}
+        }
+
+
+        if(input$show_prediction_interval & input$rho == 0) {
+        	r_se_theoretical <- cv * sqrt((1 - input$rho^2) / (input$samp_n - 2))
+        	p <- p +
+        		geom_segment(y = -0.03, x = input$rho - r_se_theoretical, xend = input$mean + r_se_theoretical ,
+        					 color = 'orange', linewidth = 3)
+        }
+
+        if(input$show_mean_se & input$rho == 0) {
+            r_se <- abs(cv * sd(sample_r$r))
             p <- p +
                 geom_vline(xintercept = mean(sample_r$r), color = 'blue', linewidth = 2) +
                 geom_segment(y = 0, x = mean(sample_r$r) - r_se, xend = mean(sample_r$r) + r_se,

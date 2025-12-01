@@ -8,7 +8,13 @@ independent_sample_vis(
   df,
   group_col = names(df)[1],
   value_col = names(df)[2],
-  colors = c("#66c2a5", "#8da0cb", "#fc8d62")
+  colors = c("#66c2a5", "#8da0cb", "#fc8d62"),
+  plot_se = TRUE,
+  plot_distribuition = TRUE,
+  plot_zero_difference = TRUE,
+  plot_ci = TRUE,
+  plot_means = TRUE,
+  plot_points = ifelse(nrow(df) < 60, TRUE, FALSE)
 )
 }
 \arguments{
@@ -20,13 +26,42 @@ independent_sample_vis(
 
 \item{colors}{vector of length three for the group colors. The last value is the color for the
 differences.}
+
+\item{plot_se}{whether to plot the standard error distributions (to the right of the points.}
+
+\item{plot_distribuition}{whether to plot the raw distributions (to the left of the points).}
+
+\item{plot_zero_difference}{whether to plot a horizontal line representing a zero difference.}
+
+\item{plot_ci}{whether to plot confidence intervals as vertical bars.}
+
+\item{plot_means}{whether to plot the group means.}
+
+\item{plot_points}{whether to plot the raw observations.}
 }
 \value{
 a ggplot2 expression.
 }
 \description{
 This is adapted from the plots introduced by Gardner and Altman (1986) for displaying overlapping
-confidence intervals for indepdent sample tests.
+confidence intervals for independent sample tests.
+}
+\examples{
+set.seed(42)
+# Can adjust these parameters
+n <- 20
+mean1 <- 10
+sd1 <- 2
+mean2 <- 14
+sd2 <- 2
+df <- data.frame(
+	group = c(rep('Group A', n / 2),
+			  rep('Group B', n / 2)),
+	value = c(rnorm(n = (n / 2), mean = mean1, sd = sd1),
+			  rnorm(n = (n / 2), mean = mean2, sd = sd2))
+)
+
+independent_sample_vis(df)
 }
 \references{
 Gardner, M.J. & Altman, D.G. (1986). Confidence intervals rather than P values:

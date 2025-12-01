@@ -20,3 +20,5 @@ shinylive.txt
 ^\.github$
 _site/
 manuscripts/
+slides/
+working/

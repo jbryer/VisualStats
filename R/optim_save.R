@@ -55,7 +55,7 @@ optim_save <- function(par, fn, ...) {
 #' Print method for `optim_save`
 #'
 #' @rdname optim-save
-#' @param x result from [option_save()].
+#' @param x result from [optim_save()].
 #' @param ... currently unused.
 #' @return the final parameters.
 #' @method print optim

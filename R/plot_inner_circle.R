@@ -3,6 +3,7 @@
 #' @param percent percentage of the inner circle.
 #' @param y_inner location for the inner circle.
 #' @export
+#' @importFrom ggforce geom_ci
 plot_inner_circle <- function(percent = 0.5, y_inner = c('center', 'bottom')) {
 	r1 <- 0.5
 	area1 <- pi * r1^2

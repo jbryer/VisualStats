@@ -6,6 +6,18 @@
 \usage{
 print_num(x, big.mark = ",", scientific = FALSE, digits = 3, ...)
 }
+\arguments{
+\item{x}{the numeric value.}
+
+\item{big.mark}{character; if not empty used as mark between every big.interval decimals before
+(hence big) the decimal point.}
+
+\item{scientific}{logical, whether to use scientific notation.}
+
+\item{digits}{the desired number of digits after the decimal point.}
+
+\item{...}{other parameters passed to \code{\link[=prettyNum]{prettyNum()}}}
+}
 \description{
 Internal function for printing numbers.
 }

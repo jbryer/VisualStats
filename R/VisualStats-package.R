@@ -9,7 +9,7 @@ utils::globalVariables(c('df', 'hand_washing', 'anorexia', 'npk', 'iris', 'pengu
 						'Iteration', 'value', 'variable', 'd', 'x_pos', 'color', 'boxTidwell_digits',
 						'boxTidwell_position_x', 'boxTidwell_position_y',
 						'anorexia.sub', 'blood_lead', 'distributions',
-						'group', 'Theoretical', 'Sample', 'fill'))
+						'group', 'group1', 'Theoretical', 'Sample', 'fill'))
 
 
 #' Color palette used for visualizations (qualitative)

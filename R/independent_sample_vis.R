@@ -119,12 +119,11 @@ independent_sample_vis <- function(
 			geom_segment(data = tab, aes(x = group, xend = group, y = mean - se, yend = mean + se),
 						 linewidth = 6, alpha = 0.75) +
 			geom_segment(data = tab, aes(x = group, xend = group, y = mean - cv * se, yend = mean + cv * se),
-						 linewidth = 3, alpha = 0.75)
-
+						 linewidth = 3, alpha = 0.75) +
+			geom_segment(x = 'Difference', xend = 'Difference',
+						 y = tab[1,]$mean - t_out$conf.int[1], yend = tab[1,]$mean - t_out$conf.int[2],
+						 linewidth = 3, alpha = 0.5)
 	}
-	# p + geom_segment(x = 'Difference', xend = 'Difference',
-	# 				 y = tab[1,]$mean - t_out$conf.int[1], yend = tab[1,]$mean - t_out$conf.int[2],
-	# 				 linewidth = 3, alpha = 0.5)
 
 	if(plot_points) {
 		p <- p +

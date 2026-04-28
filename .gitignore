@@ -10,3 +10,6 @@ book/*_files/
 data-raw/
 manuscripts/
 _site/
+.positai
+working/
+private/

@@ -22,3 +22,6 @@ _site/
 manuscripts/
 slides/
 working/
+^\.positai$
+^\.claude$
+private/

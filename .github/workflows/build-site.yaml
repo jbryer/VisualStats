@@ -43,11 +43,3 @@ jobs:
       
       - name: Build site
         run: Rscript -e 'source("build.R")'
-
-      - name: Deploy wasm R packages to GitHub pages 🚀
-        if: github.event_name != 'pull_request'
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
-        with:
-          clean: false
-          branch: gh-pages
-          folder: _site

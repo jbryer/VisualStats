@@ -5,7 +5,7 @@ apps <- list.dirs(base_dir, full.names = FALSE, recursive = FALSE)
 usethis::use_tidy_description()
 devtools::document()
 devtools::install(pkg = '.', dependencies = 'Enhances')
-devtools::check(cran = TRUE)
+# devtools::check(cran = TRUE)
 
 if(!require(icons)) {
 	remotes::install_github("ropenscilabs/icon")

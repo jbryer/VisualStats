@@ -24,6 +24,7 @@ Imports:
     gganimate,
     ggbeeswarm,
     ggdist,
+    ggforce,
     ggplot2,
     granova,
     granovaGG,
@@ -43,7 +44,6 @@ Imports:
     tidyr
 Suggests: 
     DT,
-    ggforce,
     magick,
     shinylive,
     vdiffr

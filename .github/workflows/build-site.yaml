@@ -30,12 +30,12 @@ jobs:
         uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
-          r-version: 4.3.3
+          r-version: latest
 
       - name: Install R Dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::pak, any::devtools, any::remotes, any::tidyverse, any::quarto, any::GGally, any::pbkrtest, any::car, local::.
+          extra-packages: any::pak, any::devtools, any::remotes, any::tidyverse, any::quarto, any::GGally, any::pbkrtest, any::car, any::Deriv, any::doBy, local::.
           needs: website
 
       - name: Install icons

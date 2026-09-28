@@ -2,19 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jason Bryer">
-<meta name="author" content="Bruce Dudek">
 
 <title>Visual Statistics</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -61,7 +66,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -90,15 +94,14 @@ div.csl-indent {
 <link href="./descriptives.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-65adce10e78aee9e637c723200af485c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-db8f6f552bf3db368f38d4a2c6a5ca2f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -279,26 +282,16 @@ div.csl-indent {
 
 
 <div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Authors</div>
-  <div class="quarto-title-meta-heading">Affiliations</div>
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
   
     <div class="quarto-title-meta-contents">
-    <p class="author"><a href="https://bryer.org">Jason Bryer</a> <a href="mailto:jason@bryer.org" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-2454-0402" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+    <p class="author"><a href="https://bryer.org">Jason Bryer</a> <a href="mailto:jason@bryer.org" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-2454-0402" class="quarto-title-author-orcid" aria-label="ORCID profile for Jason Bryer"> <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
   </div>
   <div class="quarto-title-meta-contents">
         <p class="affiliation">
             <a href="https://sps.cuny.edu/academics/graduate/master-science-data-science-ms">
             City University of New York
-            </a>
-          </p>
-      </div>
-    <div class="quarto-title-meta-contents">
-    <p class="author"><a href="https://bcdudek.net">Bruce Dudek</a> <a href="mailto:bruce.dudek@albany.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            <a href="https://albany.edu">
-            University at Albany
             </a>
           </p>
       </div>
@@ -316,7 +309,7 @@ div.csl-indent {
 </header>
 
 
-<p><strong>Last updated on December 01, 2025</strong></p>
+<p><strong>Last updated on September 28, 2026</strong></p>
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <p>This website is largely inspired by what our advisor, colleague, and friend Bob Pruzek called <em>elemental graphics.</em> The first two paragraphs from <span class="citation" data-cites="ElementalGraphics">Pruzek and Helmreich (<a href="references.html#ref-ElementalGraphics" role="doc-biblioref">2010</a>)</span> succinctly introduces the core ideas of <em>elemental graphics</em>:</p>
@@ -347,73 +340,73 @@ div.csl-indent {
 <div class="cell-output cell-output-stdout">
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────
  setting  value
- version  R version 4.3.3 (2024-02-29)
- os       Ubuntu 24.04.3 LTS
+ version  R version 4.6.1 (2026-06-24)
+ os       Ubuntu 24.04.5 LTS
  system   x86_64, linux-gnu
  ui       X11
  language (EN)
  collate  C.UTF-8
  ctype    C.UTF-8
  tz       UTC
- date     2025-12-01
+ date     2026-09-28
  pandoc   3.1.3 @ /usr/bin/ (via rmarkdown)
- quarto   1.8.26 @ /usr/local/bin/quarto
+ quarto   1.10.18 @ /usr/local/bin/quarto
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  package     * version date (UTC) lib source
  cachem        1.1.0   2024-05-16 [1] RSPM
- cli           3.6.5   2025-04-23 [1] RSPM
- devtools      2.4.6   2025-10-03 [1] any (@2.4.6)
+ cli           3.6.6   2026-04-09 [1] RSPM
+ devtools      2.5.2   2026-04-30 [1] any (@2.5.2)
  digest        0.6.39  2025-11-19 [1] RSPM
- ellipsis      0.3.2   2021-04-29 [1] RSPM
+ ellipsis      0.3.3   2026-04-04 [1] RSPM
  evaluate      1.0.5   2025-08-27 [1] RSPM
  fastmap       1.2.0   2024-05-15 [1] RSPM
- fs            1.6.6   2025-04-12 [1] RSPM
- glue          1.8.0   2024-09-30 [1] RSPM
- htmltools     0.5.8.1 2024-04-04 [1] RSPM
+ fs            2.1.0   2026-04-18 [1] RSPM
+ glue          1.8.1   2026-04-17 [1] RSPM
+ htmltools     0.5.9   2025-12-04 [1] RSPM
  htmlwidgets   1.6.4   2023-12-06 [1] RSPM
  jsonlite      2.0.0   2025-03-27 [1] RSPM
- knitr         1.50    2025-03-16 [1] RSPM
- lifecycle     1.0.4   2023-11-07 [1] RSPM
- magrittr      2.0.4   2025-09-12 [1] RSPM
+ knitr         1.52    2026-09-06 [1] RSPM
+ lifecycle     1.0.5   2026-01-08 [1] RSPM
+ magrittr      2.0.5   2026-04-04 [1] RSPM
  memoise       2.0.1   2021-11-26 [1] RSPM
+ otel          0.2.0   2025-08-29 [1] RSPM
  pkgbuild      1.4.8   2025-05-26 [1] RSPM
- pkgload       1.4.1   2025-09-23 [1] RSPM
- purrr         1.2.0   2025-11-04 [1] RSPM
+ pkgload       1.5.3   2026-06-15 [1] RSPM
+ purrr         1.2.2   2026-04-10 [1] RSPM
  R6            2.6.1   2025-02-15 [1] RSPM
- remotes       2.5.0   2024-03-17 [1] RSPM
- rlang         1.1.6   2025-04-11 [1] RSPM
- rmarkdown     2.30    2025-09-28 [1] RSPM
- sessioninfo   1.2.3   2025-02-05 [1] any (@1.2.3)
- usethis       3.2.1   2025-09-06 [1] RSPM
- vctrs         0.6.5   2023-12-01 [1] RSPM
- xfun          0.54    2025-10-30 [1] RSPM
- yaml          2.3.11  2025-11-28 [1] CRAN (R 4.3.3)
+ rlang         1.3.0   2026-07-05 [1] RSPM
+ rmarkdown     2.32    2026-09-01 [1] RSPM
+ sessioninfo   1.2.4   2026-06-04 [1] any (@1.2.4)
+ usethis       3.2.2   2026-09-10 [1] RSPM
+ vctrs         0.7.3   2026-04-11 [1] RSPM
+ xfun          0.61    2026-09-16 [1] RSPM
+ yaml          2.3.12  2025-12-10 [1] RSPM
 
  [1] /home/runner/work/_temp/Library
- [2] /opt/R/4.3.3/lib/R/site-library
- [3] /opt/R/4.3.3/lib/R/library
+ [2] /opt/R/4.6.1/lib/R/site-library
+ [3] /opt/R/4.6.1/lib/R/library
 
 ──────────────────────────────────────────────────────────────────────────────</code></pre>
 </div>
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-quarto" class="csl-entry" role="listitem">
 Allaire, JJ, and Christophe Dervieux. 2024. <em>Quarto: R Interface to ’Quarto’ Markdown Publishing System</em>. <a href="https://CRAN.R-project.org/package=quarto">https://CRAN.R-project.org/package=quarto</a>.
 </div>
 <div id="ref-shiny" class="csl-entry" role="listitem">
-Chang, Winston, Joe Cheng, JJ Allaire, Carson Sievert, Barret Schloerke, Yihui Xie, Jeff Allen, Jonathan McPherson, Alan Dipert, and Barbara Borges. 2023. <em>Shiny: Web Application Framework for r</em>. <a href="https://CRAN.R-project.org/package=shiny">https://CRAN.R-project.org/package=shiny</a>.
+Chang, Winston, Joe Cheng, JJ Allaire, et al. 2023. <em>Shiny: Web Application Framework for r</em>. <a href="https://CRAN.R-project.org/package=shiny">https://CRAN.R-project.org/package=shiny</a>.
 </div>
 <div id="ref-ElementalGraphics" class="csl-entry" role="listitem">
-Pruzek, Robert, and James Helmreich. 2010. <span>“Elemental Graphics for Analysis of Variance Using the r Package <span class="nocase">granova</span>.”</span>
+Pruzek, Robert, and James Helmreich. 2010. <em>Elemental Graphics for Analysis of Variance Using the r Package <span class="nocase">granova</span></em>.
 </div>
 <div id="ref-ggplot2" class="csl-entry" role="listitem">
 Wickham, Hadley. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
 </div>
 <div id="ref-Wilkinson" class="csl-entry" role="listitem">
-Wilkinson, Leland. 2005. <em>The Grammar of Graphics (Statistics and Computing)</em>. Berlin, Heidelberg: Springer-Verlag.
+Wilkinson, Leland. 2005. <em>The Grammar of Graphics (Statistics and Computing)</em>. Springer-Verlag.
 </div>
 </div>
 </section>

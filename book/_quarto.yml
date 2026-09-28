@@ -14,14 +14,14 @@ book:
         - name: City University of New York
           department: School of Professional Studies
           url: https://sps.cuny.edu/academics/graduate/master-science-data-science-ms
-    - name: Bruce Dudek
-      corresponding: false
-      email: bruce.dudek@albany.edu
-      url: https://bcdudek.net
-      affiliations:
-        - name: University at Albany
-          department: Psychology
-          url: https://albany.edu
+    # - name: Bruce Dudek
+    #   corresponding: false
+    #   email: bruce.dudek@albany.edu
+    #   url: https://bcdudek.net
+    #   affiliations:
+    #     - name: University at Albany
+    #       department: Psychology
+    #       url: https://albany.edu
   chapters:
     - index.qmd
     - descriptives.qmd

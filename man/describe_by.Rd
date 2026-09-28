@@ -20,7 +20,7 @@ taken as the nearest endpoint.}
 \item{na.rm}{a logical evaluating to TRUE or FALSE indicating whether NA values
 should be stripped before the computation proceeds.}
 
-\item{mat}{not used, provided to provide direct compatability with \link[psych:describe.by]{psych::describeBy}.}
+\item{mat}{not used, provided to provide direct compatability with \link[psych:describeBy]{psych::describeBy}.}
 
 \item{...}{not currently used. Included to ensure compatibility.}
 }
@@ -28,7 +28,7 @@ should be stripped before the computation proceeds.}
 a data.frame with the summary statistic.
 }
 \description{
-This is a re-implementation of the \link[psych:describe.by]{psych::describeBy} function using the \code{dplyr}
+This is a re-implementation of the \link[psych:describeBy]{psych::describeBy} function using the \code{dplyr}
 package for creating the resulting table. The goal is for this function to be
 a drop-in replacement, however the results are always returned as a data.frame
 consistent with the \code{mat = TRUE} parameter setting.

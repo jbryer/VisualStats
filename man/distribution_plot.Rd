@@ -123,7 +123,7 @@ distribution_plot('binom', cv = c(3), limits = c(0, 10), tails = 'greater', size
 \seealso{
 \code{\link[=plot_distributions]{plot_distributions()}}
 
-\code{\link[stats:Chisquare]{stats::dchisq()}}
+\code{\link[stats:dchisq]{stats::dchisq()}}
 
-\code{\link[stats:Fdist]{stats::df()}}
+\code{\link[stats:df]{stats::df()}}
 }

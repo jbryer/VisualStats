@@ -86,73 +86,89 @@ import(magrittr)
 import(markdown)
 import(reshape2)
 import(shiny)
-importFrom(cowplot,draw_label)
-importFrom(cowplot,ggdraw)
-importFrom(cowplot,plot_grid)
-importFrom(dplyr,across)
-importFrom(dplyr,all_of)
-importFrom(dplyr,arrange)
-importFrom(dplyr,filter)
-importFrom(dplyr,group_by)
-importFrom(dplyr,mutate)
-importFrom(dplyr,n)
-importFrom(dplyr,relocate)
-importFrom(dplyr,rename)
-importFrom(dplyr,summarise)
-importFrom(dplyr,summarize)
-importFrom(dplyr,ungroup)
+importFrom(cowplot,
+  draw_label,
+  ggdraw,
+  plot_grid
+)
+importFrom(dplyr,
+  across,
+  all_of,
+  arrange,
+  filter,
+  group_by,
+  mutate,
+  n,
+  relocate,
+  rename,
+  summarise,
+  summarize,
+  ungroup
+)
 importFrom(ggbeeswarm,geom_beeswarm)
-importFrom(ggdist,geom_dots)
-importFrom(ggdist,geom_slab)
-importFrom(ggdist,stat_slabinterval)
+importFrom(ggdist,
+  geom_dots,
+  geom_slab,
+  stat_slabinterval
+)
 importFrom(ggforce,geom_circle)
-importFrom(grDevices,boxplot.stats)
-importFrom(grDevices,palette)
+importFrom(grDevices,
+  boxplot.stats,
+  palette
+)
 importFrom(knitr,knit2html)
 importFrom(latex2exp,TeX)
 importFrom(mvtnorm,rmvnorm)
-importFrom(plotly,add_trace)
-importFrom(plotly,layout)
-importFrom(plotly,plot_ly)
-importFrom(psych,describe)
-importFrom(psych,describeBy)
+importFrom(plotly,
+  add_trace,
+  layout,
+  plot_ly
+)
+importFrom(psych,
+  describe,
+  describeBy
+)
 importFrom(reshape2,melt)
 importFrom(rlang,sym)
-importFrom(shiny,HTML)
-importFrom(shiny,renderText)
+importFrom(shiny,
+  HTML,
+  renderText
+)
 importFrom(shinyWidgets,chooseSliderSkin)
-importFrom(stats,IQR)
-importFrom(stats,anova)
-importFrom(stats,approxfun)
-importFrom(stats,as.formula)
-importFrom(stats,binomial)
-importFrom(stats,coef)
-importFrom(stats,complete.cases)
-importFrom(stats,density)
-importFrom(stats,dist)
-importFrom(stats,dnorm)
-importFrom(stats,dt)
-importFrom(stats,fitted)
-importFrom(stats,glm)
-importFrom(stats,integrate)
-importFrom(stats,lm)
-importFrom(stats,loess)
-importFrom(stats,mad)
-importFrom(stats,median)
-importFrom(stats,optim)
-importFrom(stats,pf)
-importFrom(stats,predict)
-importFrom(stats,qbinom)
-importFrom(stats,qnorm)
-importFrom(stats,qt)
-importFrom(stats,quantile)
-importFrom(stats,resid)
-importFrom(stats,rnorm)
-importFrom(stats,runif)
-importFrom(stats,sd)
-importFrom(stats,setNames)
-importFrom(stats,t.test)
-importFrom(stats,var)
+importFrom(stats,
+  IQR,
+  anova,
+  approxfun,
+  as.formula,
+  binomial,
+  coef,
+  complete.cases,
+  density,
+  dist,
+  dnorm,
+  dt,
+  fitted,
+  glm,
+  integrate,
+  lm,
+  loess,
+  mad,
+  median,
+  optim,
+  pf,
+  predict,
+  qbinom,
+  qnorm,
+  qt,
+  quantile,
+  resid,
+  rnorm,
+  runif,
+  sd,
+  setNames,
+  t.test,
+  var
+)
 importFrom(tibble,tibble)
 importFrom(tidyr,unnest_wider)
 importFrom(utils,data)

@@ -11,7 +11,7 @@ kurtosi(x, na.rm = TRUE, type = 3)
 
 \item{na.rm}{whether to remove missing values.}
 
-\item{type}{see \code{\link[psych:skew]{psych::kurtosi()}}.}
+\item{type}{see \code{\link[psych:kurtosi]{psych::kurtosi()}}.}
 }
 \description{
 Copied from the psych package
